@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/eslint",
     "@nuxtjs/seo",
+    "@nuxtjs/tailwindcss",
   ],
   site: {
     defaultLocale: "nl",
