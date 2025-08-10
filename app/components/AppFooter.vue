@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="shadow-lg">
     <div class="flex flex-col max-w-6xl mx-auto px-6 py-6 gap-6">
       <div class="flex justify-between py-6">
         <div class="flex flex-col gap-4">

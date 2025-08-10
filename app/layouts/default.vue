@@ -3,7 +3,7 @@
   <nuxt-loading-indicator />
   <app-header class="flex-initial" />
   <main class="flex-auto">
-    <div class="flex flex-col max-w-6xl mx-auto px-6">
+    <div class="flex flex-col max-w-[1440px] mx-auto">
       <slot />
     </div>
   </main>

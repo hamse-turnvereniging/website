@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="z-10 shadow-lg">
     <div class="flex items-center justify-between max-w-6xl mx-auto px-6 h-20">
       <div class="w-[160px] h-full">
         <!-- TODO: Check logo size -->

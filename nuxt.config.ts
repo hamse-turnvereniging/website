@@ -2,7 +2,20 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   css: ["~/assets/css/main.css"],
-  devtools: { enabled: true },
+  devtools: {
+    enabled: true,
+  },
+  fonts: {
+    defaults: {
+      weights: [400, 500, 600, 700],
+    },
+    families: [
+      {
+        name: "Open Sans",
+        provider: "google",
+      },
+    ],
+  },
   modules: [
     "@nuxt/content",
     "@nuxt/fonts",

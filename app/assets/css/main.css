@@ -1,3 +1,14 @@
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+button {
+  background-color: #059e95;
+  border-radius: 1rem;
+  color: #ffffff;
+  padding: 0.5rem 0.75rem;
+}
+
 .text-primary {
   color: #a0ef94;
 }
@@ -14,4 +25,20 @@ h2 {
 
 a:hover {
   color: #a0ef94;
+}
+
+.circle {
+  aspect-ratio: 1;
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.circle-primary {
+  background-color: #a0ef94;
+}
+
+.circle-grey {
+  background-color: #f3f3f3;
 }
