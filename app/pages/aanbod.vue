@@ -1,3 +1,3 @@
 <template>
-  <h1>Welkom!</h1>
+  <h1>Aanbod</h1>
 </template>
