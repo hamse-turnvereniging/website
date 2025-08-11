@@ -30,4 +30,15 @@ export default defineNuxtConfig({
     name: "Hamse Turnvereniging",
     url: "https://www.hamseturnvereniging.be",
   },
+  tailwindcss: {
+    config: {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: "Open Sans",
+          },
+        },
+      },
+    },
+  },
 });

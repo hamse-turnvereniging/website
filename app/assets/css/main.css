@@ -1,7 +1,3 @@
-body {
-  font-family: "Open Sans", sans-serif;
-}
-
 button {
   background-color: #059e95;
   border-radius: 1rem;
@@ -11,6 +7,10 @@ button {
 
 .text-primary {
   color: #a0ef94;
+}
+
+.text-secondary {
+  color: #059e95;
 }
 
 h1 {

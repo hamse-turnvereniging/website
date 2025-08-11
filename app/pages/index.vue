@@ -1,7 +1,11 @@
+<script setup lang="ts">
+import { NuxtLink } from "#components";
+</script>
+
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
   <section id="banner">
-    <div class="flex flex-col max-w-6xl mx-auto px-20 py-[230px]">
+    <div class="flex flex-col max-w-6xl mx-auto px-6 py-[230px]">
       <h1 class="font-bold text-white text-shadow">
         Een fijne turnervaring<br />
         voor elke leeftijd
@@ -29,7 +33,8 @@
               jouw is!
             </p>
           </div>
-          <button>Inschrijven</button>
+          <!-- TODO: Bekijk ons aanbod? -->
+          <NuxtLink to="/aanbod" class="flex"><button class="flex-1">Aanbod</button></NuxtLink>
         </div>
       </div>
     </div>
@@ -46,7 +51,8 @@
             fuga voluptates laboriosam minus ad impedit quia in et nobis vel consectetur officiis,
             beatae sit delectus! Culpa, quibusdam alias.
           </p>
-          <button>Aanbod</button>
+          <!-- TODO: Bekijk ons aanbod? -->
+          <NuxtLink to="/aanbod" class="flex"><button class="flex-1">Aanbod</button></NuxtLink>
         </div>
         <div class="flex flex-col gap-6">
           <img src="https://placehold.co/300x200" />
@@ -56,7 +62,8 @@
             fuga voluptates laboriosam minus ad impedit quia in et nobis vel consectetur officiis,
             beatae sit delectus! Culpa, quibusdam alias.
           </p>
-          <button>Bekijk vacatures</button>
+          <!-- TODO: Bekijk onze vacatures? -->
+          <button>Vacatures</button>
         </div>
         <div class="flex flex-col gap-6">
           <img src="https://placehold.co/300x200" />
@@ -66,7 +73,8 @@
             fuga voluptates laboriosam minus ad impedit quia in et nobis vel consectetur officiis,
             beatae sit delectus! Culpa, quibusdam alias.
           </p>
-          <button>Kalender</button>
+          <!-- TODO: Bekijk onze kalender? -->
+          <NuxtLink to="/kalender" class="flex"><button class="flex-1">Kalender</button></NuxtLink>
         </div>
       </div>
     </div>
@@ -76,6 +84,8 @@
 <style lang="css" scoped>
 section#banner {
   height: 560px;
-  background-image: url("https://placehold.co/1440x560");
+  background-image: url("https://placehold.co/1600x560");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 </style>

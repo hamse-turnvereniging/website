@@ -7,8 +7,8 @@
           class="absolute top-4"
           src="~/assets/images/logo_black_background.png"
           alt="Hamse Turnvereniging logo"
-          width="160"
-          height="160"
+          width="140"
+          height="140"
         />
       </div>
       <nav class="flex gap-6">
