@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-definePageMeta({
-  name: "FAQ",
+useHead({
+  title: "FAQ",
 });
 </script>
 
