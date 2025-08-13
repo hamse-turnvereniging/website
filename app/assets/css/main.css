@@ -26,19 +26,3 @@ h2 {
 a:hover {
   color: #a0ef94;
 }
-
-.circle {
-  aspect-ratio: 1;
-  position: absolute;
-  display: block;
-  border-radius: 50%;
-  z-index: -1;
-}
-
-.circle-primary {
-  background-color: #a0ef94;
-}
-
-.circle-grey {
-  background-color: #f9f9f9;
-}
