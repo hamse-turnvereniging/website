@@ -5,17 +5,22 @@ import { NuxtLink } from "#components";
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
   <section id="banner" class="shadow-lg">
-    <div class="max-w-6xl mx-auto px-6 py-[240px]">
+    <div class="max-w-6xl mx-auto px-8 py-[240px]">
       <h1 class="font-bold text-white text-shadow">
         Een fijne turnervaring<br />
         voor elke leeftijd
       </h1>
     </div>
   </section>
-  <section id="welkom" class="max-w-6xl mx-auto flex flex-row items-center gap-12 px-6 py-16">
-    <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
-    <div class="flex flex-col gap-6">
-      <h1 class="text-white">Welkom!</h1>
+  <section
+    id="welkom"
+    class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 px-8 py-16"
+  >
+    <div class="flex-1">
+      <img src="https://placehold.co/600x400" class="shadow-lg" />
+    </div>
+    <div class="flex flex-1 flex-col gap-6">
+      <h1 class="text-secondary">Welkom!</h1>
       <div class="flex flex-col gap-3">
         <p>
           Bij ons draait het om meer dan alleen turnen. Wij helpen jong en oud hun grenzen te
@@ -36,11 +41,11 @@ import { NuxtLink } from "#components";
   </section>
   <section
     id="in-de-schijnwerper"
-    class="max-w-6xl mx-auto grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-6 py-16"
+    class="max-w-6xl mx-auto grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 py-16"
   >
     <div class="flex flex-col gap-6">
       <img src="https://placehold.co/300x200" alt="Kom proberen afbeelding" class="shadow-lg" />
-      <h1>Kom proberen</h1>
+      <h2 class="text-secondary">Kom proberen</h2>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam similique sapiente fuga
         voluptates laboriosam minus ad impedit quia in et nobis vel consectetur officiis, beatae sit
@@ -51,7 +56,7 @@ import { NuxtLink } from "#components";
     </div>
     <div class="flex flex-col gap-6">
       <img src="https://placehold.co/300x200" alt="Trainers gezocht afbeelding" class="shadow-lg" />
-      <h1>Trainers gezocht</h1>
+      <h2 class="text-secondary">Trainers gezocht</h2>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam similique sapiente fuga
         voluptates laboriosam minus ad impedit quia in et nobis vel consectetur officiis, beatae sit
@@ -66,7 +71,7 @@ import { NuxtLink } from "#components";
         alt="Onze activiteiten afbeelding"
         class="shadow-lg"
       />
-      <h1>Onze activiteiten</h1>
+      <h2 class="text-secondary">Onze activiteiten</h2>
       <p>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam similique sapiente fuga
         voluptates laboriosam minus ad impedit quia in et nobis vel consectetur officiis, beatae sit

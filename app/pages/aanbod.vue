@@ -1,16 +1,16 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
   <section id="banner">
-    <div class="flex flex-col max-w-6xl mx-auto px-6 py-[120px]">
+    <div class="max-w-6xl mx-auto flex flex-col px-6 py-[120px]">
       <h1 class="font-bold text-white text-shadow">
         Een fijne turnervaring<br />
         voor elke leeftijd
       </h1>
     </div>
   </section>
-  <section id="turnen" class="flex flex-col max-w-6xl px-6 py-16 mx-auto gap-12">
-    <div class="flex flex-row items-center gap-12">
-      <div class="flex flex-col gap-6">
+  <section id="turnen" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
+    <div class="flex flex-row items-center gap-8">
+      <div class="flex flex-1 flex-col gap-6">
         <h1 class="text-secondary">Turnen</h1>
         <p>
           Toestelturnen is een veelzijdige en uitdagende turnsport waarbij kracht, lenigheid,
@@ -19,12 +19,15 @@
           vaardigheden die op een speelse en veilige manier worden aangeleerd en ontwikkeld.
         </p>
       </div>
-      <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
+      <!-- TODO: Other images -->
+      <div class="flex-1">
+        <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
+      </div>
     </div>
     <p class="text-center text-xl">
       Onze turnclub biedt toestelturnen aan voor verschillende leeftijden en niveaus:
     </p>
-    <div id="turnen-kleuters" class="flex flex-row items-center gap-12">
+    <div id="turnen-kleuters" class="flex flex-row items-center gap-8">
       <img class="flex-none shadow-lg" src="https://placehold.co/400x240" />
       <div class="flex flex-col gap-6">
         <h2 class="text-primary">Kleuters</h2>
@@ -34,7 +37,7 @@
         </p>
       </div>
     </div>
-    <div id="turnen-lagere-school" class="flex flex-row items-center gap-12">
+    <div id="turnen-lagere-school" class="flex flex-row items-center gap-8">
       <div class="flex flex-col gap-6">
         <h2 class="text-primary">Lagere school</h2>
         <p>
@@ -45,7 +48,7 @@
       </div>
       <img class="flex-none shadow-lg" src="https://placehold.co/400x240" />
     </div>
-    <div id="turnen-1ste-middelbaar" class="flex flex-row items-center gap-12">
+    <div id="turnen-1ste-middelbaar" class="flex flex-row items-center gap-8">
       <img class="flex-none shadow-lg" src="https://placehold.co/400x240" />
       <div class="flex flex-col gap-6">
         <h2 class="text-primary">Vanaf het 1ste middelbaar</h2>
@@ -60,7 +63,7 @@
       begeleiding van onze lesgevers turnen we in een veilige en stimulerende omgeving.
     </p>
   </section>
-  <section id="trampoline" class="flex flex-col max-w-6xl px-6 py-16 mx-auto gap-12">
+  <section id="trampoline" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
       <div class="flex flex-col gap-6">
         <h1 class="text-secondary">Trampoline</h1>
@@ -86,7 +89,7 @@
       zelfvertrouwen.<br />Ideaal voor wie houdt van beweging met een vleugje adrenaline!
     </p>
   </section>
-  <section id="bbb" class="flex flex-col max-w-6xl px-6 py-16 mx-auto gap-12">
+  <section id="bbb" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
       <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
       <div class="flex flex-col gap-6">
@@ -109,7 +112,7 @@
       vooral plezier hebben in bewegen!
     </p>
   </section>
-  <section id="callanetics" class="flex flex-col max-w-6xl px-6 py-16 mx-auto gap-12">
+  <section id="callanetics" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
       <div class="flex flex-col gap-6">
         <h1 class="text-secondary">Callanetics</h1>
@@ -137,7 +140,7 @@
       voor jou!
     </p>
   </section>
-  <section id="net-voetbal-heren" class="flex flex-col max-w-6xl px-6 py-16 mx-auto gap-12">
+  <section id="net-voetbal-heren" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
       <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
       <div class="flex flex-col gap-6">
