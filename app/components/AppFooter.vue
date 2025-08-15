@@ -1,7 +1,7 @@
 <template>
   <footer class="shadow-lg">
     <div class="flex flex-col max-w-6xl mx-auto px-6 py-6 gap-6">
-      <div class="flex justify-between py-6">
+      <div class="flex flex-col sm:flex-row justify-between gap-6 py-6">
         <div class="flex flex-col gap-4">
           <h2>Contact</h2>
           <div class="flex gap-2">
@@ -30,7 +30,7 @@
           <NuxtLink to="/faq">FAQ</NuxtLink>
           <NuxtLink to="/inschrijven">Inschrijven</NuxtLink>
         </nav>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-row sm:flex-col justify-between sm:gap-3">
           <nav class="flex flex-col gap-2">
             <NuxtLink to="/clubreglement">Clubreglement</NuxtLink>
             <NuxtLink to="/verzekering">Verzekering</NuxtLink>
@@ -41,7 +41,7 @@
           </NuxtLink>
         </div>
       </div>
-      <div class="flex justify-between">
+      <div class="flex flex-col md:flex-row justify-between text-center gap-3">
         <div class="copyright">
           &copy; {{ new Date().getFullYear() }} Hamse Turnvereniging. Alle rechten voorbehouden.
         </div>

@@ -2,18 +2,21 @@
 <template>
   <section id="banner" class="shadow-lg">
     <div class="max-w-6xl mx-auto flex flex-col px-6 py-[120px]">
-      <h1 class="font-bold text-white text-shadow">Aanbod</h1>
+      <h1 class="text-white text-shadow">Aanbod</h1>
     </div>
   </section>
   <section id="turnen" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-8">
-      <div class="flex flex-1 flex-col gap-6">
+      <div class="flex flex-1 flex-col gap-3">
         <h1 class="text-secondary">Turnen</h1>
         <p>
           Toestelturnen is een veelzijdige en uitdagende turnsport waarbij kracht, lenigheid,
           evenwicht en coördinatie centraal staan. Onze gymnasten oefenen op verschillende
-          toestellen zoals de brug, balk, trampoline, ringen,... Elk toestel vraagt om specifieke
-          vaardigheden die op een speelse en veilige manier worden aangeleerd en ontwikkeld.
+          toestellen zoals de brug, balk, trampoline, ringen,...
+        </p>
+        <p>
+          Elk toestel vraagt om specifieke vaardigheden die op een speelse en veilige manier worden
+          aangeleerd en ontwikkeld.
         </p>
       </div>
       <!-- TODO: Other images -->
@@ -26,7 +29,7 @@
     </p>
     <div id="turnen-kleuters" class="flex flex-row items-center gap-8">
       <img class="flex-none shadow-lg" src="https://placehold.co/400x240" />
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
         <h2 class="text-primary">Kleuters</h2>
         <p>
           Op een speelse manier maken kleuters kennis met de basisvaardigheden van turnen. We werken
@@ -35,7 +38,7 @@
       </div>
     </div>
     <div id="turnen-lagere-school" class="flex flex-row items-center gap-8">
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
         <h2 class="text-primary">Lagere school</h2>
         <p>
           Hier leggen we de focus op het verder ontwikkelen van turnvaardigheden. De kinderen leren
@@ -47,7 +50,7 @@
     </div>
     <div id="turnen-1ste-middelbaar" class="flex flex-row items-center gap-8">
       <img class="flex-none shadow-lg" src="https://placehold.co/400x240" />
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
         <h2 class="text-primary">Vanaf het 1ste middelbaar</h2>
         <p>
           Ook voor jongeren blijft toestelturnen uitdagend. We bouwen verder op eerder geleerde
@@ -62,7 +65,7 @@
   </section>
   <section id="trampoline" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
         <h1 class="text-secondary">Trampoline</h1>
         <p>
           Op de trampolines leren gymnasten stapsgewijs controle en techniek, van eenvoudige
@@ -89,7 +92,7 @@
   <section id="bbb" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
       <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
         <h1 class="text-secondary">BBB</h1>
         <p>
           BBB staat voor Benen, Billen en Buik - een leuke en effectieve groepsles die focust op het
@@ -111,7 +114,7 @@
   </section>
   <section id="callanetics" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
         <h1 class="text-secondary">Callanetics</h1>
         <p>
           Callanetics is een rustige maar intensieve vorm van spierversterking die focust op diepe
@@ -140,7 +143,7 @@
   <section id="net-voetbal-heren" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
       <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
-      <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
         <h1 class="text-secondary">Net-voetbal heren</h1>
         <p>
           Net-voetbal is een dynamische en leuke sport die het beste van voetbal en volleybal

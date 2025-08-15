@@ -7,7 +7,7 @@ useHead({
 <template>
   <section id="banner" class="shadow-lg">
     <div class="max-w-6xl mx-auto flex flex-col px-6 py-[120px]">
-      <h1 class="font-bold text-white text-shadow">FAQ</h1>
+      <h1 class="text-white text-shadow">FAQ</h1>
     </div>
   </section>
 </template>
