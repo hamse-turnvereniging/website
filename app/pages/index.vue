@@ -4,24 +4,21 @@ import { NuxtLink } from "#components";
 
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
-  <section id="banner" class="shadow-lg">
+  <section id="banner">
     <div class="max-w-6xl mx-auto px-8 py-[240px]">
-      <h1 class="text-white text-shadow">
+      <h1>
         Een fijne turnervaring<br />
         voor elke leeftijd
       </h1>
     </div>
   </section>
-  <section
-    id="welkom"
-    class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 px-8 py-16"
-  >
+  <section class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 px-8 py-16">
     <div class="flex-1">
-      <img src="https://placehold.co/600x400" class="shadow-lg" />
+      <img src="https://placehold.co/600x400" alt="Welkom afbeelding" />
     </div>
     <div class="flex flex-1 flex-col gap-6">
       <div class="flex flex-col gap-3">
-        <h1 class="text-secondary">Welkom!</h1>
+        <h2>Welkom!</h2>
         <p>
           Bij ons draait het om meer dan alleen turnen. Wij helpen
           <span class="font-semibold">jong en oud</span> hun grenzen te verleggen, zelfvertrouwen op
@@ -37,8 +34,7 @@ import { NuxtLink } from "#components";
           waarom turnen een sport voor jouw is!
         </p>
       </div>
-      <!-- TODO: Bekijk ons aanbod? -->
-      <NuxtLink to="/aanbod" class="flex"><button class="flex-1">Aanbod</button></NuxtLink>
+      <UButton to="aanbod" color="secondary" size="xl">Aanbod</UButton>
     </div>
   </section>
   <section
@@ -46,9 +42,9 @@ import { NuxtLink } from "#components";
     class="max-w-6xl mx-auto grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 py-16"
   >
     <div class="flex flex-col gap-6">
-      <img src="https://placehold.co/300x200" alt="Kom proberen afbeelding" class="shadow-lg" />
+      <img src="https://placehold.co/300x200" alt="Kom proberen afbeelding" />
       <div class="flex flex-col gap-3">
-        <h2 class="text-primary">Kom proberen</h2>
+        <h3>Kom proberen</h3>
         <p>
           Ben je benieuwd of turnen iets voor jou is? Kom het gewoon proberen! Bij ons is de
           <span class="font-semibold">eerste les</span> helemaal
@@ -66,17 +62,12 @@ import { NuxtLink } from "#components";
           ontdek je wel je nieuwe favoriete sport!
         </p>
       </div>
-      <!-- TODO: Bekijk ons aanbod? -->
-      <NuxtLink to="/aanbod" class="flex"><button class="flex-1">Aanbod</button></NuxtLink>
+      <UButton to="aanbod" color="secondary" size="xl">Aanbod</UButton>
     </div>
     <div class="flex flex-col gap-6">
-      <img
-        src="https://placehold.co/300x200"
-        alt="Lesgevers gezocht afbeelding"
-        class="shadow-lg"
-      />
+      <img src="https://placehold.co/300x200" alt="Lesgevers gezocht afbeelding" />
       <div class="flex flex-col gap-3">
-        <h2 class="text-primary">Lesgevers gezocht</h2>
+        <h3>Lesgevers gezocht</h3>
         <p>
           Heb jij een passie voor turnen én wil je je enthousiasme delen met anderen? Wij zijn op
           zoek naar <span class="font-semibold">gemotiveerde lesgevers</span> die onze sporters
@@ -88,21 +79,16 @@ import { NuxtLink } from "#components";
           begeleider bij één van onze groepen. Onze trainers helpen je graag op weg!
         </p>
         <p>
-          Klinkt dit als iets voor jou? Stuur ons een berichtje of kom eens langs, en wie weet sta
-          jij binnenkort voor een groep gemotiveerde turners!
+          Klinkt dit als iets voor jou?
+          <span class="font-semibold">Stuur ons een berichtje of kom eens langs</span>, en wie weet
+          sta jij binnenkort voor een groep gemotiveerde turners!
         </p>
       </div>
-      <!-- TODO: Bekijk onze vacatures? -->
-      <!-- <button>Vacatures</button> -->
     </div>
     <div class="flex flex-col gap-6">
-      <img
-        src="https://placehold.co/300x200"
-        alt="Onze activiteiten afbeelding"
-        class="shadow-lg"
-      />
+      <img src="https://placehold.co/300x200" alt="Onze activiteiten afbeelding" />
       <div class="flex flex-col gap-3">
-        <h2 class="text-primary">Onze activiteiten</h2>
+        <h3>Onze activiteiten</h3>
         <p>
           Naast de wekelijkse lessen organiseren we regelmatig leuke evenementen, zoals ons
           jaarlijkse
@@ -115,17 +101,13 @@ import { NuxtLink } from "#components";
           en wanneer je erbij kunt zijn!
         </p>
       </div>
-      <!-- TODO: Bekijk onze kalender? -->
-      <NuxtLink to="/kalender" class="flex"><button class="flex-1">Kalender</button></NuxtLink>
+      <UButton to="kalender" color="secondary" size="xl">Kalender</UButton>
     </div>
   </section>
 </template>
 
-<style lang="css" scoped>
+<style scoped>
 section#banner {
   background-image: url("https://placehold.co/1600x580");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 }
 </style>

@@ -18,27 +18,19 @@ export default defineNuxtConfig({
   },
   modules: [
     "@nuxt/content",
-    "@nuxt/fonts",
-    "@nuxt/image",
-    "@nuxt/icon",
     "@nuxt/eslint",
+    "@nuxt/fonts",
+    "@nuxt/icon",
+    "@nuxt/image",
+    "@nuxt/ui",
     "@nuxtjs/seo",
-    "@nuxtjs/tailwindcss",
   ],
   site: {
     defaultLocale: "nl",
     name: "Hamse Turnvereniging",
     url: "https://www.hamseturnvereniging.be",
   },
-  tailwindcss: {
-    config: {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: "Open Sans",
-          },
-        },
-      },
-    },
+  ui: {
+    colorMode: false,
   },
 });

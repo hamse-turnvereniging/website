@@ -1,9 +1,9 @@
 <template>
-  <footer class="shadow-lg">
-    <div class="flex flex-col max-w-6xl mx-auto px-6 py-6 gap-6">
-      <div class="flex flex-col sm:flex-row justify-between gap-6 py-6">
+  <footer>
+    <div class="flex flex-col max-w-6xl mx-auto px-8 py-8 gap-8">
+      <div class="flex flex-col sm:flex-row justify-between gap-8 py-4">
         <div class="flex flex-col gap-4">
-          <h2>Contact</h2>
+          <h3>Contact</h3>
           <div class="flex gap-2">
             <icon name="mdi-email-outline" size="24" class="text-primary" />
             <NuxtLink href="mailto:info@hamseturnvereniging.be" :external="true"
@@ -47,23 +47,22 @@
         </div>
         <div class="website-by">
           Website door
-          <a href="https://steffbeckers.com/nl" target="_blank" rel="noopener noreferrer"
-            >Steff Beckers</a
-          >
+          <NuxtLink href="https://steffbeckers.com/nl" :external="true">Steff Beckers</NuxtLink>
         </div>
       </div>
     </div>
   </footer>
 </template>
 
-<style lang="css" scoped>
+<style scoped>
+@reference "./../assets/css/main.css";
+
 footer {
-  background-color: #202020;
-  color: #ffffff;
+  @apply bg-neutral-900 text-white;
 }
 
-nav a.router-link-active {
-  color: #a0ef94;
-  font-weight: bold;
+.copyright,
+.website-by {
+  @apply text-neutral-300;
 }
 </style>

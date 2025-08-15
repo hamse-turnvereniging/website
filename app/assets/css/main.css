@@ -1,37 +1,105 @@
-button {
-  background-color: #059e95;
-  border-radius: 1rem;
-  color: #ffffff;
-  padding: 0.5rem 0.75rem;
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* https://www.tints.dev/palette/v1:bGlnaHQtZ3JlZW58YTBlZjk0fDUwMHxwfDB8MHwwfDEwMHxtfmFwcGxlLWJsdWUtc2VhLWdyZWVufDA1OWU5NXw1MDB8cHwwfDB8MHwxMDB8bX5ncmV5fDIwMjAyMHw5MDB8cHwwfDB8MHwxMDB8bQ */
+@theme static {
+  --color-apple-blue-sea-green-100: oklch(91.55% 0.13 187.91);
+  --color-apple-blue-sea-green-200: oklch(83.63% 0.145 187.55);
+  --color-apple-blue-sea-green-300: oklch(76.76% 0.133 187.96);
+  --color-apple-blue-sea-green-400: oklch(69.98% 0.121 187.82);
+  --color-apple-blue-sea-green-500: oklch(63.02% 0.109 187.65);
+  --color-apple-blue-sea-green-50: oklch(95.85% 0.06 188.45);
+  --color-apple-blue-sea-green-600: oklch(53.16% 0.092 187.91);
+  --color-apple-blue-sea-green-700: oklch(43.11% 0.075 187.14);
+  --color-apple-blue-sea-green-800: oklch(32.8% 0.057 187.6);
+  --color-apple-blue-sea-green-900: oklch(23.48% 0.041 189.32);
+  --color-apple-blue-sea-green-950: oklch(18.43% 0.032 187.45);
+
+  --color-grey-100: #e2e2e2;
+  --color-grey-200: #c9c9c9;
+  --color-grey-300: #aeaeae;
+  --color-grey-400: #939393;
+  --color-grey-500: #797979;
+  --color-grey-50: #f1f1f1;
+  --color-grey-600: #636363;
+  --color-grey-700: #4b4b4b;
+  --color-grey-800: #353535;
+  --color-grey-900: #202020;
+  --color-grey-950: #131313;
+
+  --color-light-green-100: oklch(97.96% 0.02 142.94);
+  --color-light-green-200: oklch(95.17% 0.054 142.62);
+  --color-light-green-300: oklch(93.24% 0.081 141.7);
+  --color-light-green-400: oklch(90.05% 0.123 141.3);
+  --color-light-green-500: oklch(87.92% 0.144 141.19);
+  --color-light-green-50: oklch(99.09% 0.01 145.3);
+  --color-light-green-600: oklch(72.87% 0.119 141.02);
+  --color-light-green-700: oklch(58.51% 0.096 140.86);
+  --color-light-green-800: oklch(43.22% 0.07 141.11);
+  --color-light-green-900: oklch(28.89% 0.048 141.22);
+  --color-light-green-950: oklch(21.25% 0.036 141.34);
+
+  --font-sans: "Open Sans", sans-serif;
+
+  --ui-radius: 0.5rem;
 }
 
-.text-primary {
-  color: #a0ef94;
+html,
+body,
+#__nuxt {
+  height: 100%;
 }
 
-.text-secondary {
-  color: #059e95;
+body {
+  overflow-y: scroll;
+}
+
+#__nuxt {
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
-  font-size: 32px;
-  font-weight: 700;
+  @apply text-4xl font-bold text-white text-shadow-lg;
 }
 
 h2 {
-  font-size: 24px;
-  font-weight: 600;
+  @apply text-3xl font-semibold text-primary;
 }
 
-a:hover {
-  color: #a0ef94;
+h3 {
+  @apply text-2xl font-medium text-secondary;
+}
+
+footer h3 {
+  @apply text-white;
+}
+
+a:not(.button) {
+  @apply hover:text-primary-400;
+}
+
+nav a.router-link-active {
+  @apply text-primary font-bold;
+}
+
+section#banner {
+  @apply bg-no-repeat bg-center bg-cover shadow-lg;
+}
+
+img {
+  @apply shadow-lg;
 }
 
 ul {
   list-style-type: disc;
-  padding-left: 2rem;
-}
+  @apply pl-5;
 
-ul > li {
-  padding: 0.25rem 0;
+  li {
+    @apply py-1;
+
+    &::marker {
+      @apply text-primary-400;
+    }
+  }
 }

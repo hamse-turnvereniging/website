@@ -1,14 +1,14 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
-  <section id="banner" class="shadow-lg">
+  <section id="banner">
     <div class="max-w-6xl mx-auto flex flex-col px-6 py-[120px]">
-      <h1 class="text-white text-shadow">Aanbod</h1>
+      <h1>Aanbod</h1>
     </div>
   </section>
   <section id="turnen" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-8">
       <div class="flex flex-1 flex-col gap-3">
-        <h1 class="text-secondary">Turnen</h1>
+        <h2>Turnen</h2>
         <p>
           Toestelturnen is een veelzijdige en uitdagende turnsport waarbij kracht, lenigheid,
           evenwicht en coördinatie centraal staan. Onze gymnasten oefenen op verschillende
@@ -21,16 +21,16 @@
       </div>
       <!-- TODO: Other images -->
       <div class="flex-1">
-        <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
+        <img class="flex-none" src="https://placehold.co/600x400" />
       </div>
     </div>
     <p class="text-center text-xl">
       Onze turnclub biedt toestelturnen aan voor verschillende leeftijden en niveaus:
     </p>
     <div id="turnen-kleuters" class="flex flex-row items-center gap-8">
-      <img class="flex-none shadow-lg" src="https://placehold.co/400x240" />
+      <img class="flex-none" src="https://placehold.co/400x240" />
       <div class="flex flex-col gap-3">
-        <h2 class="text-primary">Kleuters</h2>
+        <h3>Kleuters</h3>
         <p>
           Op een speelse manier maken kleuters kennis met de basisvaardigheden van turnen. We werken
           aan motoriek, coördinatie en plezier in bewegen, met aangepaste toestellen en oefeningen.
@@ -39,19 +39,19 @@
     </div>
     <div id="turnen-lagere-school" class="flex flex-row items-center gap-8">
       <div class="flex flex-col gap-3">
-        <h2 class="text-primary">Lagere school</h2>
+        <h3>Lagere school</h3>
         <p>
           Hier leggen we de focus op het verder ontwikkelen van turnvaardigheden. De kinderen leren
           technieken aan op de turntoestellen, steeds met aandacht voor een goede houding, controle
           en veiligheid.
         </p>
       </div>
-      <img class="flex-none shadow-lg" src="https://placehold.co/400x240" />
+      <img class="flex-none" src="https://placehold.co/400x240" />
     </div>
     <div id="turnen-1ste-middelbaar" class="flex flex-row items-center gap-8">
-      <img class="flex-none shadow-lg" src="https://placehold.co/400x240" />
+      <img class="flex-none" src="https://placehold.co/400x240" />
       <div class="flex flex-col gap-3">
-        <h2 class="text-primary">Vanaf het 1ste middelbaar</h2>
+        <h3>Vanaf het 1ste middelbaar</h3>
         <p>
           Ook voor jongeren blijft toestelturnen uitdagend. We bouwen verder op eerder geleerde
           technieken en zetten in op persoonlijke groei, techniekverbetering en plezier in sporten.
@@ -66,7 +66,7 @@
   <section id="trampoline" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
       <div class="flex flex-col gap-3">
-        <h1 class="text-secondary">Trampoline</h1>
+        <h2>Trampoline</h2>
         <p>
           Op de trampolines leren gymnasten stapsgewijs controle en techniek, van eenvoudige
           sprongen tot indrukwekkende bewegingen in de lucht.
@@ -82,7 +82,7 @@
           ontwikkelen of gewoon plezier te beleven aan deze unieke sport.
         </p>
       </div>
-      <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
+      <img class="flex-none" src="https://placehold.co/600x400" />
     </div>
     <p class="text-center text-xl">
       Trampolinespringen is niet alleen leuk, het verbetert ook je kracht, coördinatie en
@@ -91,9 +91,9 @@
   </section>
   <section id="bbb" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
-      <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
+      <img class="flex-none" src="https://placehold.co/600x400" />
       <div class="flex flex-col gap-3">
-        <h1 class="text-secondary">BBB</h1>
+        <h2>BBB</h2>
         <p>
           BBB staat voor Benen, Billen en Buik - een leuke en effectieve groepsles die focust op het
           versterken en verstevigen van deze drie zones. Tijdens de les werken we aan
@@ -115,7 +115,7 @@
   <section id="callanetics" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
       <div class="flex flex-col gap-3">
-        <h1 class="text-secondary">Callanetics</h1>
+        <h2>Callanetics</h2>
         <p>
           Callanetics is een rustige maar intensieve vorm van spierversterking die focust op diepe
           spieren, vooral in de buik, billen, benen en rug. Door kleine, gecontroleerde bewegingen
@@ -133,7 +133,7 @@
           precisie staan centraal, steeds in een ontspannen sfeer.
         </p>
       </div>
-      <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
+      <img class="flex-none" src="https://placehold.co/600x400" />
     </div>
     <p class="text-center text-xl">
       Wil je werken aan je lichaam op een rustige maar doelgerichte manier? Dan is Callanetics iets
@@ -142,9 +142,9 @@
   </section>
   <section id="net-voetbal-heren" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-row items-center gap-12">
-      <img class="flex-none shadow-lg" src="https://placehold.co/600x400" />
+      <img class="flex-none" src="https://placehold.co/600x400" />
       <div class="flex flex-col gap-3">
-        <h1 class="text-secondary">Net-voetbal heren</h1>
+        <h2>Net-voetbal heren</h2>
         <p>
           Net-voetbal is een dynamische en leuke sport die het beste van voetbal en volleybal
           combineert. Twee teams staan tegenover elkaar met een net ertussen en proberen de bal met
@@ -169,11 +169,8 @@
   </section>
 </template>
 
-<style lang="css" scoped>
+<style scoped>
 section#banner {
   background-image: url("https://placehold.co/1600x340");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 }
 </style>

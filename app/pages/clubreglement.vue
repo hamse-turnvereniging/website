@@ -4,14 +4,14 @@ import { NuxtLink } from "#components";
 
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
-  <section id="banner" class="shadow-lg">
+  <section id="banner">
     <div class="max-w-6xl mx-auto flex flex-col px-6 py-[120px]">
-      <h1 class="text-white text-shadow">Clubreglement</h1>
+      <h1>Clubreglement</h1>
     </div>
   </section>
-  <section id="reglement" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
+  <section class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-col gap-3">
-      <h2 class="text-primary">Algemene doelstelling</h2>
+      <h2>Algemene doelstelling</h2>
       <p>
         De Hamse Turnvereniging wil gezonde, aangename en verantwoorde sport aanbieden aan
         <span class="font-semibold">alle leeftijden</span> waarbij plezierbeleving steeds centraal
@@ -19,7 +19,7 @@ import { NuxtLink } from "#components";
       </p>
     </div>
     <div class="flex flex-col gap-3">
-      <h2 class="text-primary">Intern reglement</h2>
+      <h2>Intern reglement</h2>
       <ul>
         <li>
           In het <span class="font-semibold">lidgeld</span> is inbegrepen: de
@@ -49,10 +49,10 @@ import { NuxtLink } from "#components";
         </li>
         <li>
           Het dragen van <span class="font-semibold">juwelen</span> is tijdens de les
-          <span class="font-semibold">niet toegelaten</span>.
+          <span class="font-semibold">NIET toegelaten</span>.
         </li>
         <li>
-          Er mag <span class="font-semibold">niet gegeten, gedronken of gesnoept</span> worden in de
+          Er mag <span class="font-semibold">NIET gegeten, gedronken of gesnoept</span> worden in de
           sporthal, <span class="font-semibold">ZEKER GEEN KAUWGOM</span>.<br />
           Gelieve eten (koek) en drinken in de kleedkamer te laten.
         </li>
@@ -61,7 +61,7 @@ import { NuxtLink } from "#components";
           het wenselijk dat de <span class="font-semibold">ouders de sporthal verlaten</span>.
         </li>
         <li>
-          <span class="font-semibold">GSM</span> gebruik tijdens de lessen is
+          <span class="font-semibold">GSM</span>-gebruik tijdens de lessen is
           <span class="font-semibold">NIET toegestaan</span>
         </li>
         <li>
@@ -81,7 +81,7 @@ import { NuxtLink } from "#components";
       </ul>
     </div>
     <div class="flex flex-col gap-3">
-      <h2 class="text-primary">Te onthouden</h2>
+      <h2>Te onthouden</h2>
       <p>
         Tijdens de <span class="font-semibold">schoolvakanties</span> is er
         <span class="font-semibold">GEEN turnles</span> voor de kinderen.
@@ -90,11 +90,8 @@ import { NuxtLink } from "#components";
   </section>
 </template>
 
-<style lang="css" scoped>
+<style scoped>
 section#banner {
   background-image: url("https://placehold.co/1600x340");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
 }
 </style>

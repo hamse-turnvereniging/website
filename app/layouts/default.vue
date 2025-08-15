@@ -7,20 +7,3 @@
   </main>
   <app-footer class="flex-initial" />
 </template>
-
-<style>
-html,
-body,
-#__nuxt {
-  height: 100%;
-}
-
-body {
-  overflow-y: scroll;
-}
-
-#__nuxt {
-  display: flex;
-  flex-direction: column;
-}
-</style>
