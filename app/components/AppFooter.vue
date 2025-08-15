@@ -23,23 +23,23 @@
             >
           </div>
         </div>
-        <div class="flex flex-col gap-4">
-          <nav class="flex flex-col gap-2">
-            <NuxtLink to="/verzekering">Verzekering</NuxtLink>
-            <NuxtLink to="/privacyverklaring">Privacyverklaring</NuxtLink>
-            <NuxtLink to="/clubreglement">Clubreglement</NuxtLink>
-          </nav>
-          <NuxtLink href="https://www.gymfed.be" :external="true">
-            <img src="~/assets/images/gymfed.png" alt="Gymfed logo" width="120" />
-          </NuxtLink>
-        </div>
-        <nav class="pages flex flex-col gap-2">
+        <nav class="flex flex-col gap-2">
           <NuxtLink to="/">Welkom</NuxtLink>
           <NuxtLink to="/aanbod">Aanbod</NuxtLink>
           <NuxtLink to="/kalender">Kalender</NuxtLink>
           <NuxtLink to="/faq">FAQ</NuxtLink>
           <NuxtLink to="/inschrijven">Inschrijven</NuxtLink>
         </nav>
+        <div class="flex flex-col gap-4">
+          <nav class="flex flex-col gap-2">
+            <NuxtLink to="/clubreglement">Clubreglement</NuxtLink>
+            <NuxtLink to="/verzekering">Verzekering</NuxtLink>
+            <NuxtLink to="/privacyverklaring">Privacyverklaring</NuxtLink>
+          </nav>
+          <NuxtLink href="https://www.gymfed.be" :external="true">
+            <img src="~/assets/images/gymfed.png" alt="Gymfed logo" width="120" />
+          </NuxtLink>
+        </div>
       </div>
       <div class="flex justify-between">
         <div class="copyright">
@@ -62,7 +62,7 @@ footer {
   color: #ffffff;
 }
 
-nav.pages a.router-link-active {
+nav a.router-link-active {
   color: #a0ef94;
   font-weight: bold;
 }

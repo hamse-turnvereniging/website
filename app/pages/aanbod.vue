@@ -1,11 +1,8 @@
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
-  <section id="banner">
+  <section id="banner" class="shadow-lg">
     <div class="max-w-6xl mx-auto flex flex-col px-6 py-[120px]">
-      <h1 class="font-bold text-white text-shadow">
-        Een fijne turnervaring<br />
-        voor elke leeftijd
-      </h1>
+      <h1 class="font-bold text-white text-shadow">Aanbod</h1>
     </div>
   </section>
   <section id="turnen" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
