@@ -109,7 +109,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       </p>
       <p>
         Je gegevens worden enkel en alleen gedeeld met het bestuur van de Hamse Turnvereniging en
-        <NuxtLink href="https://www.gymfed.be" :external="true"
+        <NuxtLink href="https://www.gymfed.be" :external="true" target="_blank"
           >Gymfed (Gymnastiekfederatie Vlaanderen)</NuxtLink
         >, i.v.m. je inschrijving en verplichte verzekering.
       </p>

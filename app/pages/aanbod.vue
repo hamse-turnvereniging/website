@@ -170,7 +170,13 @@
 </template>
 
 <style scoped>
+@reference "./../assets/css/main.css";
+
 section#banner {
   background-image: url("https://placehold.co/1600x340");
+}
+
+p.text-center.text-xl {
+  @apply text-secondary-500;
 }
 </style>

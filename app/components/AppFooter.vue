@@ -12,13 +12,19 @@
           </div>
           <div class="flex gap-2">
             <icon name="mdi-facebook" size="24" class="text-primary" />
-            <NuxtLink href="https://www.facebook.com/HamseTurnvereniging/" :external="true"
+            <NuxtLink
+              href="https://www.facebook.com/HamseTurnvereniging/"
+              :external="true"
+              target="_blank"
               >Hamse Turnvereniging</NuxtLink
             >
           </div>
           <div class="flex gap-2">
             <icon name="mdi-instagram" size="24" class="text-primary" />
-            <NuxtLink href="https://www.instagram.com/hamse_turnvereniging" :external="true"
+            <NuxtLink
+              href="https://www.instagram.com/hamse_turnvereniging"
+              :external="true"
+              target="_blank"
               >@hamse_turnvereniging</NuxtLink
             >
           </div>
@@ -36,7 +42,7 @@
             <NuxtLink to="/verzekering">Verzekering</NuxtLink>
             <NuxtLink to="/privacyverklaring">Privacyverklaring</NuxtLink>
           </nav>
-          <NuxtLink href="https://www.gymfed.be" :external="true">
+          <NuxtLink href="https://www.gymfed.be" :external="true" target="_blank">
             <img src="~/assets/images/gymfed.png" alt="Gymfed logo" width="120" />
           </NuxtLink>
         </div>
@@ -47,7 +53,9 @@
         </div>
         <div class="website-by">
           Website door
-          <NuxtLink href="https://steffbeckers.com/nl" :external="true">Steff Beckers</NuxtLink>
+          <NuxtLink href="https://steffbeckers.com/nl" :external="true" target="_blank"
+            >Steff Beckers</NuxtLink
+          >
         </div>
       </div>
     </div>
@@ -59,10 +67,30 @@
 
 footer {
   @apply bg-neutral-900 text-white;
+
+  h3 {
+    @apply text-white;
+  }
+
+  a {
+    @apply text-white;
+
+    &.router-link-active {
+      @apply text-primary font-bold;
+    }
+  }
 }
 
 .copyright,
 .website-by {
   @apply text-neutral-300;
+
+  a {
+    @apply text-neutral-300;
+
+    &:hover {
+      @apply text-primary;
+    }
+  }
 }
 </style>

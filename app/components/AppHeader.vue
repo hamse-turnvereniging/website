@@ -44,5 +44,15 @@
 
 header {
   @apply bg-neutral-900 text-white shadow-lg;
+
+  nav {
+    a {
+      @apply text-white;
+
+      &.router-link-active {
+        @apply text-primary font-bold;
+      }
+    }
+  }
 }
 </style>
