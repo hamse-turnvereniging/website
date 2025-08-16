@@ -75,6 +75,10 @@ footer h3 {
   @apply text-white;
 }
 
+h4 {
+  @apply text-xl text-secondary;
+}
+
 a:not(.button) {
   @apply hover:text-primary-400;
 }
