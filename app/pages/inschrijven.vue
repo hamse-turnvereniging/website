@@ -111,7 +111,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
   toast.add({ title: "Gelukt!", description: "Je inschrijving is verzonden.", color: "primary" });
 
-  // Reset form
+  resetForm();
+}
+
+function resetForm() {
   state.value = null;
 }
 
@@ -481,7 +484,21 @@ async function onError(event: FormErrorEvent) {
             </UCheckbox>
           </UFormField>
         </div>
-        <UButton type="submit" size="xl" color="secondary">Inschrijving verzenden</UButton>
+        <div class="flex flex-col gap-3">
+          <UButton type="submit" size="xl" color="secondary">Inschrijving verzenden</UButton>
+          <!-- TODO: Better modal layout -->
+          <UModal
+            :close="true"
+            title="Gegevens wissen"
+            description="Ben je zeker dat je de gegevens van het inschrijvingsformulier wilt wissen?"
+          >
+            <UButton label="Gegevens wissen" type="button" variant="ghost" color="error" />
+            <template #body>
+              <UButton label="Annuleren" variant="ghost" color="neutral" />
+              <UButton label="Wissen" color="error" @click="resetForm" />
+            </template>
+          </UModal>
+        </div>
       </div>
     </UForm>
   </section>

@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import { NuxtLink } from "#components";
-</script>
-
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
   <section id="banner">
