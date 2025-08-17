@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/ui",
     "@nuxtjs/seo",
+    "@vueuse/nuxt",
   ],
   site: {
     defaultLocale: "nl",

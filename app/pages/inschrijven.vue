@@ -1,19 +1,96 @@
 <script lang="ts" setup>
 import * as v from "valibot";
-import type { FormSubmitEvent } from "@nuxt/ui";
+import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
+import { useLocalStorage } from "@vueuse/core";
+import { vMaska } from "maska/vue";
 
-const groups = ref(["Turnen", "Trampoline", "BBB", "Callanetics", "Net-voetbal heren"]);
-const locations = ref(["'t Vlietje (Kwaadmechelen)", "Kristoffelheem (Oostham)"]);
+const form = useTemplateRef("form");
+
+const groups = ref<SelectItem[]>([
+  {
+    type: "label",
+    label: "Turnen",
+  },
+  {
+    label: "1ste kleuterklas",
+    value: "Turnen - 1ste kleuterklas",
+  },
+  {
+    label: "2de en 3de kleuterklas",
+    value: "Turnen - 2de en 3de kleuterklas",
+  },
+  {
+    label: "1ste, 2de en 3de leerjaar",
+    value: "Turnen - 1ste, 2de en 3de leerjaar",
+  },
+  {
+    label: "4ste, 5de en 6de leerjaar",
+    value: "Turnen - 4ste, 5de en 6de leerjaar",
+  },
+  {
+    label: "12+",
+    value: "Turnen - 12+",
+  },
+  { type: "separator" },
+  {
+    label: "Trampoline (vanaf 1ste leerjaar)",
+    value: "Trampoline",
+  },
+  "BBB",
+  "Callanetics",
+  "Net-voetbal heren",
+]);
+
+const parentsGroups = ref([
+  "Turnen - 1ste kleuterklas",
+  "Turnen - 2de en 3de kleuterklas",
+  "Turnen - 1ste, 2de en 3de leerjaar",
+  "Turnen - 4ste, 5de en 6de leerjaar",
+  "Trampoline",
+]);
+
+const emergencyContactGroups = ref(["Turnen - 12+", "BBB", "Callanetics", "Net-voetbal heren"]);
+
+const locations = ref<SelectItem[]>([
+  {
+    label: "Kristoffelheem (Oostham)",
+    value: "Kristoffelheem",
+  },
+  {
+    label: "'t Vlietje (Kwaadmechelen)",
+    value: "'t Vlietje",
+  },
+]);
+
+// TODO: Check if location is available based on group
+// const locationGroups = ref<{ [location: string]: string[] }>({
+//   Kristoffelheem: [
+//     "Turnen - 1ste kleuterklas",
+//     "Turnen - 2de en 3de kleuterklas",
+//     "Turnen - 1ste, 2de en 3de leerjaar",
+//     "Turnen - 4ste, 5de en 6de leerjaar",
+//     "Trampoline",
+//     "Turnen - 12+",
+//     // TODO: Is this correct?
+//     "BBB",
+//     "Callanetics",
+//     "Net-voetbal heren",
+//   ],
+//   "'t Vlietje": [
+//     "Turnen - 1ste kleuterklas",
+//     "Turnen - 2de en 3de kleuterklas",
+//     "Turnen - 1ste, 2de en 3de leerjaar",
+//   ],
+// });
+
 const genders = ref(["Man", "Vrouw", "X"]);
-const parentsGroups = ref(["Turnen", "Trampoline"]);
-const emergencyContactGroups = ref(["BBB", "Callanetics", "Net-voetbal heren"]);
 
 const schema = v.object({
-  group: v.string(),
-  location: v.string(),
+  group: v.pipe(v.optional(v.string())),
+  location: v.pipe(v.optional(v.string())),
   firstName: v.string(),
   lastName: v.string(),
-  gender: v.string(),
+  gender: v.pipe(v.optional(v.string())),
   dateOfBirth: v.string(),
   nationality: v.string(),
   address: v.object({
@@ -23,7 +100,7 @@ const schema = v.object({
     city: v.string(),
   }),
   phoneNumber: v.string(),
-  email: v.pipe(v.string(), v.email("Ongeldig e-mailadres")),
+  email: v.string(),
   emergencyContact: v.object({
     firstName: v.string(),
     lastName: v.string(),
@@ -33,22 +110,23 @@ const schema = v.object({
     firstName: v.string(),
     lastName: v.string(),
     phoneNumber: v.string(),
-    email: v.pipe(v.string(), v.email("Ongeldig e-mailadres")),
+    email: v.string(),
   }),
   parent2: v.object({
     firstName: v.string(),
     lastName: v.string(),
     phoneNumber: v.string(),
-    email: v.pipe(v.string(), v.email("Ongeldig e-mailadres")),
+    email: v.string(),
   }),
   paymentCheck: v.boolean(),
   photosCheck: v.boolean(),
   rulesCheck: v.boolean(),
+  privacyCheck: v.boolean(),
 });
 
 type Schema = v.InferOutput<typeof schema>;
 
-const state = reactive({
+const state = useLocalStorage("inschrijvingsformulier", {
   group: undefined,
   location: undefined,
   firstName: "",
@@ -56,7 +134,7 @@ const state = reactive({
   gender: undefined,
   dateOfBirth: "",
   nationality: "",
-  addres: {
+  address: {
     streetName: "",
     houseNumber: "",
     postalCode: "",
@@ -84,12 +162,26 @@ const state = reactive({
   paymentCheck: false,
   photosCheck: true,
   rulesCheck: false,
-});
+  privacyCheck: false,
+} as Schema);
 
 const toast = useToast();
+
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data);
-  toast.add({ title: "Gelukt!", description: "Je inschrijving is verzonden.", color: "success" });
+
+  toast.add({ title: "Gelukt!", description: "Je inschrijving is verzonden.", color: "primary" });
+
+  // Reset form
+  state.value = null;
+}
+
+async function onError(event: FormErrorEvent) {
+  if (event?.errors?.[0]?.id) {
+    const element = document.getElementById(event.errors[0].id);
+    element?.focus();
+    element?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
 }
 </script>
 
@@ -107,14 +199,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         Wil je graag lid worden van onze turnclub? Fantastisch!<br />
         Schrijf je hier in en sluit je aan bij onze sportieve en gezellige groep.
       </p>
-      <p>
-        Je gegevens worden enkel en alleen gedeeld met het bestuur van de Hamse Turnvereniging en
-        <NuxtLink href="https://www.gymfed.be" :external="true" target="_blank"
-          >Gymfed (Gymnastiekfederatie Vlaanderen)</NuxtLink
-        >, i.v.m. je inschrijving en verplichte verzekering.
-      </p>
     </div>
-    <UForm :schema :state @submit="onSubmit">
+    <!-- TODO: Remove -->
+    {{ form?.getErrors() }}
+    <UForm ref="form" :schema :state @submit="onSubmit" @error="onError">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
           <h3>Voor welke groep wil je inschrijven?</h3>
@@ -141,278 +229,300 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         </div>
         <hr />
         <div class="flex flex-col gap-4">
-          <h3>Persoonlijke gegevens</h3>
-          <div class="flex flex-row gap-6">
-            <UFormField class="flex-1" label="Voornaam" name="firstName" :required="true">
-              <UInput v-model="state.firstName" class="w-full" size="xl" placeholder="Voornaam" />
-            </UFormField>
-            <UFormField class="flex-1" label="Naam" name="lastName" :required="true">
-              <UInput v-model="state.lastName" class="w-full" size="xl" placeholder="Naam" />
-            </UFormField>
-          </div>
-          <div class="flex flex-row gap-6">
-            <UFormField class="flex-1" label="Gender" name="gender" :required="true">
-              <USelect
-                v-model="state.gender"
-                :items="genders"
-                size="xl"
-                class="w-full"
-                placeholder="Man / Vrouw / X"
-              />
-            </UFormField>
-            <UFormField class="flex-1" label="Geboortedatum" name="dateOfBirth" :required="true">
-              <UInput
-                v-model="state.dateOfBirth"
-                class="w-full"
-                size="xl"
-                placeholder="dd/mm/jjjj"
-              />
-            </UFormField>
-            <UFormField class="flex-1" label="Nationaliteit" name="nationality" :required="true">
-              <UInput
-                v-model="state.nationality"
-                class="w-full"
-                size="xl"
-                placeholder="Nationaliteit"
-              />
-            </UFormField>
+          <h3>Gegevens lid</h3>
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-row gap-6">
+              <UFormField class="flex-1" label="Voornaam" name="firstName" :required="true">
+                <UInput v-model="state.firstName" class="w-full" size="xl" placeholder="Voornaam" />
+              </UFormField>
+              <UFormField class="flex-1" label="Naam" name="lastName" :required="true">
+                <UInput v-model="state.lastName" class="w-full" size="xl" placeholder="Naam" />
+              </UFormField>
+            </div>
+            <div class="flex flex-row gap-6">
+              <UFormField class="flex-1" label="Gender" name="gender" :required="true">
+                <USelect
+                  v-model="state.gender"
+                  :items="genders"
+                  size="xl"
+                  class="w-full"
+                  placeholder="Man / Vrouw / X"
+                />
+              </UFormField>
+              <UFormField class="flex-1" label="Geboortedatum" name="dateOfBirth" :required="true">
+                <UInput
+                  v-model="state.dateOfBirth"
+                  v-maska="'##/##/####'"
+                  class="w-full"
+                  size="xl"
+                  placeholder="dd/mm/jjjj"
+                />
+              </UFormField>
+              <UFormField class="flex-1" label="Nationaliteit" name="nationality" :required="true">
+                <UInput
+                  v-model="state.nationality"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Nationaliteit"
+                />
+              </UFormField>
+            </div>
+            <h4>Adres</h4>
+            <div class="flex flex-row gap-6">
+              <UFormField class="flex-1" label="Straatnaam" name="addressStreet" :required="true">
+                <UInput
+                  v-model="state.address.streetName"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Straat"
+                />
+              </UFormField>
+              <UFormField
+                class="flex-1"
+                label="Huisnummer"
+                name="addressHouseNumber"
+                :required="true"
+              >
+                <UInput
+                  v-model="state.address.houseNumber"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Huisnummer"
+                />
+              </UFormField>
+            </div>
+            <div class="flex flex-row gap-6">
+              <UFormField class="flex-1" label="Postcode" name="addressPostalCode" :required="true">
+                <UInput
+                  v-model="state.address.postalCode"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Postcode"
+                />
+              </UFormField>
+              <UFormField class="flex-1" label="Stad/gemeente" name="addressCity" :required="true">
+                <UInput
+                  v-model="state.address.city"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Stad/gemeente"
+                />
+              </UFormField>
+            </div>
+            <h4>Contact</h4>
+            <div class="flex flex-row gap-6">
+              <UFormField
+                class="flex-1"
+                label="Telefoonnummer"
+                name="phoneNumber"
+                :required="!!state.group && emergencyContactGroups.includes(state.group)"
+              >
+                <UInput
+                  v-model="state.phoneNumber"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Telefoonnummer"
+                />
+              </UFormField>
+              <UFormField
+                class="flex-1"
+                label="E-mailadres"
+                name="email"
+                :required="!!state.group && emergencyContactGroups.includes(state.group)"
+              >
+                <UInput v-model="state.email" class="w-full" size="xl" placeholder="E-mailadres" />
+              </UFormField>
+            </div>
+            <!-- TODO: v-if="state.group && emergencyContactGroups.includes(state.group)" -->
+            <div class="flex flex-row gap-6">
+              <div class="flex flex-1 flex-col gap-3">
+                <h5>Wie mogen we bellen in geval van nood?</h5>
+                <div class="flex flex-row gap-6">
+                  <UFormField
+                    class="flex-1"
+                    label="Voornaam"
+                    name="emergencyContactFirstName"
+                    :required="!!state.group && emergencyContactGroups.includes(state.group)"
+                  >
+                    <UInput
+                      v-model="state.emergencyContact.firstName"
+                      class="w-full"
+                      size="xl"
+                      placeholder="Voornaam"
+                    />
+                  </UFormField>
+                  <UFormField
+                    class="flex-1"
+                    label="Naam"
+                    name="emergencyContactLastName"
+                    :required="!!state.group && emergencyContactGroups.includes(state.group)"
+                  >
+                    <UInput
+                      v-model="state.emergencyContact.lastName"
+                      class="w-full"
+                      size="xl"
+                      placeholder="Naam"
+                    />
+                  </UFormField>
+                  <UFormField
+                    class="flex-1"
+                    label="Telefoonnummer"
+                    name="emergencyContactPhoneNumber"
+                    :required="!!state.group && emergencyContactGroups.includes(state.group)"
+                  >
+                    <UInput
+                      v-model="state.emergencyContact.phoneNumber"
+                      class="w-full"
+                      size="xl"
+                      placeholder="Telefoonnummer"
+                    />
+                  </UFormField>
+                </div>
+              </div>
+            </div>
+            <!-- TODO: v-if="state.group && parentsGroups.includes(state.group)" -->
+            <div class="flex flex-row gap-6">
+              <div class="flex flex-1 flex-col gap-4">
+                <h5>Ouder 1</h5>
+                <div class="flex flex-row gap-6">
+                  <UFormField
+                    class="flex-1"
+                    label="Voornaam"
+                    name="parent1.firstName"
+                    :required="!!state.group && parentsGroups.includes(state.group)"
+                  >
+                    <UInput
+                      v-model="state.parent1.firstName"
+                      class="w-full"
+                      size="xl"
+                      placeholder="Voornaam"
+                    />
+                  </UFormField>
+                  <UFormField
+                    class="flex-1"
+                    label="Naam"
+                    name="parent1.lastName"
+                    :required="!!state.group && parentsGroups.includes(state.group)"
+                  >
+                    <UInput
+                      v-model="state.parent1.lastName"
+                      class="w-full"
+                      size="xl"
+                      placeholder="Naam"
+                    />
+                  </UFormField>
+                </div>
+                <div class="flex flex-row gap-6">
+                  <UFormField
+                    class="flex-1"
+                    label="Telefoonnummer"
+                    name="parent1.phoneNumber"
+                    :required="!!state.group && parentsGroups.includes(state.group)"
+                  >
+                    <UInput
+                      v-model="state.parent1.phoneNumber"
+                      class="w-full"
+                      size="xl"
+                      placeholder="Telefoonnummer"
+                    />
+                  </UFormField>
+                  <UFormField
+                    class="flex-1"
+                    label="E-mailadres"
+                    name="parent1.email"
+                    :required="!!state.group && parentsGroups.includes(state.group)"
+                  >
+                    <UInput
+                      v-model="state.parent1.email"
+                      class="w-full"
+                      size="xl"
+                      placeholder="E-mailadres"
+                    />
+                  </UFormField>
+                </div>
+              </div>
+              <div class="flex flex-1 flex-col gap-4">
+                <h5>Ouder 2</h5>
+                <div class="flex flex-row gap-6">
+                  <UFormField class="flex-1" label="Voornaam" name="parent2.firstName">
+                    <UInput
+                      v-model="state.parent2.firstName"
+                      class="w-full"
+                      size="xl"
+                      placeholder="Voornaam"
+                    />
+                  </UFormField>
+                  <UFormField class="flex-1" label="Naam" name="parent2.lastName">
+                    <UInput
+                      v-model="state.parent2.lastName"
+                      class="w-full"
+                      size="xl"
+                      placeholder="Naam"
+                    />
+                  </UFormField>
+                </div>
+                <div class="flex flex-row gap-6">
+                  <UFormField class="flex-1" label="Telefoonnummer" name="parent2.phoneNumber">
+                    <UInput
+                      v-model="state.parent2.phoneNumber"
+                      class="w-full"
+                      size="xl"
+                      placeholder="Telefoonnummer"
+                    />
+                  </UFormField>
+                  <UFormField class="flex-1" label="E-mailadres" name="parent2.email">
+                    <UInput
+                      v-model="state.parent2.email"
+                      class="w-full"
+                      size="xl"
+                      placeholder="E-mailadres"
+                    />
+                  </UFormField>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <hr />
         <div class="flex flex-col gap-4">
-          <h3>Adres</h3>
-          <div class="flex flex-row gap-6">
-            <UFormField class="flex-1" label="Straatnaam" name="addressStreet" :required="true">
-              <UInput
-                v-model="state.addres.streetName"
-                class="w-full"
-                size="xl"
-                placeholder="Straat"
-              />
-            </UFormField>
-            <UFormField
-              class="flex-1"
-              label="Huisnummer"
-              name="addressHouseNumber"
-              :required="true"
-            >
-              <UInput
-                v-model="state.addres.houseNumber"
-                class="w-full"
-                size="xl"
-                placeholder="Huisnummer"
-              />
-            </UFormField>
-          </div>
-          <div class="flex flex-row gap-6">
-            <UFormField class="flex-1" label="Postcode" name="addressPostalCode" :required="true">
-              <UInput
-                v-model="state.addres.postalCode"
-                class="w-full"
-                size="xl"
-                placeholder="Postcode"
-              />
-            </UFormField>
-            <UFormField class="flex-1" label="Stad/gemeente" name="addressCity" :required="true">
-              <UInput
-                v-model="state.addres.city"
-                class="w-full"
-                size="xl"
-                placeholder="Stad/gemeente"
-              />
-            </UFormField>
-          </div>
-        </div>
-        <hr />
-        <div class="flex flex-col gap-6">
-          <h3>Contactgegevens</h3>
-          <div class="flex flex-row gap-6">
-            <UFormField class="flex-1" label="Telefoonnummer" name="phoneNumber" :required="true">
-              <UInput
-                v-model="state.phoneNumber"
-                class="w-full"
-                size="xl"
-                placeholder="Telefoonnummer"
-              />
-            </UFormField>
-            <UFormField class="flex-1" label="E-mailadres" name="email" :required="true">
-              <UInput v-model="state.email" class="w-full" size="xl" placeholder="E-mailadres" />
-            </UFormField>
-          </div>
-          <div
-            v-if="state.group && emergencyContactGroups.includes(state.group)"
-            class="flex flex-row gap-6"
-          >
-            <div class="flex flex-1 flex-col gap-3">
-              <h4>Wie mogen we bellen in geval van nood?</h4>
-              <div class="flex flex-row gap-6">
-                <UFormField
-                  class="flex-1"
-                  label="Voornaam"
-                  name="emergencyContactFirstName"
-                  :required="true"
-                >
-                  <UInput
-                    v-model="state.emergencyContact.firstName"
-                    class="w-full"
-                    size="xl"
-                    placeholder="Voornaam"
-                  />
-                </UFormField>
-                <UFormField
-                  class="flex-1"
-                  label="Naam"
-                  name="emergencyContactLastName"
-                  :required="true"
-                >
-                  <UInput
-                    v-model="state.emergencyContact.lastName"
-                    class="w-full"
-                    size="xl"
-                    placeholder="Naam"
-                  />
-                </UFormField>
-                <UFormField
-                  class="flex-1"
-                  label="Telefoonnummer"
-                  name="emergencyContactPhoneNumber"
-                  :required="true"
-                >
-                  <UInput
-                    v-model="state.emergencyContact.phoneNumber"
-                    class="w-full"
-                    size="xl"
-                    placeholder="Telefoonnummer"
-                  />
-                </UFormField>
-              </div>
-            </div>
-          </div>
-          <div
-            v-if="state.group && parentsGroups.includes(state.group)"
-            class="flex flex-row gap-6"
-          >
-            <div class="flex flex-1 flex-col gap-4">
-              <h4>Ouder 1</h4>
-              <div class="flex flex-row gap-6">
-                <UFormField
-                  class="flex-1"
-                  label="Voornaam"
-                  name="parent1FirstName"
-                  :required="true"
-                >
-                  <UInput
-                    v-model="state.parent1.firstName"
-                    class="w-full"
-                    size="xl"
-                    placeholder="Voornaam"
-                  />
-                </UFormField>
-                <UFormField class="flex-1" label="Naam" name="parent1LastName" :required="true">
-                  <UInput
-                    v-model="state.parent1.lastName"
-                    class="w-full"
-                    size="xl"
-                    placeholder="Naam"
-                  />
-                </UFormField>
-              </div>
-              <div class="flex flex-row gap-6">
-                <UFormField
-                  class="flex-1"
-                  label="Telefoonnummer"
-                  name="parent1PhoneNumber"
-                  :required="true"
-                >
-                  <UInput
-                    v-model="state.parent1.phoneNumber"
-                    class="w-full"
-                    size="xl"
-                    placeholder="Telefoonnummer"
-                  />
-                </UFormField>
-                <UFormField class="flex-1" label="E-mailadres" name="parent1Email" :required="true">
-                  <UInput
-                    v-model="state.parent1.email"
-                    class="w-full"
-                    size="xl"
-                    placeholder="E-mailadres"
-                  />
-                </UFormField>
-              </div>
-            </div>
-            <div class="flex flex-1 flex-col gap-4">
-              <h4>Ouder 2</h4>
-              <div class="flex flex-row gap-6">
-                <UFormField class="flex-1" label="Voornaam" name="parent2FirstName">
-                  <UInput
-                    v-model="state.parent2.firstName"
-                    class="w-full"
-                    size="xl"
-                    placeholder="Voornaam"
-                  />
-                </UFormField>
-                <UFormField class="flex-1" label="Naam" name="parent2LastName">
-                  <UInput
-                    v-model="state.parent2.lastName"
-                    class="w-full"
-                    size="xl"
-                    placeholder="Naam"
-                  />
-                </UFormField>
-              </div>
-              <div class="flex flex-row gap-6">
-                <UFormField class="flex-1" label="Telefoonnummer" name="parent2PhoneNumber">
-                  <UInput
-                    v-model="state.parent2.phoneNumber"
-                    class="w-full"
-                    size="xl"
-                    placeholder="Telefoonnummer"
-                  />
-                </UFormField>
-                <UFormField class="flex-1" label="E-mailadres" name="parent2Email">
-                  <UInput
-                    v-model="state.parent2.email"
-                    class="w-full"
-                    size="xl"
-                    placeholder="E-mailadres"
-                  />
-                </UFormField>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <div class="flex flex-col gap-6">
           <h3>Betaalgegevens lidgeld</h3>
           <div class="flex flex-col gap-3">
             <p>Rekeningnummer: BE69 0682 0939 9078</p>
             <p>
               Mededeling: {{ state.lastName != "" ? state.lastName : "Naam" }}
-              {{ state.firstName != "" ? state.lastName : "Voornaam" }}
+              {{ state.firstName != "" ? state.firstName : "Voornaam" }}
             </p>
           </div>
           <UCheckbox
             v-model="state.paymentCheck"
-            label="Ik heb reeds betaald of de betaalgegevens zorgvuldig genoteerd"
+            label="Ik heb reeds betaald of de betaalgegevens zorgvuldig genoteerd."
             description="(te betalen binnen 14 dagen na inschrijving)"
             size="xl"
             :required="true"
           />
         </div>
         <hr />
-        <div class="flex flex-col gap-3">
+        <div class="flex flex-col gap-4">
           <UCheckbox
             v-model="state.photosCheck"
-            label="Foto's van lid mogen gepubliceerd worden"
+            label="Foto's van lid mogen gepubliceerd worden."
             size="xl"
           />
           <UCheckbox v-model="state.rulesCheck" size="xl" :required="true">
             <template #label
-              >Ik heb
-              <NuxtLink to="clubreglement" target="_blank">het clubreglement</NuxtLink> gelezen en
-              ga hiermee akkoord.</template
+              >Ik heb het
+              <NuxtLink to="clubreglement" target="_blank">clubreglement</NuxtLink> gelezen en ga
+              hiermee akkoord.</template
             >
+          </UCheckbox>
+          <UCheckbox v-model="state.privacyCheck" size="xl" :required="true">
+            <template #label>
+              Ik ben akkoord dat bovenstaande gegevens enkel en alleen gedeeld worden met het
+              bestuur van de Hamse Turnvereniging en
+              <NuxtLink href="https://www.gymfed.be" :external="true" target="_blank"
+                >Gymfed (Gymnastiekfederatie Vlaanderen)</NuxtLink
+              >.
+            </template>
           </UCheckbox>
         </div>
         <UButton type="submit" size="xl" color="secondary">Inschrijving verzenden</UButton>
@@ -422,13 +532,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </template>
 
 <style scoped>
-@reference "./../assets/css/main.css";
-
 section#banner {
   background-image: url("https://placehold.co/1600x340");
-}
-
-hr {
-  @apply border-neutral-50;
 }
 </style>
