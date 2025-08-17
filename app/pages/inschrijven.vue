@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import * as v from "valibot";
+import schema from "../../shared/schemas/inschrijven";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
 import { useLocalStorage } from "@vueuse/core";
 import { vMaska } from "maska/vue";
@@ -85,53 +86,14 @@ const locations = ref<SelectItem[]>([
 
 const genders = ref(["Man", "Vrouw", "X"]);
 
-const schema = v.object({
-  group: v.pipe(v.optional(v.string())),
-  location: v.pipe(v.optional(v.string())),
-  firstName: v.string(),
-  lastName: v.string(),
-  gender: v.pipe(v.optional(v.string())),
-  dateOfBirth: v.string(),
-  nationality: v.string(),
-  address: v.object({
-    streetName: v.string(),
-    houseNumber: v.string(),
-    postalCode: v.string(),
-    city: v.string(),
-  }),
-  phoneNumber: v.string(),
-  email: v.string(),
-  emergencyContact: v.object({
-    firstName: v.string(),
-    lastName: v.string(),
-    phoneNumber: v.string(),
-  }),
-  parent1: v.object({
-    firstName: v.string(),
-    lastName: v.string(),
-    phoneNumber: v.string(),
-    email: v.string(),
-  }),
-  parent2: v.object({
-    firstName: v.string(),
-    lastName: v.string(),
-    phoneNumber: v.string(),
-    email: v.string(),
-  }),
-  paymentCheck: v.boolean(),
-  photosCheck: v.boolean(),
-  rulesCheck: v.boolean(),
-  privacyCheck: v.boolean(),
-});
-
 type Schema = v.InferOutput<typeof schema>;
 
 const state = useLocalStorage("inschrijvingsformulier", {
-  group: undefined,
-  location: undefined,
+  group: "",
+  location: "",
   firstName: "",
   lastName: "",
-  gender: undefined,
+  gender: "",
   dateOfBirth: "",
   nationality: "",
   address: {
@@ -159,16 +121,23 @@ const state = useLocalStorage("inschrijvingsformulier", {
     phoneNumber: "",
     email: "",
   },
-  paymentCheck: false,
+  paymentCheck: false as boolean,
   photosCheck: true,
-  rulesCheck: false,
-  privacyCheck: false,
+  rulesCheck: false as boolean,
+  privacyCheck: false as boolean,
 } as Schema);
 
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  console.log(event.data);
+  console.log("event.data", event.data);
+
+  const response = await $fetch("/api/inschrijven", {
+    method: "POST",
+    body: event.data,
+  });
+
+  console.log("response", response);
 
   toast.add({ title: "Gelukt!", description: "Je inschrijving is verzonden.", color: "primary" });
 
@@ -493,37 +462,44 @@ async function onError(event: FormErrorEvent) {
               {{ state.firstName != "" ? state.firstName : "Voornaam" }}
             </p>
           </div>
-          <UCheckbox
-            v-model="state.paymentCheck"
-            label="Ik heb reeds betaald of de betaalgegevens zorgvuldig genoteerd."
-            description="(te betalen binnen 14 dagen na inschrijving)"
-            size="xl"
-            :required="true"
-          />
+          <UFormField name="paymentCheck">
+            <UCheckbox
+              v-model="state.paymentCheck"
+              label="Ik heb reeds betaald of de betaalgegevens zorgvuldig genoteerd."
+              description="(te betalen binnen 14 dagen na inschrijving)"
+              size="xl"
+            />
+          </UFormField>
         </div>
         <hr />
         <div class="flex flex-col gap-4">
-          <UCheckbox
-            v-model="state.photosCheck"
-            label="Foto's van lid mogen gepubliceerd worden."
-            size="xl"
-          />
-          <UCheckbox v-model="state.rulesCheck" size="xl" :required="true">
-            <template #label
-              >Ik heb het
-              <NuxtLink to="clubreglement" target="_blank">clubreglement</NuxtLink> gelezen en ga
-              hiermee akkoord.</template
-            >
-          </UCheckbox>
-          <UCheckbox v-model="state.privacyCheck" size="xl" :required="true">
-            <template #label>
-              Ik ben akkoord dat bovenstaande gegevens enkel en alleen gedeeld worden met het
-              bestuur van de Hamse Turnvereniging en
-              <NuxtLink href="https://www.gymfed.be" :external="true" target="_blank"
-                >Gymfed (Gymnastiekfederatie Vlaanderen)</NuxtLink
-              >.
-            </template>
-          </UCheckbox>
+          <UFormField name="photosCheck">
+            <UCheckbox
+              v-model="state.photosCheck"
+              label="Foto's van lid mogen gepubliceerd worden."
+              size="xl"
+            />
+          </UFormField>
+          <UFormField name="rulesCheck">
+            <UCheckbox v-model="state.rulesCheck" size="xl">
+              <template #label
+                >Ik heb het
+                <NuxtLink to="clubreglement" target="_blank">clubreglement</NuxtLink> gelezen en ga
+                hiermee akkoord.</template
+              >
+            </UCheckbox>
+          </UFormField>
+          <UFormField name="privacyCheck">
+            <UCheckbox v-model="state.privacyCheck" size="xl">
+              <template #label>
+                Ik ben akkoord dat bovenstaande gegevens enkel en alleen gedeeld worden met het
+                bestuur van de Hamse Turnvereniging en
+                <NuxtLink href="https://www.gymfed.be" :external="true" target="_blank"
+                  >Gymfed (Gymnastiekfederatie Vlaanderen)</NuxtLink
+                >.
+              </template>
+            </UCheckbox>
+          </UFormField>
         </div>
         <UButton type="submit" size="xl" color="secondary">Inschrijving verzenden</UButton>
       </div>
