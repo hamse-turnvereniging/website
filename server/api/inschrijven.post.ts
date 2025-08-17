@@ -1,6 +1,6 @@
 import * as v from "valibot";
 
-import schema from "../../shared/schemas/inschrijven";
+import { schema } from "../../shared/schemas/inschrijven";
 
 export default defineEventHandler(async (event) => {
   console.log("defineEventHandler event", event);
@@ -17,5 +17,6 @@ export default defineEventHandler(async (event) => {
 
   return {
     success: true,
+    validationErrors: null,
   };
 });

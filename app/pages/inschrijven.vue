@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import * as v from "valibot";
-import schema from "../../shared/schemas/inschrijven";
+import { schema, initialState, type Schema } from "../../shared/schemas/inschrijven";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
+import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { useLocalStorage } from "@vueuse/core";
 import { vMaska } from "maska/vue";
 
@@ -86,58 +86,28 @@ const locations = ref<SelectItem[]>([
 
 const genders = ref(["Man", "Vrouw", "X"]);
 
-type Schema = v.InferOutput<typeof schema>;
-
-const state = useLocalStorage("inschrijvingsformulier", {
-  group: "",
-  location: "",
-  firstName: "",
-  lastName: "",
-  gender: "",
-  dateOfBirth: "",
-  nationality: "",
-  address: {
-    streetName: "",
-    houseNumber: "",
-    postalCode: "",
-    city: "",
-  },
-  phoneNumber: "",
-  email: "",
-  emergencyContact: {
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-  },
-  parent1: {
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    email: "",
-  },
-  parent2: {
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    email: "",
-  },
-  paymentCheck: false as boolean,
-  photosCheck: true,
-  rulesCheck: false as boolean,
-  privacyCheck: false as boolean,
-} as Schema);
+const state = useLocalStorage("inschrijvingsformulier", initialState);
 
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  console.log("event.data", event.data);
-
   const response = await $fetch("/api/inschrijven", {
     method: "POST",
     body: event.data,
   });
 
-  console.log("response", response);
+  const errorToast: Partial<Toast> = {
+    title: "Mislukt!",
+    description: "Er ging iets mis tijdens het verzenden van je inschrijving.",
+    color: "error",
+  };
+
+  if (!response.success) {
+    console.error(response);
+    toast.add(errorToast);
+
+    return;
+  }
 
   toast.add({ title: "Gelukt!", description: "Je inschrijving is verzonden.", color: "primary" });
 
@@ -238,7 +208,12 @@ async function onError(event: FormErrorEvent) {
             </div>
             <h4>Adres</h4>
             <div class="flex flex-row gap-6">
-              <UFormField class="flex-1" label="Straatnaam" name="addressStreet" :required="true">
+              <UFormField
+                class="flex-1"
+                label="Straatnaam"
+                name="address.streetName"
+                :required="true"
+              >
                 <UInput
                   v-model="state.address.streetName"
                   class="w-full"
@@ -249,7 +224,7 @@ async function onError(event: FormErrorEvent) {
               <UFormField
                 class="flex-1"
                 label="Huisnummer"
-                name="addressHouseNumber"
+                name="address.houseNumber"
                 :required="true"
               >
                 <UInput
@@ -261,7 +236,12 @@ async function onError(event: FormErrorEvent) {
               </UFormField>
             </div>
             <div class="flex flex-row gap-6">
-              <UFormField class="flex-1" label="Postcode" name="addressPostalCode" :required="true">
+              <UFormField
+                class="flex-1"
+                label="Postcode"
+                name="address.postalCode"
+                :required="true"
+              >
                 <UInput
                   v-model="state.address.postalCode"
                   class="w-full"
@@ -269,7 +249,7 @@ async function onError(event: FormErrorEvent) {
                   placeholder="Postcode"
                 />
               </UFormField>
-              <UFormField class="flex-1" label="Stad/gemeente" name="addressCity" :required="true">
+              <UFormField class="flex-1" label="Stad/gemeente" name="address.city" :required="true">
                 <UInput
                   v-model="state.address.city"
                   class="w-full"
@@ -310,7 +290,7 @@ async function onError(event: FormErrorEvent) {
                   <UFormField
                     class="flex-1"
                     label="Voornaam"
-                    name="emergencyContactFirstName"
+                    name="emergencyContact.firstName"
                     :required="!!state.group && emergencyContactGroups.includes(state.group)"
                   >
                     <UInput
@@ -323,7 +303,7 @@ async function onError(event: FormErrorEvent) {
                   <UFormField
                     class="flex-1"
                     label="Naam"
-                    name="emergencyContactLastName"
+                    name="emergencyContact.lastName"
                     :required="!!state.group && emergencyContactGroups.includes(state.group)"
                   >
                     <UInput
@@ -336,7 +316,7 @@ async function onError(event: FormErrorEvent) {
                   <UFormField
                     class="flex-1"
                     label="Telefoonnummer"
-                    name="emergencyContactPhoneNumber"
+                    name="emergencyContact.phoneNumber"
                     :required="!!state.group && emergencyContactGroups.includes(state.group)"
                   >
                     <UInput
