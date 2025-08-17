@@ -61,6 +61,24 @@
       <UButton to="aanbod" color="secondary" size="xl">Aanbod</UButton>
     </div>
     <div class="flex flex-col gap-6">
+      <img src="https://placehold.co/300x200" alt="Onze activiteiten afbeelding" />
+      <div class="flex flex-col gap-3">
+        <h3>Onze activiteiten</h3>
+        <p>
+          Naast de wekelijkse lessen organiseren we regelmatig leuke evenementen, zoals ons
+          jaarlijkse
+          <span class="font-semibold">turnfeest</span>, een gezellige
+          <span class="font-semibold">eetdag</span> en andere sportieve of sociale activiteiten.
+        </p>
+        <p>
+          Op <span class="font-semibold">onze kalender</span> vind je een volledig overzicht van
+          alles wat er te doen is, van trainingen tot speciale evenementen. Zo weet je altijd waar
+          en wanneer je erbij kunt zijn!
+        </p>
+      </div>
+      <UButton to="kalender" color="secondary" size="xl">Kalender</UButton>
+    </div>
+    <div class="flex flex-col gap-6">
       <img src="https://placehold.co/300x200" alt="Lesgevers gezocht afbeelding" />
       <div class="flex flex-col gap-3">
         <h3>Lesgevers gezocht</h3>
@@ -80,24 +98,6 @@
           sta jij binnenkort voor een groep gemotiveerde turners!
         </p>
       </div>
-    </div>
-    <div class="flex flex-col gap-6">
-      <img src="https://placehold.co/300x200" alt="Onze activiteiten afbeelding" />
-      <div class="flex flex-col gap-3">
-        <h3>Onze activiteiten</h3>
-        <p>
-          Naast de wekelijkse lessen organiseren we regelmatig leuke evenementen, zoals ons
-          jaarlijkse
-          <span class="font-semibold">turnfeest</span>, een gezellige
-          <span class="font-semibold">eetdag</span> en andere sportieve of sociale activiteiten.
-        </p>
-        <p>
-          Op <span class="font-semibold">onze kalender</span> vind je een volledig overzicht van
-          alles wat er te doen is, van trainingen tot speciale evenementen. Zo weet je altijd waar
-          en wanneer je erbij kunt zijn!
-        </p>
-      </div>
-      <UButton to="kalender" color="secondary" size="xl">Kalender</UButton>
     </div>
   </section>
 </template>
