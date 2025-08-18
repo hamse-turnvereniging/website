@@ -137,8 +137,6 @@ async function onError(event: FormErrorEvent) {
         Schrijf je hier in en sluit je aan bij onze sportieve en gezellige groep.
       </p>
     </div>
-    <!-- TODO: Remove -->
-    {{ form?.getErrors() }}
     <UForm ref="form" :schema :state @submit="onSubmit" @error="onError">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
@@ -256,43 +254,6 @@ async function onError(event: FormErrorEvent) {
                 />
               </UFormField>
             </div>
-            <!-- TODO: Remove contact block when age < 12 -->
-            <h4>Contact</h4>
-            <div class="flex gap-6">
-              <UFormField
-                class="flex-1"
-                label="Telefoonnummer"
-                name="phoneNumber"
-                :required="
-                  !!state.group &&
-                  (state.group === 'Turnen - 12+' ||
-                    state.group === 'BBB' ||
-                    state.group === 'Callanetics' ||
-                    state.group === 'Net-voetbal heren')
-                "
-              >
-                <UInput
-                  v-model="state.phoneNumber"
-                  class="w-full"
-                  size="xl"
-                  placeholder="Telefoonnummer"
-                />
-              </UFormField>
-              <UFormField
-                class="flex-1"
-                label="E-mailadres"
-                name="email"
-                :required="
-                  !!state.group &&
-                  (state.group === 'Turnen - 12+' ||
-                    state.group === 'BBB' ||
-                    state.group === 'Callanetics' ||
-                    state.group === 'Net-voetbal heren')
-                "
-              >
-                <UInput v-model="state.email" class="w-full" size="xl" placeholder="E-mailadres" />
-              </UFormField>
-            </div>
             <div
               v-if="
                 !!state.group &&
@@ -301,10 +262,51 @@ async function onError(event: FormErrorEvent) {
                   state.group === 'Callanetics' ||
                   state.group === 'Net-voetbal heren')
               "
-              class="flex flex-1 flex-col gap-3"
+              class="flex flex-1 flex-col gap-4"
             >
+              <h4>Contactgegevens</h4>
+              <div class="flex gap-6">
+                <UFormField
+                  class="flex-1"
+                  label="Telefoonnummer"
+                  name="phoneNumber"
+                  :required="
+                    !!state.group &&
+                    (state.group === 'Turnen - 12+' ||
+                      state.group === 'BBB' ||
+                      state.group === 'Callanetics' ||
+                      state.group === 'Net-voetbal heren')
+                  "
+                >
+                  <UInput
+                    v-model="state.phoneNumber"
+                    class="w-full"
+                    size="xl"
+                    placeholder="Telefoonnummer"
+                  />
+                </UFormField>
+                <UFormField
+                  class="flex-1"
+                  label="E-mailadres"
+                  name="email"
+                  :required="
+                    !!state.group &&
+                    (state.group === 'Turnen - 12+' ||
+                      state.group === 'BBB' ||
+                      state.group === 'Callanetics' ||
+                      state.group === 'Net-voetbal heren')
+                  "
+                >
+                  <UInput
+                    v-model="state.email"
+                    class="w-full"
+                    size="xl"
+                    placeholder="E-mailadres"
+                  />
+                </UFormField>
+              </div>
               <h5>Wie mogen we bellen in geval van nood?</h5>
-              <div class="flex flex-row gap-6">
+              <div class="flex gap-6">
                 <UFormField
                   class="flex-1"
                   label="Voornaam"
@@ -355,11 +357,11 @@ async function onError(event: FormErrorEvent) {
                   state.group === 'Turnen - 4ste, 5de en 6de leerjaar' ||
                   state.group === 'Trampoline')
               "
-              class="flex flex-col gap-6"
+              class="flex flex-col gap-4"
             >
               <div class="flex flex-1 flex-col gap-4">
-                <h5>Ouder 1</h5>
-                <div class="flex flex-row gap-6">
+                <h4>Contact ouder 1</h4>
+                <div class="flex gap-6">
                   <UFormField
                     class="flex-1"
                     label="Voornaam"
@@ -382,7 +384,7 @@ async function onError(event: FormErrorEvent) {
                     />
                   </UFormField>
                 </div>
-                <div class="flex flex-row gap-6">
+                <div class="flex gap-6">
                   <UFormField
                     class="flex-1"
                     label="Telefoonnummer"
@@ -412,7 +414,7 @@ async function onError(event: FormErrorEvent) {
                 </div>
               </div>
               <div class="flex flex-1 flex-col gap-4">
-                <h5>Ouder 2</h5>
+                <h4>Contact ouder 2</h4>
                 <div class="flex gap-6">
                   <UFormField class="flex-1" label="Voornaam" name="parent2.firstName">
                     <UInput
