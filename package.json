@@ -23,6 +23,7 @@
     "handlebars": "^4.7.8",
     "maska": "^3.2.0",
     "nuxt": "^4.0.1",
+    "tailwindcss": "^4.1.12",
     "valibot": "^1.1.0",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
