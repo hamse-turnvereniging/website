@@ -1,7 +1,5 @@
 import * as v from "valibot";
 import Handlebars from "handlebars";
-import fs from "fs/promises";
-import path from "path";
 
 import { schema } from "#shared/schemas/inschrijven";
 
@@ -57,32 +55,18 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    // TODO: Remove
-    console.log("to", to);
-
-    const html = await fs.readFile(
-      path.resolve(process.cwd(), "server/templates/email", "inschrijving.hbs"),
-      "utf-8"
-    );
+    const html = await useStorage("assets:server").getItem("templates/email/inschrijving.hbs");
     const htmlTemplate = Handlebars.compile(html);
     const htmlContent = htmlTemplate(input);
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       body: {
-        // TODO: Replace with to array
-        to: [
-          {
-            email: "steff@steffbeckers.com",
-            name: "Steff Beckers",
-          },
-        ],
+        to,
         bcc: [
           {
-            // TODO: inschrijvingen@hamseturnvereniging.be
-            email: "steff@steffbeckers.com",
-            // TODO: Hamse Turnvereniging
-            name: "Steff Beckers",
+            email: "inschrijvingen@hamseturnvereniging.be",
+            name: "Hamse Turnvereniging",
           },
         ],
         replyTo: {
