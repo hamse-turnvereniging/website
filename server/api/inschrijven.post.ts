@@ -70,12 +70,6 @@ export default defineEventHandler(async (event) => {
     await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       body: {
-        sender: {
-          // TODO: inschrijvingen@hamseturnvereniging.be
-          email: "steff@steffbeckers.com",
-          // TODO: Hamse Turnvereniging
-          name: "Steff Beckers",
-        },
         // TODO: Replace with to array
         to: [
           {
@@ -91,6 +85,14 @@ export default defineEventHandler(async (event) => {
             name: "Steff Beckers",
           },
         ],
+        replyTo: {
+          email: "info@hamseturnvereniging.be",
+          name: "Hamse Turnvereniging",
+        },
+        sender: {
+          email: "inschrijvingen@hamseturnvereniging.be",
+          name: "Hamse Turnvereniging",
+        },
         subject: `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`,
         htmlContent,
       },
