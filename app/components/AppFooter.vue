@@ -43,7 +43,12 @@
             <NuxtLink to="/privacyverklaring">Privacyverklaring</NuxtLink>
           </nav>
           <NuxtLink href="https://www.gymfed.be" :external="true" target="_blank">
-            <img src="~/assets/images/gymfed.png" alt="Gymfed logo" width="120" />
+            <img
+              class="shadow-none!"
+              src="~/assets/images/gymfed.png"
+              alt="Gymfed logo"
+              width="120"
+            />
           </NuxtLink>
         </div>
       </div>
