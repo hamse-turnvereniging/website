@@ -39,10 +39,6 @@ export const schema = v.variant("group", [
         ])
       )
     ),
-    phoneNumber: v.string(),
-    email: v.optional(
-      v.union([v.pipe(v.string(), v.email("E-mailadres is ongeldig")), v.literal("")])
-    ),
     parent1: v.object({
       firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
       lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),

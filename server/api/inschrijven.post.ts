@@ -1,12 +1,12 @@
 import * as v from "valibot";
+import Handlebars from "handlebars";
+import fs from "fs/promises";
+import path from "path";
 
 import { schema } from "../../shared/schemas/inschrijven";
 
 export default defineEventHandler(async (event) => {
-  console.log("defineEventHandler event", event);
-
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
-  console.log("defineEventHandler validationResult", validationResult);
 
   if (!validationResult.success) {
     return {
@@ -16,28 +16,86 @@ export default defineEventHandler(async (event) => {
     };
   }
 
+  const input = validationResult.output;
+
   try {
     const headers = new Headers();
     headers.append("api-key", process.env.BREVO_API_KEY!);
     headers.append("Content-Type", "application/json");
 
-    const response = await $fetch("https://api.brevo.com/v3/smtp/email", {
+    const to: { name: string; email: string }[] = [];
+
+    if (input.group) {
+      if (
+        input.group === "Turnen - 1ste kleuterklas" ||
+        input.group === "Turnen - 2de en 3de kleuterklas" ||
+        input.group === "Turnen - 1ste, 2de en 3de leerjaar" ||
+        input.group === "Turnen - 4ste, 5de en 6de leerjaar" ||
+        input.group === "Trampoline"
+      ) {
+        to.push({
+          name: `${input.parent1.firstName} ${input.parent1.lastName}`,
+          email: input.parent1.email,
+        });
+
+        if (input.parent2.email) {
+          to.push({
+            name: `${input.parent2.firstName} ${input.parent2.lastName}`,
+            email: input.parent2.email,
+          });
+        }
+      } else if (
+        input.group === "Turnen - 12+" ||
+        input.group === "BBB" ||
+        input.group === "Callanetics" ||
+        input.group === "Net-voetbal heren"
+      ) {
+        to.push({
+          name: `${input.firstName} ${input.lastName}`,
+          email: input.email,
+        });
+      }
+    }
+
+    // TODO: Remove
+    console.log("to", to);
+
+    const html = await fs.readFile(
+      path.resolve(process.cwd(), "server/templates/email", "inschrijving.hbs"),
+      "utf-8"
+    );
+    const htmlTemplate = Handlebars.compile(html);
+    const htmlContent = htmlTemplate(input);
+
+    await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       body: {
-        sender: { email: "steff@steffbeckers.com", name: "Steff Beckers" },
+        sender: {
+          // TODO: inschrijvingen@hamseturnvereniging.be
+          email: "steff@steffbeckers.com",
+          // TODO: Hamse Turnvereniging
+          name: "Steff Beckers",
+        },
+        // TODO: Replace with to array
         to: [
           {
-            email: validationResult.output.email,
-            name: `${validationResult.output.firstName} ${validationResult.output.lastName}`,
+            email: "steff@steffbeckers.com",
+            name: "Steff Beckers",
           },
         ],
-        subject: "Inschrijving Hamse Turnvereniging",
-        htmlContent: "<p>Dit is een test.</p>",
+        bcc: [
+          {
+            // TODO: inschrijvingen@hamseturnvereniging.be
+            email: "steff@steffbeckers.com",
+            // TODO: Hamse Turnvereniging
+            name: "Steff Beckers",
+          },
+        ],
+        subject: `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`,
+        htmlContent,
       },
       headers,
     });
-
-    console.log("defineEventHandler response", response);
   } catch (error) {
     return {
       error,

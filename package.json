@@ -20,6 +20,7 @@
     "@vueuse/nuxt": "^13.6.0",
     "better-sqlite3": "^12.2.0",
     "eslint": "^9.32.0",
+    "handlebars": "^4.7.8",
     "maska": "^3.2.0",
     "nuxt": "^4.0.1",
     "valibot": "^1.1.0",
