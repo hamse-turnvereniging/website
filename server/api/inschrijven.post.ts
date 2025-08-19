@@ -3,7 +3,7 @@ import Handlebars from "handlebars";
 import fs from "fs/promises";
 import path from "path";
 
-import { schema } from "../../shared/schemas/inschrijven";
+import { schema } from "#shared/schemas/inschrijven";
 
 export default defineEventHandler(async (event) => {
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));

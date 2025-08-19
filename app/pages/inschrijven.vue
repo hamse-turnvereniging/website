@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { schema, initialState, type Schema } from "../../shared/schemas/inschrijven";
+import { schema, initialState, type Schema } from "#shared/schemas/inschrijven";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { useLocalStorage } from "@vueuse/core";
