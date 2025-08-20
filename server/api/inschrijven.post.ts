@@ -55,20 +55,45 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    const html = await useStorage("assets:server").getItem("templates/email/inschrijving.hbs");
-    const htmlTemplate = Handlebars.compile(html);
-    const htmlContent = htmlTemplate(input);
+    // TODO: Remove
+    const serverAssetsKeys = await useStorage("assets:server").getKeys();
+    console.log("serverAssetsKeys", serverAssetsKeys);
+
+    const emailTemplate = await useStorage("assets:server").get<string>(
+      "templates:email:inschrijving.hbs"
+    );
+
+    // TODO: Remove
+    console.log("emailTemplate", emailTemplate);
+
+    const compiledEmailTemplate = Handlebars.compile(emailTemplate);
+    const htmlContent = compiledEmailTemplate(input);
+
+    // TODO: Remove
+    // return {
+    //   error: null,
+    //   success: true,
+    //   validationErrors: null,
+    // };
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       body: {
-        to,
-        bcc: [
+        // TODO: Uncomment
+        // to,
+        to: [
           {
-            email: "inschrijvingen@hamseturnvereniging.be",
-            name: "Hamse Turnvereniging",
+            email: "beckerssteff@gmail.com",
+            name: "Steff Beckers",
           },
         ],
+        // TODO: Uncomment
+        // bcc: [
+        //   {
+        //     email: "inschrijvingen@hamseturnvereniging.be",
+        //     name: "Hamse Turnvereniging",
+        //   },
+        // ],
         replyTo: {
           email: "info@hamseturnvereniging.be",
           name: "Hamse Turnvereniging",
