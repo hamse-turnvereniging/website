@@ -1,6 +1,6 @@
 import * as v from "valibot";
-import Handlebars from "handlebars";
 
+import inschrijvingEmailTemplate from "~~/server/assets/templates/email/inschrijving";
 import { schema } from "#shared/schemas/inschrijven";
 
 export default defineEventHandler(async (event) => {
@@ -58,23 +58,7 @@ export default defineEventHandler(async (event) => {
     // TODO: Remove
     console.log("to", to);
 
-    // TODO: Remove
-    const serverAssetsKeys = await useStorage("assets:server").getKeys();
-    console.log("serverAssetsKeys", serverAssetsKeys);
-
-    const emailTemplate = await useStorage("assets:server").get<string>(
-      "templates:email:inschrijving.hbs"
-    );
-
-    // TODO: Remove
-    console.log("emailTemplate", emailTemplate);
-
-    const compiledEmailTemplate = Handlebars.compile(emailTemplate);
-
-    // TODO: Remove
-    console.log("compiledEmailTemplate", compiledEmailTemplate);
-
-    const htmlContent = compiledEmailTemplate(input);
+    const htmlContent = inschrijvingEmailTemplate(input);
 
     // TODO: Remove
     console.log("htmlContent", htmlContent);
