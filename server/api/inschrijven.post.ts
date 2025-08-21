@@ -55,40 +55,18 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    // TODO: Remove
-    console.log("to", to);
-
     const htmlContent = inschrijvingEmailTemplate(input);
 
-    // TODO: Remove
-    console.log("htmlContent", htmlContent);
-
-    // TODO: Remove
-    // return {
-    //   error: null,
-    //   success: true,
-    //   validationErrors: null,
-    // };
-
-    const brevoResponse = await $fetch("https://api.brevo.com/v3/smtp/email", {
+    await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       body: {
-        // TODO: Uncomment
-        // to,
-        // TODO: Remove
-        to: [
+        to,
+        bcc: [
           {
-            email: "beckerssteff@gmail.com",
-            name: "Steff Beckers",
+            email: "inschrijvingen@hamseturnvereniging.be",
+            name: "Hamse Turnvereniging",
           },
         ],
-        // TODO: Uncomment
-        // bcc: [
-        //   {
-        //     email: "inschrijvingen@hamseturnvereniging.be",
-        //     name: "Hamse Turnvereniging",
-        //   },
-        // ],
         replyTo: {
           email: "info@hamseturnvereniging.be",
           name: "Hamse Turnvereniging",
@@ -102,9 +80,6 @@ export default defineEventHandler(async (event) => {
       },
       headers,
     });
-
-    // TODO: Remove
-    console.log("brevoResponse", brevoResponse);
   } catch (error) {
     console.error(error);
 
