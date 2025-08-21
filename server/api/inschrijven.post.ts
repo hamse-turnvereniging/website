@@ -56,6 +56,9 @@ export default defineEventHandler(async (event) => {
     }
 
     // TODO: Remove
+    console.log("to", to);
+
+    // TODO: Remove
     const serverAssetsKeys = await useStorage("assets:server").getKeys();
     console.log("serverAssetsKeys", serverAssetsKeys);
 
@@ -67,7 +70,14 @@ export default defineEventHandler(async (event) => {
     console.log("emailTemplate", emailTemplate);
 
     const compiledEmailTemplate = Handlebars.compile(emailTemplate);
+
+    // TODO: Remove
+    console.log("compiledEmailTemplate", compiledEmailTemplate);
+
     const htmlContent = compiledEmailTemplate(input);
+
+    // TODO: Remove
+    console.log("htmlContent", htmlContent);
 
     // TODO: Remove
     // return {
@@ -76,11 +86,12 @@ export default defineEventHandler(async (event) => {
     //   validationErrors: null,
     // };
 
-    await $fetch("https://api.brevo.com/v3/smtp/email", {
+    const brevoResponse = await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       body: {
         // TODO: Uncomment
         // to,
+        // TODO: Remove
         to: [
           {
             email: "beckerssteff@gmail.com",
@@ -107,7 +118,12 @@ export default defineEventHandler(async (event) => {
       },
       headers,
     });
+
+    // TODO: Remove
+    console.log("brevoResponse", brevoResponse);
   } catch (error) {
+    console.error(error);
+
     return {
       error,
       success: false,
