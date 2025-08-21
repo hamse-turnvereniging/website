@@ -227,6 +227,29 @@ async function onError(event: FormErrorEvent) {
                 />
               </UFormField>
             </div>
+            <div
+              v-if="
+                !!state.group &&
+                (state.group === 'Turnen - 1ste kleuterklas' ||
+                  state.group === 'Turnen - 2de en 3de kleuterklas' ||
+                  state.group === 'Turnen - 1ste, 2de en 3de leerjaar' ||
+                  state.group === 'Turnen - 4ste, 5de en 6de leerjaar' ||
+                  state.group === 'Trampoline')
+              "
+              class="flex flex-col gap-4"
+            >
+              <UFormField name="siblingsCheck">
+                <UCheckbox
+                  v-model="state.siblingsCheck"
+                  label="Ik wil graag nog een broer of zus inschrijven"
+                  size="xl"
+                ></UCheckbox>
+              </UFormField>
+              <div v-if="state.siblingsCheck" class="flex flex-col gap-4">
+                <h4>Broer(s) en/of zus(sen)</h4>
+                <!-- TODO: Implement -->
+              </div>
+            </div>
             <h4>Adres</h4>
             <div class="flex gap-6">
               <UFormField

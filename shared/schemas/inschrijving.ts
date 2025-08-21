@@ -58,6 +58,28 @@ export const schema = v.variant("group", [
         ])
       )
     ),
+    siblings: v.optional(
+      v.array(
+        v.object({
+          firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
+          lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
+          gender: v.optional(
+            v.pipe(
+              v.string(),
+              v.trim(),
+              v.nonEmpty("Gender is verplicht"),
+              v.picklist(["Man", "Vrouw", "X"])
+            )
+          ),
+          dateOfBirth: v.pipe(
+            v.string(),
+            v.trim(),
+            v.nonEmpty("Geboortedatum is verplicht"),
+            v.regex(/^\d{2}\/\d{2}\/\d{4}$/, "Geboortedatum is ongeldig")
+          ),
+        })
+      )
+    ),
     parent1: v.object({
       firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
       lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
@@ -103,6 +125,15 @@ export const initialState = {
   gender: undefined,
   dateOfBirth: "",
   nationality: "",
+  siblingsCheck: false as boolean,
+  siblings: [
+    {
+      firstName: "",
+      lastName: "",
+      dateOfBirth: "",
+      gender: "",
+    },
+  ],
   address: {
     streetName: "",
     houseNumber: "",
