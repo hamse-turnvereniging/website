@@ -1,3 +1,4 @@
+import { groupPrice } from "#shared/data/inschrijving";
 import { Schema } from "#shared/schemas/inschrijving";
 import bevestigingInschrijvingEmailTemplate from "~~/server/assets/templates/email/bevestiging-inschrijving";
 
@@ -69,5 +70,9 @@ export default defineEventHandler(async (event) => {
     },
   ];
 
-  return bevestigingInschrijvingEmailTemplate(inputs[inputIndex]);
+  const input = inputs[inputIndex];
+  const subject = `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`;
+  const price = input.group && groupPrice[input.group];
+
+  return bevestigingInschrijvingEmailTemplate({ ...input, subject, price });
 });

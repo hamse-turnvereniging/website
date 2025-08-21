@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { groupPrice } from "#shared/data/inschrijving";
 import { schema, initialState, type Schema } from "#shared/schemas/inschrijving";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
@@ -53,30 +54,45 @@ const locations = ref<SelectItem[]>([
   },
 ]);
 
-// TODO: Check if location is available based on group
-// const locationGroups = ref<{ [location: string]: string[] }>({
-//   Kristoffelheem: [
-//     "Turnen - 1ste kleuterklas",
-//     "Turnen - 2de en 3de kleuterklas",
-//     "Turnen - 1ste, 2de en 3de leerjaar",
-//     "Turnen - 4ste, 5de en 6de leerjaar",
-//     "Trampoline",
-//     "Turnen - 12+",
-//     // TODO: Is this correct?
-//     "BBB",
-//     "Callanetics",
-//     "Net-voetbal heren",
-//   ],
-//   "'t Vlietje": [
-//     "Turnen - 1ste kleuterklas",
-//     "Turnen - 2de en 3de kleuterklas",
-//     "Turnen - 1ste, 2de en 3de leerjaar",
-//   ],
-// });
-
 const genders = ref(["Man", "Vrouw", "X"]);
 
 const state = useLocalStorage("inschrijvingsformulier", initialState);
+
+const dateOfBirth = computed(() => {
+  if (!state.value.dateOfBirth || state.value.dateOfBirth.length != 10) {
+    return null;
+  }
+
+  const [day, month, year] = state.value.dateOfBirth.split("/").map(Number);
+
+  return new Date(year, month - 1, day);
+});
+
+const yearsYoung = computed(() => {
+  if (!dateOfBirth.value) return null;
+
+  const today = new Date();
+  let age = today.getFullYear() - dateOfBirth.value.getFullYear();
+  const m = today.getMonth() - dateOfBirth.value.getMonth();
+
+  if (m < 0 || (m === 0 && today.getDate() < dateOfBirth.value.getDate())) {
+    age--;
+  }
+
+  return age;
+});
+
+const is60PlusAtEndOfThisYear = computed(
+  () => yearsYoung.value && yearsYoung.value && yearsYoung.value >= 59
+);
+
+const amount = computed(() => groupPrice[state.value.group]);
+
+const discount = computed(() => (is60PlusAtEndOfThisYear.value ? 5 : 0));
+
+const discountedAmount = computed(() =>
+  amount.value && discount.value ? amount.value - discount.value : null
+);
 
 const toast = useToast();
 
@@ -185,15 +201,23 @@ async function onError(event: FormErrorEvent) {
                   placeholder="Man / Vrouw / X"
                 />
               </UFormField>
-              <UFormField class="flex-1" label="Geboortedatum" name="dateOfBirth" :required="true">
-                <UInput
-                  v-model="state.dateOfBirth"
-                  v-maska="'##/##/####'"
-                  class="w-full"
-                  size="xl"
-                  placeholder="dd/mm/jjjj"
-                />
-              </UFormField>
+              <div class="flex flex-col gap-1">
+                <UFormField
+                  class="flex-1"
+                  label="Geboortedatum"
+                  name="dateOfBirth"
+                  :required="true"
+                >
+                  <UInput
+                    v-model="state.dateOfBirth"
+                    v-maska="'##/##/####'"
+                    class="w-full"
+                    size="xl"
+                    placeholder="dd/mm/jjjj"
+                  />
+                </UFormField>
+                <span class="text-xs" v-if="yearsYoung != null">{{ yearsYoung }} jaar jong</span>
+              </div>
               <UFormField class="flex-1" label="Nationaliteit" name="nationality" :required="true">
                 <UInput
                   v-model="state.nationality"
@@ -459,13 +483,33 @@ async function onError(event: FormErrorEvent) {
         <hr />
         <div class="flex flex-col gap-4">
           <h3>Betaalgegevens lidgeld</h3>
-          <div class="flex flex-col gap-3">
-            <p>Rekeningnummer: BE69 0682 0939 9078</p>
-            <p>
-              Mededeling: {{ state.firstName != "" ? state.firstName : "Voornaam" }}
-              {{ state.lastName != "" ? state.lastName : "Naam" }}
-            </p>
-          </div>
+          <table>
+            <tbody>
+              <tr>
+                <td width="160px">Rekeningnummer:</td>
+                <td class="font-semibold py-1">BE69 0682 0939 9078</td>
+              </tr>
+              <tr v-if="amount">
+                <td>Bedrag:</td>
+                <td class="font-semibold py-1">
+                  <span v-if="discount"
+                    ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
+                    {{ discountedAmount }} (<span v-if="is60PlusAtEndOfThisYear"
+                      >{{ discount }} euro korting voor 60+</span
+                    >)</span
+                  >
+                  <span v-else>&euro; {{ amount }}</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Mededeling:</td>
+                <td class="font-semibold py-1">
+                  {{ state.firstName != "" ? state.firstName : "Voornaam" }}
+                  {{ state.lastName != "" ? state.lastName : "Naam" }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <UFormField name="paymentCheck">
             <UCheckbox
               v-model="state.paymentCheck"

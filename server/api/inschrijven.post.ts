@@ -1,7 +1,8 @@
 import * as v from "valibot";
 
 import bevestigingInschrijvingEmailTemplate from "~~/server/assets/templates/email/bevestiging-inschrijving";
-import { schema } from "~~/shared/schemas/inschrijving";
+import { groupPrice } from "#shared/data/inschrijving";
+import { schema } from "#shared/schemas/inschrijving";
 
 export default defineEventHandler(async (event) => {
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
@@ -56,7 +57,9 @@ export default defineEventHandler(async (event) => {
     }
 
     const subject = `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`;
-    const htmlContent = bevestigingInschrijvingEmailTemplate({ ...input, subject });
+    const price = input.group && groupPrice[input.group];
+
+    const htmlContent = bevestigingInschrijvingEmailTemplate({ ...input, subject, price });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",

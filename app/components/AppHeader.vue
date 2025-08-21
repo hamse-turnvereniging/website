@@ -6,7 +6,7 @@
           <!-- TODO: Check logo size + add shadow? -->
           <img
             class="absolute top-4 shadow-none!"
-            src="~/assets/images/logo_black_background_220x210px_shadow.png"
+            src="~/assets/images/logo_black_background_200px_shadow.png"
             alt="Hamse Turnvereniging logo"
             width="140"
             height="140"

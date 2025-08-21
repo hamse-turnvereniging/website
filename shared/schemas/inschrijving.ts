@@ -19,7 +19,12 @@ const base = v.object({
       v.picklist(["Man", "Vrouw", "X"])
     )
   ),
-  dateOfBirth: v.pipe(v.string(), v.trim(), v.nonEmpty("Geboortedatum is verplicht")),
+  dateOfBirth: v.pipe(
+    v.string(),
+    v.trim(),
+    v.nonEmpty("Geboortedatum is verplicht"),
+    v.regex(/^\d{2}\/\d{2}\/\d{4}$/, "Geboortedatum is ongeldig")
+  ),
   nationality: v.pipe(v.string(), v.trim(), v.nonEmpty("Nationaliteit is verplicht")),
   address: v.object({
     streetName: v.pipe(v.string(), v.trim(), v.nonEmpty("Straatnaam is verplicht")),
