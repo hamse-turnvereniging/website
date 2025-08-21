@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { schema, initialState, type Schema } from "#shared/schemas/inschrijven";
+import { schema, initialState, type Schema } from "#shared/schemas/inschrijving";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { useLocalStorage } from "@vueuse/core";
@@ -88,7 +88,8 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
   const errorToast: Partial<Toast> = {
     title: "Mislukt!",
-    description: "Er ging iets mis tijdens het verzenden van je inschrijving.",
+    description:
+      "Er ging iets mis tijdens het verzenden van je inschrijving. Probeer het later even opnieuw.",
     color: "error",
   };
 

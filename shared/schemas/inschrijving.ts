@@ -1,10 +1,24 @@
 import * as v from "valibot";
 
 const base = v.object({
-  location: v.optional(v.pipe(v.string(), v.trim(), v.nonEmpty("Sporthal is verplicht"))),
+  location: v.optional(
+    v.pipe(
+      v.string(),
+      v.trim(),
+      v.nonEmpty("Sporthal is verplicht"),
+      v.picklist(["Kristoffelheem", "'t Vlietje"])
+    )
+  ),
   firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
   lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
-  gender: v.optional(v.pipe(v.string(), v.trim(), v.nonEmpty("Gender is verplicht"))),
+  gender: v.optional(
+    v.pipe(
+      v.string(),
+      v.trim(),
+      v.nonEmpty("Gender is verplicht"),
+      v.picklist(["Man", "Vrouw", "X"])
+    )
+  ),
   dateOfBirth: v.pipe(v.string(), v.trim(), v.nonEmpty("Geboortedatum is verplicht")),
   nationality: v.pipe(v.string(), v.trim(), v.nonEmpty("Nationaliteit is verplicht")),
   address: v.object({

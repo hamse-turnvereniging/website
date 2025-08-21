@@ -1,7 +1,7 @@
 import * as v from "valibot";
 
-import inschrijvingEmailTemplate from "~~/server/assets/templates/email/inschrijving";
-import { schema } from "#shared/schemas/inschrijven";
+import bevestigingInschrijvingEmailTemplate from "~~/server/assets/templates/email/bevestiging-inschrijving";
+import { schema } from "~~/shared/schemas/inschrijving";
 
 export default defineEventHandler(async (event) => {
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
@@ -55,18 +55,27 @@ export default defineEventHandler(async (event) => {
       }
     }
 
-    const htmlContent = inschrijvingEmailTemplate(input);
+    const subject = `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`;
+    const htmlContent = bevestigingInschrijvingEmailTemplate({ ...input, subject });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       body: {
-        to,
-        bcc: [
+        // TODO: Uncomment
+        // to,
+        to: [
           {
-            email: "inschrijvingen@hamseturnvereniging.be",
-            name: "Hamse Turnvereniging",
+            name: "Steff Beckers",
+            email: "steff@steffbeckers.com",
           },
         ],
+        // TODO: Uncomment
+        // bcc: [
+        //   {
+        //     email: "inschrijvingen@hamseturnvereniging.be",
+        //     name: "Hamse Turnvereniging",
+        //   },
+        // ],
         replyTo: {
           email: "info@hamseturnvereniging.be",
           name: "Hamse Turnvereniging",
@@ -75,7 +84,7 @@ export default defineEventHandler(async (event) => {
           email: "inschrijvingen@hamseturnvereniging.be",
           name: "Hamse Turnvereniging",
         },
-        subject: `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`,
+        subject,
         htmlContent,
       },
       headers,
