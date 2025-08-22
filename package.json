@@ -12,6 +12,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@date-fns/tz": "^1.4.1",
     "@nuxt/content": "3.6.3",
     "@nuxt/eslint": "1.8.0",
     "@nuxt/fonts": "0.11.4",
@@ -21,6 +22,7 @@
     "@nuxtjs/seo": "^3.1.0",
     "@vueuse/nuxt": "^13.6.0",
     "better-sqlite3": "^12.2.0",
+    "date-fns": "^4.1.0",
     "eslint": "^9.32.0",
     "fast-glob": "^3.3.3",
     "handlebars": "^4.7.8",

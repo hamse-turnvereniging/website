@@ -8,6 +8,7 @@ useHead({
 });
 
 const items = ref<AccordionItem[]>([]);
+
 const { data: faq } = await useAsyncData("faq", () => queryCollection("faq").all());
 
 if (faq.value) {
