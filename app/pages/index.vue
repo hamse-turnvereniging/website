@@ -35,7 +35,7 @@
   </section>
   <section
     id="in-de-schijnwerper"
-    class="max-w-6xl mx-auto grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 py-16"
+    class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 py-16"
   >
     <div class="flex flex-col gap-6">
       <img src="https://placehold.co/300x200" alt="Kom proberen afbeelding" />

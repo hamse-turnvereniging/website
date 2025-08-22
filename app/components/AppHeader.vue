@@ -1,15 +1,13 @@
 <template>
   <header class="z-10">
-    <div class="flex items-center justify-between max-w-6xl mx-auto px-8 h-20">
+    <div class="flex items-center justify-between max-w-6xl mx-auto px-8 h-16 md:h-20">
       <div class="w-[160px] h-full">
         <NuxtLink to="/">
           <!-- TODO: Check logo size + add shadow? -->
           <img
-            class="absolute top-4 shadow-none!"
+            class="absolute top-4 shadow-none! w-[100px] h-[105px] md:w-[140px] md:h-[147px]"
             src="~/assets/images/logo_black_background_200px_shadow.png"
             alt="Hamse Turnvereniging logo"
-            width="140"
-            height="140"
           />
         </NuxtLink>
       </div>
