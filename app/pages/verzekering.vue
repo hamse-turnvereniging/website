@@ -1,6 +1,6 @@
 <template>
   <section id="banner">
-    <div class="max-w-6xl mx-auto flex flex-col px-6 py-[120px]">
+    <div class="max-w-6xl mx-auto flex flex-col px-8 py-[120px]">
       <h1>Verzekering</h1>
     </div>
   </section>
