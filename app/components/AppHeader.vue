@@ -11,7 +11,7 @@
           />
         </NuxtLink>
       </div>
-      <nav class="flex gap-2">
+      <nav class="hidden md:flex gap-2">
         <NuxtLink class="p-4 text-center" to="/">
           <div>Welkom</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Welkom</div>
@@ -33,6 +33,50 @@
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Inschrijven</div>
         </NuxtLink>
       </nav>
+      <USlideover
+        class="md:hidden"
+        :ui="{ header: 'border-b-h bg-neutral-900', body: 'flex flex-col justify-center h-full' }"
+      >
+        <UButton
+          class="absolute right-8 top-8 rounded-full aspect-square p-4 shadow-md hover:bg-primary-400!"
+        >
+          <UIcon class="size-8!" name="i-lucide-menu" />
+        </UButton>
+        <template #close="{ close }">
+          <UButton
+            class="absolute right-8 top-8 rounded-full aspect-square p-4 shadow-md hover:bg-primary-400!"
+            @click="close()"
+          >
+            <UIcon class="size-8!" name="i-lucide-x" />
+          </UButton>
+        </template>
+        <template #body="{ close }">
+          <nav class="mobile flex flex-col gap-2">
+            <NuxtLink class="p-4 text-center" to="/" @click="close()">
+              <h3>Welkom</h3>
+              <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Welkom</div>
+            </NuxtLink>
+            <NuxtLink class="p-4 text-center" to="/aanbod" @click="close()">
+              <h3>Aanbod</h3>
+              <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Aanbod</div>
+            </NuxtLink>
+            <NuxtLink class="p-4 text-center" to="/kalender" @click="close()">
+              <h3>Kalender</h3>
+              <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Kalender</div>
+            </NuxtLink>
+            <NuxtLink class="p-4 text-center" to="/faq" @click="close()">
+              <h3>FAQ</h3>
+              <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">FAQ</div>
+            </NuxtLink>
+            <NuxtLink class="p-4 text-center" to="/inschrijven" @click="close()">
+              <h3>Inschrijven</h3>
+              <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">
+                Inschrijven
+              </div>
+            </NuxtLink>
+          </nav>
+        </template>
+      </USlideover>
     </div>
   </header>
 </template>
@@ -48,6 +92,26 @@ header {
       @apply text-white;
 
       &.router-link-active {
+        @apply text-primary font-bold;
+      }
+    }
+  }
+}
+</style>
+
+<style>
+@reference "./../assets/css/main.css";
+
+nav.mobile {
+  a {
+    &:hover {
+      h3 {
+        @apply text-primary;
+      }
+    }
+
+    &.router-link-active {
+      h3 {
         @apply text-primary font-bold;
       }
     }
