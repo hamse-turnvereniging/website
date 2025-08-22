@@ -1,5 +1,11 @@
-# FAQ
+# Wanneer begint het nieuwe turnseizoen?
 
-- Wanneer beginnen de turnlessen?
+Begin september, wanneer school terug start.
 
-Begin september
+# Zijn er proeflessen?
+
+Ja, eerste les is steeds gratis.
+
+# Kan je heel het jaar instappen?
+
+Ja, dat kan zeker.
