@@ -1,25 +1,22 @@
 <script lang="ts" setup>
+import { ref } from "vue";
+import { ContentRenderer, UAccordion } from "#components";
 import type { AccordionItem } from "@nuxt/ui";
-import { UAccordion } from "#components";
 
 useHead({
   title: "FAQ",
 });
 
 const items = ref<AccordionItem[]>([]);
+const { data: faq } = await useAsyncData("faq", () => queryCollection("faq").all());
 
-const data = await queryCollection("faq").first();
-const rawItems = data?.body.value;
-
-if (rawItems) {
-  for (let i = 0; i < rawItems.length; i++) {
-    const node = rawItems[i];
-    if (node && node[0] === "h1") {
-      const label = node[2] as string;
-      const next = rawItems[i + 1];
-      const content = next && next[0] === "p" ? (next[2] as string) : "";
-      items.value.push({ label, content });
-    }
+if (faq.value) {
+  for (const question of faq.value) {
+    items.value.push({
+      label: question.title,
+      content: question.description,
+      body: question.body,
+    });
   }
 }
 </script>
@@ -36,12 +33,37 @@ if (rawItems) {
       <h2>Meest gestelde vragen</h2>
       <p>Ontdek hier de antwoorden op de meest gestelde vragen.</p>
     </div>
-    <UAccordion :items />
+    <UAccordion
+      :items
+      :ui="{
+        label: 'text-2xl font-medium text-secondary',
+        trailingIcon: 'size-8! text-neutral-400 group-data-[state=open]:text-primary-500',
+      }"
+      :unmount-on-hide="false"
+    >
+      <template #content="{ item }">
+        <ContentRenderer class="answer pb-3.5" :value="item.body" />
+      </template>
+    </UAccordion>
   </section>
 </template>
 
 <style scoped>
 section#banner {
   background-image: url("https://placehold.co/1600x340");
+}
+</style>
+
+<style>
+@reference "./../assets/css/main.css";
+
+.answer {
+  p {
+    @apply pb-2;
+  }
+
+  strong {
+    @apply font-semibold;
+  }
 }
 </style>

@@ -4,7 +4,7 @@ export default defineContentConfig({
   collections: {
     faq: defineCollection({
       type: "page",
-      source: "FAQ.md",
+      source: "FAQ/*.md",
     }),
   },
 });
