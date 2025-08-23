@@ -39,8 +39,12 @@
         <div class="flex flex-row sm:flex-col justify-between sm:gap-3">
           <nav class="flex flex-col gap-2">
             <NuxtLink to="/clubreglement">Clubreglement</NuxtLink>
-            <NuxtLink to="/verzekering">Verzekering</NuxtLink>
-            <NuxtLink to="/privacyverklaring">Privacyverklaring</NuxtLink>
+            <NuxtLink href="https://www.gymfed.be/verzekeringen" :external="true" target="_blank"
+              >Verzekeringen</NuxtLink
+            >
+            <NuxtLink href="https://www.gymfed.be/privacy" :external="true" target="_blank"
+              >Privacyverklaring</NuxtLink
+            >
           </nav>
           <NuxtLink href="https://www.gymfed.be" :external="true" target="_blank">
             <img
