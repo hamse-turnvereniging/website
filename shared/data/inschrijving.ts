@@ -1,3 +1,5 @@
+export const genders: string[] = ["Man", "Vrouw", "X"];
+
 export const groupPrice: { [group: string]: number } = {
   BBB: 105,
   Callanetics: 105,

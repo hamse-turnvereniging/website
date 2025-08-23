@@ -57,9 +57,17 @@ export default defineEventHandler(async (event) => {
     }
 
     const subject = `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`;
-    const price = input.group && groupPrice[input.group];
+    const amount = input.group && groupPrice[input.group];
+    const discount = input.is60PlusAtEndOfThisYear || input.familyMember.check ? 5 : 0;
+    const discountedAmount = amount && discount ? amount - discount : null;
 
-    const htmlContent = bevestigingInschrijvingEmailTemplate({ ...input, subject, price });
+    const htmlContent = bevestigingInschrijvingEmailTemplate({
+      ...input,
+      subject,
+      amount,
+      discount,
+      discountedAmount,
+    });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",

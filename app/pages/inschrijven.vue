@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import { groupPrice } from "#shared/data/inschrijving";
+import { genders, groupPrice } from "#shared/data/inschrijving";
 import { schema, initialState, type Schema } from "#shared/schemas/inschrijving";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
-import { useLocalStorage } from "@vueuse/core";
 import { vMaska } from "maska/vue";
 
 const form = useTemplateRef("form");
@@ -54,8 +53,6 @@ const locations = ref<SelectItem[]>([
   },
 ]);
 
-const genders = ref(["Man", "Vrouw", "X"]);
-
 const state = useLocalStorage("inschrijvingsformulier", initialState);
 
 const dateOfBirth = computed(() => {
@@ -65,10 +62,10 @@ const dateOfBirth = computed(() => {
 
   const [day, month, year] = state.value.dateOfBirth.split("/").map(Number);
 
-  return new Date(year, month - 1, day);
+  return new Date(year!, month! - 1, day);
 });
 
-const yearsYoung = computed(() => {
+const yearsOld = computed(() => {
   if (!dateOfBirth.value) return null;
 
   const today = new Date();
@@ -83,12 +80,22 @@ const yearsYoung = computed(() => {
 });
 
 const is60PlusAtEndOfThisYear = computed(
-  () => yearsYoung.value && yearsYoung.value && yearsYoung.value >= 59
+  () => yearsOld.value && yearsOld.value && yearsOld.value >= 59
 );
 
-const amount = computed(() => groupPrice[state.value.group]);
+watch(is60PlusAtEndOfThisYear, (value) => {
+  state.value.is60PlusAtEndOfThisYear = !!value;
 
-const discount = computed(() => (is60PlusAtEndOfThisYear.value ? 5 : 0));
+  if (value && state.value.familyMember.check) {
+    state.value.familyMember.check = false;
+  }
+});
+
+const amount = computed(() => state.value.group && groupPrice[state.value.group]);
+
+const discount = computed(() =>
+  state.value.is60PlusAtEndOfThisYear || state.value.familyMember.check ? 5 : 0
+);
 
 const discountedAmount = computed(() =>
   amount.value && discount.value ? amount.value - discount.value : null
@@ -201,23 +208,15 @@ async function onError(event: FormErrorEvent) {
                   placeholder="Man / Vrouw / X"
                 />
               </UFormField>
-              <div class="flex flex-col gap-1">
-                <UFormField
-                  class="flex-1"
-                  label="Geboortedatum"
-                  name="dateOfBirth"
-                  :required="true"
-                >
-                  <UInput
-                    v-model="state.dateOfBirth"
-                    v-maska="'##/##/####'"
-                    class="w-full"
-                    size="xl"
-                    placeholder="dd/mm/jjjj"
-                  />
-                </UFormField>
-                <span class="text-xs" v-if="yearsYoung != null">{{ yearsYoung }} jaar jong</span>
-              </div>
+              <UFormField class="flex-1" label="Geboortedatum" name="dateOfBirth" :required="true">
+                <UInput
+                  v-model="state.dateOfBirth"
+                  v-maska="'##/##/####'"
+                  class="w-full"
+                  size="xl"
+                  placeholder="dd/mm/jjjj"
+                />
+              </UFormField>
               <UFormField class="flex-1" label="Nationaliteit" name="nationality" :required="true">
                 <UInput
                   v-model="state.nationality"
@@ -226,29 +225,6 @@ async function onError(event: FormErrorEvent) {
                   placeholder="Nationaliteit"
                 />
               </UFormField>
-            </div>
-            <div
-              v-if="
-                !!state.group &&
-                (state.group === 'Turnen - 1ste kleuterklas' ||
-                  state.group === 'Turnen - 2de en 3de kleuterklas' ||
-                  state.group === 'Turnen - 1ste, 2de en 3de leerjaar' ||
-                  state.group === 'Turnen - 4ste, 5de en 6de leerjaar' ||
-                  state.group === 'Trampoline')
-              "
-              class="flex flex-col gap-4"
-            >
-              <UFormField name="siblingsCheck">
-                <UCheckbox
-                  v-model="state.siblingsCheck"
-                  label="Ik wil graag nog een broer of zus inschrijven"
-                  size="xl"
-                ></UCheckbox>
-              </UFormField>
-              <div v-if="state.siblingsCheck" class="flex flex-col gap-4">
-                <h4>Broer(s) en/of zus(sen)</h4>
-                <!-- TODO: Implement -->
-              </div>
             </div>
             <h4>Adres</h4>
             <div class="flex gap-6">
@@ -519,6 +495,8 @@ async function onError(event: FormErrorEvent) {
                     ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
                     {{ discountedAmount }} (<span v-if="is60PlusAtEndOfThisYear"
                       >{{ discount }} euro korting voor 60+</span
+                    ><span v-else="state.familyMember.check"
+                      >{{ discount }} euro korting via gezinslid</span
                     >)</span
                   >
                   <span v-else>&euro; {{ amount }}</span>
@@ -533,6 +511,47 @@ async function onError(event: FormErrorEvent) {
               </tr>
             </tbody>
           </table>
+          <div v-if="!is60PlusAtEndOfThisYear" class="flex flex-col gap-4">
+            <UFormField name="familyMember.check">
+              <UCheckbox
+                v-model="state.familyMember.check"
+                label="Ik heb een gezinslid dat reeds ingeschreven is"
+                description="(ontvang 5 euro korting)"
+                size="xl"
+              ></UCheckbox>
+            </UFormField>
+            <div v-if="state.familyMember.check" class="flex flex-1 flex-col gap-4">
+              <h4>Gezinslid</h4>
+              <div class="flex gap-6">
+                <UFormField
+                  class="flex-1"
+                  label="Voornaam"
+                  name="familyMember.firstName"
+                  :required="true"
+                >
+                  <UInput
+                    v-model="state.familyMember.firstName"
+                    class="w-full"
+                    size="xl"
+                    placeholder="Voornaam"
+                  />
+                </UFormField>
+                <UFormField
+                  class="flex-1"
+                  label="Naam"
+                  name="familyMember.lastName"
+                  :required="true"
+                >
+                  <UInput
+                    v-model="state.familyMember.lastName"
+                    class="w-full"
+                    size="xl"
+                    placeholder="Naam"
+                  />
+                </UFormField>
+              </div>
+            </div>
+          </div>
           <UFormField name="paymentCheck">
             <UCheckbox
               v-model="state.paymentCheck"

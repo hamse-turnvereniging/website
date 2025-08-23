@@ -1,5 +1,7 @@
 import * as v from "valibot";
 
+import { genders } from "../data/inschrijving";
+
 const base = v.object({
   location: v.optional(
     v.pipe(
@@ -12,12 +14,7 @@ const base = v.object({
   firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
   lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
   gender: v.optional(
-    v.pipe(
-      v.string(),
-      v.trim(),
-      v.nonEmpty("Gender is verplicht"),
-      v.picklist(["Man", "Vrouw", "X"])
-    )
+    v.pipe(v.string(), v.trim(), v.nonEmpty("Gender is verplicht"), v.picklist(genders))
   ),
   dateOfBirth: v.pipe(
     v.string(),
@@ -25,6 +22,7 @@ const base = v.object({
     v.nonEmpty("Geboortedatum is verplicht"),
     v.regex(/^\d{2}\/\d{2}\/\d{4}$/, "Geboortedatum is ongeldig")
   ),
+  is60PlusAtEndOfThisYear: v.boolean(),
   nationality: v.pipe(v.string(), v.trim(), v.nonEmpty("Nationaliteit is verplicht")),
   address: v.object({
     streetName: v.pipe(v.string(), v.trim(), v.nonEmpty("Straatnaam is verplicht")),
@@ -32,6 +30,18 @@ const base = v.object({
     postalCode: v.pipe(v.string(), v.trim(), v.nonEmpty("Postcode is verplicht")),
     city: v.pipe(v.string(), v.trim(), v.nonEmpty("Stad/gemeente is verplicht")),
   }),
+  familyMember: v.union([
+    v.object({
+      check: v.union([v.boolean(), v.literal(false)]),
+      firstName: v.optional(v.string()),
+      lastName: v.optional(v.string()),
+    }),
+    v.object({
+      check: v.union([v.boolean(), v.literal(true)]),
+      firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
+      lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
+    }),
+  ]),
   paymentCheck: v.pipe(
     v.boolean(),
     v.literal(true, "Je moet binnen 14 dagen na je inschrijving je lidgeld betaald hebben")
@@ -58,28 +68,6 @@ export const schema = v.variant("group", [
         ])
       )
     ),
-    siblings: v.optional(
-      v.array(
-        v.object({
-          firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
-          lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
-          gender: v.optional(
-            v.pipe(
-              v.string(),
-              v.trim(),
-              v.nonEmpty("Gender is verplicht"),
-              v.picklist(["Man", "Vrouw", "X"])
-            )
-          ),
-          dateOfBirth: v.pipe(
-            v.string(),
-            v.trim(),
-            v.nonEmpty("Geboortedatum is verplicht"),
-            v.regex(/^\d{2}\/\d{2}\/\d{4}$/, "Geboortedatum is ongeldig")
-          ),
-        })
-      )
-    ),
     parent1: v.object({
       firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
       lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
@@ -87,9 +75,9 @@ export const schema = v.variant("group", [
       email: v.pipe(v.string(), v.email("E-mailadres is ongeldig")),
     }),
     parent2: v.object({
-      firstName: v.string(),
-      lastName: v.string(),
-      phoneNumber: v.string(),
+      firstName: v.optional(v.string()),
+      lastName: v.optional(v.string()),
+      phoneNumber: v.optional(v.string()),
       email: v.optional(
         v.union([v.pipe(v.string(), v.email("E-mailadres is ongeldig")), v.literal("")])
       ),
@@ -124,16 +112,8 @@ export const initialState = {
   lastName: "",
   gender: undefined,
   dateOfBirth: "",
+  is60PlusAtEndOfThisYear: false,
   nationality: "",
-  siblingsCheck: false as boolean,
-  siblings: [
-    {
-      firstName: "",
-      lastName: "",
-      dateOfBirth: "",
-      gender: "",
-    },
-  ],
   address: {
     streetName: "",
     houseNumber: "",
@@ -158,6 +138,11 @@ export const initialState = {
     lastName: "",
     phoneNumber: "",
     email: "",
+  },
+  familyMember: {
+    check: false,
+    firstName: "",
+    lastName: "",
   },
   paymentCheck: false as boolean,
   photosCheck: true,
