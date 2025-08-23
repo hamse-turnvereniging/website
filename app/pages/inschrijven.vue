@@ -1,13 +1,34 @@
 <script lang="ts" setup>
-import { genders, groupPrice } from "#shared/data/inschrijving";
+import { genders, groupPrice, locationGroups } from "#shared/data/inschrijving";
 import { schema, initialState, type Schema } from "#shared/schemas/inschrijving";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { vMaska } from "maska/vue";
 
 const form = useTemplateRef("form");
+const state = useLocalStorage("inschrijvingsformulier", initialState, { mergeDefaults: true });
 
-const groups = ref<SelectItem[]>([
+watch(state.value, (value) => {
+  if (value.group && value.location) {
+    if (!locationGroups[value.location]?.includes(value.group!)) {
+      const newLocation = availableLocations.value[0]?.value as typeof state.value.location;
+
+      toast.add({
+        title: "Opgepast!",
+        description: `${value.group} is niet beschikbaar in sporthal ${value.location}. Locatie is aangepast naar sporthal ${newLocation}.`,
+        color: "warning",
+      });
+
+      state.value.location = newLocation;
+    }
+  } else if (value.group && !value.location) {
+    if (availableLocations.value.length === 1) {
+      state.value.location = availableLocations.value[0]?.value as typeof state.value.location;
+    }
+  }
+});
+
+const groups: SelectItem[] = [
   {
     type: "label",
     label: "Turnen",
@@ -40,9 +61,9 @@ const groups = ref<SelectItem[]>([
   "BBB",
   "Callanetics",
   "Net-voetbal heren",
-]);
+];
 
-const locations = ref<SelectItem[]>([
+const locations = [
   {
     label: "Kristoffelheem (Oostham)",
     value: "Kristoffelheem",
@@ -51,15 +72,13 @@ const locations = ref<SelectItem[]>([
     label: "'t Vlietje (Kwaadmechelen)",
     value: "'t Vlietje",
   },
-]);
+];
 
-const state = useLocalStorage("inschrijvingsformulier", initialState, { mergeDefaults: true });
-
-watch(state, (value) => {
-  if (value.familyMember === undefined) {
-    state.value.familyMember = initialState.familyMember;
-  }
-});
+const availableLocations = computed(() =>
+  state.value.group
+    ? locations.filter((x) => locationGroups[x.value]?.includes(state.value.group!))
+    : locations
+);
 
 const dateOfBirth = computed(() => {
   if (!state.value.dateOfBirth || state.value.dateOfBirth.length != 10) {
@@ -184,7 +203,7 @@ async function onError(event: FormErrorEvent) {
             <UFormField class="flex-1" label="Sporthal" name="location" :required="true">
               <USelect
                 v-model="state.location"
-                :items="locations"
+                :items="availableLocations"
                 size="xl"
                 class="w-full"
                 placeholder="Maak je keuze"
