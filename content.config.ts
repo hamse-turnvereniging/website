@@ -5,6 +5,9 @@ export default defineContentConfig({
     faq: defineCollection({
       type: "page",
       source: "faq/*.md",
+      schema: z.object({
+        order: z.optional(z.number()),
+      }),
     }),
     kalender: defineCollection({
       type: "page",

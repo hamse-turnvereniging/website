@@ -1,5 +1,6 @@
 ---
 title: Zijn sportkleren verplicht?
+order: 400
 ---
 
 Tijdens de turnles draagt men **sportkledij**. (gelieve **kleuters geen turnpakje** aan te doen)

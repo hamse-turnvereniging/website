@@ -9,7 +9,9 @@ useHead({
 
 const items = ref<AccordionItem[]>([]);
 
-const { data: faq } = await useAsyncData("faq", () => queryCollection("faq").all());
+const { data: faq } = await useAsyncData("faq", () =>
+  queryCollection("faq").order("order", "ASC").all()
+);
 
 if (faq.value) {
   for (const question of faq.value) {
