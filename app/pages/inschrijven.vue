@@ -519,7 +519,7 @@ async function onError(event: FormErrorEvent) {
                   <span v-if="discount"
                     ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
                     {{ discountedAmount }} (<span v-if="is60PlusAtEndOfThisYear"
-                      >{{ discount }} euro korting voor 60+</span
+                      >{{ discount }} euro korting voor 60-plussers</span
                     ><span v-else="state.familyMember.check"
                       >{{ discount }} euro korting via gezinslid</span
                     >)</span
@@ -540,7 +540,7 @@ async function onError(event: FormErrorEvent) {
             <UFormField name="familyMember.check">
               <UCheckbox
                 v-model="state.familyMember.check"
-                label="Ik heb een gezinslid dat reeds ingeschreven is"
+                label="Ik heb een gezinslid dat reeds ingeschreven is."
                 description="(ontvang 5 euro korting)"
                 size="xl"
               ></UCheckbox>

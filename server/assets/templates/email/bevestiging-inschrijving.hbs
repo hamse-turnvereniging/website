@@ -503,12 +503,45 @@
                   </tr>
                   <tr>
                     <td style="padding: 6px 0">Bedrag</td>
-                    <td style="padding: 6px 0"><strong>&euro; {{price}}</strong></td>
+                    {{#if discountedAmount}}
+                      <td style="padding: 6px 0">
+                        <span style="text-decoration: line-through;">&euro; {{amount}}</span>
+                        {{#if is60PlusAtEndOfThisYear}}
+                          <strong>&nbsp;&euro;
+                            {{discountedAmount}}
+                            ({{discount}}
+                            euro korting voor 60-plussers)</strong>
+                        {{else if familyMember.check}}
+                          <strong>&nbsp;&euro;
+                            {{discountedAmount}}
+                            ({{discount}}
+                            euro korting via gezinslid)</strong>
+                        {{/if}}
+                      </td>
+                    {{else}}
+                      <td style="padding: 6px 0"><strong>&euro; {{amount}}</strong></td>
+                    {{/if}}
                   </tr>
                   <tr>
                     <td style="padding: 6px 0">Mededeling</td>
                     <td style="padding: 6px 0"><strong>{{firstName}} {{lastName}}</strong></td>
                   </tr>
+                  {{#unless is60PlusAtEndOfThisYear}}
+                    <tr>
+                      <td style="padding: 6px 0">Ik heb een gezinslid dat reeds ingeschreven is.</td>
+                      <td style="padding: 6px 0">
+                        <strong>{{#if familyMember.check}}✅ Ja{{else}}❌ Nee{{/if}}</strong>
+                      </td>
+                    </tr>
+                    {{#if familyMember.check}}
+                      <tr>
+                        <td style="padding: 6px 0">Gezinslid</td>
+                        <td style="padding: 6px 0">
+                          <strong>{{familyMember.firstName}} {{familyMember.lastName}}</strong>
+                        </td>
+                      </tr>
+                    {{/if}}
+                  {{/unless}}
                   <tr>
                     <td style="padding: 6px 0">Ik heb reeds betaald of de betaalgegevens zorgvuldig
                       genoteerd.</td>
@@ -545,7 +578,7 @@
                     <td style="padding: 6px 0">Ik heb het
                       <a
                         href="https://www.hamseturnvereniging.be/clubreglement"
-                        style="color: #0f172a; text-decoration: none"
+                        style="color: #059e95; text-decoration: none"
                       >clubreglement</a>
                       gelezen en ga hiermee akkoord.</td>
                     <td style="padding: 6px 0">
@@ -557,12 +590,12 @@
                       alleen gedeeld worden met het bestuur van de
                       <a
                         href="https://www.hamseturnvereniging.be"
-                        style="color: #0f172a; text-decoration: none"
+                        style="color: #059e95; text-decoration: none"
                       >Hamse Turnvereniging</a>
                       en
                       <a
                         href="https://www.gymfed.be"
-                        style="color: #0f172a; text-decoration: none"
+                        style="color: #059e95; text-decoration: none"
                       >Gymfed (Gymnastiekfederatie Vlaanderen)</a>.</td>
                     <td style="padding: 6px 0">
                       <strong>{{#if privacyCheck}}✅ Ja{{else}}❌ Nee{{/if}}</strong>
@@ -610,10 +643,11 @@
               >
                 <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
                 <p style="margin: 0">
-                  Vragen? Mail ons via
+                  Vragen? Of klopt er iets niet? Antwoord op deze e-mail met de correcties. Mail ons
+                  via
                   <a
                     href="mailto:info@hamseturnvereniging.be"
-                    style="color: #0f172a; text-decoration: none"
+                    style="color: #059e95; text-decoration: none"
                   >info@hamseturnvereniging.be</a>.
                 </p>
               </td>
