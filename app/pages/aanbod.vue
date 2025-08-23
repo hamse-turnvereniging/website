@@ -6,7 +6,7 @@
     </div>
   </section>
   <section id="turnen" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-row items-center gap-8">
+    <div class="flex flex-col-reverse md:flex-row items-center gap-8">
       <div class="flex flex-1 flex-col gap-3">
         <h2>Turnen</h2>
         <p>
@@ -19,7 +19,6 @@
           aangeleerd en ontwikkeld.
         </p>
       </div>
-      <!-- TODO: Other images -->
       <div class="flex-1">
         <img class="flex-none" src="https://placehold.co/600x400" />
       </div>
@@ -27,9 +26,11 @@
     <p class="text-center text-xl">
       Onze turnclub biedt toestelturnen aan voor verschillende leeftijden en niveaus:
     </p>
-    <div id="turnen-kleuters" class="flex flex-row items-center gap-8">
-      <img class="flex-none" src="https://placehold.co/400x240" />
-      <div class="flex flex-col gap-3">
+    <div id="turnen-kleuters" class="flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-1">
+        <img class="flex-none" src="https://placehold.co/400x240" />
+      </div>
+      <div class="flex flex-1 flex-col gap-3">
         <h3>Kleuters</h3>
         <p>
           Op een speelse manier maken kleuters kennis met de basisvaardigheden van turnen. We werken
@@ -37,8 +38,8 @@
         </p>
       </div>
     </div>
-    <div id="turnen-lagere-school" class="flex flex-row items-center gap-8">
-      <div class="flex flex-col gap-3">
+    <div id="turnen-lagere-school" class="flex flex-col-reverse md:flex-row items-center gap-8">
+      <div class="flex flex-1 flex-col gap-3">
         <h3>Lagere school</h3>
         <p>
           Hier leggen we de focus op het verder ontwikkelen van turnvaardigheden. De kinderen leren
@@ -46,11 +47,15 @@
           en veiligheid.
         </p>
       </div>
-      <img class="flex-none" src="https://placehold.co/400x240" />
+      <div class="flex-1">
+        <img class="flex-none" src="https://placehold.co/400x240" />
+      </div>
     </div>
-    <div id="turnen-1ste-middelbaar" class="flex flex-row items-center gap-8">
-      <img class="flex-none" src="https://placehold.co/400x240" />
-      <div class="flex flex-col gap-3">
+    <div id="turnen-1ste-middelbaar" class="flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-1">
+        <img class="flex-none" src="https://placehold.co/400x240" />
+      </div>
+      <div class="flex flex-1 flex-col gap-3">
         <h3>Vanaf het 1ste middelbaar</h3>
         <p>
           Ook voor jongeren blijft toestelturnen uitdagend. We bouwen verder op eerder geleerde
@@ -59,13 +64,13 @@
       </div>
     </div>
     <p class="text-center text-xl">
-      Toestelturnen is een sport voor iedereen: jongens en meisjes, beginners en gevorderden.<br />Onder
+      Toestelturnen is een sport voor iedereen: jongens en meisjes, beginners en gevorderden. Onder
       begeleiding van onze lesgevers turnen we in een veilige en stimulerende omgeving.
     </p>
   </section>
   <section id="trampoline" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-row items-center gap-12">
-      <div class="flex flex-col gap-3">
+    <div class="flex flex-col-reverse md:flex-row items-center gap-8">
+      <div class="flex flex-1 flex-col gap-3">
         <h2>Trampoline</h2>
         <p>
           Op de trampolines leren gymnasten stapsgewijs controle en techniek, van eenvoudige
@@ -82,7 +87,9 @@
           ontwikkelen of gewoon plezier te beleven aan deze unieke sport.
         </p>
       </div>
-      <img class="flex-none" src="https://placehold.co/600x400" />
+      <div class="flex-1">
+        <img class="flex-none" src="https://placehold.co/600x400" />
+      </div>
     </div>
     <p class="text-center text-xl">
       Trampolinespringen is niet alleen leuk, het verbetert ook je kracht, coördinatie en
@@ -90,9 +97,11 @@
     </p>
   </section>
   <section id="bbb" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-row items-center gap-12">
-      <img class="flex-none" src="https://placehold.co/600x400" />
-      <div class="flex flex-col gap-3">
+    <div class="flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-1">
+        <img class="flex-none" src="https://placehold.co/600x400" />
+      </div>
+      <div class="flex flex-1 flex-col gap-3">
         <h2>BBB</h2>
         <p>
           BBB staat voor Benen, Billen en Buik - een leuke en effectieve groepsles die focust op het
@@ -113,8 +122,8 @@
     </p>
   </section>
   <section id="callanetics" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-row items-center gap-12">
-      <div class="flex flex-col gap-3">
+    <div class="flex flex-col-reverse md:flex-row items-center gap-8">
+      <div class="flex flex-1 flex-col gap-3">
         <h2>Callanetics</h2>
         <p>
           Callanetics is een rustige maar intensieve vorm van spierversterking die focust op diepe
@@ -133,7 +142,9 @@
           precisie staan centraal, steeds in een ontspannen sfeer.
         </p>
       </div>
-      <img class="flex-none" src="https://placehold.co/600x400" />
+      <div class="flex-1">
+        <img class="flex-none" src="https://placehold.co/600x400" />
+      </div>
     </div>
     <p class="text-center text-xl">
       Wil je werken aan je lichaam op een rustige maar doelgerichte manier? Dan is Callanetics iets
@@ -141,9 +152,11 @@
     </p>
   </section>
   <section id="net-voetbal-heren" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-row items-center gap-12">
-      <img class="flex-none" src="https://placehold.co/600x400" />
-      <div class="flex flex-col gap-3">
+    <div class="flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-1">
+        <img class="flex-none" src="https://placehold.co/600x400" />
+      </div>
+      <div class="flex flex-1 flex-col gap-3">
         <h2>Net-voetbal heren</h2>
         <p>
           Net-voetbal is een dynamische en leuke sport die het beste van voetbal en volleybal
