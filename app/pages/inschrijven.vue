@@ -55,6 +55,12 @@ const locations = ref<SelectItem[]>([
 
 const state = useLocalStorage("inschrijvingsformulier", initialState);
 
+watch(state, (value) => {
+  if (value.familyMember === undefined) {
+    state.value.familyMember = initialState.familyMember;
+  }
+});
+
 const dateOfBirth = computed(() => {
   if (!state.value.dateOfBirth || state.value.dateOfBirth.length != 10) {
     return null;
