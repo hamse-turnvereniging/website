@@ -15,7 +15,7 @@ watch(state.value, (value) => {
 
       toast.add({
         title: "Opgepast!",
-        description: `${value.group} is niet beschikbaar in sporthal ${value.location}. Locatie is aangepast naar sporthal ${newLocation}.`,
+        description: `${value.group} is niet beschikbaar in sporthal ${value.location}. Sporthal is aangepast naar ${newLocation}.`,
         color: "warning",
       });
 
@@ -190,7 +190,7 @@ async function onError(event: FormErrorEvent) {
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
           <h3>Voor welke groep wil je inschrijven?</h3>
-          <div class="flex gap-6">
+          <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
             <UFormField class="flex-1" label="Groep" name="group" :required="true">
               <USelect
                 v-model="state.group"
@@ -215,7 +215,7 @@ async function onError(event: FormErrorEvent) {
         <div class="flex flex-col gap-4">
           <h3>Gegevens lid</h3>
           <div class="flex flex-col gap-4">
-            <div class="flex gap-6">
+            <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
               <UFormField class="flex-1" label="Voornaam" name="firstName" :required="true">
                 <UInput v-model="state.firstName" class="w-full" size="xl" placeholder="Voornaam" />
               </UFormField>
@@ -223,7 +223,7 @@ async function onError(event: FormErrorEvent) {
                 <UInput v-model="state.lastName" class="w-full" size="xl" placeholder="Naam" />
               </UFormField>
             </div>
-            <div class="flex gap-6">
+            <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
               <UFormField class="flex-1" label="Gender" name="gender" :required="true">
                 <USelect
                   v-model="state.gender"
@@ -252,7 +252,7 @@ async function onError(event: FormErrorEvent) {
               </UFormField>
             </div>
             <h4>Adres</h4>
-            <div class="flex gap-6">
+            <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
               <UFormField
                 class="flex-1"
                 label="Straatnaam"
@@ -280,7 +280,7 @@ async function onError(event: FormErrorEvent) {
                 />
               </UFormField>
             </div>
-            <div class="flex gap-6">
+            <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
               <UFormField
                 class="flex-1"
                 label="Postcode"
@@ -314,7 +314,7 @@ async function onError(event: FormErrorEvent) {
               class="flex flex-1 flex-col gap-4"
             >
               <h4>Contactgegevens</h4>
-              <div class="flex gap-6">
+              <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
                 <UFormField
                   class="flex-1"
                   label="Telefoonnummer"
@@ -355,7 +355,7 @@ async function onError(event: FormErrorEvent) {
                 </UFormField>
               </div>
               <h5>Wie mogen we bellen in geval van nood?</h5>
-              <div class="flex gap-6">
+              <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
                 <UFormField
                   class="flex-1"
                   label="Voornaam"
@@ -410,7 +410,7 @@ async function onError(event: FormErrorEvent) {
             >
               <div class="flex flex-1 flex-col gap-4">
                 <h4>Contact ouder 1</h4>
-                <div class="flex gap-6">
+                <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
                   <UFormField
                     class="flex-1"
                     label="Voornaam"
@@ -433,7 +433,7 @@ async function onError(event: FormErrorEvent) {
                     />
                   </UFormField>
                 </div>
-                <div class="flex gap-6">
+                <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
                   <UFormField
                     class="flex-1"
                     label="Telefoonnummer"
@@ -464,7 +464,7 @@ async function onError(event: FormErrorEvent) {
               </div>
               <div class="flex flex-1 flex-col gap-4">
                 <h4>Contact ouder 2</h4>
-                <div class="flex gap-6">
+                <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
                   <UFormField class="flex-1" label="Voornaam" name="parent2.firstName">
                     <UInput
                       v-model="state.parent2.firstName"
@@ -482,7 +482,7 @@ async function onError(event: FormErrorEvent) {
                     />
                   </UFormField>
                 </div>
-                <div class="flex gap-6">
+                <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
                   <UFormField class="flex-1" label="Telefoonnummer" name="parent2.phoneNumber">
                     <UInput
                       v-model="state.parent2.phoneNumber"
@@ -507,14 +507,41 @@ async function onError(event: FormErrorEvent) {
         <hr />
         <div class="flex flex-col gap-4">
           <h3>Betaalgegevens lidgeld</h3>
-          <table>
+          <div class="sm:hidden flex flex-col gap-4">
+            <div class="flex flex-col">
+              <div class="text-sm">Rekeningnummer</div>
+              <div class="font-semibold py-1">BE69 0682 0939 9078</div>
+            </div>
+            <div class="flex flex-col">
+              <div class="text-sm">Bedrag</div>
+              <div class="font-semibold py-1">
+                <span v-if="discount"
+                  ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
+                  {{ discountedAmount }} (<span v-if="is60PlusAtEndOfThisYear"
+                    >{{ discount }} euro korting voor 60-plussers</span
+                  ><span v-else="state.familyMember.check"
+                    >{{ discount }} euro korting via gezinslid</span
+                  >)</span
+                >
+                <span v-else>&euro; {{ amount }}</span>
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <div class="text-sm">Mededeling</div>
+              <div class="font-semibold py-1">
+                {{ state.firstName != "" ? state.firstName : "Voornaam" }}
+                {{ state.lastName != "" ? state.lastName : "Naam" }}
+              </div>
+            </div>
+          </div>
+          <table class="hidden sm:block">
             <tbody>
               <tr>
-                <td width="160px">Rekeningnummer:</td>
+                <td class="text-sm" width="160px">Rekeningnummer</td>
                 <td class="font-semibold py-1">BE69 0682 0939 9078</td>
               </tr>
               <tr v-if="amount">
-                <td>Bedrag:</td>
+                <td class="text-sm">Bedrag</td>
                 <td class="font-semibold py-1">
                   <span v-if="discount"
                     ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
@@ -528,7 +555,7 @@ async function onError(event: FormErrorEvent) {
                 </td>
               </tr>
               <tr>
-                <td>Mededeling:</td>
+                <td class="text-sm">Mededeling</td>
                 <td class="font-semibold py-1">
                   {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                   {{ state.lastName != "" ? state.lastName : "Naam" }}
@@ -547,7 +574,7 @@ async function onError(event: FormErrorEvent) {
             </UFormField>
             <div v-if="state.familyMember.check" class="flex flex-1 flex-col gap-4">
               <h4>Gezinslid</h4>
-              <div class="flex gap-6">
+              <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
                 <UFormField
                   class="flex-1"
                   label="Voornaam"
