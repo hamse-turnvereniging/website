@@ -512,7 +512,7 @@ async function onError(event: FormErrorEvent) {
               <div class="text-sm">Rekeningnummer</div>
               <div class="font-semibold py-1">BE69 0682 0939 9078</div>
             </div>
-            <div class="flex flex-col">
+            <div v-if="amount" class="flex flex-col">
               <div class="text-sm">Bedrag</div>
               <div class="font-semibold py-1">
                 <span v-if="discount"
