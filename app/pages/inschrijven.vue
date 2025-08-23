@@ -53,7 +53,7 @@ const locations = ref<SelectItem[]>([
   },
 ]);
 
-const state = useLocalStorage("inschrijvingsformulier", initialState);
+const state = useLocalStorage("inschrijvingsformulier", initialState, { mergeDefaults: true });
 
 watch(state, (value) => {
   if (value.familyMember === undefined) {
