@@ -58,7 +58,7 @@
           ontdek je wel je nieuwe favoriete sport!
         </p>
       </div>
-      <UButton to="aanbod" color="secondary" size="xl">Aanbod</UButton>
+      <UButton to="inschrijven" color="secondary" size="xl">Inschrijven</UButton>
     </div>
     <div class="flex flex-col gap-6">
       <img src="https://placehold.co/300x200" alt="Onze activiteiten afbeelding" />
