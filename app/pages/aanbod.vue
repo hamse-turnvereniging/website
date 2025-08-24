@@ -5,8 +5,8 @@
       <h1>Aanbod</h1>
     </div>
   </section>
-  <div class="flex flex-col gap-16 px-8 py-16">
-    <section id="turnen" class="max-w-6xl mx-auto flex flex-col gap-8">
+  <div class="flex flex-col gap-16 py-16">
+    <section id="turnen" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
       <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
         <div class="flex flex-1 flex-col gap-3">
           <h2>Turnen</h2>
@@ -101,7 +101,7 @@
         Onder begeleiding van onze lesgevers turnen we in een veilige en stimulerende omgeving.
       </p>
     </section>
-    <section id="trampoline" class="max-w-6xl mx-auto flex flex-col gap-8">
+    <section id="trampoline" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
       <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
         <div class="flex flex-1 flex-col gap-3">
           <h2>Trampoline</h2>
@@ -135,7 +135,7 @@
         zelfvertrouwen.<br />Ideaal voor wie houdt van beweging met een vleugje adrenaline!
       </p>
     </section>
-    <section id="bbb" class="max-w-6xl mx-auto flex flex-col gap-8">
+    <section id="bbb" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
       <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <div class="flex-1">
           <nuxt-img
@@ -166,7 +166,7 @@
         vooral plezier hebben in bewegen!
       </p>
     </section>
-    <section id="callanetics" class="max-w-6xl mx-auto flex flex-col gap-8">
+    <section id="callanetics" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
       <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
         <div class="flex flex-1 flex-col gap-3">
           <h2>Callanetics</h2>
@@ -202,7 +202,7 @@
         iets voor jou!
       </p>
     </section>
-    <section id="net-voetbal-heren" class="max-w-6xl mx-auto flex flex-col gap-8">
+    <section id="net-voetbal-heren" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
       <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <div class="flex-1">
           <nuxt-img

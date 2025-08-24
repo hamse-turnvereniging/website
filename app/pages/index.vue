@@ -8,8 +8,8 @@
       </h1>
     </div>
   </section>
-  <div class="flex flex-col gap-16 px-8 py-16">
-    <section class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8">
+  <div class="flex flex-col gap-16 py-16">
+    <section class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 px-8">
       <div class="flex-1">
         <nuxt-img
           class="w-full"
@@ -42,7 +42,7 @@
     </section>
     <section
       id="in-de-schijnwerper"
-      class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-8"
+      class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-8 px-8"
     >
       <div class="flex flex-col gap-4 pb-4">
         <nuxt-img
