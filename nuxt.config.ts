@@ -16,6 +16,10 @@ export default defineNuxtConfig({
       },
     ],
   },
+  hub: {
+    blob: true,
+    database: true,
+  },
   modules: [
     "@nuxt/content",
     "@nuxt/eslint",
@@ -23,6 +27,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/image",
     "@nuxt/ui",
+    "@nuxthub/core",
     "@nuxtjs/seo",
     "@vueuse/nuxt",
   ],
