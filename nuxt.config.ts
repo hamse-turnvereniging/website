@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   $development: {
     hub: {
-      remote: true,
+      remote: "preview",
     },
   },
   compatibilityDate: "2025-07-15",
