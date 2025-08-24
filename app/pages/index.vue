@@ -10,7 +10,13 @@
   </section>
   <section class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 px-8 py-16">
     <div class="flex-1">
-      <nuxt-img class="w-full" fit="cover" src="/images/welkom.jpg" width="600" height="400" />
+      <nuxt-img
+        class="w-full"
+        fit="cover"
+        src="/images/welkom/welkom.jpg"
+        width="600"
+        height="400"
+      />
     </div>
     <div class="flex flex-1 flex-col gap-6">
       <div class="flex flex-col gap-3">
@@ -127,9 +133,7 @@
 @reference "./../assets/css/main.css";
 
 section#banner {
-  @apply bg-primary-400;
-
-  /* TODO: Background image */
-  /* background-image: url("https://placehold.co/1600x580"); */
+  @apply bg-primary-300;
+  background-image: url("/images/banner.jpg");
 }
 </style>

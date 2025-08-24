@@ -21,9 +21,9 @@
       </div>
       <div class="flex-1">
         <nuxt-img
-          class="flex-none"
+          class="w-full"
           fit="cover"
-          src="/images/aanbod/turnen.jpg"
+          src="/images/aanbod/turnen/turnen.jpg"
           width="600"
           height="400"
         />
@@ -61,7 +61,7 @@
       </div>
       <div class="flex-1">
         <nuxt-img
-          class="flex-none md:ml-auto"
+          class="flex-none"
           fit="cover"
           src="/images/aanbod/turnen/lagere-school.jpg"
           width="400"
@@ -113,7 +113,7 @@
       </div>
       <div class="flex-1">
         <nuxt-img
-          class="flex-none"
+          class="w-full"
           fit="cover"
           src="/images/aanbod/trampoline.jpg"
           width="600"
@@ -129,7 +129,13 @@
   <section id="bbb" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-col md:flex-row items-center gap-8">
       <div class="flex-1">
-        <img class="flex-none" src="https://placehold.co/600x400" />
+        <nuxt-img
+          class="w-full"
+          fit="cover"
+          src="/images/aanbod/bbb.png"
+          width="600"
+          height="400"
+        />
       </div>
       <div class="flex flex-1 flex-col gap-3">
         <h2>BBB</h2>
@@ -173,7 +179,13 @@
         </p>
       </div>
       <div class="flex-1">
-        <img class="flex-none" src="https://placehold.co/600x400" />
+        <nuxt-img
+          class="w-full"
+          fit="cover"
+          src="/images/aanbod/callanetics.png"
+          width="600"
+          height="400"
+        />
       </div>
     </div>
     <p class="text-center text-xl">
@@ -184,7 +196,13 @@
   <section id="net-voetbal-heren" class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-col md:flex-row items-center gap-8">
       <div class="flex-1">
-        <img class="flex-none" src="https://placehold.co/600x400" />
+        <nuxt-img
+          class="w-full"
+          fit="cover"
+          src="/images/aanbod/net-voetbal-heren.png"
+          width="600"
+          height="400"
+        />
       </div>
       <div class="flex flex-1 flex-col gap-3">
         <h2>Net-voetbal heren</h2>
@@ -216,10 +234,8 @@
 @reference "./../assets/css/main.css";
 
 section#banner {
-  @apply bg-primary-400;
-
-  /* TODO: Background image */
-  /* background-image: url("https://placehold.co/1600x580"); */
+  @apply bg-primary-300;
+  background-image: url("/images/banner.jpg");
 }
 
 p.text-center.text-xl {

@@ -683,9 +683,7 @@ async function onError(event: FormErrorEvent) {
 @reference "./../assets/css/main.css";
 
 section#banner {
-  @apply bg-primary-400;
-
-  /* TODO: Background image */
-  /* background-image: url("https://placehold.co/1600x580"); */
+  @apply bg-primary-300;
+  background-image: url("/images/banner.jpg");
 }
 </style>
