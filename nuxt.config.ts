@@ -36,6 +36,7 @@ export default defineNuxtConfig({
       "hub-images": "http://www.hamseturnvereniging.be/api/_hub/blob/images/",
     },
     domains: ["www.hamseturnvereniging.be"],
+    provider: "ipx",
     quality: 90,
   },
   modules: [
