@@ -20,7 +20,13 @@
         </p>
       </div>
       <div class="flex-1">
-        <img class="flex-none" src="https://placehold.co/600x400" />
+        <nuxt-img
+          class="flex-none"
+          fit="cover"
+          src="/images/aanbod/turnen.jpg"
+          width="600"
+          height="400"
+        />
       </div>
     </div>
     <p class="text-center text-xl">
@@ -54,12 +60,24 @@
         </p>
       </div>
       <div class="flex-1">
-        <img class="flex-none" src="https://placehold.co/400x240" />
+        <nuxt-img
+          class="flex-none md:ml-auto"
+          fit="cover"
+          src="/images/aanbod/turnen/lagere-school.jpg"
+          width="400"
+          height="240"
+        />
       </div>
     </div>
     <div id="turnen-1ste-middelbaar" class="flex flex-col md:flex-row items-center gap-8">
       <div class="flex-1">
-        <img class="flex-none md:ml-auto" src="https://placehold.co/400x240" />
+        <nuxt-img
+          class="flex-none md:ml-auto"
+          fit="cover"
+          src="/images/aanbod/turnen/vanaf-1ste-middelbaar.jpg"
+          width="400"
+          height="240"
+        />
       </div>
       <div class="flex flex-1 flex-col gap-3">
         <h3>Vanaf het 1ste middelbaar</h3>
@@ -198,7 +216,10 @@
 @reference "./../assets/css/main.css";
 
 section#banner {
-  background-image: url("https://placehold.co/1600x340");
+  @apply bg-primary-400;
+
+  /* TODO: Background image */
+  /* background-image: url("https://placehold.co/1600x580"); */
 }
 
 p.text-center.text-xl {

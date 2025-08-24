@@ -60,8 +60,13 @@ if (calendar.value) {
 </template>
 
 <style scoped>
+@reference "./../assets/css/main.css";
+
 section#banner {
-  background-image: url("https://placehold.co/1600x340");
+  @apply bg-primary-400;
+
+  /* TODO: Background image */
+  /* background-image: url("https://placehold.co/1600x580"); */
 }
 </style>
 

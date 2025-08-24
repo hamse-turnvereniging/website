@@ -10,7 +10,7 @@
   </section>
   <section class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 px-8 py-16">
     <div class="flex-1">
-      <img src="https://placehold.co/600x400" alt="Welkom afbeelding" />
+      <nuxt-img class="w-full" fit="cover" src="/images/welkom.jpg" width="600" height="400" />
     </div>
     <div class="flex flex-1 flex-col gap-6">
       <div class="flex flex-col gap-3">
@@ -38,7 +38,14 @@
     class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8 py-16"
   >
     <div class="flex flex-col gap-6">
-      <img src="https://placehold.co/300x200" alt="Kom proberen afbeelding" />
+      <nuxt-img
+        class="w-full"
+        fit="cover"
+        src="/images/welkom/kom-proberen.jpg"
+        alt="Kom proberen afbeelding"
+        width="300"
+        height="200"
+      />
       <div class="flex flex-col gap-3">
         <h3>Kom proberen</h3>
         <p>
@@ -61,7 +68,14 @@
       <UButton to="inschrijven" color="secondary" size="xl">Inschrijven</UButton>
     </div>
     <div class="flex flex-col gap-6">
-      <img src="https://placehold.co/300x200" alt="Onze activiteiten afbeelding" />
+      <nuxt-img
+        class="w-full"
+        fit="cover"
+        src="/images/welkom/onze-activiteiten.jpg"
+        alt="Onze activiteiten afbeelding"
+        width="300"
+        height="200"
+      />
       <div class="flex flex-col gap-3">
         <h3>Onze activiteiten</h3>
         <p>
@@ -79,7 +93,14 @@
       <UButton to="kalender" color="secondary" size="xl">Kalender</UButton>
     </div>
     <div class="flex flex-col gap-6">
-      <img src="https://placehold.co/300x200" alt="Lesgevers gezocht afbeelding" />
+      <nuxt-img
+        class="w-full"
+        fit="cover"
+        src="/images/welkom/lesgevers-gezocht.jpg"
+        alt="Lesgevers gezocht afbeelding"
+        width="300"
+        height="200"
+      />
       <div class="flex flex-col gap-3">
         <h3>Lesgevers gezocht</h3>
         <p>
@@ -103,7 +124,12 @@
 </template>
 
 <style scoped>
+@reference "./../assets/css/main.css";
+
 section#banner {
-  background-image: url("https://placehold.co/1600x580");
+  @apply bg-primary-400;
+
+  /* TODO: Background image */
+  /* background-image: url("https://placehold.co/1600x580"); */
 }
 </style>
