@@ -28,7 +28,7 @@
     </p>
     <div id="turnen-kleuters" class="flex flex-col md:flex-row items-center gap-8">
       <div class="flex-1">
-        <img class="flex-none" src="https://placehold.co/400x240" />
+        <img class="flex-none md:ml-auto" src="https://placehold.co/400x240" />
       </div>
       <div class="flex flex-1 flex-col gap-3">
         <h3>Kleuters</h3>
@@ -53,7 +53,7 @@
     </div>
     <div id="turnen-1ste-middelbaar" class="flex flex-col md:flex-row items-center gap-8">
       <div class="flex-1">
-        <img class="flex-none" src="https://placehold.co/400x240" />
+        <img class="flex-none md:ml-auto" src="https://placehold.co/400x240" />
       </div>
       <div class="flex flex-1 flex-col gap-3">
         <h3>Vanaf het 1ste middelbaar</h3>
@@ -104,7 +104,7 @@
       <div class="flex flex-1 flex-col gap-3">
         <h2>BBB</h2>
         <p>
-          BBB staat voor Benen, Billen en Buik - een leuke en effectieve groepsles die focust op het
+          BBB staat voor Buik, Billen en Benen - een leuke en effectieve groepsles die focust op het
           versterken en verstevigen van deze drie zones. Tijdens de les werken we aan
           spierversterking, vetverbranding en een betere lichaamshouding, op motiverende muziek en
           in een energieke groepssfeer.
