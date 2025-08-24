@@ -1,16 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  $development: {
-    hub: {
-      remote: true,
-    },
-    image: {
-      alias: {
-        "hub-images": "http://localhost:3000/api/_hub/blob/images/",
-      },
-      domains: ["localhost:3000"],
-    },
-  },
+  // $development: {
+  //   hub: {
+  //     remote: true,
+  //   },
+  //   image: {
+  //     alias: {
+  //       "hub-images": "http://localhost:3000/api/_hub/blob/images/",
+  //     },
+  //     domains: ["localhost:3000"],
+  //   },
+  // },
   compatibilityDate: "2025-07-15",
   css: ["~/assets/css/main.css"],
   devtools: {
@@ -28,15 +28,20 @@ export default defineNuxtConfig({
     ],
   },
   hub: {
-    blob: true,
+    // blob: true,
     database: true,
   },
   image: {
-    alias: {
-      "hub-images": "http://www.hamseturnvereniging.be/api/_hub/blob/images/",
-    },
-    domains: ["www.hamseturnvereniging.be"],
-    provider: "ipx",
+    // alias: {
+    //   "hub-images": "http://www.hamseturnvereniging.be/api/_hub/blob/images/",
+    // },
+    // domains: ["www.hamseturnvereniging.be"],
+    provider: process.env.NUXT_IMAGE_PROVIDER ?? "ipx",
+    cloudflare: process.env.NUXT_IMAGE_CLOUDFLARE_BASE_URL
+      ? {
+          baseUrl: process.env.NUXT_IMAGE_CLOUDFLARE_BASE_URL,
+        }
+      : undefined,
     quality: 90,
   },
   modules: [
