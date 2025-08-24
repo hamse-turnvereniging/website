@@ -2,7 +2,8 @@
 export default defineNuxtConfig({
   $development: {
     hub: {
-      remote: "preview",
+      // TODO: Does "preview" work already? New @nuxthub/core version available?
+      remote: true,
     },
   },
   compatibilityDate: "2025-07-15",
