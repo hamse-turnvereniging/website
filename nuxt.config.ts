@@ -2,12 +2,17 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
+  hub: {
+    blob: true,
+    database: true,
+  },
   modules: [
     "@nuxt/content",
-    "@nuxt/fonts",
-    "@nuxt/image",
-    "@nuxt/icon",
     "@nuxt/eslint",
+    "@nuxt/fonts",
+    "@nuxt/icon",
+    "@nuxt/image",
+    "@nuxthub/core",
     "@nuxtjs/seo",
     "@nuxtjs/tailwindcss",
   ],
