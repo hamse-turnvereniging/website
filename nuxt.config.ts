@@ -2,8 +2,13 @@
 export default defineNuxtConfig({
   $development: {
     hub: {
-      // TODO: Does "preview" work already? New @nuxthub/core version available?
       remote: true,
+    },
+    image: {
+      alias: {
+        "hub-images": "http://localhost:3000/api/_hub/blob/images/",
+      },
+      domains: ["localhost:3000"],
     },
   },
   compatibilityDate: "2025-07-15",
@@ -25,6 +30,12 @@ export default defineNuxtConfig({
   hub: {
     blob: true,
     database: true,
+  },
+  image: {
+    alias: {
+      "hub-images": "http://www.hamseturnvereniging.be/api/_hub/blob/images/",
+    },
+    domains: ["www.hamseturnvereniging.be"],
   },
   modules: [
     "@nuxt/content",

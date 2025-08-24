@@ -28,7 +28,13 @@
     </p>
     <div id="turnen-kleuters" class="flex flex-col md:flex-row items-center gap-8">
       <div class="flex-1">
-        <img class="flex-none md:ml-auto" src="https://placehold.co/400x240" />
+        <nuxt-img
+          class="flex-none md:ml-auto"
+          fit="cover"
+          src="/images/aanbod/turnen/kleuters.jpg"
+          width="400"
+          height="240"
+        />
       </div>
       <div class="flex flex-1 flex-col gap-3">
         <h3>Kleuters</h3>
@@ -88,7 +94,13 @@
         </p>
       </div>
       <div class="flex-1">
-        <img class="flex-none" src="https://placehold.co/600x400" />
+        <nuxt-img
+          class="flex-none"
+          fit="cover"
+          src="/images/aanbod/trampoline.jpg"
+          width="600"
+          height="400"
+        />
       </div>
     </div>
     <p class="text-center text-xl">
