@@ -30,14 +30,14 @@ const base = v.object({
     postalCode: v.pipe(v.string(), v.trim(), v.nonEmpty("Postcode is verplicht")),
     city: v.pipe(v.string(), v.trim(), v.nonEmpty("Stad/gemeente is verplicht")),
   }),
-  familyMember: v.union([
+  familyMember: v.variant("check", [
     v.object({
-      check: v.union([v.boolean(), v.literal(false)]),
+      check: v.pipe(v.boolean(), v.value(false)),
       firstName: v.optional(v.string()),
       lastName: v.optional(v.string()),
     }),
     v.object({
-      check: v.union([v.boolean(), v.literal(true)]),
+      check: v.pipe(v.boolean(), v.value(true)),
       firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
       lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
     }),
