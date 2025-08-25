@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { ContentRenderer, UAccordion } from "#components";
 import type { AccordionItem } from "@nuxt/ui";
 
 useHead({
@@ -36,7 +35,7 @@ if (faq.value) {
       <h2>Meest gestelde vragen</h2>
       <p>Ontdek hier de antwoorden op de meest gestelde vragen.</p>
     </div>
-    <UAccordion
+    <u-accordion
       :items
       :ui="{
         label: 'text-2xl font-medium text-secondary',
@@ -45,9 +44,9 @@ if (faq.value) {
       :unmount-on-hide="false"
     >
       <template #content="{ item }">
-        <ContentRenderer class="answer pb-3.5" :value="item.body" />
+        <content-renderer class="answer pb-3.5" :value="item.body" />
       </template>
-    </UAccordion>
+    </u-accordion>
   </section>
 </template>
 

@@ -186,29 +186,29 @@ async function onError(event: FormErrorEvent) {
         Schrijf je hier in en sluit je aan bij onze sportieve en gezellige groep.
       </p>
     </div>
-    <UForm ref="form" :schema :state @submit="onSubmit" @error="onError">
+    <u-form ref="form" :schema :state @submit="onSubmit" @error="onError">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
           <h3>Voor welke groep wil je inschrijven?</h3>
           <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-            <UFormField class="flex-1" label="Groep" name="group" :required="true">
-              <USelect
+            <u-form-field class="flex-1" label="Groep" name="group" :required="true">
+              <u-select
                 v-model="state.group"
                 :items="groups"
                 size="xl"
                 class="w-full"
                 placeholder="Maak je keuze"
               />
-            </UFormField>
-            <UFormField class="flex-1" label="Sporthal" name="location" :required="true">
-              <USelect
+            </u-form-field>
+            <u-form-field class="flex-1" label="Sporthal" name="location" :required="true">
+              <u-select
                 v-model="state.location"
                 :items="availableLocations"
                 size="xl"
                 class="w-full"
                 placeholder="Maak je keuze"
               />
-            </UFormField>
+            </u-form-field>
           </div>
         </div>
         <hr />
@@ -216,92 +216,112 @@ async function onError(event: FormErrorEvent) {
           <h3>Gegevens lid</h3>
           <div class="flex flex-col gap-4">
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-              <UFormField class="flex-1" label="Voornaam" name="firstName" :required="true">
-                <UInput v-model="state.firstName" class="w-full" size="xl" placeholder="Voornaam" />
-              </UFormField>
-              <UFormField class="flex-1" label="Naam" name="lastName" :required="true">
-                <UInput v-model="state.lastName" class="w-full" size="xl" placeholder="Naam" />
-              </UFormField>
+              <u-form-field class="flex-1" label="Voornaam" name="firstName" :required="true">
+                <u-input
+                  v-model="state.firstName"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Voornaam"
+                />
+              </u-form-field>
+              <u-form-field class="flex-1" label="Naam" name="lastName" :required="true">
+                <u-input v-model="state.lastName" class="w-full" size="xl" placeholder="Naam" />
+              </u-form-field>
             </div>
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-              <UFormField class="flex-1" label="Gender" name="gender" :required="true">
-                <USelect
+              <u-form-field class="flex-1" label="Gender" name="gender" :required="true">
+                <u-select
                   v-model="state.gender"
                   :items="genders"
                   size="xl"
                   class="w-full"
                   placeholder="Man / Vrouw / X"
                 />
-              </UFormField>
-              <UFormField class="flex-1" label="Geboortedatum" name="dateOfBirth" :required="true">
-                <UInput
+              </u-form-field>
+              <u-form-field
+                class="flex-1"
+                label="Geboortedatum"
+                name="dateOfBirth"
+                :required="true"
+              >
+                <u-input
                   v-model="state.dateOfBirth"
                   v-maska="'##/##/####'"
                   class="w-full"
                   size="xl"
                   placeholder="dd/mm/jjjj"
                 />
-              </UFormField>
-              <UFormField class="flex-1" label="Nationaliteit" name="nationality" :required="true">
-                <UInput
+              </u-form-field>
+              <u-form-field
+                class="flex-1"
+                label="Nationaliteit"
+                name="nationality"
+                :required="true"
+              >
+                <u-input
                   v-model="state.nationality"
                   class="w-full"
                   size="xl"
                   placeholder="Nationaliteit"
                 />
-              </UFormField>
+              </u-form-field>
             </div>
             <h4>Adres</h4>
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-              <UFormField
+              <u-form-field
                 class="flex-1"
                 label="Straatnaam"
                 name="address.streetName"
                 :required="true"
               >
-                <UInput
+                <u-input
                   v-model="state.address.streetName"
                   class="w-full"
                   size="xl"
                   placeholder="Straat"
                 />
-              </UFormField>
-              <UFormField
+              </u-form-field>
+              <u-form-field
                 class="flex-1"
                 label="Huisnummer"
                 name="address.houseNumber"
                 :required="true"
               >
-                <UInput
+                <u-input
                   v-model="state.address.houseNumber"
                   class="w-full"
                   size="xl"
                   placeholder="Huisnummer"
                 />
-              </UFormField>
+              </u-form-field>
             </div>
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-              <UFormField
+              <u-form-field
                 class="flex-1"
                 label="Postcode"
                 name="address.postalCode"
                 :required="true"
               >
-                <UInput
+                <u-input
                   v-model="state.address.postalCode"
                   class="w-full"
                   size="xl"
                   placeholder="Postcode"
                 />
-              </UFormField>
-              <UFormField class="flex-1" label="Stad/gemeente" name="address.city" :required="true">
-                <UInput
+              </u-form-field>
+              <u-form-field
+                class="flex-1"
+                label="Stad/gemeente"
+                name="address.city"
+                :required="true"
+              >
+                <u-input
                   v-model="state.address.city"
                   class="w-full"
                   size="xl"
                   placeholder="Stad/gemeente"
                 />
-              </UFormField>
+              </u-form-field>
             </div>
             <div
               v-if="
@@ -315,7 +335,7 @@ async function onError(event: FormErrorEvent) {
             >
               <h4>Contactgegevens</h4>
               <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                <UFormField
+                <u-form-field
                   class="flex-1"
                   label="Telefoonnummer"
                   name="phoneNumber"
@@ -327,14 +347,14 @@ async function onError(event: FormErrorEvent) {
                       state.group === 'Net-voetbal heren')
                   "
                 >
-                  <UInput
+                  <u-input
                     v-model="state.phoneNumber"
                     class="w-full"
                     size="xl"
                     placeholder="Telefoonnummer"
                   />
-                </UFormField>
-                <UFormField
+                </u-form-field>
+                <u-form-field
                   class="flex-1"
                   label="E-mailadres"
                   name="email"
@@ -346,55 +366,55 @@ async function onError(event: FormErrorEvent) {
                       state.group === 'Net-voetbal heren')
                   "
                 >
-                  <UInput
+                  <u-input
                     v-model="state.email"
                     class="w-full"
                     size="xl"
                     placeholder="E-mailadres"
                   />
-                </UFormField>
+                </u-form-field>
               </div>
               <h5>Wie mogen we bellen in geval van nood?</h5>
               <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                <UFormField
+                <u-form-field
                   class="flex-1"
                   label="Voornaam"
                   name="emergencyContact.firstName"
                   :required="true"
                 >
-                  <UInput
+                  <u-input
                     v-model="state.emergencyContact.firstName"
                     class="w-full"
                     size="xl"
                     placeholder="Voornaam"
                   />
-                </UFormField>
-                <UFormField
+                </u-form-field>
+                <u-form-field
                   class="flex-1"
                   label="Naam"
                   name="emergencyContact.lastName"
                   :required="true"
                 >
-                  <UInput
+                  <u-input
                     v-model="state.emergencyContact.lastName"
                     class="w-full"
                     size="xl"
                     placeholder="Naam"
                   />
-                </UFormField>
-                <UFormField
+                </u-form-field>
+                <u-form-field
                   class="flex-1"
                   label="Telefoonnummer"
                   name="emergencyContact.phoneNumber"
                   :required="true"
                 >
-                  <UInput
+                  <u-input
                     v-model="state.emergencyContact.phoneNumber"
                     class="w-full"
                     size="xl"
                     placeholder="Telefoonnummer"
                   />
-                </UFormField>
+                </u-form-field>
               </div>
             </div>
             <div
@@ -411,94 +431,99 @@ async function onError(event: FormErrorEvent) {
               <div class="flex flex-1 flex-col gap-4">
                 <h4>Contact ouder 1</h4>
                 <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                  <UFormField
+                  <u-form-field
                     class="flex-1"
                     label="Voornaam"
                     name="parent1.firstName"
                     :required="true"
                   >
-                    <UInput
+                    <u-input
                       v-model="state.parent1.firstName"
                       class="w-full"
                       size="xl"
                       placeholder="Voornaam"
                     />
-                  </UFormField>
-                  <UFormField class="flex-1" label="Naam" name="parent1.lastName" :required="true">
-                    <UInput
+                  </u-form-field>
+                  <u-form-field
+                    class="flex-1"
+                    label="Naam"
+                    name="parent1.lastName"
+                    :required="true"
+                  >
+                    <u-input
                       v-model="state.parent1.lastName"
                       class="w-full"
                       size="xl"
                       placeholder="Naam"
                     />
-                  </UFormField>
+                  </u-form-field>
                 </div>
                 <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                  <UFormField
+                  <u-form-field
                     class="flex-1"
                     label="Telefoonnummer"
                     name="parent1.phoneNumber"
                     :required="true"
                   >
-                    <UInput
+                    <u-input
                       v-model="state.parent1.phoneNumber"
                       class="w-full"
                       size="xl"
                       placeholder="Telefoonnummer"
                     />
-                  </UFormField>
-                  <UFormField
+                  </u-form-field>
+                  <u-form-field
                     class="flex-1"
                     label="E-mailadres"
                     name="parent1.email"
                     :required="true"
                   >
-                    <UInput
+                    <u-input
                       v-model="state.parent1.email"
                       class="w-full"
                       size="xl"
                       placeholder="E-mailadres"
                     />
-                  </UFormField>
+                  </u-form-field>
                 </div>
               </div>
               <div class="flex flex-1 flex-col gap-4">
                 <h4>Contact ouder 2</h4>
                 <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                  <UFormField class="flex-1" label="Voornaam" name="parent2.firstName">
-                    <UInput
+                  <u-form-field class="flex-1" label="Voornaam" name="parent2.firstName">
+                    <u-input
                       v-model="state.parent2.firstName"
                       class="w-full"
                       size="xl"
                       placeholder="Voornaam"
                     />
-                  </UFormField>
-                  <UFormField class="flex-1" label="Naam" name="parent2.lastName">
-                    <UInput
+                  </u-form-field>
+                  <u-form-field class="flex-1" label="Naam" name="parent2.lastName">
+                    <u-input
                       v-model="state.parent2.lastName"
                       class="w-full"
                       size="xl"
                       placeholder="Naam"
                     />
-                  </UFormField>
+                  </u-form-field>
                 </div>
                 <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                  <UFormField class="flex-1" label="Telefoonnummer" name="parent2.phoneNumber">
-                    <UInput
+                  <u-form-field class="flex-1" label="Telefoonnummer" name="parent2.phoneNumber">
+                    <u-input
                       v-model="state.parent2.phoneNumber"
                       class="w-full"
                       size="xl"
                       placeholder="Telefoonnummer"
                     />
-                  </UFormField>
-                  <UFormField class="flex-1" label="E-mailadres" name="parent2.email">
-                    <UInput
+                  </u-form-field>
+                  <u-form-field class="flex-1" label="E-mailadres" name="parent2.email">
+                    <u-input
                       v-model="state.parent2.email"
                       class="w-full"
                       size="xl"
                       placeholder="E-mailadres"
                     />
-                  </UFormField>
+                  </u-form-field>
                 </div>
               </div>
             </div>
@@ -564,94 +589,94 @@ async function onError(event: FormErrorEvent) {
             </tbody>
           </table>
           <div v-if="!is60PlusAtEndOfThisYear" class="flex flex-col gap-4">
-            <UFormField name="familyMember.check">
-              <UCheckbox
+            <u-form-field name="familyMember.check">
+              <u-checkbox
                 v-model="state.familyMember.check"
                 label="Ik heb een gezinslid dat reeds ingeschreven is."
                 description="(ontvang 5 euro korting)"
                 size="xl"
-              ></UCheckbox>
-            </UFormField>
+              ></u-checkbox>
+            </u-form-field>
             <div v-if="state.familyMember.check" class="flex flex-1 flex-col gap-4">
               <h4>Gezinslid</h4>
               <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                <UFormField
+                <u-form-field
                   class="flex-1"
                   label="Voornaam"
                   name="familyMember.firstName"
                   :required="true"
                 >
-                  <UInput
+                  <u-input
                     v-model="state.familyMember.firstName"
                     class="w-full"
                     size="xl"
                     placeholder="Voornaam"
                   />
-                </UFormField>
-                <UFormField
+                </u-form-field>
+                <u-form-field
                   class="flex-1"
                   label="Naam"
                   name="familyMember.lastName"
                   :required="true"
                 >
-                  <UInput
+                  <u-input
                     v-model="state.familyMember.lastName"
                     class="w-full"
                     size="xl"
                     placeholder="Naam"
                   />
-                </UFormField>
+                </u-form-field>
               </div>
             </div>
           </div>
-          <UFormField name="paymentCheck">
-            <UCheckbox
+          <u-form-field name="paymentCheck">
+            <u-checkbox
               v-model="state.paymentCheck"
               label="Ik heb reeds betaald of de betaalgegevens zorgvuldig genoteerd."
               description="(te betalen binnen 14 dagen na inschrijving)"
               size="xl"
             />
-          </UFormField>
+          </u-form-field>
         </div>
         <hr />
         <div class="flex flex-col gap-4">
-          <UFormField name="photosCheck">
-            <UCheckbox
+          <u-form-field name="photosCheck">
+            <u-checkbox
               v-model="state.photosCheck"
               label="Foto's van lid mogen gepubliceerd worden."
               size="xl"
             />
-          </UFormField>
-          <UFormField name="rulesCheck">
-            <UCheckbox v-model="state.rulesCheck" size="xl">
+          </u-form-field>
+          <u-form-field name="rulesCheck">
+            <u-checkbox v-model="state.rulesCheck" size="xl">
               <template #label
                 >Ik heb het
-                <NuxtLink to="clubreglement" target="_blank">clubreglement</NuxtLink> gelezen en ga
-                hiermee akkoord.</template
+                <nuxt-link to="clubreglement" target="_blank">clubreglement</nuxt-link> gelezen en
+                ga hiermee akkoord.</template
               >
-            </UCheckbox>
-          </UFormField>
-          <UFormField name="privacyCheck">
-            <UCheckbox v-model="state.privacyCheck" size="xl">
+            </u-checkbox>
+          </u-form-field>
+          <u-form-field name="privacyCheck">
+            <u-checkbox v-model="state.privacyCheck" size="xl">
               <template #label>
                 Ik ben akkoord dat bovenstaande gegevens enkel en alleen gedeeld worden met het
                 bestuur van de Hamse Turnvereniging en
-                <NuxtLink href="https://www.gymfed.be" :external="true" target="_blank"
-                  >Gymfed (Gymnastiekfederatie Vlaanderen)</NuxtLink
+                <nuxt-link href="https://www.gymfed.be" :external="true" target="_blank"
+                  >Gymfed (Gymnastiekfederatie Vlaanderen)</nuxt-link
                 >.
               </template>
-            </UCheckbox>
-          </UFormField>
+            </u-checkbox>
+          </u-form-field>
         </div>
         <div class="flex flex-col gap-3">
-          <UButton type="submit" size="xl" color="secondary">Inschrijving verzenden</UButton>
-          <UModal v-model:open="resetModalOpen">
-            <UButton label="Gegevens wissen" type="button" variant="ghost" color="error" />
+          <u-button type="submit" size="xl" color="secondary">Inschrijving verzenden</u-button>
+          <u-modal v-model:open="resetModalOpen">
+            <u-button label="Gegevens wissen" type="button" variant="ghost" color="error" />
             <template #content>
               <div class="flex flex-col gap-3 p-6">
                 <div class="flex justify-between">
                   <h3>Gegevens wissen</h3>
-                  <UButton
+                  <u-button
                     icon="i-lucide-x"
                     variant="ghost"
                     color="neutral"
@@ -661,21 +686,21 @@ async function onError(event: FormErrorEvent) {
                 </div>
                 <p>Ben je zeker dat je de gegevens van het inschrijvingsformulier wilt wissen?</p>
                 <div class="flex gap-3 justify-end">
-                  <UButton
+                  <u-button
                     label="Annuleren"
                     variant="ghost"
                     size="lg"
                     color="neutral"
                     @click="resetModalOpen = false"
                   />
-                  <UButton label="Wissen" size="lg" color="error" @click="resetForm()" />
+                  <u-button label="Wissen" size="lg" color="error" @click="resetForm()" />
                 </div>
               </div>
             </template>
-          </UModal>
+          </u-modal>
         </div>
       </div>
-    </UForm>
+    </u-form>
   </section>
 </template>
 

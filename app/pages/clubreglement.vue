@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import { NuxtLink } from "#components";
-</script>
-
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
   <section id="banner">
@@ -25,7 +21,7 @@ import { NuxtLink } from "#components";
           In het <span class="font-semibold">lidgeld</span> is inbegrepen: de
           <span class="font-semibold">verplichte verzekering</span>
           en de bijdrage aan de <span class="font-semibold">turnfederatie Gymfed</span>:
-          <NuxtLink href="https://www.gymfed.be">www.gymfed.be</NuxtLink>
+          <nuxt-link href="https://www.gymfed.be">www.gymfed.be</nuxt-link>
         </li>
         <li>
           <span class="font-semibold">Om te mogen deelnemen</span> aan de turnlessen dient het lid

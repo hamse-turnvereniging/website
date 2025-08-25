@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { ContentRenderer, UAccordion } from "#components";
 import type { AccordionItem } from "@nuxt/ui";
 import { addDays, startOfToday } from "date-fns";
 
@@ -39,7 +38,7 @@ if (calendar.value) {
         regelmatig aan, dus kom hier zeker nog eens terug!
       </p>
     </div>
-    <UAccordion
+    <u-accordion
       :items
       :ui="{
         trailingIcon: 'size-8! text-neutral-400 group-data-[state=open]:text-primary-500',
@@ -53,9 +52,9 @@ if (calendar.value) {
         </div>
       </template>
       <template #content="{ item }">
-        <ContentRenderer class="answer pb-3.5" :value="item.body" />
+        <content-renderer class="answer pb-3.5" :value="item.body" />
       </template>
-    </UAccordion>
+    </u-accordion>
   </section>
 </template>
 

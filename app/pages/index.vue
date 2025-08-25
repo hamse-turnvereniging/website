@@ -37,7 +37,7 @@
             zelf waarom turnen een sport voor jouw is!
           </p>
         </div>
-        <UButton to="aanbod" color="secondary" size="xl">Aanbod</UButton>
+        <u-button to="aanbod" color="secondary" size="xl">Aanbod</u-button>
       </div>
     </section>
     <section
@@ -72,7 +72,7 @@
             Misschien ontdek je wel je nieuwe favoriete sport!
           </p>
         </div>
-        <UButton to="inschrijven" color="secondary" size="xl">Inschrijven</UButton>
+        <u-button to="inschrijven" color="secondary" size="xl">Inschrijven</u-button>
       </div>
       <div class="flex flex-col gap-4 pb-4">
         <nuxt-img
@@ -97,7 +97,7 @@
             en wanneer je erbij kunt zijn!
           </p>
         </div>
-        <UButton to="kalender" color="secondary" size="xl">Kalender</UButton>
+        <u-button to="kalender" color="secondary" size="xl">Kalender</u-button>
       </div>
       <div class="flex flex-col gap-4 pb-4">
         <nuxt-img

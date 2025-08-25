@@ -2,81 +2,80 @@
   <header class="z-10">
     <div class="flex items-center justify-between max-w-6xl mx-auto px-8 h-16 md:h-20">
       <div class="w-[160px] h-full">
-        <NuxtLink to="/">
-          <!-- TODO: Check logo size + add shadow? -->
+        <nuxt-link to="/">
           <img
             class="absolute top-4 shadow-none! w-[100px] h-[105px] md:w-[140px] md:h-[147px]"
             src="~/assets/images/logo_black_background_200px_shadow.png"
             alt="Hamse Turnvereniging logo"
           />
-        </NuxtLink>
+        </nuxt-link>
       </div>
       <nav class="hidden md:flex gap-2">
-        <NuxtLink class="p-4 text-center" to="/">
+        <nuxt-link class="p-4 text-center" to="/">
           <div>Welkom</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Welkom</div>
-        </NuxtLink>
-        <NuxtLink class="p-4 text-center" to="/aanbod">
+        </nuxt-link>
+        <nuxt-link class="p-4 text-center" to="/aanbod">
           <div>Aanbod</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Aanbod</div>
-        </NuxtLink>
-        <NuxtLink class="p-4 text-center" to="/kalender">
+        </nuxt-link>
+        <nuxt-link class="p-4 text-center" to="/kalender">
           <div>Kalender</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Kalender</div>
-        </NuxtLink>
-        <NuxtLink class="p-4 text-center" to="/faq">
+        </nuxt-link>
+        <nuxt-link class="p-4 text-center" to="/faq">
           <div>FAQ</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">FAQ</div>
-        </NuxtLink>
-        <NuxtLink class="p-4 text-center" to="/inschrijven">
+        </nuxt-link>
+        <nuxt-link class="p-4 text-center" to="/inschrijven">
           <div>Inschrijven</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Inschrijven</div>
-        </NuxtLink>
+        </nuxt-link>
       </nav>
-      <USlideover
+      <u-slideover
         class="md:hidden"
         :ui="{ header: 'border-b-h bg-neutral-900', body: 'flex flex-col justify-center h-full' }"
       >
-        <UButton
+        <u-button
           class="absolute right-8 top-8 rounded-full aspect-square p-4 shadow-md hover:bg-primary-400!"
         >
-          <UIcon class="size-8!" name="i-lucide-menu" />
-        </UButton>
+          <u-icon class="size-8!" name="i-lucide-menu" />
+        </u-button>
         <template #close="{ close }">
-          <UButton
+          <u-button
             class="absolute right-8 top-8 rounded-full aspect-square p-4 shadow-md hover:bg-primary-400!"
             @click="close()"
           >
-            <UIcon class="size-8!" name="i-lucide-x" />
-          </UButton>
+            <u-icon class="size-8!" name="i-lucide-x" />
+          </u-button>
         </template>
         <template #body="{ close }">
           <nav class="mobile flex flex-col gap-2">
-            <NuxtLink class="p-4 text-center" to="/" @click="close()">
+            <nuxt-link class="p-4 text-center" to="/" @click="close()">
               <h3>Welkom</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Welkom</div>
-            </NuxtLink>
-            <NuxtLink class="p-4 text-center" to="/aanbod" @click="close()">
+            </nuxt-link>
+            <nuxt-link class="p-4 text-center" to="/aanbod" @click="close()">
               <h3>Aanbod</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Aanbod</div>
-            </NuxtLink>
-            <NuxtLink class="p-4 text-center" to="/kalender" @click="close()">
+            </nuxt-link>
+            <nuxt-link class="p-4 text-center" to="/kalender" @click="close()">
               <h3>Kalender</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Kalender</div>
-            </NuxtLink>
-            <NuxtLink class="p-4 text-center" to="/faq" @click="close()">
+            </nuxt-link>
+            <nuxt-link class="p-4 text-center" to="/faq" @click="close()">
               <h3>FAQ</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">FAQ</div>
-            </NuxtLink>
-            <NuxtLink class="p-4 text-center" to="/inschrijven" @click="close()">
+            </nuxt-link>
+            <nuxt-link class="p-4 text-center" to="/inschrijven" @click="close()">
               <h3>Inschrijven</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">
                 Inschrijven
               </div>
-            </NuxtLink>
+            </nuxt-link>
           </nav>
         </template>
-      </USlideover>
+      </u-slideover>
     </div>
   </header>
 </template>

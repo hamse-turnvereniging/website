@@ -6,54 +6,54 @@
           <h3>Contact</h3>
           <div class="flex gap-2">
             <icon name="mdi-email-outline" size="24" class="text-primary" />
-            <NuxtLink href="mailto:info@hamseturnvereniging.be" :external="true"
-              >info@hamseturnvereniging.be</NuxtLink
+            <nuxt-link href="mailto:info@hamseturnvereniging.be" :external="true"
+              >info@hamseturnvereniging.be</nuxt-link
             >
           </div>
           <div class="flex gap-2">
             <icon name="mdi-facebook" size="24" class="text-primary" />
-            <NuxtLink
+            <nuxt-link
               href="https://www.facebook.com/HamseTurnvereniging/"
               :external="true"
               target="_blank"
-              >Hamse Turnvereniging</NuxtLink
+              >Hamse Turnvereniging</nuxt-link
             >
           </div>
           <div class="flex gap-2">
             <icon name="mdi-instagram" size="24" class="text-primary" />
-            <NuxtLink
+            <nuxt-link
               href="https://www.instagram.com/hamse_turnvereniging"
               :external="true"
               target="_blank"
-              >@hamse_turnvereniging</NuxtLink
+              >@hamse_turnvereniging</nuxt-link
             >
           </div>
         </div>
         <nav class="flex flex-col gap-2">
-          <NuxtLink to="/">Welkom</NuxtLink>
-          <NuxtLink to="/aanbod">Aanbod</NuxtLink>
-          <NuxtLink to="/kalender">Kalender</NuxtLink>
-          <NuxtLink to="/faq">FAQ</NuxtLink>
-          <NuxtLink to="/inschrijven">Inschrijven</NuxtLink>
+          <nuxt-link to="/">Welkom</nuxt-link>
+          <nuxt-link to="/aanbod">Aanbod</nuxt-link>
+          <nuxt-link to="/kalender">Kalender</nuxt-link>
+          <nuxt-link to="/faq">FAQ</nuxt-link>
+          <nuxt-link to="/inschrijven">Inschrijven</nuxt-link>
         </nav>
         <div class="flex flex-row sm:flex-col justify-between sm:gap-3">
           <nav class="flex flex-col gap-2">
-            <NuxtLink to="/clubreglement">Clubreglement</NuxtLink>
-            <NuxtLink href="https://www.gymfed.be/verzekeringen" :external="true" target="_blank"
-              >Verzekeringen</NuxtLink
+            <nuxt-link to="/clubreglement">Clubreglement</nuxt-link>
+            <nuxt-link href="https://www.gymfed.be/verzekeringen" :external="true" target="_blank"
+              >Verzekeringen</nuxt-link
             >
-            <NuxtLink href="https://www.gymfed.be/privacy" :external="true" target="_blank"
-              >Privacyverklaring</NuxtLink
+            <nuxt-link href="https://www.gymfed.be/privacy" :external="true" target="_blank"
+              >Privacyverklaring</nuxt-link
             >
           </nav>
-          <NuxtLink href="https://www.gymfed.be" :external="true" target="_blank">
+          <nuxt-link href="https://www.gymfed.be" :external="true" target="_blank">
             <img
               class="shadow-none!"
               src="~/assets/images/gymfed.png"
               alt="Gymfed logo"
               width="120"
             />
-          </NuxtLink>
+          </nuxt-link>
         </div>
       </div>
       <div class="flex flex-col md:flex-row justify-between text-center gap-3">
@@ -62,8 +62,8 @@
         </div>
         <div class="website-by">
           Website door
-          <NuxtLink href="https://steffbeckers.com/nl" :external="true" target="_blank"
-            >Steff Beckers</NuxtLink
+          <nuxt-link href="https://steffbeckers.com/nl" :external="true" target="_blank"
+            >Steff Beckers</nuxt-link
           >
         </div>
       </div>
