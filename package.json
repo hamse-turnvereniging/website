@@ -1,5 +1,11 @@
 {
-  "name": "nuxt-app",
+  "name": "@hamseturnvereniging/website",
+  "version": "1.0.0",
+  "author": {
+    "name": "Steff Beckers",
+    "email": "steff@steffbeckers.com",
+    "url": "https://steffbeckers.com"
+  },
   "private": true,
   "type": "module",
   "scripts": {
