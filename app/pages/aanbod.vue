@@ -52,6 +52,56 @@
           </p>
         </div>
       </div>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <div class="flex flex-col items-center">
+          <h4>Kristoffelheem</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Groep</th>
+                <th>Wanneer?</th>
+                <th>Eerste les</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1ste<br />kleuterklas</td>
+                <td>woensdag<br />14u30 - 15u30u</td>
+                <td>3 september</td>
+              </tr>
+              <tr>
+                <td>2de en 3de<br />kleuterklas</td>
+                <td>woensdag<br />13u30 - 14u30u</td>
+                <td>3 september</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex flex-col items-center">
+          <h4>'t Vlietje</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Groep</th>
+                <th>Wanneer?</th>
+                <th>Eerste les</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1ste<br />kleuterklas</td>
+                <td>zaterdag<br />9u - 10u</td>
+                <td>6 september</td>
+              </tr>
+              <tr>
+                <td>2de en 3de<br />kleuterklas</td>
+                <td>zaterdag<br />10u - 11u</td>
+                <td>6 september</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div
         id="turnen-lagere-school"
         class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8"
@@ -72,6 +122,51 @@
             width="400"
             height="240"
           />
+        </div>
+      </div>
+      <div class="flex flex-col lg:flex-row justify-center gap-4">
+        <div class="flex flex-col items-center">
+          <h4>Kristoffelheem</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Groep</th>
+                <th>Wanneer?</th>
+                <th>Eerste les</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1ste, 2de en 3de<br />leerjaar</td>
+                <td>woensdag<br />15u30 - 16u30u</td>
+                <td>3 september</td>
+              </tr>
+              <tr>
+                <td>4de, 5de en 6de<br />leerjaar</td>
+                <td>donderdag<br />18u - 19u30</td>
+                <td>4 september</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex flex-col items-center">
+          <h4>'t Vlietje</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Groep</th>
+                <th>Wanneer?</th>
+                <th>Eerste les</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1ste, 2de en 3de<br />leerjaar</td>
+                <td>zaterdag<br />10u45 - 12u</td>
+                <td>6 september</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div
@@ -95,6 +190,24 @@
             sporten.
           </p>
         </div>
+      </div>
+      <div class="flex justify-center">
+        <table>
+          <thead>
+            <tr>
+              <th>Waar?</th>
+              <th>Wanneer?</th>
+              <th>Eerste les</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kristoffelheem</td>
+              <td>woensdag<br />18u30 - 20u</td>
+              <td>3 september</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <p class="text-center text-xl">
         Toestelturnen is een sport voor iedereen: jongens en meisjes, beginners en gevorderden.
@@ -130,6 +243,24 @@
           />
         </div>
       </div>
+      <div class="flex justify-center">
+        <table>
+          <thead>
+            <tr>
+              <th>Waar?</th>
+              <th>Wanneer?</th>
+              <th>Eerste les</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kristoffelheem</td>
+              <td>zaterdag<br />10u30 - 12u</td>
+              <td>6 september</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <p class="text-center text-xl">
         Trampolinespringen is niet alleen leuk, het verbetert ook je kracht, coördinatie en
         zelfvertrouwen.<br />Ideaal voor wie houdt van beweging met een vleugje adrenaline!
@@ -160,6 +291,24 @@
             eigen tempo meedoen.
           </p>
         </div>
+      </div>
+      <div class="flex justify-center">
+        <table>
+          <thead>
+            <tr>
+              <th>Waar?</th>
+              <th>Wanneer?</th>
+              <th>Eerste les</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kristoffelheem</td>
+              <td>woensdag<br />19u - 20u</td>
+              <td>10 september</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <p class="text-center text-xl">
         Elke les is anders, maar steeds met hetzelfde doel:<br />sterker worden, je goed voelen en
@@ -197,6 +346,24 @@
           />
         </div>
       </div>
+      <div class="flex justify-center">
+        <table>
+          <thead>
+            <tr>
+              <th>Waar?</th>
+              <th>Wanneer?</th>
+              <th>Eerste les</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kristoffelheem</td>
+              <td>dinsdag<br />19u - 20u</td>
+              <td>9 september</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <p class="text-center text-xl">
         Wil je werken aan je lichaam op een rustige maar doelgerichte manier? Dan is Callanetics
         iets voor jou!
@@ -232,6 +399,24 @@
           </p>
         </div>
       </div>
+      <div class="flex justify-center">
+        <table>
+          <thead>
+            <tr>
+              <th>Waar?</th>
+              <th>Wanneer?</th>
+              <th>Eerste les</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kristoffelheem</td>
+              <td>woensdag<br />19u - 20u</td>
+              <td>3 september</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <p class="text-center text-xl">
         Of je nu al ervaring hebt met voetbal of gewoon op zoek bent naar een nieuwe uitdaging:
         iedereen is welkom!
@@ -246,6 +431,30 @@
 section#banner {
   @apply bg-primary-300;
   background-image: url("/images/banner.jpg");
+}
+
+table {
+  thead {
+    @apply border-b-secondary border-b-2;
+
+    tr {
+      th {
+        @apply text-secondary p-3;
+      }
+    }
+  }
+
+  tbody {
+    @apply border-b-secondary border-b-2;
+
+    tr {
+      @apply odd:bg-primary-200 odd:border-b-primary odd:border-b-1 even:bg-neutral-50 even:border-b-neutral-100 even:border-b-1;
+
+      td {
+        @apply text-center p-2 sm:p-4;
+      }
+    }
+  }
 }
 
 p.text-center.text-xl {
