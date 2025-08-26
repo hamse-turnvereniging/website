@@ -1,3 +1,9 @@
+<script lang="ts" setup>
+import { breakpointsTailwind } from "@vueuse/core";
+
+const breakpoints = useBreakpoints(breakpointsTailwind);
+</script>
+
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
   <section id="banner">
@@ -50,56 +56,84 @@
             werken aan motoriek, coördinatie en plezier in bewegen, met aangepaste toestellen en
             oefeningen.
           </p>
-        </div>
-      </div>
-      <div class="flex flex-col md:flex-row justify-center gap-4">
-        <div class="flex flex-col items-center">
-          <h4>Kristoffelheem</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>Groep</th>
-                <th>Wanneer?</th>
-                <th>Eerste les</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1ste<br />kleuterklas</td>
-                <td>woensdag<br />14u30 - 15u30u</td>
-                <td>3 september</td>
-              </tr>
-              <tr>
-                <td>2de en 3de<br />kleuterklas</td>
-                <td>woensdag<br />13u30 - 14u30u</td>
-                <td>3 september</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="flex flex-col items-center">
-          <h4>'t Vlietje</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>Groep</th>
-                <th>Wanneer?</th>
-                <th>Eerste les</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1ste<br />kleuterklas</td>
-                <td>zaterdag<br />9u - 10u</td>
-                <td>6 september</td>
-              </tr>
-              <tr>
-                <td>2de en 3de<br />kleuterklas</td>
-                <td>zaterdag<br />10u - 11u</td>
-                <td>6 september</td>
-              </tr>
-            </tbody>
-          </table>
+          <div>
+            <u-modal
+              :fullscreen="breakpoints.smallerOrEqual('sm').value"
+              :ui="{ content: 'md:max-w-max' }"
+            >
+              <u-button icon="i-lucide-info" color="secondary" size="xl">Meer informatie</u-button>
+              <template #content="{ close }">
+                <div class="flex flex-col gap-3 p-6">
+                  <div class="flex justify-between">
+                    <h3>Aanbod turnen kleuters</h3>
+                    <u-button
+                      icon="i-lucide-x"
+                      variant="ghost"
+                      color="neutral"
+                      size="xl"
+                      @click="close"
+                    />
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-3">
+                    <div class="flex flex-col">
+                      <div class="text-sm">Lidgeld</div>
+                      <div class="font-semibold py-1">&euro; 85 per jaar</div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-3">
+                    <div class="flex flex-col items-center">
+                      <h4>Kristoffelheem</h4>
+                      <table class="w-full">
+                        <thead>
+                          <tr>
+                            <th>Groep</th>
+                            <th>Wanneer?</th>
+                            <th>Eerste les</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1ste<br />kleuterklas</td>
+                            <td>woensdag<br />14u30 - 15u30u</td>
+                            <td>3 september</td>
+                          </tr>
+                          <tr>
+                            <td>2de en 3de<br />kleuterklas</td>
+                            <td>woensdag<br />13u30 - 14u30u</td>
+                            <td>3 september</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="flex flex-col items-center">
+                      <h4>'t Vlietje</h4>
+                      <table class="w-full">
+                        <thead>
+                          <tr>
+                            <th>Groep</th>
+                            <th>Wanneer?</th>
+                            <th>Eerste les</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1ste<br />kleuterklas</td>
+                            <td>zaterdag<br />9u - 10u</td>
+                            <td>6 september</td>
+                          </tr>
+                          <tr>
+                            <td>2de en 3de<br />kleuterklas</td>
+                            <td>zaterdag<br />10u - 11u</td>
+                            <td>6 september</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </u-modal>
+          </div>
         </div>
       </div>
       <div
