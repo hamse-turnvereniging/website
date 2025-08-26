@@ -14,7 +14,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
   <div class="flex flex-col gap-16 py-16">
     <section id="turnen" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
       <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
-        <div class="flex flex-1 flex-col gap-3">
+        <div class="flex flex-1 flex-col gap-4">
           <h2>Turnen</h2>
           <p>
             Toestelturnen is een veelzijdige en uitdagende turnsport waarbij kracht, lenigheid,
@@ -49,21 +49,21 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             height="240"
           />
         </div>
-        <div class="flex flex-1 flex-col gap-3">
+        <div class="flex flex-1 flex-col gap-4">
           <h3>Kleuters</h3>
           <p>
             Op een speelse manier maken kleuters kennis met de basisvaardigheden van turnen. We
             werken aan motoriek, coördinatie en plezier in bewegen, met aangepaste toestellen en
             oefeningen.
           </p>
-          <div>
+          <div class="py-2">
             <u-modal
               :fullscreen="breakpoints.smallerOrEqual('sm').value"
               :ui="{ content: 'md:max-w-max' }"
             >
-              <u-button icon="i-lucide-info" color="secondary" size="xl">Meer informatie</u-button>
+              <u-button label="Meer informatie" icon="i-lucide-info" color="secondary" size="xl" />
               <template #content="{ close }">
-                <div class="flex flex-col gap-3 p-6">
+                <div class="flex flex-col gap-4 p-6">
                   <div class="flex justify-between">
                     <h3>Aanbod turnen kleuters</h3>
                     <u-button
@@ -74,13 +74,13 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       @click="close"
                     />
                   </div>
-                  <div class="flex flex-col md:flex-row gap-3">
+                  <div class="flex flex-col md:flex-row gap-4">
                     <div class="flex flex-col">
                       <div class="text-sm">Lidgeld</div>
                       <div class="font-semibold py-1">&euro; 85 per jaar</div>
                     </div>
                   </div>
-                  <div class="flex flex-col md:flex-row gap-3">
+                  <div class="flex flex-col md:flex-row gap-4">
                     <div class="flex flex-col items-center">
                       <h4>Kristoffelheem</h4>
                       <table class="w-full">
@@ -140,7 +140,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
         id="turnen-lagere-school"
         class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8"
       >
-        <div class="flex flex-1 flex-col gap-3">
+        <div class="flex flex-1 flex-col gap-4">
           <h3>Lagere school</h3>
           <p>
             Hier leggen we de focus op het verder ontwikkelen van turnvaardigheden. De kinderen
@@ -216,7 +216,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             height="240"
           />
         </div>
-        <div class="flex flex-1 flex-col gap-3">
+        <div class="flex flex-1 flex-col gap-4">
           <h3>Vanaf het 1ste middelbaar</h3>
           <p>
             Ook voor jongeren blijft toestelturnen uitdagend. We bouwen verder op eerder geleerde
@@ -250,7 +250,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
     </section>
     <section id="trampoline" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
       <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
-        <div class="flex flex-1 flex-col gap-3">
+        <div class="flex flex-1 flex-col gap-4">
           <h2>Trampoline</h2>
           <p>
             Op de trampolines leren gymnasten stapsgewijs controle en techniek, van eenvoudige
@@ -311,7 +311,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             height="400"
           />
         </div>
-        <div class="flex flex-1 flex-col gap-3">
+        <div class="flex flex-1 flex-col gap-4">
           <h2>BBB</h2>
           <p>
             BBB staat voor Buik, Billen en Benen - een leuke en effectieve groepsles die focust op
@@ -351,7 +351,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
     </section>
     <section id="callanetics" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
       <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
-        <div class="flex flex-1 flex-col gap-3">
+        <div class="flex flex-1 flex-col gap-4">
           <h2>Callanetics</h2>
           <p>
             Callanetics is een rustige maar intensieve vorm van spierversterking die focust op diepe
@@ -414,7 +414,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             height="400"
           />
         </div>
-        <div class="flex flex-1 flex-col gap-3">
+        <div class="flex flex-1 flex-col gap-4">
           <h2>Net-voetbal heren</h2>
           <p>
             Net-voetbal is een dynamische en leuke sport die het beste van voetbal en volleybal

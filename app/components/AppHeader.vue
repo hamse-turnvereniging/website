@@ -19,14 +19,16 @@
           <div>Aanbod</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Aanbod</div>
         </nuxt-link>
-        <nuxt-link class="p-4 text-center" to="/kalender">
+        <!-- TODO: Kalender -->
+        <!-- <nuxt-link class="p-4 text-center" to="/kalender">
           <div>Kalender</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Kalender</div>
-        </nuxt-link>
-        <nuxt-link class="p-4 text-center" to="/faq">
+        </nuxt-link> -->
+        <!-- TODO: FAQ -->
+        <!-- <nuxt-link class="p-4 text-center" to="/faq">
           <div>FAQ</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">FAQ</div>
-        </nuxt-link>
+        </nuxt-link> -->
         <nuxt-link class="p-4 text-center" to="/inschrijven">
           <div>Inschrijven</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Inschrijven</div>
@@ -59,14 +61,16 @@
               <h3>Aanbod</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Aanbod</div>
             </nuxt-link>
-            <nuxt-link class="p-4 text-center" to="/kalender" @click="close()">
+            <!-- TODO: Kalender -->
+            <!-- <nuxt-link class="p-4 text-center" to="/kalender" @click="close()">
               <h3>Kalender</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Kalender</div>
-            </nuxt-link>
-            <nuxt-link class="p-4 text-center" to="/faq" @click="close()">
+            </nuxt-link> -->
+            <!-- TODO: FAQ -->
+            <!-- <nuxt-link class="p-4 text-center" to="/faq" @click="close()">
               <h3>FAQ</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">FAQ</div>
-            </nuxt-link>
+            </nuxt-link> -->
             <nuxt-link class="p-4 text-center" to="/inschrijven" @click="close()">
               <h3>Inschrijven</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">

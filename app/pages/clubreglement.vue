@@ -6,7 +6,7 @@
     </div>
   </section>
   <section class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-4">
       <h2>Algemene doelstelling</h2>
       <p>
         De Hamse Turnvereniging wil gezonde, aangename en verantwoorde sport aanbieden aan
@@ -14,7 +14,7 @@
         staat. <span class="font-semibold">Iedereen kan lid worden.</span>
       </p>
     </div>
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-4">
       <h2>Intern reglement</h2>
       <ul>
         <li>
@@ -76,7 +76,7 @@
         </li>
       </ul>
     </div>
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-4">
       <h2>Te onthouden</h2>
       <p>
         Tijdens de <span class="font-semibold">schoolvakanties</span> is er

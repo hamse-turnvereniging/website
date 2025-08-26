@@ -179,7 +179,7 @@ async function onError(event: FormErrorEvent) {
     </div>
   </section>
   <section class="max-w-2xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-4">
       <h2>Schrijf je in!</h2>
       <p>
         Wil je graag lid worden van onze turnclub? Fantastisch!<br />
@@ -668,12 +668,18 @@ async function onError(event: FormErrorEvent) {
             </u-checkbox>
           </u-form-field>
         </div>
-        <div class="flex flex-col gap-3">
-          <u-button type="submit" size="xl" color="secondary">Inschrijving verzenden</u-button>
+        <div class="flex flex-col gap-4">
+          <u-button
+            label="Inschrijving verzenden"
+            type="submit"
+            icon="i-lucide-send"
+            size="xl"
+            color="secondary"
+          />
           <u-modal v-model:open="resetModalOpen">
-            <u-button label="Gegevens wissen" type="button" variant="ghost" color="error" />
+            <u-button label="Gegevens wissen" icon="i-lucide-trash" variant="ghost" color="error" />
             <template #content>
-              <div class="flex flex-col gap-3 p-6">
+              <div class="flex flex-col gap-4 p-6">
                 <div class="flex justify-between">
                   <h3>Gegevens wissen</h3>
                   <u-button
@@ -685,7 +691,7 @@ async function onError(event: FormErrorEvent) {
                   />
                 </div>
                 <p>Ben je zeker dat je de gegevens van het inschrijvingsformulier wilt wissen?</p>
-                <div class="flex gap-3 justify-end">
+                <div class="flex gap-4 justify-end">
                   <u-button
                     label="Annuleren"
                     variant="ghost"

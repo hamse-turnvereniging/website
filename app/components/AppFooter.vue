@@ -29,15 +29,17 @@
             >
           </div>
         </div>
-        <nav class="flex flex-col gap-2">
+        <nav class="flex flex-col gap-4">
           <nuxt-link to="/">Welkom</nuxt-link>
           <nuxt-link to="/aanbod">Aanbod</nuxt-link>
-          <nuxt-link to="/kalender">Kalender</nuxt-link>
-          <nuxt-link to="/faq">FAQ</nuxt-link>
+          <!-- TODO: Kalender -->
+          <!-- <nuxt-link to="/kalender">Kalender</nuxt-link>
+          <!-- TODO: FAQ -->
+          <!-- <nuxt-link to="/faq">FAQ</nuxt-link> -->
           <nuxt-link to="/inschrijven">Inschrijven</nuxt-link>
         </nav>
-        <div class="flex flex-row sm:flex-col justify-between sm:gap-3">
-          <nav class="flex flex-col gap-2">
+        <div class="flex flex-row sm:flex-col justify-between sm:gap-4">
+          <nav class="flex flex-col gap-4">
             <nuxt-link to="/clubreglement">Clubreglement</nuxt-link>
             <nuxt-link href="https://www.gymfed.be/verzekeringen" :external="true" target="_blank"
               >Verzekeringen</nuxt-link
@@ -56,7 +58,7 @@
           </nuxt-link>
         </div>
       </div>
-      <div class="flex flex-col md:flex-row justify-between text-center gap-3">
+      <div class="flex flex-col md:flex-row justify-between text-center text-sm gap-4">
         <div class="copyright">
           &copy; {{ new Date().getFullYear() }} Hamse Turnvereniging. Alle rechten voorbehouden.
         </div>

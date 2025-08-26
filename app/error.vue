@@ -39,7 +39,13 @@ useHead({
       <section class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16 w-full">
         <p>{{ description }}</p>
         <div>
-          <u-button to="/" size="xl">Terug naar startpagina</u-button>
+          <u-button
+            label="Terug naar startpagina"
+            icon="i-lucide-arrow-left"
+            to="/"
+            color="secondary"
+            size="xl"
+          />
         </div>
       </section>
     </nuxt-layout>

@@ -31,7 +31,7 @@ if (faq.value) {
     </div>
   </section>
   <section class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16 w-full">
-    <div class="flex flex-col gap-3">
+    <div class="flex flex-col gap-4">
       <h2>Meest gestelde vragen</h2>
       <p>Ontdek hier de antwoorden op de meest gestelde vragen.</p>
     </div>
