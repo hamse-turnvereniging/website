@@ -56,16 +56,22 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             werken aan motoriek, coördinatie en plezier in bewegen, met aangepaste toestellen en
             oefeningen.
           </p>
-          <div class="py-2">
+          <div class="py-2 flex sm:block">
             <u-modal
               :fullscreen="breakpoints.smallerOrEqual('sm').value"
               :ui="{ content: 'md:max-w-max' }"
             >
-              <u-button label="Meer informatie" icon="i-lucide-info" color="secondary" size="xl" />
+              <u-button
+                label="Meer informatie"
+                class="flex-1"
+                icon="i-lucide-info"
+                color="secondary"
+                size="xl"
+              />
               <template #content="{ close }">
                 <div class="flex flex-col gap-4 p-6">
-                  <div class="flex justify-between">
-                    <h3>Aanbod turnen kleuters</h3>
+                  <div class="flex justify-between gap-4">
+                    <h3>Turnen kleuters</h3>
                     <u-button
                       icon="i-lucide-x"
                       variant="ghost"
@@ -147,6 +153,89 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             leren technieken aan op de turntoestellen, steeds met aandacht voor een goede houding,
             controle en veiligheid.
           </p>
+          <div class="py-2 flex sm:block">
+            <u-modal
+              :fullscreen="breakpoints.smallerOrEqual('sm').value"
+              :ui="{ content: 'md:max-w-max' }"
+            >
+              <u-button
+                label="Meer informatie"
+                class="flex-1"
+                icon="i-lucide-info"
+                color="secondary"
+                size="xl"
+              />
+              <template #content="{ close }">
+                <div class="flex flex-col gap-4 p-6">
+                  <div class="flex justify-between gap-4">
+                    <h3>Turnen lagere school</h3>
+                    <u-button
+                      icon="i-lucide-x"
+                      variant="ghost"
+                      color="neutral"
+                      size="xl"
+                      @click="close"
+                    />
+                  </div>
+                  <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col">
+                      <div class="text-sm">Lidgeld 1ste, 2de en 3de leerjaar</div>
+                      <div class="font-semibold py-1"><span>&euro; 85 per jaar</span></div>
+                    </div>
+                    <div class="flex flex-col">
+                      <div class="text-sm">Lidgeld 4de, 5de en 6de leerjaar</div>
+                      <div class="font-semibold py-1"><span>&euro; 95 per jaar</span></div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-col items-center">
+                      <h4>Kristoffelheem</h4>
+                      <table class="w-full">
+                        <thead>
+                          <tr>
+                            <th>Groep</th>
+                            <th>Wanneer?</th>
+                            <th>Eerste les</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1ste, 2de en 3de<br />leerjaar</td>
+                            <td>woensdag<br />15u30 - 16u30u</td>
+                            <td>3 september</td>
+                          </tr>
+                          <tr>
+                            <td>4de, 5de en 6de<br />leerjaar</td>
+                            <td>donderdag<br />18u - 19u30</td>
+                            <td>4 september</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="flex flex-col items-center">
+                      <h4>'t Vlietje</h4>
+                      <table class="w-full">
+                        <thead>
+                          <tr>
+                            <th>Groep</th>
+                            <th>Wanneer?</th>
+                            <th>Eerste les</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1ste, 2de en 3de<br />leerjaar</td>
+                            <td>zaterdag<br />10u45 - 12u</td>
+                            <td>6 september</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </u-modal>
+          </div>
         </div>
         <div class="flex-1">
           <nuxt-img
@@ -156,51 +245,6 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             width="400"
             height="240"
           />
-        </div>
-      </div>
-      <div class="flex flex-col lg:flex-row justify-center gap-4">
-        <div class="flex flex-col items-center">
-          <h4>Kristoffelheem</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>Groep</th>
-                <th>Wanneer?</th>
-                <th>Eerste les</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1ste, 2de en 3de<br />leerjaar</td>
-                <td>woensdag<br />15u30 - 16u30u</td>
-                <td>3 september</td>
-              </tr>
-              <tr>
-                <td>4de, 5de en 6de<br />leerjaar</td>
-                <td>donderdag<br />18u - 19u30</td>
-                <td>4 september</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="flex flex-col items-center">
-          <h4>'t Vlietje</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>Groep</th>
-                <th>Wanneer?</th>
-                <th>Eerste les</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1ste, 2de en 3de<br />leerjaar</td>
-                <td>zaterdag<br />10u45 - 12u</td>
-                <td>6 september</td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
       <div
@@ -223,25 +267,57 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             technieken en zetten in op persoonlijke groei, techniekverbetering en plezier in
             sporten.
           </p>
+          <div class="py-2 flex sm:block">
+            <u-modal
+              :fullscreen="breakpoints.smallerOrEqual('sm').value"
+              :ui="{ content: 'md:max-w-max' }"
+            >
+              <u-button
+                label="Meer informatie"
+                class="flex-1"
+                icon="i-lucide-info"
+                color="secondary"
+                size="xl"
+              />
+              <template #content="{ close }">
+                <div class="flex flex-col gap-4 p-6">
+                  <div class="flex justify-between gap-4">
+                    <h3>Turnen vanaf het 1ste middelbaar</h3>
+                    <u-button
+                      icon="i-lucide-x"
+                      variant="ghost"
+                      color="neutral"
+                      size="xl"
+                      @click="close"
+                    />
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-col">
+                      <div class="text-sm">Lidgeld</div>
+                      <div class="font-semibold py-1">&euro; 95 per jaar</div>
+                    </div>
+                  </div>
+                  <table class="w-full">
+                    <thead>
+                      <tr>
+                        <th>Waar?</th>
+                        <th>Wanneer?</th>
+                        <th>Eerste les</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Kristoffelheem</td>
+                        <td>woensdag<br />18u30 - 20u</td>
+                        <td>3 september</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </template>
+            </u-modal>
+          </div>
         </div>
-      </div>
-      <div class="flex justify-center">
-        <table>
-          <thead>
-            <tr>
-              <th>Waar?</th>
-              <th>Wanneer?</th>
-              <th>Eerste les</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Kristoffelheem</td>
-              <td>woensdag<br />18u30 - 20u</td>
-              <td>3 september</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
       <p class="text-center text-xl">
         Toestelturnen is een sport voor iedereen: jongens en meisjes, beginners en gevorderden.
@@ -266,6 +342,59 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             Er is geen eindleeftijd, ook jongeren zijn welkom om hun springtalent verder te
             ontwikkelen of gewoon plezier te beleven aan deze unieke sport.
           </p>
+          <div class="py-2 flex sm:block">
+            <u-modal
+              :fullscreen="breakpoints.smallerOrEqual('sm').value"
+              :ui="{ content: 'md:max-w-max' }"
+            >
+              <u-button
+                label="Meer informatie"
+                class="flex-1"
+                icon="i-lucide-info"
+                color="secondary"
+                size="xl"
+              />
+              <template #content="{ close }">
+                <div class="flex flex-col gap-4 p-6">
+                  <div class="flex justify-between gap-4">
+                    <div class="flex flex-col">
+                      <h3>Trampoline</h3>
+                      <div class="text-sm text-neutral-300">(vanaf het 1ste leerjaar)</div>
+                    </div>
+                    <u-button
+                      icon="i-lucide-x"
+                      variant="ghost"
+                      color="neutral"
+                      size="xl"
+                      @click="close"
+                    />
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-col">
+                      <div class="text-sm">Lidgeld</div>
+                      <div class="font-semibold py-1">&euro; 95 per jaar</div>
+                    </div>
+                  </div>
+                  <table class="w-full">
+                    <thead>
+                      <tr>
+                        <th>Waar?</th>
+                        <th>Wanneer?</th>
+                        <th>Eerste les</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Kristoffelheem</td>
+                        <td>zaterdag<br />10u30 - 12u</td>
+                        <td>6 september</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </template>
+            </u-modal>
+          </div>
         </div>
         <div class="flex-1">
           <nuxt-img
@@ -276,24 +405,6 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             height="400"
           />
         </div>
-      </div>
-      <div class="flex justify-center">
-        <table>
-          <thead>
-            <tr>
-              <th>Waar?</th>
-              <th>Wanneer?</th>
-              <th>Eerste les</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Kristoffelheem</td>
-              <td>zaterdag<br />10u30 - 12u</td>
-              <td>6 september</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
       <p class="text-center text-xl">
         Trampolinespringen is niet alleen leuk, het verbetert ook je kracht, coördinatie en
@@ -324,25 +435,57 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             begint met sporten of je conditie en kracht verder wil opbouwen: bij BBB kan je op je
             eigen tempo meedoen.
           </p>
+          <div class="py-2 flex sm:block">
+            <u-modal
+              :fullscreen="breakpoints.smallerOrEqual('sm').value"
+              :ui="{ content: 'md:max-w-max' }"
+            >
+              <u-button
+                label="Meer informatie"
+                class="flex-1"
+                icon="i-lucide-info"
+                color="secondary"
+                size="xl"
+              />
+              <template #content="{ close }">
+                <div class="flex flex-col gap-4 p-6">
+                  <div class="flex justify-between gap-4">
+                    <h3>BBB</h3>
+                    <u-button
+                      icon="i-lucide-x"
+                      variant="ghost"
+                      color="neutral"
+                      size="xl"
+                      @click="close"
+                    />
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-col">
+                      <div class="text-sm">Lidgeld</div>
+                      <div class="font-semibold py-1">&euro; 105 per jaar</div>
+                    </div>
+                  </div>
+                  <table class="w-full">
+                    <thead>
+                      <tr>
+                        <th>Waar?</th>
+                        <th>Wanneer?</th>
+                        <th>Eerste les</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Kristoffelheem</td>
+                        <td>woensdag<br />19u - 20u</td>
+                        <td>10 september</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </template>
+            </u-modal>
+          </div>
         </div>
-      </div>
-      <div class="flex justify-center">
-        <table>
-          <thead>
-            <tr>
-              <th>Waar?</th>
-              <th>Wanneer?</th>
-              <th>Eerste les</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Kristoffelheem</td>
-              <td>woensdag<br />19u - 20u</td>
-              <td>10 september</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
       <p class="text-center text-xl">
         Elke les is anders, maar steeds met hetzelfde doel:<br />sterker worden, je goed voelen en
@@ -369,6 +512,56 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             gewrichtsklachten, dankzij de zachte en doordachte aanpak. Ademhaling, controle en
             precisie staan centraal, steeds in een ontspannen sfeer.
           </p>
+          <div class="py-2 flex sm:block">
+            <u-modal
+              :fullscreen="breakpoints.smallerOrEqual('sm').value"
+              :ui="{ content: 'md:max-w-max' }"
+            >
+              <u-button
+                label="Meer informatie"
+                class="flex-1"
+                icon="i-lucide-info"
+                color="secondary"
+                size="xl"
+              />
+              <template #content="{ close }">
+                <div class="flex flex-col gap-4 p-6">
+                  <div class="flex justify-between gap-4">
+                    <h3>Callanetics</h3>
+                    <u-button
+                      icon="i-lucide-x"
+                      variant="ghost"
+                      color="neutral"
+                      size="xl"
+                      @click="close"
+                    />
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-col">
+                      <div class="text-sm">Lidgeld</div>
+                      <div class="font-semibold py-1">&euro; 105 per jaar</div>
+                    </div>
+                  </div>
+                  <table class="w-full">
+                    <thead>
+                      <tr>
+                        <th>Waar?</th>
+                        <th>Wanneer?</th>
+                        <th>Eerste les</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Kristoffelheem</td>
+                        <td>dinsdag<br />19u - 20u</td>
+                        <td>9 september</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </template>
+            </u-modal>
+          </div>
         </div>
         <div class="flex-1">
           <nuxt-img
@@ -379,24 +572,6 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             height="400"
           />
         </div>
-      </div>
-      <div class="flex justify-center">
-        <table>
-          <thead>
-            <tr>
-              <th>Waar?</th>
-              <th>Wanneer?</th>
-              <th>Eerste les</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Kristoffelheem</td>
-              <td>dinsdag<br />19u - 20u</td>
-              <td>9 september</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
       <p class="text-center text-xl">
         Wil je werken aan je lichaam op een rustige maar doelgerichte manier? Dan is Callanetics
@@ -431,25 +606,57 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             Onze net-voetbalgroep voor heren is bedoeld voor wie graag sportief bezig is in een
             ontspannen sfeer.
           </p>
+          <div class="py-2 flex sm:block">
+            <u-modal
+              :fullscreen="breakpoints.smallerOrEqual('sm').value"
+              :ui="{ content: 'md:max-w-max' }"
+            >
+              <u-button
+                label="Meer informatie"
+                class="flex-1"
+                icon="i-lucide-info"
+                color="secondary"
+                size="xl"
+              />
+              <template #content="{ close }">
+                <div class="flex flex-col gap-4 p-6">
+                  <div class="flex justify-between gap-4">
+                    <h3>Net-voetbal heren</h3>
+                    <u-button
+                      icon="i-lucide-x"
+                      variant="ghost"
+                      color="neutral"
+                      size="xl"
+                      @click="close"
+                    />
+                  </div>
+                  <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex flex-col">
+                      <div class="text-sm">Lidgeld</div>
+                      <div class="font-semibold py-1">&euro; 105 per jaar</div>
+                    </div>
+                  </div>
+                  <table class="w-full">
+                    <thead>
+                      <tr>
+                        <th>Waar?</th>
+                        <th>Wanneer?</th>
+                        <th>Eerste les</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Kristoffelheem</td>
+                        <td>woensdag<br />19u - 20u</td>
+                        <td>3 september</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </template>
+            </u-modal>
+          </div>
         </div>
-      </div>
-      <div class="flex justify-center">
-        <table>
-          <thead>
-            <tr>
-              <th>Waar?</th>
-              <th>Wanneer?</th>
-              <th>Eerste les</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Kristoffelheem</td>
-              <td>woensdag<br />19u - 20u</td>
-              <td>3 september</td>
-            </tr>
-          </tbody>
-        </table>
       </div>
       <p class="text-center text-xl">
         Of je nu al ervaring hebt met voetbal of gewoon op zoek bent naar een nieuwe uitdaging:
