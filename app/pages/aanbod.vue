@@ -136,6 +136,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       </table>
                     </div>
                   </div>
+                  <u-button
+                    class="mt-4"
+                    label="Sluiten"
+                    variant="ghost"
+                    size="xl"
+                    color="secondary"
+                    @click="close"
+                  />
                 </div>
               </template>
             </u-modal>
@@ -232,6 +240,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       </table>
                     </div>
                   </div>
+                  <u-button
+                    class="mt-4"
+                    label="Sluiten"
+                    variant="ghost"
+                    size="xl"
+                    color="secondary"
+                    @click="close"
+                  />
                 </div>
               </template>
             </u-modal>
@@ -313,6 +329,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       </tr>
                     </tbody>
                   </table>
+                  <u-button
+                    class="mt-4"
+                    label="Sluiten"
+                    variant="ghost"
+                    size="xl"
+                    color="secondary"
+                    @click="close"
+                  />
                 </div>
               </template>
             </u-modal>
@@ -391,6 +415,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       </tr>
                     </tbody>
                   </table>
+                  <u-button
+                    class="mt-4"
+                    label="Sluiten"
+                    variant="ghost"
+                    size="xl"
+                    color="secondary"
+                    @click="close"
+                  />
                 </div>
               </template>
             </u-modal>
@@ -481,6 +513,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       </tr>
                     </tbody>
                   </table>
+                  <u-button
+                    class="mt-4"
+                    label="Sluiten"
+                    variant="ghost"
+                    size="xl"
+                    color="secondary"
+                    @click="close"
+                  />
                 </div>
               </template>
             </u-modal>
@@ -558,6 +598,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       </tr>
                     </tbody>
                   </table>
+                  <u-button
+                    class="mt-4"
+                    label="Sluiten"
+                    variant="ghost"
+                    size="xl"
+                    color="secondary"
+                    @click="close"
+                  />
                 </div>
               </template>
             </u-modal>
@@ -652,6 +700,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       </tr>
                     </tbody>
                   </table>
+                  <u-button
+                    class="mt-4"
+                    label="Sluiten"
+                    variant="ghost"
+                    size="xl"
+                    color="secondary"
+                    @click="close"
+                  />
                 </div>
               </template>
             </u-modal>
