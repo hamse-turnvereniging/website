@@ -763,7 +763,7 @@ section#banner {
 }
 
 table {
-  @apply pb-1;
+  @apply mb-1;
 
   thead {
     @apply border-b-secondary border-b-2;
