@@ -69,7 +69,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                 size="xl"
               />
               <template #content="{ close }">
-                <div class="flex flex-col gap-4 p-6">
+                <div class="flex flex-col gap-4 p-6 h-full min-h-0">
                   <div class="flex justify-between gap-4">
                     <h3>Turnen kleuters</h3>
                     <u-button
@@ -80,64 +80,70 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       @click="close"
                     />
                   </div>
-                  <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex flex-col">
-                      <div class="text-sm">Lidgeld</div>
-                      <div class="font-semibold py-1">&euro; 85 per jaar</div>
+                  <div class="flex flex-1 flex-col gap-4 overflow-auto">
+                    <div class="flex flex-wrap gap-4">
+                      <div class="flex flex-col">
+                        <div class="text-sm">Lidgeld</div>
+                        <div class="font-semibold py-1">&euro; 85 per jaar</div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex flex-col items-center">
-                      <h4>Kristoffelheem</h4>
-                      <table class="w-full">
-                        <thead>
-                          <tr>
-                            <th>Groep</th>
-                            <th>Wanneer?</th>
-                            <th>Eerste les</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1ste<br />kleuterklas</td>
-                            <td>woensdag<br />14u30 - 15u30u</td>
-                            <td>3 september</td>
-                          </tr>
-                          <tr>
-                            <td>2de en 3de<br />kleuterklas</td>
-                            <td>woensdag<br />13u30 - 14u30u</td>
-                            <td>3 september</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="flex flex-col items-center">
-                      <h4>'t Vlietje</h4>
-                      <table class="w-full">
-                        <thead>
-                          <tr>
-                            <th>Groep</th>
-                            <th>Wanneer?</th>
-                            <th>Eerste les</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1ste<br />kleuterklas</td>
-                            <td>zaterdag<br />9u - 10u</td>
-                            <td>6 september</td>
-                          </tr>
-                          <tr>
-                            <td>2de en 3de<br />kleuterklas</td>
-                            <td>zaterdag<br />10u - 11u</td>
-                            <td>6 september</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <div class="flex flex-col md:flex-row gap-4">
+                      <div class="flex flex-col items-center">
+                        <h4>Kristoffelheem</h4>
+                        <div class="w-full overflow-x-auto">
+                          <table class="w-full">
+                            <thead>
+                              <tr>
+                                <th>Groep</th>
+                                <th>Wanneer?</th>
+                                <th>Eerste les</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1ste<br />kleuterklas</td>
+                                <td>woensdag<br />14u30 - 15u30u</td>
+                                <td>3 september</td>
+                              </tr>
+                              <tr>
+                                <td>2de en 3de<br />kleuterklas</td>
+                                <td>woensdag<br />13u30 - 14u30u</td>
+                                <td>3 september</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <h4>'t Vlietje</h4>
+                        <div class="w-full overflow-x-auto">
+                          <table class="w-full">
+                            <thead>
+                              <tr>
+                                <th>Groep</th>
+                                <th>Wanneer?</th>
+                                <th>Eerste les</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1ste<br />kleuterklas</td>
+                                <td>zaterdag<br />9u - 10u</td>
+                                <td>6 september</td>
+                              </tr>
+                              <tr>
+                                <td>2de en 3de<br />kleuterklas</td>
+                                <td>zaterdag<br />10u - 11u</td>
+                                <td>6 september</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <u-button
-                    class="mt-4"
+                    class="sm:hidden"
                     label="Sluiten"
                     variant="ghost"
                     size="xl"
@@ -174,7 +180,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                 size="xl"
               />
               <template #content="{ close }">
-                <div class="flex flex-col gap-4 p-6">
+                <div class="flex flex-col gap-4 p-6 h-full min-h-0">
                   <div class="flex justify-between gap-4">
                     <h3>Turnen lagere school</h3>
                     <u-button
@@ -185,63 +191,69 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       @click="close"
                     />
                   </div>
-                  <div class="flex flex-col sm:flex-row gap-4">
-                    <div class="flex flex-col">
-                      <div class="text-sm">Lidgeld 1ste, 2de en 3de leerjaar</div>
-                      <div class="font-semibold py-1"><span>&euro; 85 per jaar</span></div>
+                  <div class="flex flex-1 flex-col gap-4 overflow-auto">
+                    <div class="flex flex-wrap gap-4">
+                      <div class="flex flex-col">
+                        <div class="text-sm">Lidgeld 1ste, 2de en 3de leerjaar</div>
+                        <div class="font-semibold py-1"><span>&euro; 85 per jaar</span></div>
+                      </div>
+                      <div class="flex flex-col">
+                        <div class="text-sm">Lidgeld 4de, 5de en 6de leerjaar</div>
+                        <div class="font-semibold py-1"><span>&euro; 95 per jaar</span></div>
+                      </div>
                     </div>
-                    <div class="flex flex-col">
-                      <div class="text-sm">Lidgeld 4de, 5de en 6de leerjaar</div>
-                      <div class="font-semibold py-1"><span>&euro; 95 per jaar</span></div>
-                    </div>
-                  </div>
-                  <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex flex-col items-center">
-                      <h4>Kristoffelheem</h4>
-                      <table class="w-full">
-                        <thead>
-                          <tr>
-                            <th>Groep</th>
-                            <th>Wanneer?</th>
-                            <th>Eerste les</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1ste, 2de en 3de<br />leerjaar</td>
-                            <td>woensdag<br />15u30 - 16u30u</td>
-                            <td>3 september</td>
-                          </tr>
-                          <tr>
-                            <td>4de, 5de en 6de<br />leerjaar</td>
-                            <td>donderdag<br />18u - 19u30</td>
-                            <td>4 september</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="flex flex-col items-center">
-                      <h4>'t Vlietje</h4>
-                      <table class="w-full">
-                        <thead>
-                          <tr>
-                            <th>Groep</th>
-                            <th>Wanneer?</th>
-                            <th>Eerste les</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>1ste, 2de en 3de<br />leerjaar</td>
-                            <td>zaterdag<br />10u45 - 12u</td>
-                            <td>6 september</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <div class="flex flex-col md:flex-row gap-4">
+                      <div class="flex flex-col items-center">
+                        <h4>Kristoffelheem</h4>
+                        <div class="w-full overflow-x-auto">
+                          <table class="w-full">
+                            <thead>
+                              <tr>
+                                <th>Groep</th>
+                                <th>Wanneer?</th>
+                                <th>Eerste les</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1ste, 2de en 3de<br />leerjaar</td>
+                                <td>woensdag<br />15u30 - 16u30u</td>
+                                <td>3 september</td>
+                              </tr>
+                              <tr>
+                                <td>4de, 5de en 6de<br />leerjaar</td>
+                                <td>donderdag<br />18u - 19u30</td>
+                                <td>4 september</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="flex flex-col items-center">
+                        <h4>'t Vlietje</h4>
+                        <div class="w-full overflow-x-auto">
+                          <table class="w-full">
+                            <thead>
+                              <tr>
+                                <th>Groep</th>
+                                <th>Wanneer?</th>
+                                <th>Eerste les</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1ste, 2de en 3de<br />leerjaar</td>
+                                <td>zaterdag<br />10u45 - 12u</td>
+                                <td>6 september</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <u-button
-                    class="mt-4"
+                    class="sm:hidden"
                     label="Sluiten"
                     variant="ghost"
                     size="xl"
@@ -296,7 +308,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                 size="xl"
               />
               <template #content="{ close }">
-                <div class="flex flex-col gap-4 p-6">
+                <div class="flex flex-col gap-4 p-6 h-full min-h-0">
                   <div class="flex justify-between gap-4">
                     <h3>Turnen vanaf het 1ste middelbaar</h3>
                     <u-button
@@ -307,30 +319,34 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       @click="close"
                     />
                   </div>
-                  <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex flex-col">
-                      <div class="text-sm">Lidgeld</div>
-                      <div class="font-semibold py-1">&euro; 95 per jaar</div>
+                  <div class="flex flex-1 flex-col gap-4 overflow-auto">
+                    <div class="flex flex-wrap gap-4">
+                      <div class="flex flex-col">
+                        <div class="text-sm">Lidgeld</div>
+                        <div class="font-semibold py-1">&euro; 95 per jaar</div>
+                      </div>
+                    </div>
+                    <div class="w-full overflow-x-auto">
+                      <table class="w-full">
+                        <thead>
+                          <tr>
+                            <th>Waar?</th>
+                            <th>Wanneer?</th>
+                            <th>Eerste les</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Kristoffelheem</td>
+                            <td>woensdag<br />18u30 - 20u</td>
+                            <td>3 september</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  <table class="w-full">
-                    <thead>
-                      <tr>
-                        <th>Waar?</th>
-                        <th>Wanneer?</th>
-                        <th>Eerste les</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Kristoffelheem</td>
-                        <td>woensdag<br />18u30 - 20u</td>
-                        <td>3 september</td>
-                      </tr>
-                    </tbody>
-                  </table>
                   <u-button
-                    class="mt-4"
+                    class="sm:hidden"
                     label="Sluiten"
                     variant="ghost"
                     size="xl"
@@ -379,7 +395,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                 size="xl"
               />
               <template #content="{ close }">
-                <div class="flex flex-col gap-4 p-6">
+                <div class="flex flex-col gap-4 p-6 h-full min-h-0">
                   <div class="flex justify-between gap-4">
                     <div class="flex flex-col">
                       <h3>Trampoline</h3>
@@ -393,30 +409,34 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       @click="close"
                     />
                   </div>
-                  <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex flex-col">
-                      <div class="text-sm">Lidgeld</div>
-                      <div class="font-semibold py-1">&euro; 95 per jaar</div>
+                  <div class="flex flex-1 flex-col gap-4 overflow-auto">
+                    <div class="flex flex-wrap gap-4">
+                      <div class="flex flex-col">
+                        <div class="text-sm">Lidgeld</div>
+                        <div class="font-semibold py-1">&euro; 95 per jaar</div>
+                      </div>
+                    </div>
+                    <div class="w-full overflow-x-auto">
+                      <table class="w-full">
+                        <thead>
+                          <tr>
+                            <th>Waar?</th>
+                            <th>Wanneer?</th>
+                            <th>Eerste les</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Kristoffelheem</td>
+                            <td>zaterdag<br />10u30 - 12u</td>
+                            <td>6 september</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  <table class="w-full">
-                    <thead>
-                      <tr>
-                        <th>Waar?</th>
-                        <th>Wanneer?</th>
-                        <th>Eerste les</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Kristoffelheem</td>
-                        <td>zaterdag<br />10u30 - 12u</td>
-                        <td>6 september</td>
-                      </tr>
-                    </tbody>
-                  </table>
                   <u-button
-                    class="mt-4"
+                    class="sm:hidden"
                     label="Sluiten"
                     variant="ghost"
                     size="xl"
@@ -480,7 +500,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                 size="xl"
               />
               <template #content="{ close }">
-                <div class="flex flex-col gap-4 p-6">
+                <div class="flex flex-col gap-4 p-6 h-full min-h-0">
                   <div class="flex justify-between gap-4">
                     <h3>BBB</h3>
                     <u-button
@@ -491,30 +511,34 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       @click="close"
                     />
                   </div>
-                  <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex flex-col">
-                      <div class="text-sm">Lidgeld</div>
-                      <div class="font-semibold py-1">&euro; 105 per jaar</div>
+                  <div class="flex flex-1 flex-col gap-4 overflow-auto">
+                    <div class="flex flex-wrap gap-4">
+                      <div class="flex flex-col">
+                        <div class="text-sm">Lidgeld</div>
+                        <div class="font-semibold py-1">&euro; 105 per jaar</div>
+                      </div>
+                    </div>
+                    <div class="w-full overflow-x-auto">
+                      <table class="w-full">
+                        <thead>
+                          <tr>
+                            <th>Waar?</th>
+                            <th>Wanneer?</th>
+                            <th>Eerste les</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Kristoffelheem</td>
+                            <td>woensdag<br />19u - 20u</td>
+                            <td>10 september</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  <table class="w-full">
-                    <thead>
-                      <tr>
-                        <th>Waar?</th>
-                        <th>Wanneer?</th>
-                        <th>Eerste les</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Kristoffelheem</td>
-                        <td>woensdag<br />19u - 20u</td>
-                        <td>10 september</td>
-                      </tr>
-                    </tbody>
-                  </table>
                   <u-button
-                    class="mt-4"
+                    class="sm:hidden"
                     label="Sluiten"
                     variant="ghost"
                     size="xl"
@@ -565,7 +589,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                 size="xl"
               />
               <template #content="{ close }">
-                <div class="flex flex-col gap-4 p-6">
+                <div class="flex flex-col gap-4 p-6 h-full min-h-0">
                   <div class="flex justify-between gap-4">
                     <h3>Callanetics</h3>
                     <u-button
@@ -576,30 +600,34 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       @click="close"
                     />
                   </div>
-                  <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex flex-col">
-                      <div class="text-sm">Lidgeld</div>
-                      <div class="font-semibold py-1">&euro; 105 per jaar</div>
+                  <div class="flex flex-1 flex-col gap-4 overflow-auto">
+                    <div class="flex flex-wrap gap-4">
+                      <div class="flex flex-col">
+                        <div class="text-sm">Lidgeld</div>
+                        <div class="font-semibold py-1">&euro; 105 per jaar</div>
+                      </div>
+                    </div>
+                    <div class="w-full overflow-x-auto">
+                      <table class="w-full">
+                        <thead>
+                          <tr>
+                            <th>Waar?</th>
+                            <th>Wanneer?</th>
+                            <th>Eerste les</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Kristoffelheem</td>
+                            <td>dinsdag<br />19u - 20u</td>
+                            <td>9 september</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  <table class="w-full">
-                    <thead>
-                      <tr>
-                        <th>Waar?</th>
-                        <th>Wanneer?</th>
-                        <th>Eerste les</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Kristoffelheem</td>
-                        <td>dinsdag<br />19u - 20u</td>
-                        <td>9 september</td>
-                      </tr>
-                    </tbody>
-                  </table>
                   <u-button
-                    class="mt-4"
+                    class="sm:hidden"
                     label="Sluiten"
                     variant="ghost"
                     size="xl"
@@ -667,7 +695,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                 size="xl"
               />
               <template #content="{ close }">
-                <div class="flex flex-col gap-4 p-6">
+                <div class="flex flex-col gap-4 p-6 h-full min-h-0">
                   <div class="flex justify-between gap-4">
                     <h3>Net-voetbal heren</h3>
                     <u-button
@@ -678,30 +706,34 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                       @click="close"
                     />
                   </div>
-                  <div class="flex flex-col md:flex-row gap-4">
-                    <div class="flex flex-col">
-                      <div class="text-sm">Lidgeld</div>
-                      <div class="font-semibold py-1">&euro; 105 per jaar</div>
+                  <div class="flex flex-1 flex-col gap-4 overflow-auto">
+                    <div class="flex flex-wrap gap-4">
+                      <div class="flex flex-col">
+                        <div class="text-sm">Lidgeld</div>
+                        <div class="font-semibold py-1">&euro; 105 per jaar</div>
+                      </div>
+                    </div>
+                    <div class="w-full overflow-x-auto">
+                      <table class="w-full">
+                        <thead>
+                          <tr>
+                            <th>Waar?</th>
+                            <th>Wanneer?</th>
+                            <th>Eerste les</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Kristoffelheem</td>
+                            <td>woensdag<br />19u - 20u</td>
+                            <td>3 september</td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  <table class="w-full">
-                    <thead>
-                      <tr>
-                        <th>Waar?</th>
-                        <th>Wanneer?</th>
-                        <th>Eerste les</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Kristoffelheem</td>
-                        <td>woensdag<br />19u - 20u</td>
-                        <td>3 september</td>
-                      </tr>
-                    </tbody>
-                  </table>
                   <u-button
-                    class="mt-4"
+                    class="sm:hidden"
                     label="Sluiten"
                     variant="ghost"
                     size="xl"
@@ -748,7 +780,7 @@ table {
       @apply odd:bg-primary-200 odd:border-b-primary odd:border-b-1 even:bg-neutral-50 even:border-b-neutral-100 even:border-b-1;
 
       td {
-        @apply text-center p-2 sm:p-4;
+        @apply text-center text-nowrap p-2 sm:p-4;
       }
     }
   }
