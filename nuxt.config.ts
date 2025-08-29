@@ -1,10 +1,32 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
-  devtools: { enabled: true },
+  css: ["~/assets/css/main.css"],
+  devtools: {
+    enabled: true,
+  },
+  fonts: {
+    defaults: {
+      weights: [400, 500, 600, 700],
+    },
+    families: [
+      {
+        name: "Open Sans",
+        provider: "google",
+      },
+    ],
+  },
   hub: {
-    blob: true,
     database: true,
+  },
+  image: {
+    provider: process.env.NUXT_IMAGE_PROVIDER ?? "ipx",
+    cloudflare: process.env.NUXT_IMAGE_CLOUDFLARE_BASE_URL
+      ? {
+          baseUrl: process.env.NUXT_IMAGE_CLOUDFLARE_BASE_URL,
+        }
+      : undefined,
+    quality: 90,
   },
   modules: [
     "@nuxt/content",
@@ -12,13 +34,17 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxt/icon",
     "@nuxt/image",
+    "@nuxt/ui",
     "@nuxthub/core",
     "@nuxtjs/seo",
-    "@nuxtjs/tailwindcss",
+    "@vueuse/nuxt",
   ],
   site: {
     defaultLocale: "nl",
     name: "Hamse Turnvereniging",
     url: "https://www.hamseturnvereniging.be",
+  },
+  ui: {
+    colorMode: false,
   },
 });
