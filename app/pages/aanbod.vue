@@ -46,7 +46,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             fit="cover"
             src="/images/aanbod/turnen/kleuters.jpg"
             width="400"
-            height="240"
+            height="267"
           />
         </div>
         <div class="flex flex-1 flex-col gap-4">
@@ -271,7 +271,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             fit="cover"
             src="/images/aanbod/turnen/lagere-school.jpg"
             width="400"
-            height="240"
+            height="267"
           />
         </div>
       </div>
@@ -285,7 +285,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             fit="cover"
             src="/images/aanbod/turnen/vanaf-1ste-middelbaar.jpg"
             width="400"
-            height="240"
+            height="267"
           />
         </div>
         <div class="flex flex-1 flex-col gap-4">
@@ -469,7 +469,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
           <nuxt-img
             class="w-full"
             fit="cover"
-            src="/images/aanbod/bbb.png"
+            src="/images/aanbod/bbb.jpg"
             width="600"
             height="400"
           />
@@ -643,7 +643,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
           <nuxt-img
             class="w-full"
             fit="cover"
-            src="/images/aanbod/callanetics.png"
+            src="/images/aanbod/callanetics.jpg"
             width="600"
             height="400"
           />
@@ -660,7 +660,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
           <nuxt-img
             class="w-full"
             fit="cover"
-            src="/images/aanbod/net-voetbal-heren.png"
+            src="/images/aanbod/net-voetbal-heren.jpg"
             width="600"
             height="400"
           />
