@@ -15,6 +15,7 @@
           class="w-full"
           fit="cover"
           src="/images/welkom/welkom.jpg"
+          alt="Welkom afbeelding"
           width="600"
           height="400"
         />
