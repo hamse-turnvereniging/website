@@ -31,6 +31,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             class="w-full"
             fit="cover"
             src="/images/aanbod/turnen/turnen.jpg"
+            alt="Turnen afbeelding"
             width="600"
             height="400"
           />
@@ -45,6 +46,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             class="flex-none md:ml-auto"
             fit="cover"
             src="/images/aanbod/turnen/kleuters.jpg"
+            alt="Turnen kleuters afbeelding"
             width="400"
             height="267"
           />
@@ -270,6 +272,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             class="flex-none"
             fit="cover"
             src="/images/aanbod/turnen/lagere-school.jpg"
+            alt="Turnen lagere school afbeelding"
             width="400"
             height="267"
           />
@@ -284,6 +287,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             class="flex-none md:ml-auto"
             fit="cover"
             src="/images/aanbod/turnen/vanaf-1ste-middelbaar.jpg"
+            alt="Turnen vanaf 1ste middelbaar afbeelding"
             width="400"
             height="267"
           />
@@ -453,6 +457,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             class="w-full"
             fit="cover"
             src="/images/aanbod/trampoline.jpg"
+            alt="Trampoline afbeelding"
             width="600"
             height="400"
           />
@@ -470,6 +475,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             class="w-full"
             fit="cover"
             src="/images/aanbod/bbb.jpg"
+            alt="BBB afbeelding"
             width="600"
             height="400"
           />
@@ -644,6 +650,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             class="w-full"
             fit="cover"
             src="/images/aanbod/callanetics.jpg"
+            alt="Callanetics afbeelding"
             width="600"
             height="400"
           />
@@ -661,6 +668,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             class="w-full"
             fit="cover"
             src="/images/aanbod/net-voetbal-heren.jpg"
+            alt="Net-voetbal heren afbeelding"
             width="600"
             height="400"
           />
