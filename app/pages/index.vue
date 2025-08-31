@@ -55,8 +55,8 @@
           fit="cover"
           src="/images/welkom/kom-proberen.jpg"
           alt="Kom proberen afbeelding"
-          width="300"
-          height="200"
+          width="400"
+          height="267"
         />
         <h3>Kom proberen</h3>
         <p>
@@ -90,8 +90,8 @@
           fit="cover"
           src="/images/welkom/onze-activiteiten.jpg"
           alt="Onze activiteiten afbeelding"
-          width="300"
-          height="200"
+          width="400"
+          height="267"
         />
         <h3>Onze activiteiten</h3>
         <p>
@@ -122,8 +122,8 @@
           fit="cover"
           src="/images/welkom/lesgevers-gezocht.jpg"
           alt="Lesgevers gezocht afbeelding"
-          width="300"
-          height="200"
+          width="400"
+          height="267"
         />
         <h3>Lesgevers gezocht</h3>
         <p>
