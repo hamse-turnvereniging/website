@@ -3,6 +3,7 @@ import * as v from "valibot";
 import bevestigingInschrijvingEmailTemplate from "~~/server/assets/templates/email/bevestiging-inschrijving";
 import { groupPrice } from "#shared/data/inschrijving";
 import { schema } from "#shared/schemas/inschrijving";
+import { tables, useDrizzle } from "../utils/drizzle";
 
 export default defineEventHandler(async (event) => {
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
@@ -18,6 +19,15 @@ export default defineEventHandler(async (event) => {
   const input = validationResult.output;
 
   try {
+    // Save to database
+    await useDrizzle()
+      .insert(tables.inschrijvingen)
+      .values({
+        data: JSON.stringify(input),
+        createdAt: new Date(),
+      });
+
+    // Send email
     const headers = new Headers();
     headers.append("api-key", process.env.BREVO_API_KEY!);
     headers.append("Content-Type", "application/json");
