@@ -11,6 +11,7 @@
   "scripts": {
     "prebuild": "node scripts/precompile-hbs.mjs",
     "build": "nuxt build",
+    "db:generate": "drizzle-kit generate",
     "predev": "node scripts/precompile-hbs.mjs",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
@@ -31,6 +32,7 @@
     "@vueuse/nuxt": "^13.6.0",
     "better-sqlite3": "^12.2.0",
     "date-fns": "^4.1.0",
+    "drizzle-orm": "^0.44.5",
     "eslint": "^9.32.0",
     "fast-glob": "^3.3.3",
     "handlebars": "^4.7.8",
@@ -42,6 +44,7 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "drizzle-kit": "^0.31.4",
     "wrangler": "^4.32.0"
   },
   "packageManager": "pnpm@10.15.0+sha512.486ebc259d3e999a4e8691ce03b5cac4a71cbeca39372a9b762cb500cfdf0873e2cb16abe3d951b1ee2cf012503f027b98b6584e4df22524e0c7450d9ec7aa7b"
