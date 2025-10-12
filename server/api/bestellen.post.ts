@@ -55,20 +55,13 @@ export default defineEventHandler(async (event) => {
     await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       body: {
-        // TODO: Uncomment
-        // to,
-        // TODO: Remove
-        to: [
-          { email: "steff@steffbeckers.com", name: "Steff Beckers" },
-          { email: "beckerssteff@gmail.com", name: "Steff Beckers" },
+        to,
+        bcc: [
+          {
+            email: "info@hamseturnvereniging.be",
+            name: "Hamse Turnvereniging",
+          },
         ],
-        // TODO: Uncomment
-        // bcc: [
-        //   {
-        //     email: "info@hamseturnvereniging.be",
-        //     name: "Hamse Turnvereniging",
-        //   },
-        // ],
         sender: {
           email: "info@hamseturnvereniging.be",
           name: "Hamse Turnvereniging",
