@@ -1,7 +1,7 @@
 ---
-title: 22 maart
+title: 21 maart
 description: Kom jij ook kijken naar het Turnfeest?
-date: 2026-03-22
+date: 2026-03-21
 ---
 
-Op 22 maart gaat onze jaarlijks Turnfeest door.
+Op zaterdag 21 maart gaat onze jaarlijks Turnfeest door.

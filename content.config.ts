@@ -11,7 +11,7 @@ export default defineContentConfig({
     }),
     kalender: defineCollection({
       type: "page",
-      source: "kalender/**/*.md",
+      source: "kalender/2025-2026/**/*.md",
       schema: z.object({
         date: z.date(),
       }),

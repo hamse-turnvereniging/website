@@ -106,15 +106,13 @@
           alles wat er te doen is, van trainingen tot speciale evenementen. Zo weet je altijd waar
           en wanneer je erbij kunt zijn!
         </p>
-        <!-- TODO: Kalender -->
         <u-button
-          label="Kalender (binnenkort beschikbaar)"
+          label="Kalender"
           class="mt-2"
           icon="i-lucide-calendar"
           to="kalender"
           color="secondary"
           size="xl"
-          disabled
         />
       </div>
       <div class="flex flex-col gap-4 pb-4">

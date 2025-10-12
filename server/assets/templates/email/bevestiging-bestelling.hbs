@@ -1,0 +1,253 @@
+<html lang="nl" style="margin: 0; padding: 0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{subject}}</title>
+
+    <!-- Webfont (fallback naar sans-serif indien niet ondersteund) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--[if mso]>
+      <style type="text/css">
+        * {
+          font-family: Arial, sans-serif !important;
+        }
+      </style>
+    <![endif]-->
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background: f1f1f1;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      font-family: 'Open Sans', sans-serif;
+    "
+  >
+    <!-- Preheader -->
+    <div
+      style="
+        display: none;
+        overflow: hidden;
+        line-height: 1px;
+        opacity: 0;
+        max-height: 0;
+        max-width: 0;
+      "
+    >
+      Bevestiging van je bestelling van
+      {{type}}
+      - bekijk het overzicht hieronder.
+    </div>
+
+    <table
+      role="presentation"
+      width="100%"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      style="background: #f5f7fb"
+    >
+      <tr>
+        <td align="center" style="padding: 24px">
+          <table
+            role="presentation"
+            width="100%"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            style="max-width: 640px; background: #ffffff; border-radius: 12px; overflow: hidden"
+          >
+            <!-- Header -->
+            <tr>
+              <td
+                style="
+                  background: #202020;
+                  color: #ffffff;
+                  padding-top: 16px;
+                  padding-right: 24px;
+                  padding-bottom: 16px;
+                  padding-left: 24px;
+                  font-family: 'Open Sans', sans-serif;
+                  position: relative;
+                "
+              >
+                <img
+                  src="https://www.hamseturnvereniging.be/cdn-cgi/image/w=160,h=160,q=100,fit=cover/images/logo.png"
+                  height="80"
+                  alt="Hamse Turnvereniging logo"
+                />
+              </td>
+            </tr>
+
+            <!-- Intro -->
+            <tr>
+              <td
+                style="
+                  padding: 18px 24px;
+                  color: #0f172a;
+                  font-size: 14px;
+                  line-height: 1.6;
+                  font-family: 'Open Sans', sans-serif;
+                "
+              >
+                <h1
+                  style="
+                    color: #a0ef94;
+                    margin: 0 0 12px;
+                    font-size: 20px;
+                    font-weight: 700;
+                    font-family: 'Open Sans', sans-serif;
+                  "
+                >
+                  Bevestiging bestelling
+                </h1>
+                <p style="margin: 0 0 12px">Dag {{firstName}},</p>
+                <p style="margin: 0">
+                  Bedankt voor je bestelling van
+                  {{type}}
+                  bij de Hamse Turnvereniging. Hieronder vind je een overzicht van de gegevens die
+                  we hebben ontvangen.
+                </p>
+              </td>
+            </tr>
+
+            <!-- Bestelformulier -->
+            <tr>
+              <td style="padding: 12px 24px 0">
+                <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
+                <h2
+                  style="
+                    margin: 0 0 8px;
+                    font-size: 16px;
+                    color: #059e95;
+                    font-weight: 700;
+                    font-family: 'Open Sans', sans-serif;
+                  "
+                >
+                  Bestelformulier
+                </h2>
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="
+                    border-collapse: collapse;
+                    font-size: 14px;
+                    color: #0f172a;
+                    font-family: 'Open Sans', sans-serif;
+                  "
+                >
+                  <tr>
+                    <td width="34%" style="padding: 6px 6px 6px 0px">Voornaam</td>
+                    <td style="padding: 6px 0"><strong>{{firstName}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Naam</td>
+                    <td style="padding: 6px 0"><strong>{{lastName}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Telefoon</td>
+                    <td style="padding: 6px 0">
+                      <a
+                        href="tel:{{phoneNumber}}"
+                        style="color: #0f172a; text-decoration: none"
+                      ><strong>{{phoneNumber}}</strong></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">E-mail</td>
+                    <td style="padding: 6px 0">
+                      <a
+                        href="mailto:{{email}}"
+                        style="color: #0f172a; text-decoration: none"
+                      ><strong>{{email}}</strong></a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Betaalgegevens -->
+            <tr>
+              <td style="padding: 12px 24px 0">
+                <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
+                <h2
+                  style="
+                    margin: 0 0 8px;
+                    font-size: 16px;
+                    color: #059e95;
+                    font-weight: 700;
+                    font-family: 'Open Sans', sans-serif;
+                  "
+                >
+                  Betaalgegevens
+                </h2>
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="font-size: 14px; color: #0f172a; font-family: 'Open Sans', sans-serif"
+                >
+                  <tr>
+                    <td width="34%" style="padding: 6px 6px 6px 0px">Rekeningnummer</td>
+                    <td style="padding: 6px 0">
+                      <strong>BE69 0682 0939 9078</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Bedrag</td>
+                    <td style="padding: 6px 0"><strong>&euro; {{amount}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Mededeling</td>
+                    <td style="padding: 6px 0"><strong>{{type}}
+                        {{firstName}}
+                        {{lastName}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Ik heb reeds betaald of de betaalgegevens
+                      zorgvuldig genoteerd.</td>
+                    <td style="padding: 6px 0">
+                      <strong>{{#if paymentCheck}}✅ Ja{{else}}❌ Nee{{/if}}</strong>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td
+                style="
+                  padding: 12px 24px 24px;
+                  font-size: 12px;
+                  line-height: 1.6;
+                  font-family: 'Open Sans', sans-serif;
+                "
+              >
+                <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
+                <p style="margin: 0">
+                  Vragen? Of klopt er iets niet? Antwoord op deze e-mail met de correcties. Mail ons
+                  via
+                  <a
+                    href="mailto:info@hamseturnvereniging.be"
+                    style="color: #059e95; text-decoration: none"
+                  >info@hamseturnvereniging.be</a>.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

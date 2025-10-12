@@ -34,8 +34,8 @@ if (calendar.value) {
     <div class="flex flex-col gap-4">
       <h2>Seizoen 2025-2026</h2>
       <p>
-        Hier kan je al onze activiteiten van dit turnseizoen terugvinden. We vullen deze kalender
-        regelmatig aan, dus kom hier zeker nog eens terug!
+        Hier kan je al onze activiteiten van dit turnseizoen terugvinden.<br />We vullen deze
+        kalender regelmatig aan, dus kom hier zeker nog eens terug!
       </p>
     </div>
     <u-accordion
@@ -52,7 +52,7 @@ if (calendar.value) {
         </div>
       </template>
       <template #content="{ item }">
-        <content-renderer class="answer pb-3.5" :value="item.body" />
+        <content-renderer class="detail pb-3.5" :value="item.body" />
       </template>
     </u-accordion>
   </section>
@@ -70,9 +70,14 @@ section#banner {
 <style>
 @reference "./../assets/css/main.css";
 
-.answer {
-  p {
+.detail {
+  > p,
+  > ul {
     @apply pb-2;
+  }
+
+  > a {
+    @apply mb-2;
   }
 
   strong {

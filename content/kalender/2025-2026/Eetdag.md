@@ -1,7 +1,7 @@
 ---
-title: 3 maart
+title: 1 maart
 description: Kom smullen op onze jaarlijkse eetdag!
-date: 2026-03-03
+date: 2026-03-01
 ---
 
-Op 3 maart gaat onze jaarlijkse eetdag door.
+Op zondag 1 maart gaat onze jaarlijkse eetdag door.
