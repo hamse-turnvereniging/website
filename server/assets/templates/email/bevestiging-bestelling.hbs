@@ -108,9 +108,9 @@
                 </h1>
                 <p style="margin: 0 0 12px">Dag {{firstName}},</p>
                 <p style="margin: 0">
-                  Bedankt voor je bestelling van
-                  {{downcase type}}
-                  bij de Hamse Turnvereniging. Hieronder vind je een overzicht van de gegevens die
+                  Bedankt voor je bestelling
+                  {{typeLowercase}}
+                  van de Hamse Turnvereniging. Hieronder vind je een overzicht van de gegevens die
                   we hebben ontvangen.
                 </p>
               </td>
@@ -175,7 +175,7 @@
             </tr>
 
             <!-- Wafels -->
-            {{#if (eq type "Wafels")}}
+            {{#if typeWafels}}
               <tr>
                 <td style="padding: 12px 24px 0">
                   <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />

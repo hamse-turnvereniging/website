@@ -10,8 +10,6 @@ for (const f of files) {
   const source = await fs.readFile(resolve(SRC, f), "utf8");
   const spec = Handlebars.precompile(source);
   const code = `import Handlebars from 'handlebars/runtime.js';
-import helpers from "handlebars-helpers";
-helpers({ handlebars: Handlebars });
 export default Handlebars.template(${spec});
 `;
   const outPath = resolve(SRC, f.replace(/\.hbs$/, ".js"));

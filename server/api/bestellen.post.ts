@@ -40,8 +40,9 @@ export default defineEventHandler(async (event) => {
 
     const subject = `Bevestiging bestelling - ${input.type} - ${input.firstName} ${input.lastName}`;
     let amount = 0;
+    let typeWafels = input.type === "Wafels";
 
-    if (input.type === "Wafels") {
+    if (typeWafels) {
       const quantity = (input.wafels.vanilla ?? 0) + (input.wafels.chocolate ?? 0);
       amount = quantity * (quantity >= 3 ? 4 : 5);
     }
@@ -50,6 +51,8 @@ export default defineEventHandler(async (event) => {
       ...input,
       subject,
       amount,
+      typeLowercase: input.type?.toLowerCase(),
+      typeWafels,
     });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {

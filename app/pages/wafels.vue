@@ -95,10 +95,7 @@ async function onError(event: FormErrorEvent) {
         <nuxt-img src="/images/wafels/chocolade.jpg" width="180" height="135" />
       </div>
       <p>De prijs bedraagt &euro; 5 per pak, vanaf 3 pakken &euro; 4 per pak.</p>
-      <p>
-        Bestellen kan <strong>tot en met 9 november</strong> via het bestelformulier onderaan deze
-        pagina.
-      </p>
+      <p>Bestellen kan <strong>tot en met 9 november</strong> via het bestelformulier hieronder.</p>
       <p>
         De bestelde wafels zullen verdeeld worden tijdens de lessen vanaf de laatste week van
         november.
