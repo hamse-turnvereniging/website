@@ -80,8 +80,8 @@ async function onError(event: FormErrorEvent) {
         Je hebt de keuze tussen vanillewafels of half-gechocolateerde wafels.
       </p>
       <div class="flex flex-wrap gap-4">
-        <nuxt-img src="/images/wafels/vanille.jpg" />
-        <nuxt-img src="/images/wafels/chocolade.jpg" />
+        <nuxt-img src="/images/wafels/vanille.jpg" width="180" height="135" />
+        <nuxt-img src="/images/wafels/chocolade.jpg" width="180" height="135" />
       </div>
       <p>De prijs bedraagt:</p>
       <ul>

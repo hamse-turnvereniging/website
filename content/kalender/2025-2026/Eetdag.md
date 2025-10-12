@@ -1,5 +1,5 @@
 ---
-title: 1 maart
+title: 1 maart - Eetdag
 description: Kom smullen op onze jaarlijkse eetdag!
 date: 2026-03-01
 ---
