@@ -32,10 +32,8 @@
         <nav class="flex flex-col gap-4">
           <nuxt-link to="/">Welkom</nuxt-link>
           <nuxt-link to="/aanbod">Aanbod</nuxt-link>
-          <!-- TODO: Kalender -->
-          <!-- <nuxt-link to="/kalender">Kalender</nuxt-link>
-          <!-- TODO: FAQ -->
-          <!-- <nuxt-link to="/faq">FAQ</nuxt-link> -->
+          <nuxt-link to="/kalender">Kalender</nuxt-link>
+          <nuxt-link to="/faq">FAQ</nuxt-link>
           <nuxt-link to="/inschrijven">Inschrijven</nuxt-link>
         </nav>
         <div class="flex flex-row sm:flex-col justify-between sm:gap-4">

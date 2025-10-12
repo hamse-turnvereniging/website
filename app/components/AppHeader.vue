@@ -1,3 +1,10 @@
+<script lang="ts" setup>
+import { startOfDay, startOfToday } from "date-fns";
+
+const route = useRoute();
+const showWafels = computed(() => startOfToday() <= startOfDay(new Date("2025-11-09")));
+</script>
+
 <template>
   <header class="z-10">
     <div class="flex items-center justify-between max-w-6xl mx-auto px-8 h-16 md:h-20">
@@ -19,20 +26,26 @@
           <div>Aanbod</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Aanbod</div>
         </nuxt-link>
-        <!-- TODO: Kalender -->
-        <!-- <nuxt-link class="p-4 text-center" to="/kalender">
+        <nuxt-link class="p-4 text-center" to="/kalender">
           <div>Kalender</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Kalender</div>
-        </nuxt-link> -->
-        <!-- TODO: FAQ -->
-        <!-- <nuxt-link class="p-4 text-center" to="/faq">
+        </nuxt-link>
+        <nuxt-link class="p-4 text-center" to="/faq">
           <div>FAQ</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">FAQ</div>
-        </nuxt-link> -->
+        </nuxt-link>
         <nuxt-link class="p-4 text-center" to="/inschrijven">
           <div>Inschrijven</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Inschrijven</div>
         </nuxt-link>
+        <div v-if="showWafels" class="flex items-center">
+          <u-button
+            to="/wafels"
+            :color="route.path === '/wafels' ? 'primary' : 'secondary'"
+            size="xl"
+            >Wafels</u-button
+          >
+        </div>
       </nav>
       <u-slideover
         class="md:hidden"
@@ -61,22 +74,28 @@
               <h3>Aanbod</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Aanbod</div>
             </nuxt-link>
-            <!-- TODO: Kalender -->
-            <!-- <nuxt-link class="p-4 text-center" to="/kalender" @click="close()">
+            <nuxt-link class="p-4 text-center" to="/kalender" @click="close()">
               <h3>Kalender</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Kalender</div>
-            </nuxt-link> -->
-            <!-- TODO: FAQ -->
-            <!-- <nuxt-link class="p-4 text-center" to="/faq" @click="close()">
+            </nuxt-link>
+            <nuxt-link class="p-4 text-center" to="/faq" @click="close()">
               <h3>FAQ</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">FAQ</div>
-            </nuxt-link> -->
+            </nuxt-link>
             <nuxt-link class="p-4 text-center" to="/inschrijven" @click="close()">
               <h3>Inschrijven</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">
                 Inschrijven
               </div>
             </nuxt-link>
+            <div v-if="showWafels" class="p-4 flex justify-center">
+              <u-button
+                to="/wafels"
+                :color="route.path === '/wafels' ? 'primary' : 'secondary'"
+                size="xl"
+                ><h3 class="text-white!">Wafels</h3></u-button
+              >
+            </div>
           </nav>
         </template>
       </u-slideover>

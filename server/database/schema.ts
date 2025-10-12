@@ -5,3 +5,9 @@ export const inschrijvingen = sqliteTable("inschrijvingen", {
   data: text("data").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
 });
+
+export const bestellingen = sqliteTable("bestellingen", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  data: text("data").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
