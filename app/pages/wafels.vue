@@ -6,14 +6,25 @@ import { startOfDay, startOfToday } from "date-fns";
 const showForm = computed(() => startOfToday() <= startOfDay(new Date("2025-11-09")));
 
 const form = useTemplateRef("form");
-const state = useLocalStorage(
-  "bestelformulier-wafels",
-  {
-    ...initialState,
-    type: "Wafels",
-  } as Schema,
-  { mergeDefaults: true }
-);
+
+const wafelsInitialState = {
+  ...initialState,
+  type: "Wafels",
+  wafels: {
+    vanilla: 0,
+    chocolate: 0,
+  },
+} as Schema;
+
+const state = useLocalStorage("bestelformulier-wafels", wafelsInitialState, {
+  mergeDefaults: true,
+});
+
+const amount = computed(() => {
+  const quantity = (state.value.wafels.vanilla ?? 0) + (state.value.wafels.chocolate ?? 0);
+
+  return quantity * (quantity >= 3 ? 4 : 5);
+});
 
 const toast = useToast();
 
@@ -45,7 +56,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 const resetModalOpen = ref(false);
 
 function resetForm() {
-  Object.assign(state.value, initialState);
+  Object.assign(state.value, wafelsInitialState);
   form.value?.clear();
   resetModalOpen.value = false;
   window.scrollTo({ behavior: "smooth", top: 0 });
@@ -83,11 +94,7 @@ async function onError(event: FormErrorEvent) {
         <nuxt-img src="/images/wafels/vanille.jpg" width="180" height="135" />
         <nuxt-img src="/images/wafels/chocolade.jpg" width="180" height="135" />
       </div>
-      <p>De prijs bedraagt:</p>
-      <ul>
-        <li>&euro; 5 voor 1 pak wafels</li>
-        <li>&euro; 12 voor 3 pakken wafels</li>
-      </ul>
+      <p>De prijs bedraagt &euro; 5 per pak, vanaf 3 pakken &euro; 4 per pak.</p>
       <p>
         Bestellen kan <strong>tot en met 9 november</strong> via het bestelformulier onderaan deze
         pagina.
@@ -134,6 +141,39 @@ async function onError(event: FormErrorEvent) {
                 <u-input v-model="state.email" class="w-full" size="xl" placeholder="E-mailadres" />
               </u-form-field>
             </div>
+            <h4>Wafels</h4>
+            <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+              <u-form-field
+                class="flex-1"
+                label="Aantal pakken vanillewafels"
+                name="wafels.vanilla"
+              >
+                <u-input
+                  v-model="state.wafels.vanilla"
+                  type="number"
+                  min="0"
+                  step="1"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Aantal pakken vanille"
+                />
+              </u-form-field>
+              <u-form-field
+                class="flex-1"
+                label="Aantal pakken half-gechocolateerde"
+                name="wafels.chocolate"
+              >
+                <u-input
+                  v-model="state.wafels.chocolate"
+                  type="number"
+                  min="0"
+                  step="1"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Aantal pakken half-gechocolateerde"
+                />
+              </u-form-field>
+            </div>
           </div>
         </div>
         <hr />
@@ -144,20 +184,10 @@ async function onError(event: FormErrorEvent) {
               <div class="text-sm">Rekeningnummer</div>
               <div class="font-semibold py-1">BE69 0682 0939 9078</div>
             </div>
-            <!-- <div v-if="amount" class="flex flex-col">
+            <div v-if="amount" class="flex flex-col">
               <div class="text-sm">Bedrag</div>
-              <div class="font-semibold py-1">
-                <span v-if="discount"
-                  ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
-                  {{ discountedAmount }} (<span v-if="is60PlusAtEndOfThisYear"
-                    >{{ discount }} euro korting voor 60-plussers</span
-                  ><span v-else="state.familyMember.check"
-                    >{{ discount }} euro korting via gezinslid</span
-                  >)</span
-                >
-                <span v-else>&euro; {{ amount }}</span>
-              </div>
-            </div> -->
+              <div class="font-semibold py-1">&euro; {{ amount }}</div>
+            </div>
             <div class="flex flex-col">
               <div class="text-sm">Mededeling</div>
               <div class="font-semibold py-1">
@@ -173,20 +203,10 @@ async function onError(event: FormErrorEvent) {
                 <td class="text-sm" width="160px">Rekeningnummer</td>
                 <td class="font-semibold py-1">BE69 0682 0939 9078</td>
               </tr>
-              <!-- <tr v-if="amount">
+              <tr v-if="amount">
                 <td class="text-sm">Bedrag</td>
-                <td class="font-semibold py-1">
-                  <span v-if="discount"
-                    ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
-                    {{ discountedAmount }} (<span v-if="is60PlusAtEndOfThisYear"
-                      >{{ discount }} euro korting voor 60-plussers</span
-                    ><span v-else="state.familyMember.check"
-                      >{{ discount }} euro korting via gezinslid</span
-                    >)</span
-                  >
-                  <span v-else>&euro; {{ amount }}</span>
-                </td>
-              </tr> -->
+                <td class="font-semibold py-1">&euro; {{ amount }}</td>
+              </tr>
               <tr>
                 <td class="text-sm">Mededeling</td>
                 <td class="font-semibold py-1">

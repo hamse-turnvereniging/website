@@ -109,7 +109,7 @@
                 <p style="margin: 0 0 12px">Dag {{firstName}},</p>
                 <p style="margin: 0">
                   Bedankt voor je bestelling van
-                  {{type}}
+                  {{downcase type}}
                   bij de Hamse Turnvereniging. Hieronder vind je een overzicht van de gegevens die
                   we hebben ontvangen.
                 </p>
@@ -173,6 +173,48 @@
                 </table>
               </td>
             </tr>
+
+            <!-- Wafels -->
+            {{#if (eq type "Wafels")}}
+              <tr>
+                <td style="padding: 12px 24px 0">
+                  <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
+                  <h2
+                    style="
+                    margin: 0 0 8px;
+                    font-size: 16px;
+                    color: #059e95;
+                    font-weight: 700;
+                    font-family: 'Open Sans', sans-serif;
+                  "
+                  >
+                    Wafels
+                  </h2>
+                  <table
+                    role="presentation"
+                    width="100%"
+                    cellspacing="0"
+                    cellpadding="0"
+                    border="0"
+                    style="
+                    border-collapse: collapse;
+                    font-size: 14px;
+                    color: #0f172a;
+                    font-family: 'Open Sans', sans-serif;
+                  "
+                  >
+                    <tr>
+                      <td width="50%" style="padding: 6px 6px 6px 0px">Aantal pakken vanille</td>
+                      <td style="padding: 6px 0"><strong>{{wafels.vanilla}}</strong></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px 6px 6px 0px">Aantal pakken half-gechocolateerde</td>
+                      <td style="padding: 6px 0"><strong>{{wafels.chocolate}}</strong></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            {{/if}}
 
             <!-- Betaalgegevens -->
             <tr>

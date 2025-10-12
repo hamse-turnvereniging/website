@@ -39,8 +39,12 @@ export default defineEventHandler(async (event) => {
     ];
 
     const subject = `Bevestiging bestelling - ${input.type} - ${input.firstName} ${input.lastName}`;
-    // TODO
-    const amount = 0;
+    let amount = 0;
+
+    if (input.type === "Wafels") {
+      const quantity = (input.wafels.vanilla ?? 0) + (input.wafels.chocolate ?? 0);
+      amount = quantity * (quantity >= 3 ? 4 : 5);
+    }
 
     const htmlContent = bevestigingBestellingEmailTemplate({
       ...input,
