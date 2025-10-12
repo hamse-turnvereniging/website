@@ -93,6 +93,7 @@ const showWafels = computed(() => startOfToday() <= startOfDay(new Date("2025-11
                 to="/wafels"
                 :color="route.path === '/wafels' ? 'primary' : 'secondary'"
                 size="xl"
+                @click="close()"
                 ><h3 class="text-white!">Wafels</h3></u-button
               >
             </div>
