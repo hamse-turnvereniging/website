@@ -141,6 +141,19 @@
           sta jij binnenkort voor een groep gemotiveerde turners!
         </p>
       </div>
+      <div class="flex flex-col gap-4 pb-4">
+        <h3>T-shirt verkoop</h3>
+        <p>
+          We verkopen met de <span class="font-semibold">turnclub T-shirts</span> voor de leden.
+          Deze kunnen gedragen worden tijdens de lessen, tijdens activiteiten en de uitstap op het
+          einde van het seizoen.
+        </p>
+        <p>
+          Een <span class="font-semibold">T-shirt</span> voor de leden kost
+          <span class="font-semibold">12 euro</span>. Deze kunnen aangekocht worden na de les, bij
+          de lesgevers.
+        </p>
+      </div>
     </section>
   </div>
 </template>

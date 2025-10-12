@@ -47,6 +47,10 @@ if (faq.value) {
         <content-renderer class="answer pb-3.5" :value="item.body" />
       </template>
     </u-accordion>
+    <p>
+      Indien je nog andere vragen hebt kan je altijd terecht bij ons via het e-mailadres
+      <a href="mailto:info@hamseturnvereniging.be">info@hamseturnvereniging.be</a>.
+    </p>
   </section>
 </template>
 
@@ -63,8 +67,13 @@ section#banner {
 @reference "./../assets/css/main.css";
 
 .answer {
-  p {
+  > p,
+  > ul {
     @apply pb-2;
+  }
+
+  > a {
+    @apply mb-2;
   }
 
   strong {
