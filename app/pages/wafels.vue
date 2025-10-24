@@ -56,7 +56,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 const resetModalOpen = ref(false);
 
 function resetForm() {
-  Object.assign(state.value, wafelsInitialState);
+  state.value = wafelsInitialState;
   form.value?.clear();
   resetModalOpen.value = false;
   window.scrollTo({ behavior: "smooth", top: 0 });
@@ -224,6 +224,10 @@ async function onError(event: FormErrorEvent) {
           </u-form-field>
         </div>
         <div class="flex flex-col gap-4">
+          <p>
+            Je ontvangt een bevestiging van je bestelling via e-mail.
+            <span class="font-semibold">Controleer ook je spam/ongewenste e-mail</span>.
+          </p>
           <u-button
             label="Bestelling verzenden"
             type="submit"
