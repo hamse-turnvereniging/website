@@ -6,6 +6,8 @@ import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { vMaska } from "maska/vue";
 
 const form = useTemplateRef("form");
+const formTitle = useTemplateRef("formTitle");
+
 const state = useLocalStorage("inschrijvingsformulier", initialState, { mergeDefaults: true });
 
 watch(state.value, (value) => {
@@ -156,10 +158,35 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 const resetModalOpen = ref(false);
 
 function resetForm() {
-  state.value = initialState;
+  state.value = {
+    ...initialState,
+    address: {
+      ...initialState.address,
+    },
+    emergencyContact: {
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+    },
+    familyMember: {
+      ...initialState.familyMember,
+    },
+    parent1: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+    },
+    parent2: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+    },
+  };
   form.value?.clear();
   resetModalOpen.value = false;
-  window.scrollTo({ behavior: "smooth", top: 0 });
+  formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 async function onError(event: FormErrorEvent) {
@@ -189,7 +216,7 @@ async function onError(event: FormErrorEvent) {
     <u-form ref="form" :schema :state @submit="onSubmit" @error="onError">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
-          <h3>Voor welke groep wil je inschrijven?</h3>
+          <h3 ref="formTitle">Voor welke groep wil je inschrijven?</h3>
           <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
             <u-form-field class="flex-1" label="Groep" name="group" :required="true">
               <u-select
