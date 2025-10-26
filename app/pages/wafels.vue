@@ -6,6 +6,7 @@ import { startOfDay, startOfToday } from "date-fns";
 const showForm = computed(() => startOfToday() <= startOfDay(new Date("2025-11-09")));
 
 const form = useTemplateRef("form");
+const formTitle = useTemplateRef("formTitle");
 
 const wafelsInitialState = {
   ...initialState,
@@ -56,10 +57,15 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 const resetModalOpen = ref(false);
 
 function resetForm() {
-  state.value = wafelsInitialState;
+  state.value = {
+    ...wafelsInitialState,
+    wafels: {
+      ...wafelsInitialState.wafels,
+    },
+  };
   form.value?.clear();
   resetModalOpen.value = false;
-  window.scrollTo({ behavior: "smooth", top: 0 });
+  formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 async function onError(event: FormErrorEvent) {
@@ -105,7 +111,7 @@ async function onError(event: FormErrorEvent) {
     <u-form v-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
-          <h3>Bestelformulier</h3>
+          <h3 ref="formTitle">Bestelformulier</h3>
           <div class="flex flex-col gap-4">
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
               <u-form-field class="flex-1" label="Voornaam" name="firstName" :required="true">
