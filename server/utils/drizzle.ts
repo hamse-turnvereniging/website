@@ -12,3 +12,5 @@ export function useDrizzle() {
 export type Inschrijving = typeof schema.inschrijvingen.$inferSelect;
 
 export type Bestelling = typeof schema.bestellingen.$inferSelect;
+
+export type Reservatie = typeof schema.reservaties.$inferSelect;

@@ -1,6 +1,6 @@
 import * as v from "valibot";
 
-import bevestigingInschrijvingEmailTemplate from "~~/server/assets/templates/email/bevestiging-inschrijving";
+import emailTemplate from "~~/server/assets/templates/email/inschrijving";
 import { groupPrice } from "#shared/data/inschrijving";
 import { schema } from "#shared/schemas/inschrijving";
 import { tables, useDrizzle } from "../utils/drizzle";
@@ -71,7 +71,7 @@ export default defineEventHandler(async (event) => {
     const discount = input.is60PlusAtEndOfThisYear || input.familyMember.check ? 5 : 0;
     const discountedAmount = amount && discount ? amount - discount : null;
 
-    const htmlContent = bevestigingInschrijvingEmailTemplate({
+    const htmlContent = emailTemplate({
       ...input,
       subject,
       amount,
@@ -82,13 +82,20 @@ export default defineEventHandler(async (event) => {
     await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       body: {
-        to,
-        bcc: [
-          {
-            email: "inschrijvingen@hamseturnvereniging.be",
-            name: "Hamse Turnvereniging",
-          },
+        // TODO: Uncomment
+        // to,
+        // TODO: Remove
+        to: [
+          { email: "steff@steffbeckers.com", name: "Steff Beckers" },
+          { email: "beckerssteff@gmail.com", name: "Steff Beckers" },
         ],
+        // TODO: Uncomment
+        // bcc: [
+        //   {
+        //     email: "info@hamseturnvereniging.be",
+        //     name: "Hamse Turnvereniging",
+        //   },
+        // ],
         replyTo: {
           email: "info@hamseturnvereniging.be",
           name: "Hamse Turnvereniging",

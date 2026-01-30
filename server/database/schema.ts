@@ -11,3 +11,9 @@ export const bestellingen = sqliteTable("bestellingen", {
   data: text("data").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
 });
+
+export const reservaties = sqliteTable("reservaties", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  data: text("data").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});

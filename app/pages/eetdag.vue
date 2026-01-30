@@ -1,27 +1,31 @@
 <script lang="ts" setup>
-import { schema, initialState, type Schema } from "#shared/schemas/bestellen/wafels";
+import {
+  schema,
+  initialState,
+  type Schema,
+  paymentTypes,
+} from "~~/shared/schemas/reserveren/eetdag";
 import type { FormErrorEvent, FormSubmitEvent } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { startOfDay, startOfToday } from "date-fns";
-const showForm = computed(() => startOfToday() <= startOfDay(new Date("2025-11-09")));
+const showForm = computed(() => startOfToday() <= startOfDay(new Date("2026-02-25")));
 
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
 
-const state = useLocalStorage("bestelformulier-wafels", initialState, {
+const state = useLocalStorage("reservatieformulier-eetdag", initialState, {
   mergeDefaults: true,
 });
 
 const amount = computed(() => {
-  const quantity = (state.value.wafels.vanilla ?? 0) + (state.value.wafels.chocolate ?? 0);
-
-  return quantity * (quantity >= 3 ? 4 : 5);
+  // TODO: Calculate amount
+  return 0;
 });
 
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  const response = await $fetch("/api/bestellen/wafels", {
+  const response = await $fetch("/api/reserveren/eetdag", {
     method: "POST",
     body: event.data,
   });
@@ -29,7 +33,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   const errorToast: Partial<Toast> = {
     title: "Mislukt!",
     description:
-      "Er ging iets mis tijdens het verzenden van je bestelling. Probeer het later even opnieuw.",
+      "Er ging iets mis tijdens het verzenden van je reservatie. Probeer het later even opnieuw.",
     color: "error",
   };
 
@@ -40,7 +44,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     return;
   }
 
-  toast.add({ title: "Gelukt!", description: "Je bestelling is verzonden.", color: "primary" });
+  toast.add({ title: "Gelukt!", description: "Je reservatie is verzonden.", color: "primary" });
 
   resetForm();
 }
@@ -67,37 +71,22 @@ async function onError(event: FormErrorEvent) {
 <template>
   <section id="banner">
     <div class="max-w-6xl mx-auto flex flex-col px-8 py-[120px]">
-      <h1>Wafels</h1>
+      <h1>Eetdag</h1>
     </div>
   </section>
   <section class="max-w-2xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-col gap-4">
-      <h2>Wafelverkoop</h2>
-      <p>Dit jaar organiseren we voor het eerst een wafelverkoop ten voordele van onze club.</p>
+      <h2>Eetdag</h2>
       <p>
-        Met deze actie willen we de werking van de Hamse Turnvereniging extra ondersteunen en daar
-        kunnen we jullie hulp goed bij gebruiken!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, ratione sint perspiciatis
+        nostrum vitae et repudiandae facilis soluta, omnis modi delectus dolores. Dolor odit rem
+        molestiae inventore eligendi et veritatis!
       </p>
-      <p>
-        We verkopen heerlijke Mina-wafels, verpakt in pakken van 5 wafels per pak.<br />
-        Je hebt de keuze tussen vanillewafels of half-gechocolateerde wafels.
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <nuxt-img src="/images/wafels/vanille.jpg" width="180" height="135" />
-        <nuxt-img src="/images/wafels/chocolade.jpg" width="180" height="135" />
-      </div>
-      <p>De prijs bedraagt &euro; 5 per pak, vanaf 3 pakken &euro; 4 per pak.</p>
-      <p>Bestellen kan <strong>tot en met 9 november</strong> via het bestelformulier hieronder.</p>
-      <p>
-        De bestelde wafels zullen verdeeld worden tijdens de lessen vanaf de laatste week van
-        november.
-      </p>
-      <p>Alvast bedankt voor jullie steun! Samen maken we er een geslaagde actie van.</p>
     </div>
     <u-form v-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
-          <h3 ref="formTitle">Bestelformulier</h3>
+          <h3 ref="formTitle">Reserveren</h3>
           <div class="flex flex-col gap-4">
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
               <u-form-field class="flex-1" label="Voornaam" name="firstName" :required="true">
@@ -134,42 +123,11 @@ async function onError(event: FormErrorEvent) {
         </div>
         <hr />
         <div class="flex flex-col gap-4">
-          <h4>Wafels</h4>
-          <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-            <u-form-field class="flex-1" label="Aantal pakken vanillewafels" name="wafels.vanilla">
-              <u-input
-                v-model="state.wafels.vanilla"
-                type="number"
-                min="0"
-                step="1"
-                class="w-full"
-                size="xl"
-                placeholder="Aantal pakken vanille"
-              />
-            </u-form-field>
-            <u-form-field
-              class="flex-1"
-              label="Aantal pakken half-gechocolateerde"
-              name="wafels.chocolate"
-            >
-              <u-input
-                v-model="state.wafels.chocolate"
-                type="number"
-                min="0"
-                step="1"
-                class="w-full"
-                size="xl"
-                placeholder="Aantal pakken half-gechocolateerde"
-              />
-            </u-form-field>
-          </div>
-        </div>
-        <hr />
-        <div class="flex flex-col gap-4">
-          <h4>Betaalgegevens</h4>
+          <h4>Betaling</h4>
+          <URadioGroup v-model="state.payment" :items="paymentTypes" size="xl" />
           <!-- TODO: Add SEPA QR -->
           <div class="sm:hidden flex flex-col gap-4">
-            <div class="flex flex-col">
+            <div v-if="state.payment === paymentTypes[0]" class="flex flex-col">
               <div class="text-sm">Rekeningnummer</div>
               <div class="font-semibold py-1">BE69 0682 0939 9078</div>
             </div>
@@ -177,10 +135,10 @@ async function onError(event: FormErrorEvent) {
               <div class="text-sm">Bedrag</div>
               <div class="font-semibold py-1">&euro; {{ amount }}</div>
             </div>
-            <div class="flex flex-col">
+            <div v-if="state.payment === paymentTypes[0]" class="flex flex-col">
               <div class="text-sm">Mededeling</div>
               <div class="font-semibold py-1">
-                Wafels
+                Eetdag
                 {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                 {{ state.lastName != "" ? state.lastName : "Naam" }}
               </div>
@@ -188,41 +146,33 @@ async function onError(event: FormErrorEvent) {
           </div>
           <table class="hidden sm:block">
             <tbody>
-              <tr>
-                <td class="text-sm" width="160px">Rekeningnummer</td>
+              <tr v-if="state.payment === paymentTypes[0]">
+                <td class="text-sm">Rekeningnummer</td>
                 <td class="font-semibold py-1">BE69 0682 0939 9078</td>
               </tr>
               <tr>
-                <td class="text-sm">Bedrag</td>
+                <td class="text-sm" width="160px">Bedrag</td>
                 <td class="font-semibold py-1">&euro; {{ amount }}</td>
               </tr>
-              <tr>
+              <tr v-if="state.payment === paymentTypes[0]">
                 <td class="text-sm">Mededeling</td>
                 <td class="font-semibold py-1">
-                  Wafels
+                  Eetdag
                   {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                   {{ state.lastName != "" ? state.lastName : "Naam" }}
                 </td>
               </tr>
             </tbody>
           </table>
-          <u-form-field name="paymentCheck">
-            <u-checkbox
-              v-model="state.paymentCheck"
-              label="Ik heb reeds betaald of de betaalgegevens zorgvuldig genoteerd."
-              description="(te betalen binnen 14 dagen na bestelling)"
-              size="xl"
-            />
-          </u-form-field>
         </div>
         <hr />
         <div class="flex flex-col gap-4">
           <p>
-            Je ontvangt een bevestiging van je bestelling via e-mail.
+            Je ontvangt een bevestiging van je reservatie via e-mail.
             <span class="font-semibold">Controleer ook je spam/ongewenste e-mail</span>.
           </p>
           <u-button
-            label="Bestelling verzenden"
+            label="Reservatie verzenden"
             type="submit"
             icon="i-lucide-send"
             size="xl"
@@ -242,7 +192,7 @@ async function onError(event: FormErrorEvent) {
                     @click="resetModalOpen = false"
                   />
                 </div>
-                <p>Ben je zeker dat je de gegevens van het bestelformulier wilt wissen?</p>
+                <p>Ben je zeker dat je de gegevens van het reservatieformulier wilt wissen?</p>
                 <div class="flex gap-4 justify-end">
                   <u-button
                     label="Annuleren"
@@ -260,8 +210,8 @@ async function onError(event: FormErrorEvent) {
       </div>
     </u-form>
     <div v-else class="flex flex-col gap-4">
-      <h3>Bestelformulier</h3>
-      <p>Je kan momenteel geen wafels meer bestellen.</p>
+      <h3>Reserveren</h3>
+      <p>Je kan momenteel niet meer reserveren voor de eetdag.</p>
     </div>
   </section>
 </template>

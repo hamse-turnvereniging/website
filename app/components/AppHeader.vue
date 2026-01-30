@@ -3,6 +3,7 @@ import { startOfDay, startOfToday } from "date-fns";
 
 const route = useRoute();
 const showWafels = computed(() => startOfToday() <= startOfDay(new Date("2025-11-09")));
+const showEetdag = computed(() => startOfToday() <= startOfDay(new Date("2026-03-01")));
 </script>
 
 <template>
@@ -44,6 +45,14 @@ const showWafels = computed(() => startOfToday() <= startOfDay(new Date("2025-11
             :color="route.path === '/wafels' ? 'primary' : 'secondary'"
             size="xl"
             >Wafels</u-button
+          >
+        </div>
+        <div v-if="showEetdag" class="flex items-center">
+          <u-button
+            to="/eetdag"
+            :color="route.path === '/eetdag' ? 'primary' : 'secondary'"
+            size="xl"
+            >Eetdag</u-button
           >
         </div>
       </nav>
@@ -95,6 +104,15 @@ const showWafels = computed(() => startOfToday() <= startOfDay(new Date("2025-11
                 size="xl"
                 @click="close()"
                 ><h3 class="text-white!">Wafels</h3></u-button
+              >
+            </div>
+            <div v-if="showEetdag" class="p-4 flex justify-center">
+              <u-button
+                to="/eetdag"
+                :color="route.path === '/eetdag' ? 'primary' : 'secondary'"
+                size="xl"
+                @click="close()"
+                ><h3 class="text-white!">Eetdag</h3></u-button
               >
             </div>
           </nav>

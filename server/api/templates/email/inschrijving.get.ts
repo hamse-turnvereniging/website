@@ -1,6 +1,6 @@
 import { groupPrice } from "#shared/data/inschrijving";
 import { Schema } from "#shared/schemas/inschrijving";
-import bevestigingInschrijvingEmailTemplate from "~~/server/assets/templates/email/bevestiging-inschrijving";
+import emailTemplate from "~~/server/assets/templates/email/inschrijving";
 
 export default defineEventHandler(async (event) => {
   let inputIndex = 0;
@@ -116,7 +116,7 @@ export default defineEventHandler(async (event) => {
   const discount = input.is60PlusAtEndOfThisYear || input.familyMember.check ? 5 : 0;
   const discountedAmount = amount && discount ? amount - discount : null;
 
-  return bevestigingInschrijvingEmailTemplate({
+  return emailTemplate({
     ...input,
     subject,
     amount,

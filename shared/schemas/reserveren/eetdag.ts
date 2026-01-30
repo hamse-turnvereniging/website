@@ -1,28 +1,24 @@
 import * as v from "valibot";
 
-const base = v.object({
+export const paymentTypes = ["Via overschrijving", "Aan de kassa"];
+
+export const schema = v.object({
   firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
   lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
   phoneNumber: v.pipe(v.string(), v.trim(), v.nonEmpty("Telefoonnummer is verplicht")),
   email: v.pipe(v.string(), v.email("E-mailadres is ongeldig")),
-  paymentCheck: v.pipe(
-    v.boolean(),
-    v.literal(true, "Je moet binnen 14 dagen na je bestelling betaald hebben")
+  timeSlot: v.optional(
+    v.pipe(
+      v.string(),
+      v.trim(),
+      v.nonEmpty("Tijdslot is verplicht"),
+      v.picklist(["11u30 - 15u", "16u30 - 19u"])
+    )
+  ),
+  payment: v.optional(
+    v.pipe(v.string(), v.trim(), v.nonEmpty("Betaling is verplicht"), v.picklist(paymentTypes))
   ),
 });
-
-export const schema = v.variant("type", [
-  v.object({
-    ...base.entries,
-    type: v.optional(
-      v.pipe(v.string(), v.trim(), v.nonEmpty("Type is verplicht"), v.literal("Wafels"))
-    ),
-    wafels: v.object({
-      vanilla: v.optional(v.number()),
-      chocolate: v.optional(v.number()),
-    }),
-  }),
-]);
 
 export type Schema = v.InferOutput<typeof schema>;
 
@@ -32,4 +28,6 @@ export const initialState = {
   phoneNumber: "",
   email: "",
   paymentCheck: false as boolean,
+  timeSlot: "11u30 - 15u",
+  payment: paymentTypes[0],
 } as Schema;

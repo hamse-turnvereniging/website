@@ -1,8 +1,8 @@
 import * as v from "valibot";
 
-import bevestigingBestellingEmailTemplate from "~~/server/assets/templates/email/bevestiging-bestelling";
-import { schema } from "#shared/schemas/bestelling";
-import { tables, useDrizzle } from "../utils/drizzle";
+import emailTemplate from "~~/server/assets/templates/email/reserveren/eetdag";
+import { schema } from "~~/shared/schemas/reserveren/eetdag";
+import { tables, useDrizzle } from "../../utils/drizzle";
 
 export default defineEventHandler(async (event) => {
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
@@ -20,9 +20,9 @@ export default defineEventHandler(async (event) => {
   try {
     // Save to database
     await useDrizzle()
-      .insert(tables.bestellingen)
+      .insert(tables.reservaties)
       .values({
-        data: JSON.stringify(input),
+        data: JSON.stringify({ ...input, type: "Eetdag" }),
         createdAt: new Date(),
       });
 
@@ -38,33 +38,35 @@ export default defineEventHandler(async (event) => {
       },
     ];
 
-    const subject = `Bevestiging bestelling - ${input.type} - ${input.firstName} ${input.lastName}`;
-    let amount = 0;
-    let typeWafels = input.type === "Wafels";
+    // TODO: Date as const variable
+    const subject = `Bevestiging reservatie - Eetdag 01/03/2026 - ${input.firstName} ${input.lastName}`;
 
-    if (typeWafels) {
-      const quantity = (input.wafels.vanilla ?? 0) + (input.wafels.chocolate ?? 0);
-      amount = quantity * (quantity >= 3 ? 4 : 5);
-    }
+    // TODO: Calculate amount
+    const amount = 0;
 
-    const htmlContent = bevestigingBestellingEmailTemplate({
+    const htmlContent = emailTemplate({
       ...input,
       subject,
       amount,
-      typeLowercase: input.type?.toLowerCase(),
-      typeWafels,
     });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       body: {
-        to,
-        bcc: [
-          {
-            email: "info@hamseturnvereniging.be",
-            name: "Hamse Turnvereniging",
-          },
+        // TODO: Uncomment
+        // to,
+        // TODO: Remove
+        to: [
+          { email: "steff@steffbeckers.com", name: "Steff Beckers" },
+          { email: "beckerssteff@gmail.com", name: "Steff Beckers" },
         ],
+        // TODO: Uncomment
+        // bcc: [
+        //   {
+        //     email: "info@hamseturnvereniging.be",
+        //     name: "Hamse Turnvereniging",
+        //   },
+        // ],
         sender: {
           email: "info@hamseturnvereniging.be",
           name: "Hamse Turnvereniging",

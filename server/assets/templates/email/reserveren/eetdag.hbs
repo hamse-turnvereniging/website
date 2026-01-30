@@ -39,9 +39,7 @@
         max-width: 0;
       "
     >
-      Bevestiging van je bestelling van
-      {{type}}
-      - bekijk het overzicht hieronder.
+      Bevestiging van je reservatie voor de eetdag - bekijk het overzicht hieronder.
     </div>
 
     <table
@@ -104,14 +102,14 @@
                     font-family: 'Open Sans', sans-serif;
                   "
                 >
-                  Bevestiging bestelling
+                  Bevestiging reservatie
                 </h1>
                 <p style="margin: 0 0 12px">Dag {{firstName}},</p>
                 <p style="margin: 0">
-                  Bedankt voor je bestelling
-                  {{typeLowercase}}
-                  van de Hamse Turnvereniging. Hieronder vind je een overzicht van de gegevens die
-                  we hebben ontvangen.
+                  Bedankt voor je reservatie voor de eetdag van de Hamse Turnvereniging. We
+                  verwelkomen je graag op
+                  <span style="font-weight: bold;">zondag 1 maart 2026</span>! Hieronder vind je een
+                  overzicht van de gegevens die we hebben ontvangen.
                 </p>
               </td>
             </tr>
@@ -129,7 +127,7 @@
                     font-family: 'Open Sans', sans-serif;
                   "
                 >
-                  Bestelformulier
+                  Reservatie
                 </h2>
                 <table
                   role="presentation"
@@ -174,47 +172,45 @@
               </td>
             </tr>
 
-            <!-- Wafels -->
-            {{#if typeWafels}}
-              <tr>
-                <td style="padding: 12px 24px 0">
-                  <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
-                  <h2
-                    style="
-                    margin: 0 0 8px;
-                    font-size: 16px;
-                    color: #059e95;
-                    font-weight: 700;
-                    font-family: 'Open Sans', sans-serif;
-                  "
-                  >
-                    Wafels
-                  </h2>
-                  <table
-                    role="presentation"
-                    width="100%"
-                    cellspacing="0"
-                    cellpadding="0"
-                    border="0"
-                    style="
-                    border-collapse: collapse;
-                    font-size: 14px;
-                    color: #0f172a;
-                    font-family: 'Open Sans', sans-serif;
-                  "
-                  >
-                    <tr>
-                      <td width="50%" style="padding: 6px 6px 6px 0px">Aantal pakken vanille</td>
-                      <td style="padding: 6px 0"><strong>{{wafels.vanilla}}</strong></td>
-                    </tr>
-                    <tr>
-                      <td style="padding: 6px 6px 6px 0px">Aantal pakken half-gechocolateerde</td>
-                      <td style="padding: 6px 0"><strong>{{wafels.chocolate}}</strong></td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            {{/if}}
+            <tr>
+              <td style="padding: 12px 24px 0">
+                <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
+                <h2
+                  style="
+                  margin: 0 0 8px;
+                  font-size: 16px;
+                  color: #059e95;
+                  font-weight: 700;
+                  font-family: 'Open Sans', sans-serif;
+                "
+                >
+                  Gerechten
+                </h2>
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="
+                  border-collapse: collapse;
+                  font-size: 14px;
+                  color: #0f172a;
+                  font-family: 'Open Sans', sans-serif;
+                "
+                >
+                  {{! TODO: Implement }}
+                  <tr>
+                    <td width="50%" style="padding: 6px 6px 6px 0px">Kipfilet</td>
+                    <td style="padding: 6px 0"><strong>1</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Koude schotel</td>
+                    <td style="padding: 6px 0"><strong>2</strong></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
             <!-- Betaalgegevens -->
             <tr>
@@ -251,7 +247,7 @@
                   </tr>
                   <tr>
                     <td style="padding: 6px 6px 6px 0px">Mededeling</td>
-                    <td style="padding: 6px 0"><strong>{{type}}
+                    <td style="padding: 6px 0"><strong>Eetdag
                         {{firstName}}
                         {{lastName}}</strong></td>
                   </tr>
