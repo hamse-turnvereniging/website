@@ -154,9 +154,9 @@
                     <td style="padding: 6px 6px 6px 0px">Telefoon</td>
                     <td style="padding: 6px 0">
                       <a
-                        href="tel:{{phoneNumber}}"
+                        href="tel:{{this.phoneNumber}}"
                         style="color: #0f172a; text-decoration: none"
-                      ><strong>{{phoneNumber}}</strong></a>
+                      ><strong>{{this.phoneNumber}}</strong></a>
                     </td>
                   </tr>
                   <tr>
@@ -186,85 +186,130 @@
                 >
                   Gerechten of steunkaart
                 </h2>
-                <p style="font-size: 14px;">Alle gerechten worden geserveerd met lekkere frietjes!</p>
-                <h3
-                  style="
+                <p
+                  style="font-size: 14px; color: #0f172a; font-family: 'Open Sans', sans-serif"
+                ><span style="font-weight: bold;">Alle gerechten</span>
+                  worden geserveerd
+                  <span style="font-weight: bold;">met lekkere frietjes</span>!</p>
+                {{#if childMeals.length}}
+                  <h3
+                    style="
                   margin: 0 0 8px;
                   font-size: 14px;
                   color: #059e95;
                   font-weight: 700;
                   font-family: 'Open Sans', sans-serif;
                 "
-                >
-                  Kinderen: soep, hoofdgerecht en dessert
-                </h3>
-                <table
-                  role="presentation"
-                  width="100%"
-                  cellspacing="0"
-                  cellpadding="0"
-                  border="0"
-                  style="
+                  >
+                    Kinderen: soep, hoofdgerecht en dessert
+                  </h3>
+                  <table
+                    role="presentation"
+                    width="100%"
+                    cellspacing="0"
+                    cellpadding="0"
+                    border="0"
+                    style="
                   border-collapse: collapse;
                   font-size: 14px;
                   color: #0f172a;
                   font-family: 'Open Sans', sans-serif;
                 "
-                >
-                  {{#each childMeals}}
-                    <tr>
-                      <td width="34%" style="padding: 6px 6px 6px 0px">{{name}}</td>
-                      <td style="padding: 6px 0">&euro;
-                        {{price}}
-                        x
-                        <strong>{{quantity}}</strong>
-                        &equals; &euro;
-                        {{multiply price quantity}}
-                      </td>
-                    </tr>
-                  {{/each}}
-                </table>
-                <h3
-                  style="
-                  margin: 0 0 8px;
+                  >
+                    {{#each childMeals}}
+                      <tr>
+                        <td width="34%" style="padding: 6px 6px 6px 0px">{{name}}</td>
+                        <td style="padding: 6px 0">&euro;
+                          {{price}}
+                          x
+                          <strong>{{quantity}}</strong>
+                          &equals; &euro;
+                          {{multiply price (toInt quantity)}}
+                        </td>
+                      </tr>
+                    {{/each}}
+                  </table>
+                {{/if}}
+                {{#if adultMeals.length}}
+                  <h3
+                    style="
+                  margin: 8px 0 8px;
                   font-size: 14px;
                   color: #059e95;
                   font-weight: 700;
                   font-family: 'Open Sans', sans-serif;
                 "
-                >
-                  Volwassenen: soep, hoofdgerecht, dessert of koffie
-                </h3>
-                <table
-                  role="presentation"
-                  width="100%"
-                  cellspacing="0"
-                  cellpadding="0"
-                  border="0"
-                  style="
+                  >
+                    Volwassenen: soep, hoofdgerecht, dessert of koffie
+                  </h3>
+                  <table
+                    role="presentation"
+                    width="100%"
+                    cellspacing="0"
+                    cellpadding="0"
+                    border="0"
+                    style="
                   border-collapse: collapse;
                   font-size: 14px;
                   color: #0f172a;
                   font-family: 'Open Sans', sans-serif;
                 "
-                >
-                  {{#each adultMeals}}
+                  >
+                    {{#each adultMeals}}
+                      <tr>
+                        <td width="34%" style="padding: 6px 6px 6px 0px">{{name}}</td>
+                        <td style="padding: 6px 0">&euro;
+                          {{price}}
+                          x
+                          <strong>{{quantity}}</strong>
+                          &equals; &euro;
+                          {{multiply price (toInt quantity)}}
+                        </td>
+                      </tr>
+                    {{/each}}
+                  </table>
+                {{/if}}
+                {{#if supportCardQuantity}}
+                  <h3
+                    style="
+                  margin: 8px 0 8px;
+                  font-size: 14px;
+                  color: #059e95;
+                  font-weight: 700;
+                  font-family: 'Open Sans', sans-serif;
+                "
+                  >
+                    Steunkaart
+                  </h3>
+                  <table
+                    role="presentation"
+                    width="100%"
+                    cellspacing="0"
+                    cellpadding="0"
+                    border="0"
+                    style="
+                  border-collapse: collapse;
+                  font-size: 14px;
+                  color: #0f172a;
+                  font-family: 'Open Sans', sans-serif;
+                "
+                  >
                     <tr>
-                      <td width="34%" style="padding: 6px 6px 6px 0px">{{name}}</td>
+                      <td width="34%" style="padding: 6px 6px 6px 0px">Wil je ons ook graag steunen?</td>
                       <td style="padding: 6px 0">&euro;
-                        {{price}}
+                        {{supportCardPrice}}
                         x
-                        <strong>{{quantity}}</strong>
+                        <strong>{{supportCardQuantity}}</strong>
                         &equals; &euro;
-                        {{multiply price quantity}}
+                        {{multiply supportCardPrice (toInt supportCardQuantity)}}
                       </td>
                     </tr>
-                  {{/each}}
-                </table>
+                  </table>
+                {{/if}}
               </td>
             </tr>
 
-            <!-- Betaalgegevens -->
+            <!-- Betaling -->
             <tr>
               <td style="padding: 12px 24px 0">
                 <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
@@ -277,8 +322,17 @@
                     font-family: 'Open Sans', sans-serif;
                   "
                 >
-                  Betaalgegevens
+                  Betaling
                 </h2>
+                <p
+                  style="font-weight: bold; font-size: 14px; color: #0f172a; font-family: 'Open Sans', sans-serif"
+                >
+                  {{#if (eq payment "Via overschrijving")}}
+                    Via overschrijving
+                  {{else}}
+                    Aan de kassa
+                  {{/if}}
+                </p>
                 <table
                   role="presentation"
                   width="100%"
@@ -287,22 +341,26 @@
                   border="0"
                   style="font-size: 14px; color: #0f172a; font-family: 'Open Sans', sans-serif"
                 >
+                  {{#if (eq payment "Via overschrijving")}}
+                    <tr>
+                      <td style="padding: 6px 6px 6px 0px">Rekeningnummer</td>
+                      <td style="padding: 6px 0">
+                        <strong>BE69 0682 0939 9078</strong>
+                      </td>
+                    </tr>
+                  {{/if}}
                   <tr>
-                    <td width="34%" style="padding: 6px 6px 6px 0px">Rekeningnummer</td>
-                    <td style="padding: 6px 0">
-                      <strong>BE69 0682 0939 9078</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 6px 6px 6px 0px">Bedrag</td>
+                    <td width="34%" style="padding: 6px 6px 6px 0px">Bedrag</td>
                     <td style="padding: 6px 0"><strong>&euro; {{amount}}</strong></td>
                   </tr>
-                  <tr>
-                    <td style="padding: 6px 6px 6px 0px">Mededeling</td>
-                    <td style="padding: 6px 0"><strong>Eetdag
-                        {{firstName}}
-                        {{lastName}}</strong></td>
-                  </tr>
+                  {{#if (eq payment "Via overschrijving")}}
+                    <tr>
+                      <td style="padding: 6px 6px 6px 0px">Mededeling</td>
+                      <td style="padding: 6px 0"><strong>Eetdag
+                          {{firstName}}
+                          {{lastName}}</strong></td>
+                    </tr>
+                  {{/if}}
                 </table>
               </td>
             </tr>

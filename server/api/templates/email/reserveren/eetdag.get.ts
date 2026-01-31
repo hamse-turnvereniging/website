@@ -40,8 +40,34 @@ export default defineEventHandler(async (event) => {
           quantity: 1,
         },
       ],
-      supportCardQuantity: 1,
+      supportCardQuantity: 2,
       payment: "Via overschrijving",
+    },
+    {
+      timeSlot: "van 11u30 tot 15u",
+      firstName: "Daisy",
+      lastName: "Delcour",
+      phoneNumber: "+32 499 765 192",
+      email: "steff@steffbeckers.com",
+      childMeals: [],
+      adultMeals: [
+        {
+          name: "Kippenfilet",
+          price: 18,
+          quantity: 1,
+        },
+        {
+          name: "Vol-au-vent",
+          price: 18,
+          quantity: 2,
+        },
+        {
+          name: "Goulash",
+          price: 18,
+          quantity: 1,
+        },
+      ],
+      payment: "Aan de kassa",
     },
   ];
 
@@ -57,5 +83,6 @@ export default defineEventHandler(async (event) => {
     ...input,
     subject,
     amount,
+    supportCardPrice,
   });
 });
