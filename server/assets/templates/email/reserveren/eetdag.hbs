@@ -224,7 +224,7 @@
                           x
                           <strong>{{quantity}}</strong>
                           &equals; &euro;
-                          {{multiply price (toInt quantity)}}
+                          {{multiply price quantity}}
                         </td>
                       </tr>
                     {{/each}}
@@ -263,7 +263,7 @@
                           x
                           <strong>{{quantity}}</strong>
                           &equals; &euro;
-                          {{multiply price (toInt quantity)}}
+                          {{multiply price quantity}}
                         </td>
                       </tr>
                     {{/each}}
@@ -301,7 +301,7 @@
                         x
                         <strong>{{supportCardQuantity}}</strong>
                         &equals; &euro;
-                        {{multiply supportCardPrice (toInt supportCardQuantity)}}
+                        {{multiply supportCardPrice supportCardQuantity}}
                       </td>
                     </tr>
                   </table>
