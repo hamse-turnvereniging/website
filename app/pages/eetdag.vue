@@ -54,9 +54,14 @@ Eetdag ${state.value.firstName} ${state.value.lastName}
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  const body = event.data;
+
+  body.childMeals = body.childMeals.filter((x) => x.quantity && x.quantity > 0);
+  body.adultMeals = body.adultMeals.filter((x) => x.quantity && x.quantity > 0);
+
   const response = await $fetch("/api/reserveren/eetdag", {
     method: "POST",
-    body: event.data,
+    body,
   });
 
   const errorToast: Partial<Toast> = {

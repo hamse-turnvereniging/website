@@ -1,7 +1,7 @@
 import * as v from "valibot";
 
 import emailTemplate from "~~/server/assets/templates/email/reserveren/eetdag";
-import { schema } from "~~/shared/schemas/reserveren/eetdag";
+import { schema, supportCardPrice } from "~~/shared/schemas/reserveren/eetdag";
 import { tables, useDrizzle } from "../../utils/drizzle";
 
 export default defineEventHandler(async (event) => {
@@ -41,8 +41,11 @@ export default defineEventHandler(async (event) => {
     // TODO: Date as const variable
     const subject = `Bevestiging reservatie - Eetdag 01/03/2026 - ${input.firstName} ${input.lastName}`;
 
-    // TODO: Calculate amount
-    const amount = 0;
+    const amount = [
+      ...input.childMeals.map((x) => (x.quantity ?? 0) * x.price),
+      ...input.adultMeals.map((x) => (x.quantity ?? 0) * x.price),
+      (input.supportCardQuantity ?? 0) * supportCardPrice,
+    ].reduce((sum, amount) => sum + amount, 0);
 
     const htmlContent = emailTemplate({
       ...input,

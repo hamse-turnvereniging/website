@@ -184,8 +184,20 @@
                   font-family: 'Open Sans', sans-serif;
                 "
                 >
-                  Gerechten
+                  Gerechten of steunkaart
                 </h2>
+                <p style="font-size: 14px;">Alle gerechten worden geserveerd met lekkere frietjes!</p>
+                <h3
+                  style="
+                  margin: 0 0 8px;
+                  font-size: 14px;
+                  color: #059e95;
+                  font-weight: 700;
+                  font-family: 'Open Sans', sans-serif;
+                "
+                >
+                  Kinderen: soep, hoofdgerecht en dessert
+                </h3>
                 <table
                   role="presentation"
                   width="100%"
@@ -199,15 +211,55 @@
                   font-family: 'Open Sans', sans-serif;
                 "
                 >
-                  {{! TODO: Implement }}
-                  <tr>
-                    <td width="50%" style="padding: 6px 6px 6px 0px">Kipfilet</td>
-                    <td style="padding: 6px 0"><strong>1</strong></td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 6px 6px 6px 0px">Koude schotel</td>
-                    <td style="padding: 6px 0"><strong>2</strong></td>
-                  </tr>
+                  {{#each childMeals}}
+                    <tr>
+                      <td width="34%" style="padding: 6px 6px 6px 0px">{{name}}</td>
+                      <td style="padding: 6px 0">&euro;
+                        {{price}}
+                        x
+                        <strong>{{quantity}}</strong>
+                        &equals; &euro;
+                        {{multiply price quantity}}
+                      </td>
+                    </tr>
+                  {{/each}}
+                </table>
+                <h3
+                  style="
+                  margin: 0 0 8px;
+                  font-size: 14px;
+                  color: #059e95;
+                  font-weight: 700;
+                  font-family: 'Open Sans', sans-serif;
+                "
+                >
+                  Volwassenen: soep, hoofdgerecht, dessert of koffie
+                </h3>
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="
+                  border-collapse: collapse;
+                  font-size: 14px;
+                  color: #0f172a;
+                  font-family: 'Open Sans', sans-serif;
+                "
+                >
+                  {{#each adultMeals}}
+                    <tr>
+                      <td width="34%" style="padding: 6px 6px 6px 0px">{{name}}</td>
+                      <td style="padding: 6px 0">&euro;
+                        {{price}}
+                        x
+                        <strong>{{quantity}}</strong>
+                        &equals; &euro;
+                        {{multiply price quantity}}
+                      </td>
+                    </tr>
+                  {{/each}}
                 </table>
               </td>
             </tr>
@@ -250,13 +302,6 @@
                     <td style="padding: 6px 0"><strong>Eetdag
                         {{firstName}}
                         {{lastName}}</strong></td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 6px 6px 6px 0px">Ik heb reeds betaald of de betaalgegevens
-                      zorgvuldig genoteerd.</td>
-                    <td style="padding: 6px 0">
-                      <strong>{{#if paymentCheck}}✅ Ja{{else}}❌ Nee{{/if}}</strong>
-                    </td>
                   </tr>
                 </table>
               </td>
