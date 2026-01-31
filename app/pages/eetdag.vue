@@ -35,6 +35,22 @@ const amount = computed(() =>
   ].reduce((sum, amount) => sum + amount, 0)
 );
 
+const qrCode = computed(() =>
+  amount.value > 0 && state.value.firstName && state.value.lastName
+    ? `BCD
+001
+1
+SCT
+GKCCBEBB
+HAMSE TURNVERENIGING
+BE69068209399078
+EUR${amount.value}
+
+Eetdag ${state.value.firstName} ${state.value.lastName}
+`
+    : null
+);
+
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -91,10 +107,22 @@ async function onError(event: FormErrorEvent) {
     <div class="flex flex-col gap-4">
       <h2>Eetdag</h2>
       <p>
-        <!-- TODO: x ste eetdag -->
-        Op <span class="font-semibold">zondag 1 maart 2026</span> organiseren we onze eetdag t.v.v.
-        de Hamse Turnvereniging, in het <span class="font-semibold">Kristoffelheem</span> te
+        Op <span class="font-semibold">zondag 1 maart 2026</span> organiseren we onze jaarlijkse
+        eetdag in de grote zaal van het <span class="font-semibold">Kristoffelheem</span> in
         Oostham.
+      </p>
+      <p>
+        Kom smullen van allerlei lekkers en steun ondertussen onze club. Reserveer via onderstaand
+        formulier en geef ook aan op welk moment je graag komt eten.
+      </p>
+      <p>
+        Het eindbedrag wordt automatisch berekend en kan je onderaan de pagina terugvinden. Betaal
+        via een overschrijving of aan de kassa op de dag zelf.
+      </p>
+      <p>Reserveren kan <span class="font-semibold">tot en met 25 februari</span>.</p>
+      <p class="font-semibold">
+        Opgelet: breng zeker je bevestingsmail (digitaal of afgedrukt) mee op de eetdag zelf als
+        bewijs van je bestelling.
       </p>
     </div>
     <u-form v-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
@@ -257,7 +285,6 @@ async function onError(event: FormErrorEvent) {
             orientation="horizontal"
             size="xl"
           />
-          <!-- TODO: Add SEPA QR -->
           <div class="sm:hidden flex flex-col gap-2">
             <div v-if="state.payment === paymentTypes[0]" class="flex flex-col">
               <div class="text-sm">Rekeningnummer</div>
@@ -274,6 +301,10 @@ async function onError(event: FormErrorEvent) {
                 {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                 {{ state.lastName != "" ? state.lastName : "Naam" }}
               </div>
+            </div>
+            <div v-if="state.payment === paymentTypes[0] && qrCode" class="flex flex-col">
+              <div class="text-sm py-1">Scan via bank app</div>
+              <qrcode class="py-1" width="150" :value="qrCode" :border="0" />
             </div>
           </div>
           <table class="hidden sm:block">
@@ -293,6 +324,10 @@ async function onError(event: FormErrorEvent) {
                   {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                   {{ state.lastName != "" ? state.lastName : "Naam" }}
                 </td>
+              </tr>
+              <tr v-if="state.payment === paymentTypes[0] && qrCode">
+                <td class="text-sm align-top py-1">Scan via bank app</td>
+                <qrcode class="py-1" width="150" :value="qrCode" />
               </tr>
             </tbody>
           </table>

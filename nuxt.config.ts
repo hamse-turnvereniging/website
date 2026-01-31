@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     "@nuxthub/core",
     "@nuxtjs/seo",
     "@vueuse/nuxt",
+    "nuxt-qrcode",
   ],
   site: {
     defaultLocale: "nl",
