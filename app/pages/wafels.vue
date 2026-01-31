@@ -168,7 +168,7 @@ async function onError(event: FormErrorEvent) {
         <div class="flex flex-col gap-4">
           <h4>Betaalgegevens</h4>
           <!-- TODO: Add SEPA QR -->
-          <div class="sm:hidden flex flex-col gap-4">
+          <div class="sm:hidden flex flex-col gap-2">
             <div class="flex flex-col">
               <div class="text-sm">Rekeningnummer</div>
               <div class="font-semibold py-1">BE69 0682 0939 9078</div>

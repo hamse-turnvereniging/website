@@ -4,6 +4,8 @@ import {
   initialState,
   type Schema,
   paymentTypes,
+  timeSlots,
+  supportCardPrice,
 } from "~~/shared/schemas/reserveren/eetdag";
 import type { FormErrorEvent, FormSubmitEvent } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
@@ -17,10 +19,21 @@ const state = useLocalStorage("reservatieformulier-eetdag", initialState, {
   mergeDefaults: true,
 });
 
-const amount = computed(() => {
-  // TODO: Calculate amount
-  return 0;
-});
+const quantity = computed(() =>
+  [
+    ...state.value.childMeals.map((x) => x.quantity ?? 0),
+    ...state.value.adultMeals.map((x) => x.quantity ?? 0),
+    state.value.supportCardQuantity ?? 0,
+  ].reduce((sum, quantity) => sum + quantity, 0)
+);
+
+const amount = computed(() =>
+  [
+    ...state.value.childMeals.map((x) => (x.quantity ?? 0) * x.price),
+    ...state.value.adultMeals.map((x) => (x.quantity ?? 0) * x.price),
+    (state.value.supportCardQuantity ?? 0) * supportCardPrice,
+  ].reduce((sum, amount) => sum + amount, 0)
+);
 
 const toast = useToast();
 
@@ -78,9 +91,10 @@ async function onError(event: FormErrorEvent) {
     <div class="flex flex-col gap-4">
       <h2>Eetdag</h2>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, ratione sint perspiciatis
-        nostrum vitae et repudiandae facilis soluta, omnis modi delectus dolores. Dolor odit rem
-        molestiae inventore eligendi et veritatis!
+        <!-- TODO: x ste eetdag -->
+        Op <span class="font-semibold">zondag 1 maart 2026</span> organiseren we onze eetdag t.v.v.
+        de Hamse Turnvereniging, in het <span class="font-semibold">Kristoffelheem</span> te
+        Oostham.
       </p>
     </div>
     <u-form v-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
@@ -88,6 +102,14 @@ async function onError(event: FormErrorEvent) {
         <div class="flex flex-col gap-4">
           <h3 ref="formTitle">Reserveren</h3>
           <div class="flex flex-col gap-4">
+            <u-form-field class="flex-1" label="Tijdslot" name="timeSlot">
+              <u-radio-group
+                v-model="state.timeSlot"
+                :items="timeSlots"
+                orientation="horizontal"
+                size="xl"
+              />
+            </u-form-field>
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
               <u-form-field class="flex-1" label="Voornaam" name="firstName" :required="true">
                 <u-input
@@ -123,10 +145,120 @@ async function onError(event: FormErrorEvent) {
         </div>
         <hr />
         <div class="flex flex-col gap-4">
+          <h4>Gerechten of steunkaart</h4>
+          <p>
+            <span class="font-semibold">Alle gerechten</span> worden geserveerd
+            <span class="font-semibold">met lekkere frietjes</span>!
+          </p>
+          <h5>Kinderen: soep, hoofdgerecht en dessert</h5>
+          <table class="meals">
+            <tbody>
+              <tr v-for="childMeal in state.childMeals" :key="childMeal.name">
+                <td>{{ childMeal.name }}</td>
+                <td class="w-10 text-right">&euro; {{ childMeal.price }}</td>
+                <td class="w-10 text-center"><u-icon class="mt-1.5" name="i-lucide-x" /></td>
+                <td class="w-25">
+                  <u-input
+                    class="w-full"
+                    v-model="childMeal.quantity"
+                    size="xl"
+                    type="number"
+                    min="0"
+                    step="1"
+                    :name="'adult-meal-' + childMeal.name + '-quantity'"
+                    placeholder="Aantal"
+                  />
+                </td>
+                <td class="w-10 text-center"><span v-if="childMeal.quantity">&equals;</span></td>
+                <td class="w-15">
+                  <span v-if="childMeal.quantity">
+                    &euro; {{ childMeal.quantity * childMeal.price }}</span
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h5>Volwassenen: soep, hoofdgerecht, dessert of koffie</h5>
+          <table class="meals">
+            <tbody>
+              <tr v-for="adultMeal in state.adultMeals" :key="adultMeal.name">
+                <td>{{ adultMeal.name }}</td>
+                <td class="w-10 text-right">&euro; {{ adultMeal.price }}</td>
+                <td class="w-10 text-center"><u-icon class="mt-1.5" name="i-lucide-x" /></td>
+                <td class="w-25">
+                  <u-input
+                    class="w-full"
+                    v-model="adultMeal.quantity"
+                    size="xl"
+                    type="number"
+                    min="0"
+                    step="1"
+                    :name="'adult-meal-' + adultMeal.name + '-quantity'"
+                    placeholder="Aantal"
+                  />
+                </td>
+                <td class="w-10 text-center"><span v-if="adultMeal.quantity">&equals;</span></td>
+                <td class="w-15">
+                  <span v-if="adultMeal.quantity">
+                    &euro; {{ adultMeal.quantity * adultMeal.price }}</span
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h5>Steunkaart <u-icon name="i-lucide-heart" /></h5>
+          <table>
+            <tbody>
+              <tr>
+                <td>Wil je ons ook graag steunen?</td>
+                <td class="w-10 text-right">&euro; {{ supportCardPrice }}</td>
+                <td class="w-10 text-center"><u-icon class="mt-1.5" name="i-lucide-x" /></td>
+                <td class="w-25">
+                  <u-input
+                    class="w-full"
+                    v-model="state.supportCardQuantity"
+                    size="xl"
+                    type="number"
+                    min="0"
+                    step="1"
+                    name="support-card-quantity"
+                    placeholder="Aantal"
+                  />
+                </td>
+                <td class="w-10 text-center">
+                  <span v-if="state.supportCardQuantity">&equals;</span>
+                </td>
+                <td class="w-15">
+                  <span v-if="state.supportCardQuantity">
+                    &euro; {{ state.supportCardQuantity * supportCardPrice }}</span
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table v-if="quantity">
+            <tbody>
+              <tr>
+                <td class="text-right">Totaal aantal</td>
+                <td class="w-6"></td>
+                <td class="w-25 ps-3">{{ quantity }}</td>
+                <td class="w-10 text-center">&equals;</td>
+                <td class="w-15">&euro; {{ amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+        <div class="flex flex-col gap-4">
           <h4>Betaling</h4>
-          <URadioGroup v-model="state.payment" :items="paymentTypes" size="xl" />
+          <u-radio-group
+            v-model="state.payment"
+            :items="paymentTypes"
+            orientation="horizontal"
+            size="xl"
+          />
           <!-- TODO: Add SEPA QR -->
-          <div class="sm:hidden flex flex-col gap-4">
+          <div class="sm:hidden flex flex-col gap-2">
             <div v-if="state.payment === paymentTypes[0]" class="flex flex-col">
               <div class="text-sm">Rekeningnummer</div>
               <div class="font-semibold py-1">BE69 0682 0939 9078</div>
@@ -222,5 +354,15 @@ async function onError(event: FormErrorEvent) {
 section#banner {
   @apply bg-primary-300;
   background-image: url("/images/banner.jpg");
+}
+
+table.meals {
+  tr {
+    @apply border-b-1 border-b-neutral-50 last-of-type:border-0;
+
+    td {
+      @apply py-1;
+    }
+  }
 }
 </style>
