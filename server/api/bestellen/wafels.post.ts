@@ -1,8 +1,8 @@
+import { bestellingen } from "hub:db:schema";
 import * as v from "valibot";
 
 import emailTemplate from "~~/server/assets/templates/email/bestellen/wafels";
 import { schema } from "~~/shared/schemas/bestellen/wafels";
-import { tables, useDrizzle } from "../../utils/drizzle";
 
 export default defineEventHandler(async (event) => {
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
@@ -19,12 +19,10 @@ export default defineEventHandler(async (event) => {
 
   try {
     // Save to database
-    await useDrizzle()
-      .insert(tables.bestellingen)
-      .values({
-        data: JSON.stringify({ ...input, type: "Wafels" }),
-        createdAt: new Date(),
-      });
+    await db.insert(bestellingen).values({
+      data: JSON.stringify({ ...input, type: "Wafels" }),
+      createdAt: new Date(),
+    });
 
     // Send email
     const headers = new Headers();

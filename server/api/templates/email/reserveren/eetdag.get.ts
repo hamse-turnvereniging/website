@@ -72,6 +72,11 @@ export default defineEventHandler(async (event) => {
   ];
 
   const input = inputs[inputIndex];
+
+  if (!input) {
+    return;
+  }
+
   const subject = `Bevestiging reservatie - Eetdag 01/03/2026 - ${input.firstName} ${input.lastName}`;
   const amount = [
     ...input.childMeals.map((x) => (x.quantity ?? 0) * x.price),

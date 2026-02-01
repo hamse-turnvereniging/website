@@ -1,8 +1,8 @@
+import { reservaties } from "hub:db:schema";
 import * as v from "valibot";
 
 import emailTemplate from "~~/server/assets/templates/email/reserveren/eetdag";
 import { schema, supportCardPrice } from "~~/shared/schemas/reserveren/eetdag";
-import { tables, useDrizzle } from "../../utils/drizzle";
 
 export default defineEventHandler(async (event) => {
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
@@ -19,12 +19,10 @@ export default defineEventHandler(async (event) => {
 
   try {
     // Save to database
-    await useDrizzle()
-      .insert(tables.reservaties)
-      .values({
-        data: JSON.stringify({ ...input, type: "Eetdag" }),
-        createdAt: new Date(),
-      });
+    await db.insert(reservaties).values({
+      data: JSON.stringify({ ...input, type: "Eetdag" }),
+      createdAt: new Date(),
+    });
 
     // Send email
     const headers = new Headers();
@@ -51,6 +49,7 @@ export default defineEventHandler(async (event) => {
       ...input,
       subject,
       amount,
+      supportCardPrice,
     });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {
