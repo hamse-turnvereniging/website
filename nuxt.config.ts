@@ -43,6 +43,9 @@ export default defineNuxtConfig({
       deployConfig: true,
       nodeCompat: true,
     },
+    rollupConfig: {
+      external: ["handlebars-helpers"],
+    },
   },
   site: {
     defaultLocale: "nl",
