@@ -1,0 +1,49 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "website",
+  "main": "./.output/server/index.mjs",
+  "compatibility_date": "2026-02-01",
+  "assets": {
+    "directory": "./.output/public/",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "r2_buckets": [
+    {
+      "binding": "BLOB",
+      "bucket_name": "website"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_id": "25965957-bd2d-49e6-8284-a31054d2da65"
+    }
+  ],
+  "vars": {
+    "NUXT_IMAGE_CLOUDFLARE_BASE_URL": "https://www.hamseturnvereniging.be",
+    "NUXT_IMAGE_PROVIDER": "cloudflare"
+  },
+  "env": {
+    "preview": {
+      "r2_buckets": [
+        {
+          "binding": "BLOB",
+          "bucket_name": "website-preview"
+        }
+      ],
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_id": "668e6197-dfdb-4b74-bacb-6d6c302843b7"
+        }
+      ],
+      "vars": {
+        "NUXT_IMAGE_CLOUDFLARE_BASE_URL": "https://preview.hamseturnvereniging.be",
+        "NUXT_IMAGE_PROVIDER": "cloudflare"
+      }
+    }
+  }
+}

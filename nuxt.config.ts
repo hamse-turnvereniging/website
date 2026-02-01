@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2025-07-15",
+  compatibilityDate: "2026-02-01",
   css: ["~/assets/css/main.css"],
   fonts: {
     defaults: {
@@ -37,6 +37,13 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "nuxt-qrcode",
   ],
+  nitro: {
+    preset: "cloudflare_module",
+    cloudflare: {
+      deployConfig: true,
+      nodeCompat: true,
+    },
+  },
   site: {
     defaultLocale: "nl",
     name: "Hamse Turnvereniging",
