@@ -24,7 +24,7 @@ const quantity = computed(() =>
     ...state.value.childMeals.map((x) => x.quantity ?? 0),
     ...state.value.adultMeals.map((x) => x.quantity ?? 0),
     state.value.supportCardQuantity ?? 0,
-  ].reduce((sum, quantity) => sum + quantity, 0)
+  ].reduce((sum, quantity) => sum + Number(quantity), 0)
 );
 
 const amount = computed(() =>
@@ -32,7 +32,7 @@ const amount = computed(() =>
     ...state.value.childMeals.map((x) => (x.quantity ?? 0) * x.price),
     ...state.value.adultMeals.map((x) => (x.quantity ?? 0) * x.price),
     (state.value.supportCardQuantity ?? 0) * supportCardPrice,
-  ].reduce((sum, amount) => sum + amount, 0)
+  ].reduce((sum, amount) => sum + Number(amount), 0)
 );
 
 const qrCode = computed(() =>
@@ -183,7 +183,7 @@ async function onError(event: FormErrorEvent) {
             <span class="font-semibold">Alle gerechten</span> worden geserveerd
             <span class="font-semibold">met lekkere frietjes</span>!
           </p>
-          <h5>Kinderen: soep, hoofdgerecht en dessert</h5>
+          <h5><span class="font-bold">Kindermenu</span>: soep, hoofdgerecht en dessert</h5>
           <table class="meals">
             <tbody>
               <tr v-for="childMeal in state.childMeals" :key="childMeal.name">
@@ -211,7 +211,7 @@ async function onError(event: FormErrorEvent) {
               </tr>
             </tbody>
           </table>
-          <h5>Volwassenen: soep, hoofdgerecht, dessert of koffie</h5>
+          <h5><span class="font-bold">Volwassenen</span>: soep, hoofdgerecht, dessert of koffie</h5>
           <table class="meals">
             <tbody>
               <tr v-for="adultMeal in state.adultMeals" :key="adultMeal.name">
