@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "website",
+  "name": "website-preview",
   "main": "./.output/server/index.mjs",
   "compatibility_date": "2026-02-01",
   "assets": {
