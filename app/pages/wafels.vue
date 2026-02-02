@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { schema, initialState, type Schema } from "#shared/schemas/bestelling";
+import { schema, initialState, type Schema } from "#shared/schemas/bestellen/wafels";
 import type { FormErrorEvent, FormSubmitEvent } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { startOfDay, startOfToday } from "date-fns";
@@ -8,16 +8,7 @@ const showForm = computed(() => startOfToday() <= startOfDay(new Date("2025-11-0
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
 
-const wafelsInitialState = {
-  ...initialState,
-  type: "Wafels",
-  wafels: {
-    vanilla: 0,
-    chocolate: 0,
-  },
-} as Schema;
-
-const state = useLocalStorage("bestelformulier-wafels", wafelsInitialState, {
+const state = useLocalStorage("bestelformulier-wafels", initialState, {
   mergeDefaults: true,
 });
 
@@ -30,7 +21,7 @@ const amount = computed(() => {
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  const response = await $fetch("/api/bestellen", {
+  const response = await $fetch("/api/bestellen/wafels", {
     method: "POST",
     body: event.data,
   });
@@ -57,12 +48,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 const resetModalOpen = ref(false);
 
 function resetForm() {
-  state.value = {
-    ...wafelsInitialState,
-    wafels: {
-      ...wafelsInitialState.wafels,
-    },
-  };
+  state.value = { ...initialState };
   form.value?.clear();
   resetModalOpen.value = false;
   formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -144,50 +130,50 @@ async function onError(event: FormErrorEvent) {
                 <u-input v-model="state.email" class="w-full" size="xl" placeholder="E-mailadres" />
               </u-form-field>
             </div>
-            <h4>Wafels</h4>
-            <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-              <u-form-field
-                class="flex-1"
-                label="Aantal pakken vanillewafels"
-                name="wafels.vanilla"
-              >
-                <u-input
-                  v-model="state.wafels.vanilla"
-                  type="number"
-                  min="0"
-                  step="1"
-                  class="w-full"
-                  size="xl"
-                  placeholder="Aantal pakken vanille"
-                />
-              </u-form-field>
-              <u-form-field
-                class="flex-1"
-                label="Aantal pakken half-gechocolateerde"
-                name="wafels.chocolate"
-              >
-                <u-input
-                  v-model="state.wafels.chocolate"
-                  type="number"
-                  min="0"
-                  step="1"
-                  class="w-full"
-                  size="xl"
-                  placeholder="Aantal pakken half-gechocolateerde"
-                />
-              </u-form-field>
-            </div>
           </div>
         </div>
         <hr />
         <div class="flex flex-col gap-4">
-          <h3>Betaalgegevens</h3>
-          <div class="sm:hidden flex flex-col gap-4">
+          <h4>Wafels</h4>
+          <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+            <u-form-field class="flex-1" label="Aantal pakken vanillewafels" name="wafels.vanilla">
+              <u-input
+                v-model="state.wafels.vanilla"
+                type="number"
+                min="0"
+                step="1"
+                class="w-full"
+                size="xl"
+                placeholder="Aantal pakken vanille"
+              />
+            </u-form-field>
+            <u-form-field
+              class="flex-1"
+              label="Aantal pakken half-gechocolateerde"
+              name="wafels.chocolate"
+            >
+              <u-input
+                v-model="state.wafels.chocolate"
+                type="number"
+                min="0"
+                step="1"
+                class="w-full"
+                size="xl"
+                placeholder="Aantal pakken half-gechocolateerde"
+              />
+            </u-form-field>
+          </div>
+        </div>
+        <hr />
+        <div class="flex flex-col gap-4">
+          <h4>Betaalgegevens</h4>
+          <!-- TODO: Add SEPA QR -->
+          <div class="sm:hidden flex flex-col gap-2">
             <div class="flex flex-col">
               <div class="text-sm">Rekeningnummer</div>
               <div class="font-semibold py-1">BE69 0682 0939 9078</div>
             </div>
-            <div v-if="amount" class="flex flex-col">
+            <div class="flex flex-col">
               <div class="text-sm">Bedrag</div>
               <div class="font-semibold py-1">&euro; {{ amount }}</div>
             </div>
@@ -206,7 +192,7 @@ async function onError(event: FormErrorEvent) {
                 <td class="text-sm" width="160px">Rekeningnummer</td>
                 <td class="font-semibold py-1">BE69 0682 0939 9078</td>
               </tr>
-              <tr v-if="amount">
+              <tr>
                 <td class="text-sm">Bedrag</td>
                 <td class="font-semibold py-1">&euro; {{ amount }}</td>
               </tr>
@@ -229,6 +215,7 @@ async function onError(event: FormErrorEvent) {
             />
           </u-form-field>
         </div>
+        <hr />
         <div class="flex flex-col gap-4">
           <p>
             Je ontvangt een bevestiging van je bestelling via e-mail.

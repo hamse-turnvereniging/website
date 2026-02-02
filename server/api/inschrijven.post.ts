@@ -1,9 +1,9 @@
 import * as v from "valibot";
 
-import bevestigingInschrijvingEmailTemplate from "~~/server/assets/templates/email/bevestiging-inschrijving";
+import emailTemplate from "~~/server/assets/templates/email/inschrijving";
 import { groupPrice } from "#shared/data/inschrijving";
 import { schema } from "#shared/schemas/inschrijving";
-import { tables, useDrizzle } from "../utils/drizzle";
+import { inschrijvingen } from "hub:db:schema";
 
 export default defineEventHandler(async (event) => {
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
@@ -20,12 +20,10 @@ export default defineEventHandler(async (event) => {
 
   try {
     // Save to database
-    await useDrizzle()
-      .insert(tables.inschrijvingen)
-      .values({
-        data: JSON.stringify(input),
-        createdAt: new Date(),
-      });
+    await db.insert(inschrijvingen).values({
+      data: JSON.stringify(input),
+      createdAt: new Date(),
+    });
 
     // Send email
     const headers = new Headers();
@@ -71,7 +69,7 @@ export default defineEventHandler(async (event) => {
     const discount = input.is60PlusAtEndOfThisYear || input.familyMember.check ? 5 : 0;
     const discountedAmount = amount && discount ? amount - discount : null;
 
-    const htmlContent = bevestigingInschrijvingEmailTemplate({
+    const htmlContent = emailTemplate({
       ...input,
       subject,
       amount,
@@ -85,7 +83,7 @@ export default defineEventHandler(async (event) => {
         to,
         bcc: [
           {
-            email: "inschrijvingen@hamseturnvereniging.be",
+            email: "info@hamseturnvereniging.be",
             name: "Hamse Turnvereniging",
           },
         ],

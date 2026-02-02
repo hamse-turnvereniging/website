@@ -10,5 +10,10 @@ export default defineAppConfig({
         base: "button justify-center",
       },
     },
+    radioGroup: {
+      slots: {
+        fieldset: "gap-x-6",
+      },
+    },
   },
 });
