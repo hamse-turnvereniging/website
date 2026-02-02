@@ -12,6 +12,19 @@ const state = useLocalStorage("bestelformulier-wafels", initialState, {
   mergeDefaults: true,
 });
 
+// Number input state fixes
+watch(state.value, (value) => {
+  if (value.wafels) {
+    if ((value.wafels.vanilla as any) === "") {
+      state.value.wafels.vanilla = undefined;
+    }
+
+    if ((value.wafels.chocolate as any) === "") {
+      state.value.wafels.chocolate = undefined;
+    }
+  }
+});
+
 const amount = computed(() => {
   const quantity = (state.value.wafels.vanilla ?? 0) + (state.value.wafels.chocolate ?? 0);
 
