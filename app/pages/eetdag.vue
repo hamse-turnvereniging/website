@@ -157,7 +157,7 @@ async function onError(event: FormErrorEvent) {
       </p>
       <p>Reserveren kan <span class="font-semibold">tot en met 25 februari</span>.</p>
       <p class="font-semibold">
-        Opgelet: breng zeker je bevestingsmail (digitaal of afgedrukt) mee op de eetdag zelf als
+        Opgelet: breng zeker je bevestigingsmail (digitaal of afgedrukt) mee op de eetdag zelf als
         bewijs van je bestelling.
       </p>
     </div>
