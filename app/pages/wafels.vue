@@ -8,9 +8,11 @@ const showForm = computed(() => startOfToday() <= startOfDay(new Date("2025-11-0
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
 
-const state = useLocalStorage("bestelformulier-wafels", initialState, {
-  mergeDefaults: true,
-});
+const state = useLocalStorage(
+  "bestelformulier-wafels",
+  { ...initialState },
+  { mergeDefaults: true }
+);
 
 // Number input state fixes
 watch(state.value, (value) => {
@@ -61,10 +63,18 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 const resetModalOpen = ref(false);
 
 function resetForm() {
-  state.value = { ...initialState };
+  state.value = {
+    ...initialState,
+    wafels: {
+      ...initialState.wafels,
+    },
+  };
   form.value?.clear();
   resetModalOpen.value = false;
-  formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  setTimeout(() => {
+    formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 100);
 }
 
 async function onError(event: FormErrorEvent) {
