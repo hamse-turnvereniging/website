@@ -8,7 +8,11 @@ import { vMaska } from "maska/vue";
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
 
-const state = useLocalStorage("inschrijvingsformulier", initialState, { mergeDefaults: true });
+const state = useLocalStorage(
+  "inschrijvingsformulier",
+  { ...initialState },
+  { mergeDefaults: true }
+);
 
 watch(state.value, (value) => {
   if (value.group && value.location) {
@@ -186,7 +190,10 @@ function resetForm() {
   };
   form.value?.clear();
   resetModalOpen.value = false;
-  formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  setTimeout(() => {
+    formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 100);
 }
 
 async function onError(event: FormErrorEvent) {
