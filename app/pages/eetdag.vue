@@ -19,6 +19,37 @@ const state = useLocalStorage("reservatieformulier-eetdag", initialState, {
   mergeDefaults: true,
 });
 
+// Number input state fixes
+watch(state.value, (value) => {
+  for (let i = 0; i < value.childMeals.length; i++) {
+    const childMeal = value.childMeals[i];
+
+    if (!childMeal) {
+      continue;
+    }
+
+    if ((childMeal.quantity as any) === "") {
+      state.value.childMeals[i]!.quantity = undefined;
+    }
+  }
+
+  for (let i = 0; i < value.adultMeals.length; i++) {
+    const adultMeal = value.adultMeals[i];
+
+    if (!adultMeal) {
+      continue;
+    }
+
+    if ((adultMeal.quantity as any) === "") {
+      state.value.adultMeals[i]!.quantity = undefined;
+    }
+  }
+
+  if ((value.supportCardQuantity as any) === "") {
+    state.value.supportCardQuantity = undefined;
+  }
+});
+
 const quantity = computed(() =>
   [
     ...state.value.childMeals.map((x) => x.quantity ?? 0),
