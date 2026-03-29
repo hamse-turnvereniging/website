@@ -44,7 +44,7 @@ if (faq.value) {
       :unmount-on-hide="false"
     >
       <template #content="{ item }">
-        <content-renderer class="answer pb-3.5" :value="item.body" />
+        <content-renderer class="answer pb-3.5" :value="item.body" :prose="false" />
       </template>
     </u-accordion>
     <p>

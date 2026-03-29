@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{subject}}</title>
 
-    <!-- Webfont (fallback naar sans-serif indien niet ondersteund) -->
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
       rel="stylesheet"
@@ -28,7 +27,6 @@
       font-family: 'Open Sans', sans-serif;
     "
   >
-    <!-- Preheader -->
     <div
       style="
         display: none;
@@ -39,7 +37,7 @@
         max-width: 0;
       "
     >
-      Bevestiging van je bestelling wafels - bekijk het overzicht hieronder.
+      Bevestiging van je inschrijving voor het Paaskamp - bekijk het overzicht hieronder.
     </div>
 
     <table
@@ -60,7 +58,6 @@
             border="0"
             style="max-width: 640px; background: #ffffff; border-radius: 12px; overflow: hidden"
           >
-            <!-- Header -->
             <tr>
               <td
                 style="
@@ -82,7 +79,6 @@
               </td>
             </tr>
 
-            <!-- Intro -->
             <tr>
               <td
                 style="
@@ -102,17 +98,16 @@
                     font-family: 'Open Sans', sans-serif;
                   "
                 >
-                  Bevestiging bestelling
+                  Bevestiging inschrijving
                 </h1>
-                <p style="margin: 0 0 12px">Dag {{firstName}},</p>
+                <p style="margin: 0 0 12px">Dag {{contact.firstName}},</p>
                 <p style="margin: 0">
-                  Bedankt voor je bestelling wafels van de Hamse Turnvereniging. Hieronder vind je
-                  een overzicht van de gegevens die we hebben ontvangen.
+                  Bedankt voor je inschrijving voor het Paaskamp van de Hamse Turnvereniging.
+                  Hieronder vind je een overzicht van de gegevens die we hebben ontvangen.
                 </p>
               </td>
             </tr>
 
-            <!-- Bestelformulier -->
             <tr>
               <td style="padding: 12px 24px 0">
                 <h2
@@ -124,7 +119,54 @@
                     font-family: 'Open Sans', sans-serif;
                   "
                 >
-                  Bestelformulier
+                  Activiteit
+                </h2>
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="
+                    border-collapse: collapse;
+                    font-size: 14px;
+                    color: #0f172a;
+                    font-family: 'Open Sans', sans-serif;
+                  "
+                >
+                  <tr>
+                    <td width="34%" style="padding: 6px 6px 6px 0px">Activiteit</td>
+                    <td style="padding: 6px 0"><strong>Turnkamp Hamse Turnvereniging</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Wanneer</td>
+                    <td style="padding: 6px 0"><strong>13, 14 en 15 april 2026 van 10u tot 15u</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Locatie</td>
+                    <td style="padding: 6px 0"><strong>Sporthal Kristoffelheem</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Prijs</td>
+                    <td style="padding: 6px 0"><strong>&euro; {{amount}}</strong></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding: 12px 24px 0">
+                <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
+                <h2
+                  style="
+                    margin: 0 0 8px;
+                    font-size: 16px;
+                    color: #059e95;
+                    font-weight: 700;
+                    font-family: 'Open Sans', sans-serif;
+                  "
+                >
+                  Deelnemer
                 </h2>
                 <table
                   role="presentation"
@@ -148,41 +190,26 @@
                     <td style="padding: 6px 0"><strong>{{lastName}}</strong></td>
                   </tr>
                   <tr>
-                    <td style="padding: 6px 6px 6px 0px">Telefoon</td>
-                    <td style="padding: 6px 0">
-                      <a
-                        href="tel:{{this.phoneNumber}}"
-                        style="color: #0f172a; text-decoration: none"
-                      ><strong>{{this.phoneNumber}}</strong></a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 6px 6px 6px 0px">E-mail</td>
-                    <td style="padding: 6px 0">
-                      <a
-                        href="mailto:{{email}}"
-                        style="color: #0f172a; text-decoration: none"
-                      ><strong>{{email}}</strong></a>
-                    </td>
+                    <td style="padding: 6px 6px 6px 0px">Leerjaar</td>
+                    <td style="padding: 6px 0"><strong>{{schoolYear}}</strong></td>
                   </tr>
                 </table>
               </td>
             </tr>
 
-            <!-- Wafels -->
             <tr>
               <td style="padding: 12px 24px 0">
                 <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
                 <h2
                   style="
-                  margin: 0 0 8px;
-                  font-size: 16px;
-                  color: #059e95;
-                  font-weight: 700;
-                  font-family: 'Open Sans', sans-serif;
-                "
+                    margin: 0 0 8px;
+                    font-size: 16px;
+                    color: #059e95;
+                    font-weight: 700;
+                    font-family: 'Open Sans', sans-serif;
+                  "
                 >
-                  Wafels
+                  Contactpersoon
                 </h2>
                 <table
                   role="presentation"
@@ -191,19 +218,37 @@
                   cellpadding="0"
                   border="0"
                   style="
-                  border-collapse: collapse;
-                  font-size: 14px;
-                  color: #0f172a;
-                  font-family: 'Open Sans', sans-serif;
-                "
+                    border-collapse: collapse;
+                    font-size: 14px;
+                    color: #0f172a;
+                    font-family: 'Open Sans', sans-serif;
+                  "
                 >
                   <tr>
-                    <td width="50%" style="padding: 6px 6px 6px 0px">Aantal pakken vanille</td>
-                    <td style="padding: 6px 0"><strong>{{wafels.vanilla}}</strong></td>
+                    <td width="34%" style="padding: 6px 6px 6px 0px">Voornaam</td>
+                    <td style="padding: 6px 0"><strong>{{contact.firstName}}</strong></td>
                   </tr>
                   <tr>
-                    <td style="padding: 6px 6px 6px 0px">Aantal pakken half-gechocolateerde</td>
-                    <td style="padding: 6px 0"><strong>{{wafels.chocolate}}</strong></td>
+                    <td style="padding: 6px 6px 6px 0px">Naam</td>
+                    <td style="padding: 6px 0"><strong>{{contact.lastName}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Telefoon</td>
+                    <td style="padding: 6px 0">
+                      <a
+                        href="tel:{{contact.phoneNumber}}"
+                        style="color: #0f172a; text-decoration: none"
+                      ><strong>{{contact.phoneNumber}}</strong></a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">E-mail</td>
+                    <td style="padding: 6px 0">
+                      <a
+                        href="mailto:{{contact.email}}"
+                        style="color: #0f172a; text-decoration: none"
+                      ><strong>{{contact.email}}</strong></a>
+                    </td>
                   </tr>
                 </table>
               </td>
@@ -244,7 +289,7 @@
                   </tr>
                   <tr>
                     <td style="padding: 6px 6px 6px 0px">Mededeling</td>
-                    <td style="padding: 6px 0"><strong>{{type}}
+                    <td style="padding: 6px 0"><strong>Paaskamp
                         {{firstName}}
                         {{lastName}}</strong></td>
                   </tr>
@@ -256,6 +301,31 @@
                     </td>
                   </tr>
                 </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding: 12px 24px 0">
+                <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
+                <h2
+                  style="
+                    margin: 0 0 8px;
+                    font-size: 16px;
+                    color: #059e95;
+                    font-weight: 700;
+                    font-family: 'Open Sans', sans-serif;
+                  "
+                >
+                  Praktische info
+                </h2>
+                <p style="margin: 0 0 8px; font-size: 14px; color: #0f172a">
+                  Breng op 13 en 14 april een lunchpakket mee. Op woensdag 15 april voorzien we
+                  frietjes voor alle deelnemers.
+                </p>
+                <p style="margin: 0; font-size: 14px; color: #0f172a">
+                  De kinderen worden verwacht in sportieve kledij of turnkledij en brengen zelf een
+                  drinkbus en een tussendoortje mee.
+                </p>
               </td>
             </tr>
 

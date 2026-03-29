@@ -22,6 +22,13 @@
       "when": 1769803082891,
       "tag": "0002_many_prodigy",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1774779211283,
+      "tag": "0003_abnormal_sersi",
+      "breakpoints": true
     }
   ]
 }

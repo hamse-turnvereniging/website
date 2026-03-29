@@ -4,6 +4,7 @@ import { startOfDay, startOfToday } from "date-fns";
 const route = useRoute();
 const showWafels = computed(() => startOfToday() <= startOfDay(new Date("2025-11-09")));
 const showEetdag = computed(() => startOfToday() <= startOfDay(new Date("2026-03-01")));
+const showPaaskamp = computed(() => startOfToday() <= startOfDay(new Date("2026-04-15")));
 </script>
 
 <template>
@@ -55,6 +56,14 @@ const showEetdag = computed(() => startOfToday() <= startOfDay(new Date("2026-03
             >Eetdag</u-button
           >
         </div>
+        <div v-if="showPaaskamp" class="flex items-center">
+          <u-button
+            to="/paaskamp"
+            :color="route.path === '/paaskamp' ? 'primary' : 'secondary'"
+            size="xl"
+            >Paaskamp</u-button
+          >
+        </div>
       </nav>
       <u-slideover
         class="md:hidden"
@@ -65,10 +74,10 @@ const showEetdag = computed(() => startOfToday() <= startOfDay(new Date("2026-03
         >
           <u-icon class="size-8!" name="i-lucide-menu" />
         </u-button>
-        <template #close="{ close }">
+        <template #close="{ ui }">
           <u-button
             class="absolute right-8 top-8 rounded-full aspect-square p-4 shadow-md hover:bg-primary-400!"
-            @click="close()"
+            @click="ui.close()"
           >
             <u-icon class="size-8!" name="i-lucide-x" />
           </u-button>
@@ -113,6 +122,15 @@ const showEetdag = computed(() => startOfToday() <= startOfDay(new Date("2026-03
                 size="xl"
                 @click="close()"
                 ><h3 class="text-white!">Eetdag</h3></u-button
+              >
+            </div>
+            <div v-if="showPaaskamp" class="p-4 flex justify-center">
+              <u-button
+                to="/paaskamp"
+                :color="route.path === '/paaskamp' ? 'primary' : 'secondary'"
+                size="xl"
+                @click="close()"
+                ><h3 class="text-white!">Paaskamp</h3></u-button
               >
             </div>
           </nav>
