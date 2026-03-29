@@ -1,6 +1,6 @@
 ---
 title: 3 september - Start nieuwe turnseizoen
-description: Start van het nieuwe turnseizoen
+description: Start van het nieuwe turnseizoen.
 date: 2025-09-03
 ---
 

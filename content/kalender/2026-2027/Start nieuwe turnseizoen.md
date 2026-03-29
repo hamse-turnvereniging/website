@@ -1,6 +1,6 @@
 ---
 title: 2 september - Start nieuwe turnseizoen
-description: Start van het nieuwe turnseizoen
+description: Start van het nieuwe turnseizoen.
 date: 2026-09-02
 ---
 
