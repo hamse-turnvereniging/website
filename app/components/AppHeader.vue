@@ -5,6 +5,7 @@ const route = useRoute();
 const showWafels = computed(() => startOfToday() <= startOfDay(new Date("2025-11-09")));
 const showEetdag = computed(() => startOfToday() <= startOfDay(new Date("2026-03-01")));
 const showPaaskamp = computed(() => startOfToday() <= startOfDay(new Date("2026-04-15")));
+const showUitstap = computed(() => startOfToday() <= startOfDay(new Date("2026-06-27")));
 </script>
 
 <template>
@@ -62,6 +63,14 @@ const showPaaskamp = computed(() => startOfToday() <= startOfDay(new Date("2026-
             :color="route.path === '/paaskamp' ? 'primary' : 'secondary'"
             size="xl"
             >Paaskamp</u-button
+          >
+        </div>
+        <div v-if="showUitstap" class="flex items-center">
+          <u-button
+            to="/uitstap"
+            :color="route.path === '/uitstap' ? 'primary' : 'secondary'"
+            size="xl"
+            >Uitstap</u-button
           >
         </div>
       </nav>
@@ -131,6 +140,15 @@ const showPaaskamp = computed(() => startOfToday() <= startOfDay(new Date("2026-
                 size="xl"
                 @click="close()"
                 ><h3 class="text-white!">Paaskamp</h3></u-button
+              >
+            </div>
+            <div v-if="showUitstap" class="p-4 flex justify-center">
+              <u-button
+                to="/uitstap"
+                :color="route.path === '/uitstap' ? 'primary' : 'secondary'"
+                size="xl"
+                @click="close()"
+                ><h3 class="text-white!">Uitstap</h3></u-button
               >
             </div>
           </nav>

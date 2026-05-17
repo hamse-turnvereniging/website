@@ -29,6 +29,13 @@
       "when": 1774779211283,
       "tag": "0003_abnormal_sersi",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1779026400000,
+      "tag": "0004_inschrijvingen_uitstap",
+      "breakpoints": true
     }
   ]
 }
