@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
         phoneNumber: "+32 499 765 192",
         email: "steff@steffbeckers.com",
       },
-      transport: "Beide",
+      transport: "Brengen & halen",
       paymentCheck: true,
     },
   ];
