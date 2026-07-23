@@ -1,9 +1,12 @@
 <script lang="ts" setup>
 import { genders, groupPrice, locationGroups } from "#shared/data/inschrijving";
 import { schema, initialState, type Schema } from "#shared/schemas/inschrijving";
+import { isRegistrationFormVisible } from "#shared/utils/registration-visibility";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { vMaska } from "maska/vue";
+
+const showForm = computed(() => isRegistrationFormVisible(new Date()));
 
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
@@ -213,15 +216,16 @@ async function onError(event: FormErrorEvent) {
     </div>
   </section>
   <section class="max-w-2xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-col gap-4">
-      <h2>Schrijf je in!</h2>
-      <p>
-        Wil je graag lid worden van onze turnclub? Fantastisch!<br />
-        Schrijf je hier in en sluit je aan bij onze sportieve en gezellige groep.
-      </p>
-    </div>
-    <u-form ref="form" :schema :state @submit="onSubmit" @error="onError">
-      <div class="flex flex-col gap-8">
+    <template v-if="showForm">
+      <div class="flex flex-col gap-4">
+        <h2>Schrijf je in!</h2>
+        <p>
+          Wil je graag lid worden van onze turnclub? Fantastisch!<br />
+          Schrijf je hier in en sluit je aan bij onze sportieve en gezellige groep.
+        </p>
+      </div>
+      <u-form ref="form" :schema :state @submit="onSubmit" @error="onError">
+        <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
           <h3 ref="formTitle">Voor welke groep wil je inschrijven?</h3>
           <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
@@ -743,8 +747,16 @@ async function onError(event: FormErrorEvent) {
             </template>
           </u-modal>
         </div>
-      </div>
-    </u-form>
+        </div>
+      </u-form>
+    </template>
+    <div v-else class="flex flex-col gap-4">
+      <h2>Inschrijvingen nog niet geopend</h2>
+      <p>
+        De inschrijvingen voor het nieuwe turnjaar zijn nog niet geopend. Meer informatie volgt
+        binnenkort.
+      </p>
+    </div>
   </section>
 </template>
 
