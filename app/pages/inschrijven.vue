@@ -59,14 +59,10 @@ const groups: SelectItem[] = [
     value: "Turnen - 4ste, 5de en 6de leerjaar",
   },
   {
-    label: "12+",
-    value: "Turnen - 12+",
-  },
-  { type: "separator" },
-  {
     label: "Trampoline (vanaf 1ste leerjaar)",
     value: "Trampoline",
   },
+  { type: "separator" },
   "BBB",
   "Callanetics",
   "Net-voetbal heren",

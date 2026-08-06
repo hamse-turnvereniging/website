@@ -32,7 +32,7 @@ if (calendar.value) {
   </section>
   <section class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16 w-full">
     <div class="flex flex-col gap-4">
-      <h2>Seizoen 2025-2026</h2>
+      <h2>Seizoen 2026-2027</h2>
       <p>
         Hier kan je al onze activiteiten van dit turnseizoen terugvinden.<br />We vullen deze
         kalender regelmatig aan, dus kom hier zeker nog eens terug!
