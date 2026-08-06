@@ -483,7 +483,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
         <div class="flex flex-1 flex-col gap-4">
           <h2>BBB</h2>
           <p>
-            BBB staat voor Buik, Billen en Benen - een leuke en effectieve groepsles die focust op
+            BBB staat voor Billen, Buik, en Borst - een leuke en effectieve groepsles die focust op
             het versterken en verstevigen van deze drie zones. Tijdens de les werken we aan
             spierversterking, vetverbranding en een betere lichaamshouding, op motiverende muziek en
             in een energieke groepssfeer.
