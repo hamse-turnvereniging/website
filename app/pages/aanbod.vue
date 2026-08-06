@@ -661,20 +661,20 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
         iets voor jou!
       </p>
     </section>
-    <section id="net-voetbal-heren" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
+    <section id="net-voetbal" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
       <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <div class="flex-1">
           <nuxt-img
             class="w-full"
             fit="cover"
-            src="/images/aanbod/net-voetbal-heren.jpg"
-            alt="Net-voetbal heren afbeelding"
+            src="/images/aanbod/net-voetbal.jpg"
+            alt="Net-voetbal afbeelding"
             width="600"
             height="400"
           />
         </div>
         <div class="flex flex-1 flex-col gap-4">
-          <h2>Net-voetbal heren</h2>
+          <h2>Net-voetbal</h2>
           <p>
             Net-voetbal is een dynamische en leuke sport die het beste van voetbal en volleybal
             combineert. Twee teams staan tegenover elkaar met een net ertussen en proberen de bal
@@ -685,10 +685,6 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             Deze sport vraagt snelheid, techniek, precisie en een goede teamgeest. Het is een
             uitstekende manier om je balcontrole en reactievermogen te verbeteren, terwijl je ook
             stevig aan je conditie werkt.
-          </p>
-          <p>
-            Onze net-voetbalgroep voor heren is bedoeld voor wie graag sportief bezig is in een
-            ontspannen sfeer.
           </p>
           <div class="py-2 flex sm:block">
             <u-modal
@@ -705,7 +701,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
               <template #content="{ close }">
                 <div class="flex flex-col gap-4 p-6 h-full min-h-0">
                   <div class="flex justify-between gap-4">
-                    <h3>Net-voetbal heren</h3>
+                    <h3>Net-voetbal</h3>
                     <u-button
                       icon="i-lucide-x"
                       variant="ghost"
