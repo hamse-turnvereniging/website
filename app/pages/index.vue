@@ -54,6 +54,27 @@
         <nuxt-img
           class="w-full"
           fit="cover"
+          src="/images/aanbod/bbb.jpg"
+          alt="Lesgever BBB gezocht in Oostham afbeelding"
+          width="400"
+          height="267"
+        />
+        <h3>Lesgever BBB gezocht in Oostham</h3>
+        <p>De Hamse Turnvereniging is op zoek naar een <span class="font-semibold">enthousiaste lesgever</span> voor onze lessen <span class="font-semibold">BBB</span> op <span class="font-semibold">woensdagen</span> van 19u tot 20u.</p>
+        <p>Heb je <span class="font-semibold">interesse</span> of ken je iemand die perfect in dit plaatje past?</p>
+        <u-button
+          label="Meer info"
+          class="mt-2"
+          icon="i-lucide-info"
+          to="lesgever-bbb"
+          color="secondary"
+          size="xl"
+        />
+      </div>
+      <div class="flex flex-col gap-4 pb-4">
+        <nuxt-img
+          class="w-full"
+          fit="cover"
           src="/images/welkom/kom-proberen.jpg"
           alt="Kom proberen afbeelding"
           width="400"

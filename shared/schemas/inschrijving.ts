@@ -42,6 +42,7 @@ const base = v.object({
       lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
     }),
   ]),
+  secondSportCheck: v.boolean(),
   paymentCheck: v.pipe(
     v.boolean(),
     v.literal(true, "Je moet binnen 14 dagen na je inschrijving je lidgeld betaald hebben")
@@ -90,7 +91,7 @@ export const schema = v.variant("group", [
         v.string(),
         v.trim(),
         v.nonEmpty("Groep is verplicht"),
-        v.picklist(["Turnen - 12+", "BBB", "Callanetics", "Net-voetbal heren"])
+        v.picklist(["BBB", "Callanetics", "Net-voetbal"])
       )
     ),
     phoneNumber: v.pipe(v.string(), v.trim(), v.nonEmpty("Telefoonnummer is verplicht")),
@@ -144,6 +145,7 @@ export const initialState = {
     firstName: "",
     lastName: "",
   },
+  secondSportCheck: false as boolean,
   paymentCheck: false as boolean,
   photosCheck: true,
   rulesCheck: false as boolean,

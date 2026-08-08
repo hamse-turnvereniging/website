@@ -3,7 +3,6 @@ import * as v from "valibot";
 export const groups = [
   "Turnen - 1ste, 2de en 3de leerjaar",
   "Turnen - 4ste, 5de en 6de leerjaar",
-  "Turnen - 12+",
   "Trampoline",
 ] as const;
 

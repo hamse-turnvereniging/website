@@ -2,7 +2,7 @@
 import { startOfDay, startOfToday } from "date-fns";
 
 const route = useRoute();
-const showWafels = computed(() => startOfToday() <= startOfDay(new Date("2025-11-09")));
+const showWafels = computed(() => startOfToday() >= startOfDay(new Date("2026-10-18")) && startOfToday() <= startOfDay(new Date("2026-11-15")));
 const showEetdag = computed(() => startOfToday() <= startOfDay(new Date("2026-03-01")));
 const showPaaskamp = computed(() => startOfToday() <= startOfDay(new Date("2026-04-15")));
 const showUitstap = computed(() => startOfToday() <= startOfDay(new Date("2026-06-27")));

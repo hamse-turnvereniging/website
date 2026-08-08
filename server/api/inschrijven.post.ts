@@ -52,10 +52,9 @@ export default defineEventHandler(async (event) => {
           });
         }
       } else if (
-        input.group === "Turnen - 12+" ||
         input.group === "BBB" ||
         input.group === "Callanetics" ||
-        input.group === "Net-voetbal heren"
+        input.group === "Net-voetbal"
       ) {
         to.push({
           name: `${input.firstName} ${input.lastName}`,

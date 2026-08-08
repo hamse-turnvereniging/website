@@ -3,7 +3,7 @@ import { schema, initialState, type Schema } from "#shared/schemas/bestellen/waf
 import type { FormErrorEvent, FormSubmitEvent } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { startOfDay, startOfToday } from "date-fns";
-const showForm = computed(() => startOfToday() <= startOfDay(new Date("2026-11-15")));
+const showForm = computed(() => startOfToday() >= startOfDay(new Date("2026-10-18")) && startOfToday() <= startOfDay(new Date("2026-11-15")));
 
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");

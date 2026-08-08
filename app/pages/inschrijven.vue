@@ -65,7 +65,7 @@ const groups: SelectItem[] = [
   { type: "separator" },
   "BBB",
   "Callanetics",
-  "Net-voetbal heren",
+  "Net-voetbal",
 ];
 
 const locations = [
@@ -360,10 +360,9 @@ async function onError(event: FormErrorEvent) {
             <div
               v-if="
                 !!state.group &&
-                (state.group === 'Turnen - 12+' ||
-                  state.group === 'BBB' ||
+                (state.group === 'BBB' ||
                   state.group === 'Callanetics' ||
-                  state.group === 'Net-voetbal heren')
+                  state.group === 'Net-voetbal')
               "
               class="flex flex-1 flex-col gap-4"
             >
@@ -375,10 +374,9 @@ async function onError(event: FormErrorEvent) {
                   name="phoneNumber"
                   :required="
                     !!state.group &&
-                    (state.group === 'Turnen - 12+' ||
-                      state.group === 'BBB' ||
+                    (state.group === 'BBB' ||
                       state.group === 'Callanetics' ||
-                      state.group === 'Net-voetbal heren')
+                      state.group === 'Net-voetbal')
                   "
                 >
                   <u-input
@@ -394,10 +392,9 @@ async function onError(event: FormErrorEvent) {
                   name="email"
                   :required="
                     !!state.group &&
-                    (state.group === 'Turnen - 12+' ||
-                      state.group === 'BBB' ||
+                    (state.group === 'BBB' ||
                       state.group === 'Callanetics' ||
-                      state.group === 'Net-voetbal heren')
+                      state.group === 'Net-voetbal')
                   "
                 >
                   <u-input
@@ -631,6 +628,14 @@ async function onError(event: FormErrorEvent) {
                 size="xl"
               ></u-checkbox>
             </u-form-field>
+            <u-form-field name="secondSportCheck">
+            <u-checkbox
+              v-model="state.secondSportCheck"
+              label="Ik ben dit seizoen reeds ingeschreven voor een andere sport binnen de club."
+              description="(ontvang 5 euro korting)"
+              size="xl"
+            />
+          </u-form-field>
             <div v-if="state.familyMember.check" class="flex flex-1 flex-col gap-4">
               <h4>Gezinslid</h4>
               <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">

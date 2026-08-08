@@ -105,12 +105,12 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                               <tr>
                                 <td>1ste<br />kleuterklas</td>
                                 <td>woensdag<br />14u30 - 15u30u</td>
-                                <td>3 september</td>
+                                <td>9 september</td>
                               </tr>
                               <tr>
                                 <td>2de en 3de<br />kleuterklas</td>
                                 <td>woensdag<br />13u30 - 14u30u</td>
-                                <td>3 september</td>
+                                <td>9 september</td>
                               </tr>
                             </tbody>
                           </table>
@@ -131,12 +131,12 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                               <tr>
                                 <td>1ste<br />kleuterklas</td>
                                 <td>zaterdag<br />9u - 10u</td>
-                                <td>6 september</td>
+                                <td>5 september</td>
                               </tr>
                               <tr>
                                 <td>2de en 3de<br />kleuterklas</td>
                                 <td>zaterdag<br />10u - 11u</td>
-                                <td>6 september</td>
+                                <td>5 september</td>
                               </tr>
                             </tbody>
                           </table>
@@ -220,12 +220,12 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                               <tr>
                                 <td>1ste, 2de en 3de<br />leerjaar</td>
                                 <td>woensdag<br />15u30 - 16u30u</td>
-                                <td>3 september</td>
+                                <td>9 september</td>
                               </tr>
                               <tr>
                                 <td>4de, 5de en 6de<br />leerjaar</td>
                                 <td>donderdag<br />18u - 19u30</td>
-                                <td>4 september</td>
+                                <td>3 september</td>
                               </tr>
                             </tbody>
                           </table>
@@ -246,7 +246,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                               <tr>
                                 <td>1ste, 2de en 3de<br />leerjaar</td>
                                 <td>zaterdag<br />10u45 - 12u</td>
-                                <td>6 september</td>
+                                <td>5 september</td>
                               </tr>
                             </tbody>
                           </table>
@@ -278,7 +278,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
           />
         </div>
       </div>
-      <div
+      <!-- <div
         id="turnen-1ste-middelbaar"
         class="flex flex-col md:flex-row items-center gap-4 md:gap-8"
       >
@@ -362,14 +362,24 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             </u-modal>
           </div>
         </div>
-      </div>
+      </div> -->
       <p class="text-center text-xl">
         Toestelturnen is een sport voor iedereen: jongens en meisjes, beginners en gevorderden.
         Onder begeleiding van onze lesgevers turnen we in een veilige en stimulerende omgeving.
       </p>
     </section>
     <section id="trampoline" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
-      <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
+      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+        <div class="flex-1">
+          <nuxt-img
+            class="w-full"
+            fit="cover"
+            src="/images/aanbod/trampoline.jpg"
+            alt="Trampoline afbeelding"
+            width="600"
+            height="400"
+          />
+        </div>
         <div class="flex flex-1 flex-col gap-4">
           <h2>Trampoline</h2>
           <p>
@@ -433,7 +443,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                           <tr>
                             <td>Kristoffelheem</td>
                             <td>zaterdag<br />10u30 - 12u</td>
-                            <td>6 september</td>
+                            <td>5 september</td>
                           </tr>
                         </tbody>
                       </table>
@@ -452,16 +462,6 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             </u-modal>
           </div>
         </div>
-        <div class="flex-1">
-          <nuxt-img
-            class="w-full"
-            fit="cover"
-            src="/images/aanbod/trampoline.jpg"
-            alt="Trampoline afbeelding"
-            width="600"
-            height="400"
-          />
-        </div>
       </div>
       <p class="text-center text-xl">
         Trampolinespringen is niet alleen leuk, het verbetert ook je kracht, coördinatie en
@@ -469,17 +469,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
       </p>
     </section>
     <section id="bbb" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
-      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-        <div class="flex-1">
-          <nuxt-img
-            class="w-full"
-            fit="cover"
-            src="/images/aanbod/bbb.jpg"
-            alt="BBB afbeelding"
-            width="600"
-            height="400"
-          />
-        </div>
+      <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
         <div class="flex flex-1 flex-col gap-4">
           <h2>BBB</h2>
           <p>
@@ -537,7 +527,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                           <tr>
                             <td>Kristoffelheem</td>
                             <td>woensdag<br />19u - 20u</td>
-                            <td>10 september</td>
+                            <td>9 september</td>
                           </tr>
                         </tbody>
                       </table>
@@ -556,6 +546,16 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             </u-modal>
           </div>
         </div>
+        <div class="flex-1">
+          <nuxt-img
+            class="w-full"
+            fit="cover"
+            src="/images/aanbod/bbb.jpg"
+            alt="BBB afbeelding"
+            width="600"
+            height="400"
+          />
+        </div>
       </div>
       <p class="text-center text-xl">
         Elke les is anders, maar steeds met hetzelfde doel:<br />sterker worden, je goed voelen en
@@ -563,7 +563,17 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
       </p>
     </section>
     <section id="callanetics" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
-      <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
+      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+        <div class="flex-1">
+          <nuxt-img
+            class="w-full"
+            fit="cover"
+            src="/images/aanbod/callanetics.jpg"
+            alt="Callanetics afbeelding"
+            width="600"
+            height="400"
+          />
+        </div>
         <div class="flex flex-1 flex-col gap-4">
           <h2>Callanetics</h2>
           <p>
@@ -626,7 +636,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                           <tr>
                             <td>Kristoffelheem</td>
                             <td>dinsdag<br />19u - 20u</td>
-                            <td>9 september</td>
+                            <td>8 september</td>
                           </tr>
                         </tbody>
                       </table>
@@ -645,16 +655,6 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             </u-modal>
           </div>
         </div>
-        <div class="flex-1">
-          <nuxt-img
-            class="w-full"
-            fit="cover"
-            src="/images/aanbod/callanetics.jpg"
-            alt="Callanetics afbeelding"
-            width="600"
-            height="400"
-          />
-        </div>
       </div>
       <p class="text-center text-xl">
         Wil je werken aan je lichaam op een rustige maar doelgerichte manier? Dan is Callanetics
@@ -662,17 +662,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
       </p>
     </section>
     <section id="net-voetbal" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
-      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-        <div class="flex-1">
-          <nuxt-img
-            class="w-full"
-            fit="cover"
-            src="/images/aanbod/net-voetbal.jpg"
-            alt="Net-voetbal afbeelding"
-            width="600"
-            height="400"
-          />
-        </div>
+      <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
         <div class="flex flex-1 flex-col gap-4">
           <h2>Net-voetbal</h2>
           <p>
@@ -730,7 +720,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                           <tr>
                             <td>Kristoffelheem</td>
                             <td>woensdag<br />19u - 20u</td>
-                            <td>3 september</td>
+                            <td>9 september</td>
                           </tr>
                         </tbody>
                       </table>
@@ -748,6 +738,16 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
               </template>
             </u-modal>
           </div>
+        </div>
+        <div class="flex-1">
+          <nuxt-img
+            class="w-full"
+            fit="cover"
+            src="/images/aanbod/net-voetbal.jpg"
+            alt="Net-voetbal afbeelding"
+            width="600"
+            height="400"
+          />
         </div>
       </div>
       <p class="text-center text-xl">
