@@ -9,7 +9,7 @@ const showUitstap = computed(() => startOfToday() <= startOfDay(new Date("2026-0
 </script>
 
 <template>
-  <header class="z-10">
+  <header class="z-10 relative">
     <div class="flex items-center justify-between max-w-6xl mx-auto px-8 h-16 md:h-20">
       <div class="w-[160px] h-full">
         <nuxt-link to="/">
