@@ -141,6 +141,22 @@ const discountedAmount = computed(() =>
   amount.value && discount.value ? amount.value - discount.value : null
 );
 
+const qrCode = computed(() =>
+  amount.value && state.value.firstName && state.value.lastName
+    ? `BCD
+001
+1
+SCT
+GKCCBEBB
+HAMSE TURNVERENIGING
+BE69068209399078
+EUR${discountedAmount.value ?? amount.value}
+
+${state.value.firstName} ${state.value.lastName}
+`
+    : null
+);
+
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
@@ -597,6 +613,10 @@ async function onError(event: FormErrorEvent) {
                 {{ state.lastName != "" ? state.lastName : "Naam" }}
               </div>
             </div>
+            <div v-if="qrCode" class="flex flex-col">
+              <div class="text-sm py-1">Scan via bank app</div>
+              <qrcode class="py-1" width="150" :value="qrCode" :border="0" />
+            </div>
           </div>
           <table class="hidden sm:block">
             <tbody>
@@ -622,6 +642,10 @@ async function onError(event: FormErrorEvent) {
                   {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                   {{ state.lastName != "" ? state.lastName : "Naam" }}
                 </td>
+              </tr>
+              <tr v-if="qrCode">
+                <td class="text-sm align-top py-1">Scan via bank app</td>
+                <qrcode class="py-1" width="150" :value="qrCode" />
               </tr>
             </tbody>
           </table>
