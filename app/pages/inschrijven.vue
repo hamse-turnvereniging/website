@@ -124,7 +124,7 @@ watch(is60PlusAtEndOfThisYear, (value) => {
 const amount = computed(() => state.value.group && groupPrice[state.value.group]);
 
 const discount = computed(() =>
-  state.value.is60PlusAtEndOfThisYear || state.value.familyMember.check ? 5 : 0
+  state.value.is60PlusAtEndOfThisYear || state.value.familyMember.check || state.value.secondSportCheck ? 5 : 0
 );
 
 const discountedAmount = computed(() =>
@@ -571,14 +571,12 @@ async function onError(event: FormErrorEvent) {
             <div v-if="amount" class="flex flex-col">
               <div class="text-sm">Bedrag</div>
               <div class="font-semibold py-1">
-                <span v-if="discount"
-                  ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
-                  {{ discountedAmount }} (<span v-if="is60PlusAtEndOfThisYear"
-                    >{{ discount }} euro korting voor 60-plussers</span
-                  ><span v-else="state.familyMember.check"
-                    >{{ discount }} euro korting via gezinslid</span
-                  >)</span
-                >
+                <span v-if="discount">
+                  <span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro; {{ discountedAmount }}
+                  <span v-if="is60PlusAtEndOfThisYear">&nbsp;({{ discount }} euro korting voor 60-plussers)</span>
+                  <span v-else-if="state.familyMember.check">&nbsp;({{ discount }} euro korting via gezinslid)</span>
+                  <span v-else-if="state.secondSportCheck">&nbsp;({{ discount }} euro korting via tweede sport)</span>
+                </span>
                 <span v-else>&euro; {{ amount }}</span>
               </div>
             </div>
@@ -599,14 +597,12 @@ async function onError(event: FormErrorEvent) {
               <tr v-if="amount">
                 <td class="text-sm">Bedrag</td>
                 <td class="font-semibold py-1">
-                  <span v-if="discount"
-                    ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
-                    {{ discountedAmount }} (<span v-if="is60PlusAtEndOfThisYear"
-                      >{{ discount }} euro korting voor 60-plussers</span
-                    ><span v-else="state.familyMember.check"
-                      >{{ discount }} euro korting via gezinslid</span
-                    >)</span
-                  >
+                  <span v-if="discount">
+                    <span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro; {{ discountedAmount }}
+                    <span v-if="is60PlusAtEndOfThisYear">&nbsp;({{ discount }} euro korting voor 60-plussers)</span>
+                    <span v-else-if="state.familyMember.check">&nbsp;({{ discount }} euro korting via gezinslid)</span>
+                    <span v-else-if="state.secondSportCheck">&nbsp;({{ discount }} euro korting via tweede sport)</span>
+                  </span>
                   <span v-else>&euro; {{ amount }}</span>
                 </td>
               </tr>
@@ -620,7 +616,7 @@ async function onError(event: FormErrorEvent) {
             </tbody>
           </table>
           <div v-if="!is60PlusAtEndOfThisYear" class="flex flex-col gap-4">
-            <u-form-field name="familyMember.check">
+            <u-form-field v-if="!state.secondSportCheck" name="familyMember.check">
               <u-checkbox
                 v-model="state.familyMember.check"
                 label="Ik heb een gezinslid dat reeds ingeschreven is."
@@ -628,14 +624,14 @@ async function onError(event: FormErrorEvent) {
                 size="xl"
               ></u-checkbox>
             </u-form-field>
-            <u-form-field name="secondSportCheck">
-            <u-checkbox
-              v-model="state.secondSportCheck"
-              label="Ik ben dit seizoen reeds ingeschreven voor een andere sport binnen de club."
-              description="(ontvang 5 euro korting)"
-              size="xl"
-            />
-          </u-form-field>
+            <u-form-field v-if="!state.familyMember.check" name="secondSportCheck">
+              <u-checkbox
+                v-model="state.secondSportCheck"
+                label="Ik ben dit seizoen reeds ingeschreven voor een andere sport binnen de club."
+                description="(ontvang 5 euro korting)"
+                size="xl"
+              />
+            </u-form-field>
             <div v-if="state.familyMember.check" class="flex flex-1 flex-col gap-4">
               <h4>Gezinslid</h4>
               <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
