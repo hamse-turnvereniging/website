@@ -91,7 +91,7 @@ export default Handlebars.template({"0":function(container,depth0,helpers,partia
   return "                      <td style=\"padding: 6px 0\">\r\n                        <span style=\"text-decoration: line-through;\">&euro; "
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"amount") || (depth0 != null ? lookupProperty(depth0,"amount") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"amount","hash":{},"data":data,"loc":{"start":{"line":508,"column":76},"end":{"line":508,"column":86}}}) : helper)))
     + "</span>\r\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"is60PlusAtEndOfThisYear") : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(6, data, 0),"data":data,"loc":{"start":{"line":509,"column":24},"end":{"line":519,"column":31}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"is60PlusAtEndOfThisYear") : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(6, data, 0),"data":data,"loc":{"start":{"line":509,"column":24},"end":{"line":515,"column":31}}})) != null ? stack1 : "")
     + "                      </td>\r\n";
 },"5":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
@@ -101,11 +101,11 @@ export default Handlebars.template({"0":function(container,depth0,helpers,partia
         return undefined
     };
 
-  return "                          <strong>&nbsp;&euro;\r\n                            "
-    + alias4(((helper = (helper = lookupProperty(helpers,"discountedAmount") || (depth0 != null ? lookupProperty(depth0,"discountedAmount") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"discountedAmount","hash":{},"data":data,"loc":{"start":{"line":511,"column":28},"end":{"line":511,"column":48}}}) : helper)))
-    + "\r\n                            ("
-    + alias4(((helper = (helper = lookupProperty(helpers,"discount") || (depth0 != null ? lookupProperty(depth0,"discount") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"discount","hash":{},"data":data,"loc":{"start":{"line":512,"column":29},"end":{"line":512,"column":41}}}) : helper)))
-    + "\r\n                            euro korting voor 60-plussers)</strong>\r\n";
+  return "                          <strong>&nbsp;&euro; "
+    + alias4(((helper = (helper = lookupProperty(helpers,"discountedAmount") || (depth0 != null ? lookupProperty(depth0,"discountedAmount") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"discountedAmount","hash":{},"data":data,"loc":{"start":{"line":510,"column":47},"end":{"line":510,"column":67}}}) : helper)))
+    + " ("
+    + alias4(((helper = (helper = lookupProperty(helpers,"discount") || (depth0 != null ? lookupProperty(depth0,"discount") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"discount","hash":{},"data":data,"loc":{"start":{"line":510,"column":69},"end":{"line":510,"column":81}}}) : helper)))
+    + " euro korting voor 60-plussers)</strong>\r\n";
 },"6":function(container,depth0,helpers,partials,data) {
     var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -114,7 +114,7 @@ export default Handlebars.template({"0":function(container,depth0,helpers,partia
         return undefined
     };
 
-  return ((stack1 = lookupProperty(helpers,"if").call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? lookupProperty(depth0,"familyMember") : depth0)) != null ? lookupProperty(stack1,"check") : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":514,"column":24},"end":{"line":519,"column":24}}})) != null ? stack1 : "");
+  return ((stack1 = lookupProperty(helpers,"if").call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? lookupProperty(depth0,"familyMember") : depth0)) != null ? lookupProperty(stack1,"check") : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.program(8, data, 0),"data":data,"loc":{"start":{"line":511,"column":24},"end":{"line":515,"column":24}}})) != null ? stack1 : "");
 },"7":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
@@ -123,12 +123,34 @@ export default Handlebars.template({"0":function(container,depth0,helpers,partia
         return undefined
     };
 
-  return "                          <strong>&nbsp;&euro;\r\n                            "
-    + alias4(((helper = (helper = lookupProperty(helpers,"discountedAmount") || (depth0 != null ? lookupProperty(depth0,"discountedAmount") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"discountedAmount","hash":{},"data":data,"loc":{"start":{"line":516,"column":28},"end":{"line":516,"column":48}}}) : helper)))
-    + "\r\n                            ("
-    + alias4(((helper = (helper = lookupProperty(helpers,"discount") || (depth0 != null ? lookupProperty(depth0,"discount") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"discount","hash":{},"data":data,"loc":{"start":{"line":517,"column":29},"end":{"line":517,"column":41}}}) : helper)))
-    + "\r\n                            euro korting via gezinslid)</strong>\r\n                        ";
+  return "                          <strong>&nbsp;&euro; "
+    + alias4(((helper = (helper = lookupProperty(helpers,"discountedAmount") || (depth0 != null ? lookupProperty(depth0,"discountedAmount") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"discountedAmount","hash":{},"data":data,"loc":{"start":{"line":512,"column":47},"end":{"line":512,"column":67}}}) : helper)))
+    + " ("
+    + alias4(((helper = (helper = lookupProperty(helpers,"discount") || (depth0 != null ? lookupProperty(depth0,"discount") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"discount","hash":{},"data":data,"loc":{"start":{"line":512,"column":69},"end":{"line":512,"column":81}}}) : helper)))
+    + " euro korting via gezinslid)</strong>\r\n";
 },"8":function(container,depth0,helpers,partials,data) {
+    var stack1, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return ((stack1 = lookupProperty(helpers,"if").call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? lookupProperty(depth0,"secondSportCheck") : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":513,"column":24},"end":{"line":515,"column":24}}})) != null ? stack1 : "");
+},"9":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.hooks.helperMissing, alias3="function", alias4=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+        if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
+          return parent[propertyName];
+        }
+        return undefined
+    };
+
+  return "                          <strong>&nbsp;&euro; "
+    + alias4(((helper = (helper = lookupProperty(helpers,"discountedAmount") || (depth0 != null ? lookupProperty(depth0,"discountedAmount") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"discountedAmount","hash":{},"data":data,"loc":{"start":{"line":514,"column":47},"end":{"line":514,"column":67}}}) : helper)))
+    + " ("
+    + alias4(((helper = (helper = lookupProperty(helpers,"discount") || (depth0 != null ? lookupProperty(depth0,"discount") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"discount","hash":{},"data":data,"loc":{"start":{"line":514,"column":69},"end":{"line":514,"column":81}}}) : helper)))
+    + " euro korting via 2de sport)</strong>\r\n                        ";
+},"10":function(container,depth0,helpers,partials,data) {
     var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -137,9 +159,9 @@ export default Handlebars.template({"0":function(container,depth0,helpers,partia
     };
 
   return "                      <td style=\"padding: 6px 0\"><strong>&euro; "
-    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"amount") || (depth0 != null ? lookupProperty(depth0,"amount") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"amount","hash":{},"data":data,"loc":{"start":{"line":522,"column":64},"end":{"line":522,"column":74}}}) : helper)))
+    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"amount") || (depth0 != null ? lookupProperty(depth0,"amount") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"amount","hash":{},"data":data,"loc":{"start":{"line":518,"column":64},"end":{"line":518,"column":74}}}) : helper)))
     + "</strong></td>\r\n";
-},"9":function(container,depth0,helpers,partials,data) {
+},"11":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -148,14 +170,17 @@ export default Handlebars.template({"0":function(container,depth0,helpers,partia
     };
 
   return "                    <tr>\r\n                      <td style=\"padding: 6px 6px 6px 0px\">Ik heb een gezinslid dat reeds\r\n                        ingeschreven is.</td>\r\n                      <td style=\"padding: 6px 0\">\r\n                        <strong>"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,((stack1 = (depth0 != null ? lookupProperty(depth0,"familyMember") : depth0)) != null ? lookupProperty(stack1,"check") : stack1),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.program(11, data, 0),"data":data,"loc":{"start":{"line":534,"column":32},"end":{"line":534,"column":82}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,((stack1 = (depth0 != null ? lookupProperty(depth0,"familyMember") : depth0)) != null ? lookupProperty(stack1,"check") : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.program(13, data, 0),"data":data,"loc":{"start":{"line":530,"column":32},"end":{"line":530,"column":82}}})) != null ? stack1 : "")
     + "</strong>\r\n                      </td>\r\n                    </tr>\r\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,((stack1 = (depth0 != null ? lookupProperty(depth0,"familyMember") : depth0)) != null ? lookupProperty(stack1,"check") : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":537,"column":20},"end":{"line":544,"column":27}}})) != null ? stack1 : "");
-},"10":function(container,depth0,helpers,partials,data) {
-    return "✅ Ja";
-},"11":function(container,depth0,helpers,partials,data) {
-    return "❌ Nee";
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,((stack1 = (depth0 != null ? lookupProperty(depth0,"familyMember") : depth0)) != null ? lookupProperty(stack1,"check") : stack1),{"name":"if","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":533,"column":20},"end":{"line":540,"column":27}}})) != null ? stack1 : "")
+    + "                    <tr>\r\n                      <td style=\"padding: 6px 6px 6px 0px\">Ik ben dit seizoen reeds ingeschreven voor een andere sport binnen de club.</td>\r\n                      <td style=\"padding: 6px 0\">\r\n                        <strong>"
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"secondSportCheck") : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.program(13, data, 0),"data":data,"loc":{"start":{"line":544,"column":32},"end":{"line":544,"column":80}}})) != null ? stack1 : "")
+    + "</strong>\r\n                      </td>\r\n                    </tr>\r\n";
 },"12":function(container,depth0,helpers,partials,data) {
+    return "✅ Ja";
+},"13":function(container,depth0,helpers,partials,data) {
+    return "❌ Nee";
+},"14":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
@@ -215,20 +240,20 @@ export default Handlebars.template({"0":function(container,depth0,helpers,partia
     + "\r\n"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,((stack1 = (depth0 != null ? lookupProperty(depth0,"parent2") : depth0)) != null ? lookupProperty(stack1,"firstName") : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":424,"column":12},"end":{"line":473,"column":19}}})) != null ? stack1 : "")
     + "\r\n            <!-- Betaalgegevens -->\r\n            <tr>\r\n              <td style=\"padding: 12px 24px 0\">\r\n                <hr style=\"border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px\" />\r\n                <h2\r\n                  style=\"\r\n                    margin: 0 0 8px;\r\n                    font-size: 16px;\r\n                    color: #059e95;\r\n                    font-weight: 700;\r\n                    font-family: 'Open Sans', sans-serif;\r\n                  \"\r\n                >\r\n                  Betaalgegevens lidgeld\r\n                </h2>\r\n                <table\r\n                  role=\"presentation\"\r\n                  width=\"100%\"\r\n                  cellspacing=\"0\"\r\n                  cellpadding=\"0\"\r\n                  border=\"0\"\r\n                  style=\"font-size: 14px; color: #0f172a; font-family: 'Open Sans', sans-serif\"\r\n                >\r\n                  <tr>\r\n                    <td width=\"34%\" style=\"padding: 6px 6px 6px 0px\">Rekeningnummer</td>\r\n                    <td style=\"padding: 6px 0\">\r\n                      <strong>BE69 0682 0939 9078</strong>\r\n                    </td>\r\n                  </tr>\r\n                  <tr>\r\n                    <td style=\"padding: 6px 6px 6px 0px\">Bedrag</td>\r\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"discountedAmount") : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.program(8, data, 0),"data":data,"loc":{"start":{"line":506,"column":20},"end":{"line":523,"column":27}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"discountedAmount") : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.program(10, data, 0),"data":data,"loc":{"start":{"line":506,"column":20},"end":{"line":519,"column":27}}})) != null ? stack1 : "")
     + "                  </tr>\r\n                  <tr>\r\n                    <td style=\"padding: 6px 6px 6px 0px\">Mededeling</td>\r\n                    <td style=\"padding: 6px 0\"><strong>"
-    + alias4(((helper = (helper = lookupProperty(helpers,"firstName") || (depth0 != null ? lookupProperty(depth0,"firstName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"firstName","hash":{},"data":data,"loc":{"start":{"line":527,"column":55},"end":{"line":527,"column":68}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"firstName") || (depth0 != null ? lookupProperty(depth0,"firstName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"firstName","hash":{},"data":data,"loc":{"start":{"line":523,"column":55},"end":{"line":523,"column":68}}}) : helper)))
     + " "
-    + alias4(((helper = (helper = lookupProperty(helpers,"lastName") || (depth0 != null ? lookupProperty(depth0,"lastName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"lastName","hash":{},"data":data,"loc":{"start":{"line":527,"column":69},"end":{"line":527,"column":81}}}) : helper)))
+    + alias4(((helper = (helper = lookupProperty(helpers,"lastName") || (depth0 != null ? lookupProperty(depth0,"lastName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"lastName","hash":{},"data":data,"loc":{"start":{"line":523,"column":69},"end":{"line":523,"column":81}}}) : helper)))
     + "</strong></td>\r\n                  </tr>\r\n"
-    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"is60PlusAtEndOfThisYear") : depth0),{"name":"unless","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":529,"column":18},"end":{"line":545,"column":29}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"unless").call(alias1,(depth0 != null ? lookupProperty(depth0,"is60PlusAtEndOfThisYear") : depth0),{"name":"unless","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":525,"column":18},"end":{"line":547,"column":29}}})) != null ? stack1 : "")
     + "                  <tr>\r\n                    <td style=\"padding: 6px 6px 6px 0px\">Ik heb reeds betaald of de betaalgegevens\r\n                      zorgvuldig genoteerd.</td>\r\n                    <td style=\"padding: 6px 0\">\r\n                      <strong>"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"paymentCheck") : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.program(11, data, 0),"data":data,"loc":{"start":{"line":550,"column":30},"end":{"line":550,"column":74}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"paymentCheck") : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.program(13, data, 0),"data":data,"loc":{"start":{"line":552,"column":30},"end":{"line":552,"column":74}}})) != null ? stack1 : "")
     + "</strong>\r\n                    </td>\r\n                  </tr>\r\n                </table>\r\n              </td>\r\n            </tr>\r\n\r\n            <tr>\r\n              <td style=\"padding: 12px 24px 0\">\r\n                <table\r\n                  role=\"presentation\"\r\n                  width=\"100%\"\r\n                  cellspacing=\"0\"\r\n                  cellpadding=\"0\"\r\n                  border=\"0\"\r\n                  style=\"font-size: 14px; color: #0f172a; font-family: 'Open Sans', sans-serif\"\r\n                >\r\n                  <tr>\r\n                    <td colspan=\"2\">\r\n                      <hr style=\"border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px\" />\r\n                    </td>\r\n                  </tr>\r\n                  <tr>\r\n                    <td width=\"80%\" style=\"padding: 6px 6px 6px 0px\">Foto's van lid mogen\r\n                      gepubliceerd worden.</td>\r\n                    <td style=\"padding: 6px 0\">\r\n                      <strong>"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"photosCheck") : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.program(11, data, 0),"data":data,"loc":{"start":{"line":576,"column":30},"end":{"line":576,"column":73}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"photosCheck") : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.program(13, data, 0),"data":data,"loc":{"start":{"line":578,"column":30},"end":{"line":578,"column":73}}})) != null ? stack1 : "")
     + "</strong>\r\n                    </td>\r\n                  </tr>\r\n                  <tr>\r\n                    <td style=\"padding: 6px 6px 6px 0px\">Ik heb het\r\n                      <a\r\n                        href=\"https://www.hamseturnvereniging.be/clubreglement\"\r\n                        style=\"color: #059e95; text-decoration: none\"\r\n                      >clubreglement</a>\r\n                      gelezen en ga hiermee akkoord.</td>\r\n                    <td style=\"padding: 6px 0\">\r\n                      <strong>"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"rulesCheck") : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.program(11, data, 0),"data":data,"loc":{"start":{"line":587,"column":30},"end":{"line":587,"column":72}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"rulesCheck") : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.program(13, data, 0),"data":data,"loc":{"start":{"line":589,"column":30},"end":{"line":589,"column":72}}})) != null ? stack1 : "")
     + "</strong>\r\n                    </td>\r\n                  </tr>\r\n                  <tr>\r\n                    <td style=\"padding: 6px 6px 6px 0px\">Ik ben akkoord dat bovenstaande gegevens\r\n                      enkel en alleen gedeeld worden met het bestuur van de\r\n                      <a\r\n                        href=\"https://www.hamseturnvereniging.be\"\r\n                        style=\"color: #059e95; text-decoration: none\"\r\n                      >Hamse Turnvereniging</a>\r\n                      en\r\n                      <a\r\n                        href=\"https://www.gymfed.be\"\r\n                        style=\"color: #059e95; text-decoration: none\"\r\n                      >Gymfed (Gymnastiekfederatie Vlaanderen)</a>.</td>\r\n                    <td style=\"padding: 6px 0\">\r\n                      <strong>"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"privacyCheck") : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.program(11, data, 0),"data":data,"loc":{"start":{"line":603,"column":30},"end":{"line":603,"column":74}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"privacyCheck") : depth0),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.program(13, data, 0),"data":data,"loc":{"start":{"line":605,"column":30},"end":{"line":605,"column":74}}})) != null ? stack1 : "")
     + "</strong>\r\n                    </td>\r\n                  </tr>\r\n                </table>\r\n              </td>\r\n            </tr>\r\n\r\n            <!-- Wat nu -->\r\n\r\n            <!-- Footer -->\r\n            <tr>\r\n              <td\r\n                style=\"\r\n                  padding: 12px 24px 24px;\r\n                  font-size: 12px;\r\n                  line-height: 1.6;\r\n                  font-family: 'Open Sans', sans-serif;\r\n                \"\r\n              >\r\n                <hr style=\"border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px\" />\r\n                <p style=\"margin: 0\">\r\n                  Vragen? Of klopt er iets niet? Antwoord op deze e-mail met de correcties. Mail ons\r\n                  via\r\n                  <a\r\n                    href=\"mailto:info@hamseturnvereniging.be\"\r\n                    style=\"color: #059e95; text-decoration: none\"\r\n                  >info@hamseturnvereniging.be</a>.\r\n                </p>\r\n              </td>\r\n            </tr>\r\n          </table>\r\n        </td>\r\n      </tr>\r\n    </table>\r\n  </body>\r\n</html>";
 },"useData":true});

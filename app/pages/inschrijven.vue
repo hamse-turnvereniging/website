@@ -575,7 +575,7 @@ async function onError(event: FormErrorEvent) {
                   <span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro; {{ discountedAmount }}
                   <span v-if="is60PlusAtEndOfThisYear">&nbsp;({{ discount }} euro korting voor 60-plussers)</span>
                   <span v-else-if="state.familyMember.check">&nbsp;({{ discount }} euro korting via gezinslid)</span>
-                  <span v-else-if="state.secondSportCheck">&nbsp;({{ discount }} euro korting via tweede sport)</span>
+                  <span v-else-if="state.secondSportCheck">&nbsp;({{ discount }} euro korting via 2de sport)</span>
                 </span>
                 <span v-else>&euro; {{ amount }}</span>
               </div>
@@ -601,7 +601,7 @@ async function onError(event: FormErrorEvent) {
                     <span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro; {{ discountedAmount }}
                     <span v-if="is60PlusAtEndOfThisYear">&nbsp;({{ discount }} euro korting voor 60-plussers)</span>
                     <span v-else-if="state.familyMember.check">&nbsp;({{ discount }} euro korting via gezinslid)</span>
-                    <span v-else-if="state.secondSportCheck">&nbsp;({{ discount }} euro korting via tweede sport)</span>
+                    <span v-else-if="state.secondSportCheck">&nbsp;({{ discount }} euro korting via 2de sport)</span>
                   </span>
                   <span v-else>&euro; {{ amount }}</span>
                 </td>

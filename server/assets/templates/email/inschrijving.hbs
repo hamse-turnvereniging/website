@@ -507,15 +507,11 @@
                       <td style="padding: 6px 0">
                         <span style="text-decoration: line-through;">&euro; {{amount}}</span>
                         {{#if is60PlusAtEndOfThisYear}}
-                          <strong>&nbsp;&euro;
-                            {{discountedAmount}}
-                            ({{discount}}
-                            euro korting voor 60-plussers)</strong>
+                          <strong>&nbsp;&euro; {{discountedAmount}} ({{discount}} euro korting voor 60-plussers)</strong>
                         {{else if familyMember.check}}
-                          <strong>&nbsp;&euro;
-                            {{discountedAmount}}
-                            ({{discount}}
-                            euro korting via gezinslid)</strong>
+                          <strong>&nbsp;&euro; {{discountedAmount}} ({{discount}} euro korting via gezinslid)</strong>
+                        {{else if secondSportCheck}}
+                          <strong>&nbsp;&euro; {{discountedAmount}} ({{discount}} euro korting via 2de sport)</strong>
                         {{/if}}
                       </td>
                     {{else}}
@@ -542,6 +538,12 @@
                         </td>
                       </tr>
                     {{/if}}
+                    <tr>
+                      <td style="padding: 6px 6px 6px 0px">Ik ben dit seizoen reeds ingeschreven voor een andere sport binnen de club.</td>
+                      <td style="padding: 6px 0">
+                        <strong>{{#if secondSportCheck}}✅ Ja{{else}}❌ Nee{{/if}}</strong>
+                      </td>
+                    </tr>
                   {{/unless}}
                   <tr>
                     <td style="padding: 6px 6px 6px 0px">Ik heb reeds betaald of de betaalgegevens

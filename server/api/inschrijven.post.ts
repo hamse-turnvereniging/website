@@ -65,7 +65,7 @@ export default defineEventHandler(async (event) => {
 
     const subject = `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`;
     const amount = input.group && groupPrice[input.group];
-    const discount = input.is60PlusAtEndOfThisYear || input.familyMember.check ? 5 : 0;
+    const discount = input.is60PlusAtEndOfThisYear || input.familyMember.check || input.secondSportCheck ? 5 : 0;
     const discountedAmount = amount && discount ? amount - discount : null;
 
     const htmlContent = emailTemplate({
