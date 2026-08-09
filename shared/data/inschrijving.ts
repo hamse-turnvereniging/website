@@ -11,6 +11,11 @@ export const groupPrice: { [group: string]: number } = {
   "Net-voetbal": 105,
 };
 
+export const defaultDiscount = 5;
+export const is60PlusAtEndOfThisYearDiscount = defaultDiscount;
+export const familyMemberDiscount = defaultDiscount;
+export const secondSportDiscount = defaultDiscount;
+
 export const locationGroups: { [location: string]: string[] } = {
   Kristoffelheem: [
     "Turnen - 1ste kleuterklas",

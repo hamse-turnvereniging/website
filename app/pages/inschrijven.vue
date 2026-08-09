@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { genders, groupPrice, locationGroups } from "#shared/data/inschrijving";
+import { familyMemberDiscount, genders, groupPrice, is60PlusAtEndOfThisYearDiscount, locationGroups, secondSportDiscount } from "#shared/data/inschrijving";
 import { schema, initialState, type Schema } from "#shared/schemas/inschrijving";
 import { isRegistrationFormVisible } from "#shared/utils/registration-visibility";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
@@ -115,17 +115,27 @@ const is60PlusAtEndOfThisYear = computed(
 
 watch(is60PlusAtEndOfThisYear, (value) => {
   state.value.is60PlusAtEndOfThisYear = !!value;
-
-  if (value && state.value.familyMember.check) {
-    state.value.familyMember.check = false;
-  }
 });
 
 const amount = computed(() => state.value.group && groupPrice[state.value.group]);
 
-const discount = computed(() =>
-  state.value.is60PlusAtEndOfThisYear || state.value.familyMember.check || state.value.secondSportCheck ? 5 : 0
-);
+const discount = computed(() => {
+  let discountAmount = 0;
+
+  if (state.value.is60PlusAtEndOfThisYear) {
+    discountAmount += is60PlusAtEndOfThisYearDiscount;
+  }
+
+  if (state.value.familyMember.check) {
+    discountAmount += familyMemberDiscount;
+  }
+
+  if (state.value.secondSportCheck) {
+    discountAmount += secondSportDiscount;
+  }
+
+  return discountAmount;
+});
 
 const discountedAmount = computed(() =>
   amount.value && discount.value ? amount.value - discount.value : null
@@ -573,9 +583,9 @@ async function onError(event: FormErrorEvent) {
               <div class="font-semibold py-1">
                 <span v-if="discount">
                   <span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro; {{ discountedAmount }}
-                  <span v-if="is60PlusAtEndOfThisYear">&nbsp;({{ discount }} euro korting voor 60-plussers)</span>
-                  <span v-else-if="state.familyMember.check">&nbsp;({{ discount }} euro korting via gezinslid)</span>
-                  <span v-else-if="state.secondSportCheck">&nbsp;({{ discount }} euro korting via 2de sport)</span>
+                  <span v-if="is60PlusAtEndOfThisYear">&nbsp;({{ is60PlusAtEndOfThisYearDiscount }} euro korting voor 60-plussers)</span>
+                  <span v-if="state.familyMember.check">&nbsp;({{ familyMemberDiscount }} euro korting via gezinslid)</span>
+                  <span v-if="state.secondSportCheck">&nbsp;({{ secondSportDiscount }} euro korting via 2de sport)</span>
                 </span>
                 <span v-else>&euro; {{ amount }}</span>
               </div>
@@ -599,9 +609,9 @@ async function onError(event: FormErrorEvent) {
                 <td class="font-semibold py-1">
                   <span v-if="discount">
                     <span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro; {{ discountedAmount }}
-                    <span v-if="is60PlusAtEndOfThisYear">&nbsp;({{ discount }} euro korting voor 60-plussers)</span>
-                    <span v-else-if="state.familyMember.check">&nbsp;({{ discount }} euro korting via gezinslid)</span>
-                    <span v-else-if="state.secondSportCheck">&nbsp;({{ discount }} euro korting via 2de sport)</span>
+                    <span v-if="is60PlusAtEndOfThisYear">&nbsp;({{ is60PlusAtEndOfThisYearDiscount }} euro korting voor 60-plussers)</span>
+                    <span v-if="state.familyMember.check">&nbsp;({{ familyMemberDiscount }} euro korting via gezinslid)</span>
+                    <span v-if="state.secondSportCheck">&nbsp;({{ secondSportDiscount }} euro korting via 2de sport)</span>
                   </span>
                   <span v-else>&euro; {{ amount }}</span>
                 </td>
@@ -615,22 +625,14 @@ async function onError(event: FormErrorEvent) {
               </tr>
             </tbody>
           </table>
-          <div v-if="!is60PlusAtEndOfThisYear" class="flex flex-col gap-4">
-            <u-form-field v-if="!state.secondSportCheck" name="familyMember.check">
+          <div class="flex flex-col gap-4">
+            <u-form-field name="familyMember.check">
               <u-checkbox
                 v-model="state.familyMember.check"
                 label="Ik heb een gezinslid dat reeds ingeschreven is."
                 description="(ontvang 5 euro korting)"
                 size="xl"
               ></u-checkbox>
-            </u-form-field>
-            <u-form-field v-if="!state.familyMember.check" name="secondSportCheck">
-              <u-checkbox
-                v-model="state.secondSportCheck"
-                label="Ik ben dit seizoen reeds ingeschreven voor een andere sport binnen de club."
-                description="(ontvang 5 euro korting)"
-                size="xl"
-              />
             </u-form-field>
             <div v-if="state.familyMember.check" class="flex flex-1 flex-col gap-4">
               <h4>Gezinslid</h4>
@@ -663,6 +665,14 @@ async function onError(event: FormErrorEvent) {
                 </u-form-field>
               </div>
             </div>
+            <u-form-field name="secondSportCheck">
+              <u-checkbox
+                v-model="state.secondSportCheck"
+                label="Ik ben dit seizoen reeds ingeschreven voor een andere sport binnen de club."
+                description="(ontvang 5 euro korting)"
+                size="xl"
+              />
+            </u-form-field>
           </div>
           <u-form-field name="paymentCheck">
             <u-checkbox
