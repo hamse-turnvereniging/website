@@ -77,6 +77,9 @@ export default defineEventHandler(async (event) => {
       amount,
       discount,
       discountedAmount,
+      is60PlusAtEndOfThisYearDiscount,
+      familyMemberDiscount,
+      secondSportDiscount
     });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {

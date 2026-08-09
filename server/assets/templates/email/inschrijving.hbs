@@ -506,13 +506,17 @@
                     {{#if discountedAmount}}
                       <td style="padding: 6px 0">
                         <span style="text-decoration: line-through;">&euro; {{amount}}</span>
+                        <strong>&nbsp;&euro; {{discountedAmount}}
                         {{#if is60PlusAtEndOfThisYear}}
-                          <strong>&nbsp;&euro; {{discountedAmount}} ({{discount}} euro korting voor 60-plussers)</strong>
-                        {{else if familyMember.check}}
-                          <strong>&nbsp;&euro; {{discountedAmount}} ({{discount}} euro korting via gezinslid)</strong>
-                        {{else if secondSportCheck}}
-                          <strong>&nbsp;&euro; {{discountedAmount}} ({{discount}} euro korting via 2de sport)</strong>
+                          <span>&nbsp;({{is60PlusAtEndOfThisYearDiscount}} euro korting voor 60-plussers)</span>
                         {{/if}}
+                        {{#if familyMember.check}}
+                          <span>&nbsp;({{familyMemberDiscount}} euro korting via gezinslid)</span>
+                        {{/if}}
+                        {{#if secondSportCheck}}
+                          <span>&nbsp;({{secondSportDiscount}} euro korting via 2de sport)</span>
+                        {{/if}}
+                        </strong>
                       </td>
                     {{else}}
                       <td style="padding: 6px 0"><strong>&euro; {{amount}}</strong></td>
@@ -522,29 +526,27 @@
                     <td style="padding: 6px 6px 6px 0px">Mededeling</td>
                     <td style="padding: 6px 0"><strong>{{firstName}} {{lastName}}</strong></td>
                   </tr>
-                  {{#unless is60PlusAtEndOfThisYear}}
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Ik heb een gezinslid dat reeds
+                      ingeschreven is.</td>
+                    <td style="padding: 6px 0">
+                      <strong>{{#if familyMember.check}}✅ Ja{{else}}❌ Nee{{/if}}</strong>
+                    </td>
+                  </tr>
+                  {{#if familyMember.check}}
                     <tr>
-                      <td style="padding: 6px 6px 6px 0px">Ik heb een gezinslid dat reeds
-                        ingeschreven is.</td>
+                      <td style="padding: 6px 6px 6px 0px">Gezinslid</td>
                       <td style="padding: 6px 0">
-                        <strong>{{#if familyMember.check}}✅ Ja{{else}}❌ Nee{{/if}}</strong>
+                        <strong>{{familyMember.firstName}} {{familyMember.lastName}}</strong>
                       </td>
                     </tr>
-                    {{#if familyMember.check}}
-                      <tr>
-                        <td style="padding: 6px 6px 6px 0px">Gezinslid</td>
-                        <td style="padding: 6px 0">
-                          <strong>{{familyMember.firstName}} {{familyMember.lastName}}</strong>
-                        </td>
-                      </tr>
-                    {{/if}}
-                    <tr>
-                      <td style="padding: 6px 6px 6px 0px">Ik ben dit seizoen reeds ingeschreven voor een andere sport binnen de club.</td>
-                      <td style="padding: 6px 0">
-                        <strong>{{#if secondSportCheck}}✅ Ja{{else}}❌ Nee{{/if}}</strong>
-                      </td>
-                    </tr>
-                  {{/unless}}
+                  {{/if}}
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Ik ben dit seizoen reeds ingeschreven voor een andere sport binnen de club.</td>
+                    <td style="padding: 6px 0">
+                      <strong>{{#if secondSportCheck}}✅ Ja{{else}}❌ Nee{{/if}}</strong>
+                    </td>
+                  </tr>
                   <tr>
                     <td style="padding: 6px 6px 6px 0px">Ik heb reeds betaald of de betaalgegevens
                       zorgvuldig genoteerd.</td>

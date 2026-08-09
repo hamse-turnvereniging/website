@@ -1,4 +1,4 @@
-import { groupPrice } from "#shared/data/inschrijving";
+import { familyMemberDiscount, groupPrice, is60PlusAtEndOfThisYearDiscount, secondSportDiscount } from "#shared/data/inschrijving";
 import { Schema } from "#shared/schemas/inschrijving";
 import emailTemplate from "~~/server/assets/templates/email/inschrijving";
 
@@ -36,6 +36,7 @@ export default defineEventHandler(async (event) => {
         firstName: "Daisy",
         lastName: "Delcour",
       },
+      secondSportCheck: true,
       paymentCheck: true,
       phoneNumber: "+32 499 765 192",
       photosCheck: true,
@@ -66,6 +67,7 @@ export default defineEventHandler(async (event) => {
       familyMember: {
         check: false,
       },
+      secondSportCheck: true,
       paymentCheck: true,
       phoneNumber: "+32 499 765 192",
       photosCheck: true,
@@ -103,6 +105,7 @@ export default defineEventHandler(async (event) => {
       familyMember: {
         check: false,
       },
+      secondSportCheck: false,
       paymentCheck: true,
       photosCheck: false,
       rulesCheck: true,
@@ -118,7 +121,10 @@ export default defineEventHandler(async (event) => {
 
   const subject = `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`;
   const amount = input.group && groupPrice[input.group];
-  const discount = input.is60PlusAtEndOfThisYear || input.familyMember.check ? 5 : 0;
+  let discount = 0;
+  discount += input.is60PlusAtEndOfThisYear ? is60PlusAtEndOfThisYearDiscount : 0;
+  discount += input.familyMember.check ? familyMemberDiscount : 0;
+  discount += input.secondSportCheck ? secondSportDiscount : 0;
   const discountedAmount = amount && discount ? amount - discount : null;
 
   return emailTemplate({
@@ -127,5 +133,8 @@ export default defineEventHandler(async (event) => {
     amount,
     discount,
     discountedAmount,
+    is60PlusAtEndOfThisYearDiscount,
+    familyMemberDiscount,
+    secondSportDiscount
   });
 });
