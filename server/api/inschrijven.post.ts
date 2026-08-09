@@ -1,7 +1,7 @@
 import * as v from "valibot";
 
 import emailTemplate from "~~/server/assets/templates/email/inschrijving";
-import { groupPrice } from "#shared/data/inschrijving";
+import { familyMemberDiscount, groupPrice, is60PlusAtEndOfThisYearDiscount, secondSportDiscount } from "#shared/data/inschrijving";
 import { schema } from "#shared/schemas/inschrijving";
 import { inschrijvingen } from "hub:db:schema";
 
@@ -65,7 +65,10 @@ export default defineEventHandler(async (event) => {
 
     const subject = `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`;
     const amount = input.group && groupPrice[input.group];
-    const discount = input.is60PlusAtEndOfThisYear || input.familyMember.check || input.secondSportCheck ? 5 : 0;
+    let discount = 0;
+    discount += input.is60PlusAtEndOfThisYear ? is60PlusAtEndOfThisYearDiscount : 0;
+    discount += input.familyMember.check ? familyMemberDiscount : 0;
+    discount += input.secondSportCheck ? secondSportDiscount : 0;
     const discountedAmount = amount && discount ? amount - discount : null;
 
     const htmlContent = emailTemplate({
