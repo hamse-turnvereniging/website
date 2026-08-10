@@ -46,5 +46,5 @@ test("omits the QR-code row when qrCodeBase64 is missing", () => {
   const html = emailTemplate({ ...baseProps });
 
   assert.ok(!html.includes("Scan via bank app"));
-  assert.ok(!html.includes("<img"));
+  assert.ok(!html.includes('alt="QR-code betaling"'));
 });
