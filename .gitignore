@@ -1,4 +1,5 @@
 docs/superpowers/
+.superpowers/
 
 # Nuxt dev/build outputs
 .output
