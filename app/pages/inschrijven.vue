@@ -157,12 +157,18 @@ ${state.value.firstName} ${state.value.lastName}
     : null
 );
 
+const qrCodeBase64 = computed(() =>
+  qrCode.value
+    ? useQrcode(qrCode.value, { toBase64: true, blackColor: "#000000", whiteColor: "#FFFFFF" })
+    : null
+);
+
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   const response = await $fetch("/api/inschrijven", {
     method: "POST",
-    body: event.data,
+    body: { ...event.data, qrCodeBase64: qrCodeBase64.value },
   });
 
   const errorToast: Partial<Toast> = {
