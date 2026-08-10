@@ -11,8 +11,18 @@ const base = v.object({
       v.picklist(["Kristoffelheem", "'t Vlietje"])
     )
   ),
-  firstName: v.pipe(v.string(), v.trim(), v.nonEmpty("Voornaam is verplicht")),
-  lastName: v.pipe(v.string(), v.trim(), v.nonEmpty("Naam is verplicht")),
+  firstName: v.pipe(
+    v.string(),
+    v.trim(),
+    v.nonEmpty("Voornaam is verplicht"),
+    v.maxLength(100, "Voornaam mag maximaal 100 tekens bevatten")
+  ),
+  lastName: v.pipe(
+    v.string(),
+    v.trim(),
+    v.nonEmpty("Naam is verplicht"),
+    v.maxLength(100, "Naam mag maximaal 100 tekens bevatten")
+  ),
   gender: v.optional(
     v.pipe(v.string(), v.trim(), v.nonEmpty("Gender is verplicht"), v.picklist(genders))
   ),
