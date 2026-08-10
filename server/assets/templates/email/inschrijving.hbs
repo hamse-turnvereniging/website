@@ -526,6 +526,14 @@
                     <td style="padding: 6px 6px 6px 0px">Mededeling</td>
                     <td style="padding: 6px 0"><strong>{{firstName}} {{lastName}}</strong></td>
                   </tr>
+                  {{#if qrCodeBase64}}
+                    <tr>
+                      <td style="padding: 6px 6px 6px 0px; vertical-align: top">Scan via bank app</td>
+                      <td style="padding: 6px 0">
+                        <img src="{{{qrCodeBase64}}}" width="150" height="150" alt="QR-code betaling" />
+                      </td>
+                    </tr>
+                  {{/if}}
                   <tr>
                     <td style="padding: 6px 6px 6px 0px">Ik heb een gezinslid dat reeds
                       ingeschreven is.</td>
