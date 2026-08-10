@@ -159,7 +159,7 @@ ${state.value.firstName} ${state.value.lastName}
 
 const qrCodeBase64 = computed(() =>
   qrCode.value
-    ? useQrcode(qrCode.value, { toBase64: true, blackColor: "#000000", whiteColor: "#FFFFFF" })
+    ? useQrcode(qrCode.value, { toBase64: true, blackColor: "#000000", whiteColor: "#FFFFFF" }).value
     : null
 );
 
