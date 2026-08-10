@@ -6,7 +6,8 @@ import { schema } from "#shared/schemas/inschrijving";
 import { inschrijvingen } from "hub:db:schema";
 
 export default defineEventHandler(async (event) => {
-  const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
+  const body = await readBody(event);
+  const validationResult = v.safeParse(schema, body);
 
   if (!validationResult.success) {
     return {
@@ -17,6 +18,10 @@ export default defineEventHandler(async (event) => {
   }
 
   const input = validationResult.output;
+  const qrCodeBase64 =
+    typeof body.qrCodeBase64 === "string" && body.qrCodeBase64.startsWith("data:image/")
+      ? body.qrCodeBase64
+      : null;
 
   try {
     // Save to database
@@ -79,7 +84,8 @@ export default defineEventHandler(async (event) => {
       discountedAmount,
       is60PlusAtEndOfThisYearDiscount,
       familyMemberDiscount,
-      secondSportDiscount
+      secondSportDiscount,
+      qrCodeBase64,
     });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {
