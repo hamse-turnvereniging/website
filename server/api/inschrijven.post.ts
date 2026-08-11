@@ -1,8 +1,9 @@
 import * as v from "valibot";
 
 import emailTemplate from "~~/server/assets/templates/email/inschrijving";
-import { familyMemberDiscount, groupPrice, is60PlusAtEndOfThisYearDiscount, secondSportDiscount } from "#shared/data/inschrijving";
+import { familyMemberDiscount, is60PlusAtEndOfThisYearDiscount, secondSportDiscount } from "#shared/data/inschrijving";
 import { schema } from "#shared/schemas/inschrijving";
+import { calculateInschrijvingAmount } from "#shared/utils/inschrijving-pricing";
 import { inschrijvingen } from "hub:db:schema";
 
 export default defineEventHandler(async (event) => {
@@ -17,10 +18,12 @@ export default defineEventHandler(async (event) => {
   }
 
   const input = validationResult.output;
+  const publicId = crypto.randomUUID();
 
   try {
     // Save to database
     await db.insert(inschrijvingen).values({
+      publicId,
       data: JSON.stringify(input),
       createdAt: new Date(),
     });
@@ -64,18 +67,9 @@ export default defineEventHandler(async (event) => {
     }
 
     const subject = `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`;
-    const amount = input.group && groupPrice[input.group];
-    let discount = 0;
-    discount += input.is60PlusAtEndOfThisYear ? is60PlusAtEndOfThisYearDiscount : 0;
-    discount += input.familyMember.check ? familyMemberDiscount : 0;
-    discount += input.secondSportCheck ? secondSportDiscount : 0;
-    const discountedAmount = amount && discount ? amount - discount : null;
+    const { amount, discount, discountedAmount } = calculateInschrijvingAmount(input);
     const qrCodeImageUrl = amount
-      ? `https://www.hamseturnvereniging.be/api/inschrijven/qr-code?${new URLSearchParams({
-          firstName: input.firstName,
-          lastName: input.lastName,
-          amount: String(discountedAmount ?? amount),
-        })}`
+      ? `https://www.hamseturnvereniging.be/api/inschrijven/${publicId}/qr-code`
       : null;
 
     const htmlContent = emailTemplate({
