@@ -142,7 +142,7 @@ export default Handlebars.template({"0":function(container,depth0,helpers,partia
     + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"amount") || (depth0 != null ? lookupProperty(depth0,"amount") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"amount","hash":{},"data":data,"loc":{"start":{"line":522,"column":64},"end":{"line":522,"column":74}}}) : helper)))
     + "</strong></td>\r\n";
 },"9":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
+    var helper, lookupProperty = container.lookupProperty || function(parent, propertyName) {
         if (Object.prototype.hasOwnProperty.call(parent, propertyName)) {
           return parent[propertyName];
         }
@@ -150,7 +150,7 @@ export default Handlebars.template({"0":function(container,depth0,helpers,partia
     };
 
   return "                    <tr>\r\n                      <td style=\"padding: 6px 6px 6px 0px; vertical-align: top\">Scan via bank app</td>\r\n                      <td style=\"padding: 6px 0\">\r\n                        <img src=\""
-    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"qrCodeBase64") || (depth0 != null ? lookupProperty(depth0,"qrCodeBase64") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"qrCodeBase64","hash":{},"data":data,"loc":{"start":{"line":533,"column":34},"end":{"line":533,"column":52}}}) : helper))) != null ? stack1 : "")
+    + container.escapeExpression(((helper = (helper = lookupProperty(helpers,"qrCodeImageUrl") || (depth0 != null ? lookupProperty(depth0,"qrCodeImageUrl") : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"qrCodeImageUrl","hash":{},"data":data,"loc":{"start":{"line":533,"column":34},"end":{"line":533,"column":52}}}) : helper)))
     + "\" width=\"150\" height=\"150\" alt=\"QR-code betaling\" />\r\n                      </td>\r\n                    </tr>\r\n";
 },"10":function(container,depth0,helpers,partials,data) {
     return "✅ Ja";
@@ -222,7 +222,7 @@ export default Handlebars.template({"0":function(container,depth0,helpers,partia
     + " "
     + alias4(((helper = (helper = lookupProperty(helpers,"lastName") || (depth0 != null ? lookupProperty(depth0,"lastName") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"lastName","hash":{},"data":data,"loc":{"start":{"line":527,"column":69},"end":{"line":527,"column":81}}}) : helper)))
     + "</strong></td>\r\n                  </tr>\r\n"
-    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"qrCodeBase64") : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":529,"column":18},"end":{"line":536,"column":25}}})) != null ? stack1 : "")
+    + ((stack1 = lookupProperty(helpers,"if").call(alias1,(depth0 != null ? lookupProperty(depth0,"qrCodeImageUrl") : depth0),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data,"loc":{"start":{"line":529,"column":18},"end":{"line":536,"column":25}}})) != null ? stack1 : "")
     + "                  <tr>\r\n                    <td style=\"padding: 6px 6px 6px 0px\">Ik heb een gezinslid dat reeds\r\n                      ingeschreven is.</td>\r\n                    <td style=\"padding: 6px 0\">\r\n                      <strong>"
     + ((stack1 = lookupProperty(helpers,"if").call(alias1,((stack1 = (depth0 != null ? lookupProperty(depth0,"familyMember") : depth0)) != null ? lookupProperty(stack1,"check") : stack1),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.program(11, data, 0),"data":data,"loc":{"start":{"line":541,"column":30},"end":{"line":541,"column":80}}})) != null ? stack1 : "")
     + "</strong>\r\n                    </td>\r\n                  </tr>\r\n"

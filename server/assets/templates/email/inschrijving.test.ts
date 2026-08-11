@@ -29,20 +29,22 @@ const baseProps = {
   privacyCheck: true,
 };
 
-test("includes the QR-code image when qrCodeBase64 is provided", () => {
-  const qrCodeBase64 =
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
+test("includes the QR-code image when qrCodeImageUrl is provided", () => {
+  const qrCodeImageUrl =
+    "https://www.hamseturnvereniging.be/api/inschrijven/qr-code?firstName=Test&lastName=Persoon&amount=105";
 
-  const html = emailTemplate({ ...baseProps, qrCodeBase64 });
+  const html = emailTemplate({ ...baseProps, qrCodeImageUrl });
 
   assert.ok(
-    html.includes(`<img src="${qrCodeBase64}"`),
-    "expected the raw (unescaped) base64 data URL to appear in an <img> src"
+    html.includes(
+      '<img src="https://www.hamseturnvereniging.be/api/inschrijven/qr-code?firstName&#x3D;Test&amp;lastName&#x3D;Persoon&amp;amount&#x3D;105"'
+    ),
+    "expected the hosted QR image URL to appear in an <img> src, HTML-escaped"
   );
   assert.ok(html.includes("Scan via bank app"));
 });
 
-test("omits the QR-code row when qrCodeBase64 is missing", () => {
+test("omits the QR-code row when qrCodeImageUrl is missing", () => {
   const html = emailTemplate({ ...baseProps });
 
   assert.ok(!html.includes("Scan via bank app"));

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { familyMemberDiscount, genders, groupPrice, is60PlusAtEndOfThisYearDiscount, locationGroups, secondSportDiscount } from "#shared/data/inschrijving";
 import { schema, initialState, type Schema } from "#shared/schemas/inschrijving";
+import { buildInschrijvingQrCode } from "#shared/utils/inschrijving-qr-code";
 import { isRegistrationFormVisible } from "#shared/utils/registration-visibility";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
@@ -143,31 +144,13 @@ const discountedAmount = computed(() =>
 
 const qrCode = computed(() =>
   amount.value && state.value.firstName && state.value.lastName
-    ? `BCD
-001
-1
-SCT
-GKCCBEBB
-HAMSE TURNVERENIGING
-BE69068209399078
-EUR${discountedAmount.value ?? amount.value}
-
-${state.value.firstName} ${state.value.lastName}
-`
+    ? buildInschrijvingQrCode({
+        firstName: state.value.firstName,
+        lastName: state.value.lastName,
+        amount: discountedAmount.value ?? amount.value,
+      })
     : null
 );
-
-const qrCodeBase64 = computed(() => {
-  if (!qrCode.value) return null;
-
-  try {
-    return useQrcode(qrCode.value, { toBase64: true, blackColor: "#000000", whiteColor: "#FFFFFF" })
-      .value;
-  } catch (error) {
-    console.error("QR-code kon niet gegenereerd worden", error);
-    return null;
-  }
-});
 
 interface PendingPayment {
   id: string;
@@ -198,7 +181,7 @@ const toast = useToast();
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   const response = await $fetch("/api/inschrijven", {
     method: "POST",
-    body: { ...event.data, qrCodeBase64: qrCodeBase64.value },
+    body: event.data,
   });
 
   const errorToast: Partial<Toast> = {

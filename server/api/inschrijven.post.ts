@@ -5,15 +5,8 @@ import { familyMemberDiscount, groupPrice, is60PlusAtEndOfThisYearDiscount, seco
 import { schema } from "#shared/schemas/inschrijving";
 import { inschrijvingen } from "hub:db:schema";
 
-// The client only ever produces `data:image/svg+xml;base64,<base64>` (renderSVGBase64 from
-// nuxt-qrcode). The value is rendered unescaped in the e-mail template, so it must match that
-// exact shape over the full string, otherwise HTML can be injected into our outgoing e-mail.
-const QR_CODE_BASE64_PATTERN = /^data:image\/svg\+xml;base64,[A-Za-z0-9+/]+={0,2}$/;
-const QR_CODE_BASE64_MAX_LENGTH = 100_000;
-
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
-  const validationResult = v.safeParse(schema, body);
+  const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
 
   if (!validationResult.success) {
     return {
@@ -24,12 +17,6 @@ export default defineEventHandler(async (event) => {
   }
 
   const input = validationResult.output;
-  const qrCodeBase64 =
-    typeof body.qrCodeBase64 === "string" &&
-    body.qrCodeBase64.length <= QR_CODE_BASE64_MAX_LENGTH &&
-    QR_CODE_BASE64_PATTERN.test(body.qrCodeBase64)
-      ? body.qrCodeBase64
-      : null;
 
   try {
     // Save to database
@@ -83,6 +70,13 @@ export default defineEventHandler(async (event) => {
     discount += input.familyMember.check ? familyMemberDiscount : 0;
     discount += input.secondSportCheck ? secondSportDiscount : 0;
     const discountedAmount = amount && discount ? amount - discount : null;
+    const qrCodeImageUrl = amount
+      ? `https://www.hamseturnvereniging.be/api/inschrijven/qr-code?${new URLSearchParams({
+          firstName: input.firstName,
+          lastName: input.lastName,
+          amount: String(discountedAmount ?? amount),
+        })}`
+      : null;
 
     const htmlContent = emailTemplate({
       ...input,
@@ -93,7 +87,7 @@ export default defineEventHandler(async (event) => {
       is60PlusAtEndOfThisYearDiscount,
       familyMemberDiscount,
       secondSportDiscount,
-      qrCodeBase64,
+      qrCodeImageUrl,
     });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {
