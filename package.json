@@ -14,10 +14,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "node --test"
   },
   "dependencies": {
     "@date-fns/tz": "^1.4.1",
+    "@juit/qrcode": "^1.0.106",
     "@libsql/client": "^0.17.2",
     "@nuxt/content": "^3.12.0",
     "@nuxt/eslint": "^1.15.2",

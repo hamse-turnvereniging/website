@@ -2,14 +2,14 @@
 import { startOfDay, startOfToday } from "date-fns";
 
 const route = useRoute();
-const showWafels = computed(() => startOfToday() <= startOfDay(new Date("2025-11-09")));
+const showWafels = computed(() => startOfToday() >= startOfDay(new Date("2026-10-18")) && startOfToday() <= startOfDay(new Date("2026-11-15")));
 const showEetdag = computed(() => startOfToday() <= startOfDay(new Date("2026-03-01")));
 const showPaaskamp = computed(() => startOfToday() <= startOfDay(new Date("2026-04-15")));
 const showUitstap = computed(() => startOfToday() <= startOfDay(new Date("2026-06-27")));
 </script>
 
 <template>
-  <header class="z-10">
+  <header class="z-10 relative">
     <div class="flex items-center justify-between max-w-6xl mx-auto px-8 h-16 md:h-20">
       <div class="w-[160px] h-full">
         <nuxt-link to="/">

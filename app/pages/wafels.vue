@@ -3,7 +3,7 @@ import { schema, initialState, type Schema } from "#shared/schemas/bestellen/waf
 import type { FormErrorEvent, FormSubmitEvent } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { startOfDay, startOfToday } from "date-fns";
-const showForm = computed(() => startOfToday() <= startOfDay(new Date("2025-11-09")));
+const showForm = computed(() => startOfToday() >= startOfDay(new Date("2026-10-18")) && startOfToday() <= startOfDay(new Date("2026-11-15")));
 
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
@@ -32,6 +32,22 @@ const amount = computed(() => {
 
   return quantity * (quantity >= 3 ? 4 : 5);
 });
+
+const qrCode = computed(() =>
+  amount.value > 0 && state.value.firstName && state.value.lastName
+    ? `BCD
+001
+1
+SCT
+GKCCBEBB
+HAMSE TURNVERENIGING
+BE69068209399078
+EUR${amount.value}
+
+Wafels ${state.value.firstName} ${state.value.lastName}
+`
+    : null
+);
 
 const toast = useToast();
 
@@ -190,7 +206,6 @@ async function onError(event: FormErrorEvent) {
         <hr />
         <div class="flex flex-col gap-4">
           <h4>Betaalgegevens</h4>
-          <!-- TODO: Add SEPA QR -->
           <div class="sm:hidden flex flex-col gap-2">
             <div class="flex flex-col">
               <div class="text-sm">Rekeningnummer</div>
@@ -207,6 +222,10 @@ async function onError(event: FormErrorEvent) {
                 {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                 {{ state.lastName != "" ? state.lastName : "Naam" }}
               </div>
+            </div>
+            <div v-if="qrCode" class="flex flex-col">
+              <div class="text-sm py-1">Scan via bank app</div>
+              <qrcode class="py-1" width="150" :value="qrCode" :border="0" />
             </div>
           </div>
           <table class="hidden sm:block">
@@ -226,6 +245,10 @@ async function onError(event: FormErrorEvent) {
                   {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                   {{ state.lastName != "" ? state.lastName : "Naam" }}
                 </td>
+              </tr>
+              <tr v-if="qrCode">
+                <td class="text-sm align-top py-1">Scan via bank app</td>
+                <qrcode class="py-1" width="150" :value="qrCode" />
               </tr>
             </tbody>
           </table>

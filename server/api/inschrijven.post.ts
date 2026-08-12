@@ -1,8 +1,9 @@
 import * as v from "valibot";
 
 import emailTemplate from "~~/server/assets/templates/email/inschrijving";
-import { groupPrice } from "#shared/data/inschrijving";
+import { familyMemberDiscount, is60PlusAtEndOfThisYearDiscount, secondSportDiscount } from "#shared/data/inschrijving";
 import { schema } from "#shared/schemas/inschrijving";
+import { calculateInschrijvingAmount } from "#shared/utils/inschrijving-pricing";
 import { inschrijvingen } from "hub:db:schema";
 
 export default defineEventHandler(async (event) => {
@@ -17,10 +18,12 @@ export default defineEventHandler(async (event) => {
   }
 
   const input = validationResult.output;
+  const publicId = crypto.randomUUID();
 
   try {
     // Save to database
     await db.insert(inschrijvingen).values({
+      publicId,
       data: JSON.stringify(input),
       createdAt: new Date(),
     });
@@ -52,10 +55,9 @@ export default defineEventHandler(async (event) => {
           });
         }
       } else if (
-        input.group === "Turnen - 12+" ||
         input.group === "BBB" ||
         input.group === "Callanetics" ||
-        input.group === "Net-voetbal heren"
+        input.group === "Net-voetbal"
       ) {
         to.push({
           name: `${input.firstName} ${input.lastName}`,
@@ -65,9 +67,10 @@ export default defineEventHandler(async (event) => {
     }
 
     const subject = `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`;
-    const amount = input.group && groupPrice[input.group];
-    const discount = input.is60PlusAtEndOfThisYear || input.familyMember.check ? 5 : 0;
-    const discountedAmount = amount && discount ? amount - discount : null;
+    const { amount, discount, discountedAmount } = calculateInschrijvingAmount(input);
+    const qrCodeImageUrl = amount
+      ? `https://www.hamseturnvereniging.be/api/inschrijven/${publicId}/qr-code.png`
+      : null;
 
     const htmlContent = emailTemplate({
       ...input,
@@ -75,6 +78,10 @@ export default defineEventHandler(async (event) => {
       amount,
       discount,
       discountedAmount,
+      is60PlusAtEndOfThisYearDiscount,
+      familyMemberDiscount,
+      secondSportDiscount,
+      qrCodeImageUrl,
     });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {

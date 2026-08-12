@@ -59,7 +59,7 @@ if (faq.value) {
 
 section#banner {
   @apply bg-primary-300;
-  background-image: url("/images/banner.jpg");
+  background-image: url("/images/faq/banner.jpg");
 }
 </style>
 

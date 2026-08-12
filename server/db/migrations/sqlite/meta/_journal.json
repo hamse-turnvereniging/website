@@ -36,6 +36,13 @@
       "when": 1779026400000,
       "tag": "0004_inschrijvingen_uitstap",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1786477908136,
+      "tag": "0005_workable_turbo",
+      "breakpoints": true
     }
   ]
 }

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { genders, groupPrice, locationGroups } from "#shared/data/inschrijving";
+import { familyMemberDiscount, genders, groupPrice, is60PlusAtEndOfThisYearDiscount, locationGroups, secondSportDiscount } from "#shared/data/inschrijving";
 import { schema, initialState, type Schema } from "#shared/schemas/inschrijving";
+import { buildInschrijvingQrCode } from "#shared/utils/inschrijving-qr-code";
 import { isRegistrationFormVisible } from "#shared/utils/registration-visibility";
 import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
@@ -59,17 +60,13 @@ const groups: SelectItem[] = [
     value: "Turnen - 4ste, 5de en 6de leerjaar",
   },
   {
-    label: "12+",
-    value: "Turnen - 12+",
-  },
-  { type: "separator" },
-  {
     label: "Trampoline (vanaf 1ste leerjaar)",
     value: "Trampoline",
   },
+  { type: "separator" },
   "BBB",
   "Callanetics",
-  "Net-voetbal heren",
+  "Net-voetbal",
 ];
 
 const locations = [
@@ -119,21 +116,65 @@ const is60PlusAtEndOfThisYear = computed(
 
 watch(is60PlusAtEndOfThisYear, (value) => {
   state.value.is60PlusAtEndOfThisYear = !!value;
-
-  if (value && state.value.familyMember.check) {
-    state.value.familyMember.check = false;
-  }
 });
 
 const amount = computed(() => state.value.group && groupPrice[state.value.group]);
 
-const discount = computed(() =>
-  state.value.is60PlusAtEndOfThisYear || state.value.familyMember.check ? 5 : 0
-);
+const discount = computed(() => {
+  let discountAmount = 0;
+
+  if (state.value.is60PlusAtEndOfThisYear) {
+    discountAmount += is60PlusAtEndOfThisYearDiscount;
+  }
+
+  if (state.value.familyMember.check) {
+    discountAmount += familyMemberDiscount;
+  }
+
+  if (state.value.secondSportCheck) {
+    discountAmount += secondSportDiscount;
+  }
+
+  return discountAmount;
+});
 
 const discountedAmount = computed(() =>
   amount.value && discount.value ? amount.value - discount.value : null
 );
+
+const qrCode = computed(() =>
+  amount.value && state.value.firstName && state.value.lastName
+    ? buildInschrijvingQrCode({
+        firstName: state.value.firstName,
+        lastName: state.value.lastName,
+        amount: discountedAmount.value ?? amount.value,
+      })
+    : null
+);
+
+interface PendingPayment {
+  id: string;
+  firstName: string;
+  lastName: string;
+  group: string;
+  amount: number;
+  discount: number;
+  discountedAmount: number | null;
+  is60PlusAtEndOfThisYear: boolean;
+  familyMemberCheck: boolean;
+  secondSportCheck: boolean;
+  qrCode: string;
+  createdAt: string;
+}
+
+const pendingPayments = useLocalStorage<PendingPayment[]>(
+  "inschrijvingsformulier-openstaande-betalingen",
+  []
+);
+
+function markAsPaid(id: string) {
+  pendingPayments.value = pendingPayments.value.filter((payment) => payment.id !== id);
+}
 
 const toast = useToast();
 
@@ -158,6 +199,23 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   }
 
   toast.add({ title: "Gelukt!", description: "Je inschrijving is verzonden.", color: "primary" });
+
+  if (amount.value) {
+    pendingPayments.value.push({
+      id: crypto.randomUUID(),
+      firstName: state.value.firstName,
+      lastName: state.value.lastName,
+      group: state.value.group ?? "",
+      amount: amount.value,
+      discount: discount.value,
+      discountedAmount: discountedAmount.value,
+      is60PlusAtEndOfThisYear: !!state.value.is60PlusAtEndOfThisYear,
+      familyMemberCheck: !!state.value.familyMember.check,
+      secondSportCheck: !!state.value.secondSportCheck,
+      qrCode: qrCode.value ?? "",
+      createdAt: new Date().toISOString(),
+    });
+  }
 
   resetForm();
 }
@@ -364,10 +422,9 @@ async function onError(event: FormErrorEvent) {
             <div
               v-if="
                 !!state.group &&
-                (state.group === 'Turnen - 12+' ||
-                  state.group === 'BBB' ||
+                (state.group === 'BBB' ||
                   state.group === 'Callanetics' ||
-                  state.group === 'Net-voetbal heren')
+                  state.group === 'Net-voetbal')
               "
               class="flex flex-1 flex-col gap-4"
             >
@@ -379,10 +436,9 @@ async function onError(event: FormErrorEvent) {
                   name="phoneNumber"
                   :required="
                     !!state.group &&
-                    (state.group === 'Turnen - 12+' ||
-                      state.group === 'BBB' ||
+                    (state.group === 'BBB' ||
                       state.group === 'Callanetics' ||
-                      state.group === 'Net-voetbal heren')
+                      state.group === 'Net-voetbal')
                   "
                 >
                   <u-input
@@ -398,10 +454,9 @@ async function onError(event: FormErrorEvent) {
                   name="email"
                   :required="
                     !!state.group &&
-                    (state.group === 'Turnen - 12+' ||
-                      state.group === 'BBB' ||
+                    (state.group === 'BBB' ||
                       state.group === 'Callanetics' ||
-                      state.group === 'Net-voetbal heren')
+                      state.group === 'Net-voetbal')
                   "
                 >
                   <u-input
@@ -578,14 +633,12 @@ async function onError(event: FormErrorEvent) {
             <div v-if="amount" class="flex flex-col">
               <div class="text-sm">Bedrag</div>
               <div class="font-semibold py-1">
-                <span v-if="discount"
-                  ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
-                  {{ discountedAmount }} (<span v-if="is60PlusAtEndOfThisYear"
-                    >{{ discount }} euro korting voor 60-plussers</span
-                  ><span v-else="state.familyMember.check"
-                    >{{ discount }} euro korting via gezinslid</span
-                  >)</span
-                >
+                <span v-if="discount">
+                  <span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro; {{ discountedAmount }}
+                  <span v-if="is60PlusAtEndOfThisYear">&nbsp;({{ is60PlusAtEndOfThisYearDiscount }} euro korting voor 60-plussers)</span>
+                  <span v-if="state.familyMember.check">&nbsp;({{ familyMemberDiscount }} euro korting via gezinslid)</span>
+                  <span v-if="state.secondSportCheck">&nbsp;({{ secondSportDiscount }} euro korting via 2de sport)</span>
+                </span>
                 <span v-else>&euro; {{ amount }}</span>
               </div>
             </div>
@@ -595,6 +648,10 @@ async function onError(event: FormErrorEvent) {
                 {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                 {{ state.lastName != "" ? state.lastName : "Naam" }}
               </div>
+            </div>
+            <div v-if="qrCode" class="flex flex-col">
+              <div class="text-sm py-1">Scan via bank app</div>
+              <qrcode class="py-1" width="150" :value="qrCode" :border="0" />
             </div>
           </div>
           <table class="hidden sm:block">
@@ -606,14 +663,12 @@ async function onError(event: FormErrorEvent) {
               <tr v-if="amount">
                 <td class="text-sm">Bedrag</td>
                 <td class="font-semibold py-1">
-                  <span v-if="discount"
-                    ><span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro;
-                    {{ discountedAmount }} (<span v-if="is60PlusAtEndOfThisYear"
-                      >{{ discount }} euro korting voor 60-plussers</span
-                    ><span v-else="state.familyMember.check"
-                      >{{ discount }} euro korting via gezinslid</span
-                    >)</span
-                  >
+                  <span v-if="discount">
+                    <span class="font-normal line-through mr-1">&euro; {{ amount }}</span> &euro; {{ discountedAmount }}
+                    <span v-if="is60PlusAtEndOfThisYear">&nbsp;({{ is60PlusAtEndOfThisYearDiscount }} euro korting voor 60-plussers)</span>
+                    <span v-if="state.familyMember.check">&nbsp;({{ familyMemberDiscount }} euro korting via gezinslid)</span>
+                    <span v-if="state.secondSportCheck">&nbsp;({{ secondSportDiscount }} euro korting via 2de sport)</span>
+                  </span>
                   <span v-else>&euro; {{ amount }}</span>
                 </td>
               </tr>
@@ -624,9 +679,13 @@ async function onError(event: FormErrorEvent) {
                   {{ state.lastName != "" ? state.lastName : "Naam" }}
                 </td>
               </tr>
+              <tr v-if="qrCode">
+                <td class="text-sm align-top py-1">Scan via bank app</td>
+                <qrcode class="py-1" width="150" :value="qrCode" />
+              </tr>
             </tbody>
           </table>
-          <div v-if="!is60PlusAtEndOfThisYear" class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4">
             <u-form-field name="familyMember.check">
               <u-checkbox
                 v-model="state.familyMember.check"
@@ -666,6 +725,14 @@ async function onError(event: FormErrorEvent) {
                 </u-form-field>
               </div>
             </div>
+            <u-form-field name="secondSportCheck">
+              <u-checkbox
+                v-model="state.secondSportCheck"
+                label="Ik ben dit seizoen reeds ingeschreven voor een andere sport binnen de club."
+                description="(ontvang 5 euro korting)"
+                size="xl"
+              />
+            </u-form-field>
           </div>
           <u-form-field name="paymentCheck">
             <u-checkbox
@@ -756,6 +823,64 @@ async function onError(event: FormErrorEvent) {
         De inschrijvingen voor het nieuwe turnjaar zijn nog niet geopend. Meer informatie volgt
         binnenkort.
       </p>
+    </div>
+  </section>
+  <section v-if="pendingPayments.length" class="max-w-2xl mx-auto flex flex-col gap-8 px-8 py-16">
+    <div class="flex flex-col gap-4">
+      <h2>Openstaande betalingen</h2>
+      <p>
+        Overzicht van lidgeld dat nog betaald moet worden. Dit overzicht is enkel op dit toestel
+        zichtbaar en verdwijnt zodra je een betaling als betaald markeert.
+      </p>
+    </div>
+    <div
+      v-for="payment in pendingPayments"
+      :key="payment.id"
+      class="flex flex-col gap-4 border border-default rounded-lg p-4"
+    >
+      <h3>{{ payment.firstName }} {{ payment.lastName }} - {{ payment.group }}</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td class="text-sm" width="160px">Rekeningnummer</td>
+            <td class="font-semibold py-1">BE69 0682 0939 9078</td>
+          </tr>
+          <tr>
+            <td class="text-sm">Bedrag</td>
+            <td class="font-semibold py-1">
+              <span v-if="payment.discount">
+                <span class="font-normal line-through mr-1">&euro; {{ payment.amount }}</span>
+                &euro; {{ payment.discountedAmount }}
+                <span v-if="payment.is60PlusAtEndOfThisYear">
+                  &nbsp;({{ is60PlusAtEndOfThisYearDiscount }} euro korting voor 60-plussers)
+                </span>
+                <span v-if="payment.familyMemberCheck">
+                  &nbsp;({{ familyMemberDiscount }} euro korting via gezinslid)
+                </span>
+                <span v-if="payment.secondSportCheck">
+                  &nbsp;({{ secondSportDiscount }} euro korting via 2de sport)
+                </span>
+              </span>
+              <span v-else>&euro; {{ payment.amount }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-sm">Mededeling</td>
+            <td class="font-semibold py-1">{{ payment.firstName }} {{ payment.lastName }}</td>
+          </tr>
+          <tr>
+            <td class="text-sm align-top py-1">Scan via bank app</td>
+            <td class="py-1"><qrcode width="150" :value="payment.qrCode" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <u-button
+        label="Markeer als betaald"
+        icon="i-lucide-check"
+        color="primary"
+        class="self-start"
+        @click="markAsPaid(payment.id)"
+      />
     </div>
   </section>
 </template>
