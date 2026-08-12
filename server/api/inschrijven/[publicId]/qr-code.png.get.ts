@@ -1,5 +1,5 @@
+import { generate } from "@juit/qrcode";
 import { eq } from "drizzle-orm";
-import QRCode from "qrcode";
 
 import { calculateInschrijvingAmount } from "#shared/utils/inschrijving-pricing";
 import { buildInschrijvingQrCode } from "#shared/utils/inschrijving-qr-code";
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
     lastName: input.lastName,
     amount: discountedAmount ?? amount,
   });
-  const png = await QRCode.toBuffer(qrCodeText, { type: "png", width: 300, margin: 1 });
+  const png = await generate(qrCodeText, "png", { scale: 6, margin: 2 });
 
   setHeader(event, "Content-Type", "image/png");
   setHeader(event, "Cache-Control", "public, max-age=31536000, immutable");

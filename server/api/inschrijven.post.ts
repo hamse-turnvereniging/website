@@ -69,7 +69,7 @@ export default defineEventHandler(async (event) => {
     const subject = `Bevestiging inschrijving - ${input.firstName} ${input.lastName} (${input.group} - Sporthal ${input.location})`;
     const { amount, discount, discountedAmount } = calculateInschrijvingAmount(input);
     const qrCodeImageUrl = amount
-      ? `https://www.hamseturnvereniging.be/api/inschrijven/${publicId}/qr-code`
+      ? `https://www.hamseturnvereniging.be/api/inschrijven/${publicId}/qr-code.png`
       : null;
 
     const htmlContent = emailTemplate({
