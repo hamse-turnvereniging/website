@@ -49,3 +49,12 @@ const selectedIndex = ref<number | null>(null);
     <app-photo-lightbox v-model="selectedIndex" :photos="photos" />
   </section>
 </template>
+
+<style scoped>
+@reference "./../assets/css/main.css";
+
+section#banner {
+  @apply bg-primary-300;
+  background-image: url("/images/banner.jpg");
+}
+</style>

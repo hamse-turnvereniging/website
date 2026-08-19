@@ -101,7 +101,7 @@ export default defineEventHandler(async () => {
       cache.cachedAt = Date.now();
     } catch (error) {
       console.error(error);
-      return { photos: [], error: true };
+      return { photos: cache.photos, error: cache.photos.length === 0 };
     }
   }
 
