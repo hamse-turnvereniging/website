@@ -45,6 +45,8 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.124",
+    "@iconify-json/mdi": "^1.2.3",
     "drizzle-kit": "^0.31.10",
     "nuxt-qrcode": "^0.4.9",
     "wrangler": "^4.78.0"
