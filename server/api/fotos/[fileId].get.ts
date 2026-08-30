@@ -14,10 +14,12 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const response = await $fetch.raw(`${GOOGLE_DRIVE_FILES_URL}/${fileId}`, {
+    const response = await $fetch.raw<ArrayBuffer>(`${GOOGLE_DRIVE_FILES_URL}/${fileId}`, {
       query: {
         alt: "media",
-        key: process.env.GOOGLE_DRIVE_API_KEY,
+      },
+      headers: {
+        "X-goog-api-key": process.env.GOOGLE_DRIVE_API_KEY!,
       },
       responseType: "arrayBuffer",
     });
@@ -25,7 +27,7 @@ export default defineEventHandler(async (event) => {
     setHeader(event, "Content-Type", response.headers.get("content-type") ?? "application/octet-stream");
     setHeader(event, "Cache-Control", "public, max-age=3600");
 
-    return response._data;
+    return new Uint8Array(response._data!);
   } catch (error) {
     console.error(error);
     throw createError({ statusCode: 502, statusMessage: "Kon foto niet ophalen bij Google Drive" });

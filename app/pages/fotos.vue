@@ -36,13 +36,10 @@ const selectedIndex = ref<number | null>(null);
         type="button"
         @click="selectedIndex = index"
       >
-        <nuxt-img
+        <img
           class="w-full h-full object-cover hover:scale-105 transition-transform"
           :src="`/api/fotos/${photo.id}`"
           :alt="photo.name"
-          width="400"
-          height="400"
-          fit="cover"
           loading="lazy"
         />
       </button>

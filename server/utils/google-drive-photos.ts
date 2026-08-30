@@ -43,7 +43,9 @@ async function fetchAllPhotos(): Promise<GooglePhoto[]> {
         orderBy: "name",
         pageSize: 1000,
         pageToken,
-        key: apiKey,
+      },
+      headers: {
+        "X-goog-api-key": apiKey!,
       },
     });
 

@@ -62,14 +62,11 @@ useEventListener("keydown", onKeydown);
           size="xl"
           @click="close"
         />
-        <nuxt-img
+        <img
           v-if="currentPhoto"
           class="max-h-[70vh] max-w-full object-contain"
           :src="`/api/fotos/${currentPhoto.id}`"
           :alt="currentPhoto.name"
-          width="1600"
-          height="1600"
-          fit="contain"
         />
         <div class="flex justify-between w-full">
           <u-button
