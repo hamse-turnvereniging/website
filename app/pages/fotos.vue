@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { buildThumbnailUrl } from "#shared/utils/google-photos";
-
 useHead({
   title: "Foto's",
 });
@@ -38,10 +36,13 @@ const selectedIndex = ref<number | null>(null);
         type="button"
         @click="selectedIndex = index"
       >
-        <img
+        <nuxt-img
           class="w-full h-full object-cover hover:scale-105 transition-transform"
-          :src="buildThumbnailUrl(photo.baseUrl, 400)"
-          :alt="photo.filename"
+          :src="`/api/fotos/${photo.id}`"
+          :alt="photo.name"
+          width="400"
+          height="400"
+          fit="cover"
           loading="lazy"
         />
       </button>

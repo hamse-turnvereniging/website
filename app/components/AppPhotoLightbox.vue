@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { breakpointsTailwind } from "@vueuse/core";
 
-import { buildFullSizeUrl, type GooglePhoto } from "#shared/utils/google-photos";
+import type { GooglePhoto } from "#shared/utils/google-drive";
 
 const props = defineProps<{
   photos: GooglePhoto[];
@@ -62,11 +62,14 @@ useEventListener("keydown", onKeydown);
           size="xl"
           @click="close"
         />
-        <img
+        <nuxt-img
           v-if="currentPhoto"
           class="max-h-[70vh] max-w-full object-contain"
-          :src="buildFullSizeUrl(currentPhoto.baseUrl, 1600)"
-          :alt="currentPhoto.filename"
+          :src="`/api/fotos/${currentPhoto.id}`"
+          :alt="currentPhoto.name"
+          width="1600"
+          height="1600"
+          fit="contain"
         />
         <div class="flex justify-between w-full">
           <u-button
