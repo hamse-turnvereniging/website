@@ -1,19 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { buildFullSizeUrl, buildThumbnailUrl, isCacheStale } from "./google-photos.ts";
-
-test("buildThumbnailUrl appends a square-cropped size suffix", () => {
-  const url = buildThumbnailUrl("https://photos.example/base", 400);
-
-  assert.equal(url, "https://photos.example/base=w400-h400-c");
-});
-
-test("buildFullSizeUrl appends an uncropped size suffix", () => {
-  const url = buildFullSizeUrl("https://photos.example/base", 1600);
-
-  assert.equal(url, "https://photos.example/base=w1600-h1600");
-});
+import { isCacheStale } from "./google-drive.ts";
 
 test("isCacheStale is stale when nothing has been cached yet", () => {
   assert.equal(isCacheStale(null, 5 * 60 * 1000, Date.now()), true);
