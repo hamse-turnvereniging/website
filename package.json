@@ -7,6 +7,7 @@
     "url": "https://steffbeckers.com"
   },
   "private": true,
+  "license": "GPL-3.0",
   "type": "module",
   "scripts": {
     "compile-hbs": "node scripts/compile-hbs.mjs",
