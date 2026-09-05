@@ -72,6 +72,7 @@ useEventListener("keydown", onKeydown);
           <img
             v-if="currentPhoto"
             class="max-h-full max-w-full object-contain"
+            referrerPolicy="no-referrer"
             :src="buildSizedThumbnailUrl(currentPhoto.thumbnailLink, 1600)"
             :alt="currentPhoto.name"
           />

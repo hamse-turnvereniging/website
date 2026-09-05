@@ -40,6 +40,7 @@ const selectedIndex = ref<number | null>(null);
       >
         <img
           class="w-full h-full object-cover hover:scale-105 transition-transform"
+          referrerPolicy="no-referrer"
           :src="buildSizedThumbnailUrl(photo.thumbnailLink, 400)"
           :alt="photo.name"
           loading="lazy"
