@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { buildSizedThumbnailUrl } from "#shared/utils/google-drive";
+
 useHead({
   title: "Foto's",
 });
@@ -38,7 +40,7 @@ const selectedIndex = ref<number | null>(null);
       >
         <img
           class="w-full h-full object-cover hover:scale-105 transition-transform"
-          :src="`/api/fotos/${photo.id}`"
+          :src="buildSizedThumbnailUrl(photo.thumbnailLink, 400)"
           :alt="photo.name"
           loading="lazy"
         />

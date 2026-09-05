@@ -17,10 +17,7 @@ const cache: Cache = {
 type DriveFile = {
   id: string;
   name: string;
-  imageMediaMetadata?: {
-    width?: number;
-    height?: number;
-  };
+  thumbnailLink?: string;
 };
 
 type DriveFilesListResponse = {
@@ -39,22 +36,23 @@ async function fetchAllPhotos(): Promise<GooglePhoto[]> {
     const response = await $fetch<DriveFilesListResponse>(GOOGLE_DRIVE_FILES_URL, {
       query: {
         q: `'${folderId}' in parents and mimeType contains 'image/' and trashed = false`,
-        fields: "files(id,name,imageMediaMetadata(width,height)),nextPageToken",
+        fields: "files(id,name,thumbnailLink),nextPageToken",
         orderBy: "name",
         pageSize: 1000,
         pageToken,
-      },
-      headers: {
-        "X-goog-api-key": apiKey!,
+        key: apiKey,
       },
     });
 
     for (const file of response.files ?? []) {
+      if (!file.thumbnailLink) {
+        continue;
+      }
+
       photos.push({
         id: file.id,
         name: file.name,
-        width: file.imageMediaMetadata?.width,
-        height: file.imageMediaMetadata?.height,
+        thumbnailLink: file.thumbnailLink,
       });
     }
 
@@ -76,7 +74,10 @@ export async function getPhotos(): Promise<{ photos: GooglePhoto[]; error: boole
       cache.photos = await fetchAllPhotos();
       cache.cachedAt = Date.now();
     } catch (error) {
-      console.error(error);
+      console.error(
+        "Kon foto's niet ophalen bij Google Drive:",
+        error instanceof Error ? error.message.replace(/key=[^&"\s]+/, "key=REDACTED") : error
+      );
       return { photos: cache.photos, error: cache.photos.length === 0 };
     }
   }

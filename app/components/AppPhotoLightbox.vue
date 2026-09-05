@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { breakpointsTailwind } from "@vueuse/core";
 
-import type { GooglePhoto } from "#shared/utils/google-drive";
+import { buildSizedThumbnailUrl, type GooglePhoto } from "#shared/utils/google-drive";
 
 const props = defineProps<{
   photos: GooglePhoto[];
@@ -65,7 +65,7 @@ useEventListener("keydown", onKeydown);
         <img
           v-if="currentPhoto"
           class="max-h-[70vh] max-w-full object-contain"
-          :src="`/api/fotos/${currentPhoto.id}`"
+          :src="buildSizedThumbnailUrl(currentPhoto.thumbnailLink, 1600)"
           :alt="currentPhoto.name"
         />
         <div class="flex justify-between w-full">

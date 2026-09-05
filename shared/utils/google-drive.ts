@@ -1,8 +1,7 @@
 export type GooglePhoto = {
   id: string;
   name: string;
-  width?: number;
-  height?: number;
+  thumbnailLink: string;
 };
 
 export function isCacheStale(cachedAt: number | null, ttlMs: number, now: number): boolean {
@@ -11,4 +10,8 @@ export function isCacheStale(cachedAt: number | null, ttlMs: number, now: number
   }
 
   return now - cachedAt > ttlMs;
+}
+
+export function buildSizedThumbnailUrl(thumbnailLink: string, size: number): string {
+  return thumbnailLink.replace(/=s\d+$/, `=s${size}`);
 }
