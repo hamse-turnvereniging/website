@@ -53,36 +53,40 @@ useEventListener("keydown", onKeydown);
     @update:open="(value) => !value && close()"
   >
     <template #content>
-      <div class="relative flex h-full min-h-0 items-center justify-center p-6">
-        <u-button
-          class="absolute right-4 top-4 z-10 rounded-full bg-black/50! text-white! hover:bg-black/70!"
-          icon="i-lucide-x"
-          variant="ghost"
-          size="xl"
-          @click="close"
-        />
-        <u-button
-          v-if="photos.length > 1"
-          class="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/50! text-white! hover:bg-black/70!"
-          icon="i-lucide-chevron-left"
-          variant="ghost"
-          size="xl"
-          @click="previous"
-        />
-        <img
-          v-if="currentPhoto"
-          class="max-h-[85vh] max-w-full object-contain"
-          :src="buildSizedThumbnailUrl(currentPhoto.thumbnailLink, 1600)"
-          :alt="currentPhoto.name"
-        />
-        <u-button
-          v-if="photos.length > 1"
-          class="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/50! text-white! hover:bg-black/70!"
-          icon="i-lucide-chevron-right"
-          variant="ghost"
-          size="xl"
-          @click="next"
-        />
+      <div class="flex flex-col gap-4 p-6 h-full min-h-0">
+        <div class="flex justify-end">
+          <u-button icon="i-lucide-x" variant="ghost" color="neutral" size="xl" @click="close" />
+        </div>
+        <div class="relative flex flex-1 min-h-0 items-center justify-center">
+          <button
+            v-if="photos.length > 1"
+            class="absolute inset-y-0 left-0 z-10 flex w-1/4 min-w-16 items-center justify-center"
+            type="button"
+            aria-label="Vorige foto"
+            @click="previous"
+          >
+            <div class="rounded-full bg-black/50 p-2">
+              <u-icon name="i-lucide-chevron-left" class="size-8 text-white" />
+            </div>
+          </button>
+          <img
+            v-if="currentPhoto"
+            class="max-h-full max-w-full object-contain"
+            :src="buildSizedThumbnailUrl(currentPhoto.thumbnailLink, 1600)"
+            :alt="currentPhoto.name"
+          />
+          <button
+            v-if="photos.length > 1"
+            class="absolute inset-y-0 right-0 z-10 flex w-1/4 min-w-16 items-center justify-center"
+            type="button"
+            aria-label="Volgende foto"
+            @click="next"
+          >
+            <div class="rounded-full bg-black/50 p-2">
+              <u-icon name="i-lucide-chevron-right" class="size-8 text-white" />
+            </div>
+          </button>
+        </div>
       </div>
     </template>
   </u-modal>
