@@ -1,5 +1,13 @@
 <script lang="ts" setup>
+import LightGallery from "lightgallery/vue";
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
+
 import { buildSizedThumbnailUrl } from "#shared/utils/google-drive";
+
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-thumbnail.css";
+import "lightgallery/css/lg-zoom.css";
 
 useHead({
   title: "Foto's",
@@ -9,7 +17,19 @@ const { data } = await useFetch("/api/fotos");
 
 const photos = computed(() => data.value?.photos ?? []);
 const hasError = computed(() => data.value?.error === true);
-const selectedIndex = ref<number | null>(null);
+
+const lightGalleryPlugins = [lgThumbnail, lgZoom];
+const lightGalleryLicenseKey = useRuntimeConfig().public.lightGalleryLicenseKey;
+
+function onAfterAppendSlide(detail: { index: number }) {
+  const img = document.querySelector<HTMLImageElement>(
+    `.lg-item[id$="-${detail.index}"] img`
+  );
+
+  if (img) {
+    img.referrerPolicy = "no-referrer";
+  }
+}
 </script>
 
 <!-- eslint-disable vue/no-multiple-template-root -->
@@ -30,24 +50,28 @@ const selectedIndex = ref<number | null>(null);
     <p v-else-if="photos.length === 0" class="text-center text-xl">
       Er staan nog geen foto's in het album.
     </p>
-    <div v-else class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      <button
-        v-for="(photo, index) in photos"
-        :key="photo.id"
-        class="aspect-square overflow-hidden rounded-lg cursor-pointer"
-        type="button"
-        @click="selectedIndex = index"
+    <client-only v-else>
+      <light-gallery
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
+        :settings="{ plugins: lightGalleryPlugins, licenseKey: lightGalleryLicenseKey, speed: 300 }"
+        :onAfterAppendSlide="onAfterAppendSlide"
       >
-        <img
-          class="w-full h-full object-cover hover:scale-105 transition-transform"
-          referrerPolicy="no-referrer"
-          :src="buildSizedThumbnailUrl(photo.thumbnailLink, 400)"
-          :alt="photo.name"
-          loading="lazy"
-        />
-      </button>
-    </div>
-    <app-photo-lightbox v-model="selectedIndex" :photos="photos" />
+        <a
+          v-for="photo in photos"
+          :key="photo.id"
+          class="block aspect-square overflow-hidden rounded-lg cursor-pointer"
+          :href="buildSizedThumbnailUrl(photo.thumbnailLink, 1600)"
+        >
+          <img
+            class="w-full h-full object-cover hover:scale-105 transition-transform"
+            referrerPolicy="no-referrer"
+            :src="buildSizedThumbnailUrl(photo.thumbnailLink, 400)"
+            :alt="photo.name"
+            loading="lazy"
+          />
+        </a>
+      </light-gallery>
+    </client-only>
   </section>
 </template>
 
