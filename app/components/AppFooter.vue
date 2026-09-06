@@ -34,6 +34,7 @@
           <nuxt-link to="/aanbod">Aanbod</nuxt-link>
           <nuxt-link to="/kalender">Kalender</nuxt-link>
           <nuxt-link to="/faq">FAQ</nuxt-link>
+          <nuxt-link to="/fotos">Foto's</nuxt-link>
           <nuxt-link to="/inschrijven">Inschrijven</nuxt-link>
         </nav>
         <div class="flex flex-row sm:flex-col justify-between sm:gap-4">
