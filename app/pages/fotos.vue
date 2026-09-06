@@ -11,6 +11,11 @@ import "lightgallery/css/lg-zoom.css";
 
 useHead({
   title: "Foto's",
+  // Applies to every request this document makes, including the <img> tags
+  // lightGallery inserts dynamically — unlike setting `referrerPolicy` on
+  // those elements after the fact, this can't lose the race against the
+  // browser already having started the request with the default referrer.
+  meta: [{ name: "referrer", content: "no-referrer" }],
 });
 
 const { data } = await useFetch("/api/fotos");
@@ -20,16 +25,6 @@ const hasError = computed(() => data.value?.error === true);
 
 const lightGalleryPlugins = [lgThumbnail, lgZoom];
 const lightGalleryLicenseKey = useRuntimeConfig().public.lightGalleryLicenseKey;
-
-function onAfterAppendSlide(detail: { index: number }) {
-  const img = document.querySelector<HTMLImageElement>(
-    `.lg-item[id$="-${detail.index}"] img`
-  );
-
-  if (img) {
-    img.referrerPolicy = "no-referrer";
-  }
-}
 </script>
 
 <!-- eslint-disable vue/no-multiple-template-root -->
@@ -54,7 +49,6 @@ function onAfterAppendSlide(detail: { index: number }) {
       <light-gallery
         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
         :settings="{ plugins: lightGalleryPlugins, licenseKey: lightGalleryLicenseKey, speed: 300 }"
-        :onAfterAppendSlide="onAfterAppendSlide"
       >
         <a
           v-for="photo in photos"
