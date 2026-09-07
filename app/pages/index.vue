@@ -12,7 +12,7 @@
     <section class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 px-8">
       <div class="flex-1">
         <nuxt-img
-          class="w-full"
+          class="w-full rounded-lg"
           fit="cover"
           src="/images/welkom/welkom.jpg"
           alt="Welkom afbeelding"
@@ -52,7 +52,7 @@
     >
       <div class="flex flex-col gap-4 pb-4">
         <nuxt-img
-          class="w-full"
+          class="w-full rounded-lg"
           fit="cover"
           src="/images/aanbod/bbb.jpg"
           alt="Lesgever BBB gezocht in Oostham afbeelding"
@@ -73,7 +73,7 @@
       </div>
       <div class="flex flex-col gap-4 pb-4">
         <nuxt-img
-          class="w-full"
+          class="w-full rounded-lg"
           fit="cover"
           src="/images/welkom/kom-proberen.jpg"
           alt="Kom proberen afbeelding"
@@ -108,7 +108,7 @@
       </div>
       <div class="flex flex-col gap-4 pb-4">
         <nuxt-img
-          class="w-full"
+          class="w-full rounded-lg"
           fit="cover"
           src="/images/welkom/onze-activiteiten.jpg"
           alt="Onze activiteiten afbeelding"
@@ -138,7 +138,7 @@
       </div>
       <div class="flex flex-col gap-4 pb-4">
         <nuxt-img
-          class="w-full"
+          class="w-full rounded-lg"
           fit="cover"
           src="/images/welkom/lesgevers-gezocht.jpg"
           alt="Lesgevers gezocht afbeelding"

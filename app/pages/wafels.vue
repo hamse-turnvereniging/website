@@ -112,7 +112,7 @@ async function onError(event: FormErrorEvent) {
   <section class="max-w-2xl mx-auto flex flex-col gap-8 px-8 py-16">
     <div class="flex flex-col gap-4">
       <h2>Wafelverkoop</h2>
-      <p>Dit jaar organiseren we voor het eerst een wafelverkoop ten voordele van onze club.</p>
+      <p>Dit jaar organiseren we opnieuw een wafelverkoop ten voordele van onze club.</p>
       <p>
         Met deze actie willen we de werking van de Hamse Turnvereniging extra ondersteunen en daar
         kunnen we jullie hulp goed bij gebruiken!
@@ -122,11 +122,11 @@ async function onError(event: FormErrorEvent) {
         Je hebt de keuze tussen vanillewafels of half-gechocolateerde wafels.
       </p>
       <div class="flex flex-wrap gap-4">
-        <nuxt-img src="/images/wafels/vanille.jpg" width="180" height="135" />
-        <nuxt-img src="/images/wafels/chocolade.jpg" width="180" height="135" />
+        <nuxt-img class="rounded-lg" src="/images/wafels/vanille.jpg" width="180" height="135" />
+        <nuxt-img class="rounded-lg" src="/images/wafels/chocolade.jpg" width="180" height="135" />
       </div>
       <p>De prijs bedraagt &euro; 5 per pak, vanaf 3 pakken &euro; 4 per pak.</p>
-      <p>Bestellen kan <strong>tot en met 9 november</strong> via het bestelformulier hieronder.</p>
+      <p>Bestellen kan <strong>tot en met 15 november</strong> via het bestelformulier hieronder.</p>
       <p>
         De bestelde wafels zullen verdeeld worden tijdens de lessen vanaf de laatste week van
         november.

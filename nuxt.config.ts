@@ -47,6 +47,13 @@ export default defineNuxtConfig({
       external: ["handlebars-helpers"],
     },
   },
+  runtimeConfig: {
+    public: {
+      // Free GPLv3 key requested from contact@lightgalleryjs.com; falls back to
+      // the vendor's own placeholder (shows a console warning) until it's set.
+      lightGalleryLicenseKey: process.env.NUXT_PUBLIC_LIGHT_GALLERY_LICENSE_KEY ?? "0000-0000-000-0000",
+    },
+  },
   site: {
     defaultLocale: "nl",
     name: "Hamse Turnvereniging",

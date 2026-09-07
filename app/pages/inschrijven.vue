@@ -56,8 +56,8 @@ const groups: SelectItem[] = [
     value: "Turnen - 1ste, 2de en 3de leerjaar",
   },
   {
-    label: "4ste, 5de en 6de leerjaar",
-    value: "Turnen - 4ste, 5de en 6de leerjaar",
+    label: "vanaf het 4de leerjaar",
+    value: "Turnen - vanaf het 4de leerjaar",
   },
   {
     label: "Trampoline (vanaf 1ste leerjaar)",
@@ -516,7 +516,7 @@ async function onError(event: FormErrorEvent) {
                 (state.group === 'Turnen - 1ste kleuterklas' ||
                   state.group === 'Turnen - 2de en 3de kleuterklas' ||
                   state.group === 'Turnen - 1ste, 2de en 3de leerjaar' ||
-                  state.group === 'Turnen - 4ste, 5de en 6de leerjaar' ||
+                  state.group === 'Turnen - vanaf het 4de leerjaar' ||
                   state.group === 'Trampoline')
               "
               class="flex flex-col gap-4"

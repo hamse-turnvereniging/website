@@ -7,6 +7,7 @@
     "url": "https://steffbeckers.com"
   },
   "private": true,
+  "license": "GPL-3.0",
   "type": "module",
   "scripts": {
     "compile-hbs": "node scripts/compile-hbs.mjs",
@@ -37,6 +38,7 @@
     "eslint": "^9.39.4",
     "fast-glob": "^3.3.3",
     "handlebars": "^4.7.9",
+    "lightgallery": "^2.9.0",
     "maska": "^3.2.0",
     "nuxt": "^4.4.2",
     "tailwindcss": "^4.2.2",
@@ -45,6 +47,8 @@
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.124",
+    "@iconify-json/mdi": "^1.2.3",
     "drizzle-kit": "^0.31.10",
     "nuxt-qrcode": "^0.4.9",
     "wrangler": "^4.78.0"

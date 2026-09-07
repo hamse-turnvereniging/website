@@ -37,6 +37,10 @@ const showUitstap = computed(() => startOfToday() <= startOfDay(new Date("2026-0
           <div>FAQ</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">FAQ</div>
         </nuxt-link>
+        <nuxt-link class="p-4 text-center" to="/fotos">
+          <div>Foto's</div>
+          <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Foto's</div>
+        </nuxt-link>
         <nuxt-link class="p-4 text-center" to="/inschrijven">
           <div>Inschrijven</div>
           <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Inschrijven</div>
@@ -108,6 +112,10 @@ const showUitstap = computed(() => startOfToday() <= startOfDay(new Date("2026-0
             <nuxt-link class="p-4 text-center" to="/faq" @click="close()">
               <h3>FAQ</h3>
               <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">FAQ</div>
+            </nuxt-link>
+            <nuxt-link class="p-4 text-center" to="/fotos" @click="close()">
+              <h3>Foto's</h3>
+              <div aria-disabled="true" class="h-0 font-bold invisible" tabindex="-1">Foto's</div>
             </nuxt-link>
             <nuxt-link class="p-4 text-center" to="/inschrijven" @click="close()">
               <h3>Inschrijven</h3>
