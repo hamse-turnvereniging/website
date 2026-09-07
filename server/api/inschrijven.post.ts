@@ -40,7 +40,7 @@ export default defineEventHandler(async (event) => {
         input.group === "Turnen - 1ste kleuterklas" ||
         input.group === "Turnen - 2de en 3de kleuterklas" ||
         input.group === "Turnen - 1ste, 2de en 3de leerjaar" ||
-        input.group === "Turnen - 4ste, 5de en 6de leerjaar" ||
+        input.group === "Turnen - vanaf het 4de leerjaar" ||
         input.group === "Trampoline"
       ) {
         to.push({

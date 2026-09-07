@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 import { breakpointsTailwind } from "@vueuse/core";
+import {
+  familyMemberDiscount,
+  is60PlusAtEndOfThisYearDiscount,
+  secondSportDiscount,
+} from "#shared/data/inschrijving";
 
 const breakpoints = useBreakpoints(breakpointsTailwind);
 </script>
@@ -11,7 +16,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
       <h1>Aanbod</h1>
     </div>
   </section>
-  <div class="flex flex-col gap-16 py-16">
+  <div class="flex flex-col gap-16 pt-16">
     <section id="turnen" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
       <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
         <div class="flex flex-1 flex-col gap-4">
@@ -28,7 +33,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
         </div>
         <div class="flex-1">
           <nuxt-img
-            class="w-full"
+            class="w-full rounded-lg"
             fit="cover"
             src="/images/aanbod/turnen/turnen.jpg"
             alt="Turnen afbeelding"
@@ -43,7 +48,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
       <div id="turnen-kleuters" class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <div class="flex-1">
           <nuxt-img
-            class="flex-none md:ml-auto"
+            class="flex-none md:ml-auto rounded-lg"
             fit="cover"
             src="/images/aanbod/turnen/kleuters.jpg"
             alt="Turnen kleuters afbeelding"
@@ -64,7 +69,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
               :ui="{ content: 'md:max-w-max' }"
             >
               <u-button
-                label="Meer informatie"
+                label="Meer info & lidgeld"
                 class="flex-1"
                 icon="i-lucide-info"
                 color="secondary"
@@ -175,7 +180,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
               :ui="{ content: 'md:max-w-max' }"
             >
               <u-button
-                label="Meer informatie"
+                label="Meer info & lidgeld"
                 class="flex-1"
                 icon="i-lucide-info"
                 color="secondary"
@@ -200,7 +205,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                         <div class="font-semibold py-1"><span>&euro; 85 per jaar</span></div>
                       </div>
                       <div class="flex flex-col">
-                        <div class="text-sm">Lidgeld 4de, 5de en 6de leerjaar</div>
+                        <div class="text-sm">Lidgeld vanaf het 4de leerjaar</div>
                         <div class="font-semibold py-1"><span>&euro; 95 per jaar</span></div>
                       </div>
                     </div>
@@ -223,7 +228,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
                                 <td>9 september</td>
                               </tr>
                               <tr>
-                                <td>4de, 5de en 6de<br />leerjaar</td>
+                                <td>vanaf het 4de<br />leerjaar</td>
                                 <td>donderdag<br />18u - 19u30</td>
                                 <td>3 september</td>
                               </tr>
@@ -269,7 +274,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
         </div>
         <div class="flex-1">
           <nuxt-img
-            class="flex-none"
+            class="flex-none rounded-lg"
             fit="cover"
             src="/images/aanbod/turnen/lagere-school.jpg"
             alt="Turnen lagere school afbeelding"
@@ -284,7 +289,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
       >
         <div class="flex-1">
           <nuxt-img
-            class="flex-none md:ml-auto"
+            class="flex-none md:ml-auto rounded-lg"
             fit="cover"
             src="/images/aanbod/turnen/vanaf-1ste-middelbaar.jpg"
             alt="Turnen vanaf 1ste middelbaar afbeelding"
@@ -305,7 +310,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
               :ui="{ content: 'md:max-w-max' }"
             >
               <u-button
-                label="Meer informatie"
+                label="Meer info & lidgeld"
                 class="flex-1"
                 icon="i-lucide-info"
                 color="secondary"
@@ -372,7 +377,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
       <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <div class="flex-1">
           <nuxt-img
-            class="w-full"
+            class="w-full rounded-lg"
             fit="cover"
             src="/images/aanbod/trampoline.jpg"
             alt="Trampoline afbeelding"
@@ -402,7 +407,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
               :ui="{ content: 'md:max-w-max' }"
             >
               <u-button
-                label="Meer informatie"
+                label="Meer info & lidgeld"
                 class="flex-1"
                 icon="i-lucide-info"
                 color="secondary"
@@ -489,7 +494,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
               :ui="{ content: 'md:max-w-max' }"
             >
               <u-button
-                label="Meer informatie"
+                label="Meer info & lidgeld"
                 class="flex-1"
                 icon="i-lucide-info"
                 color="secondary"
@@ -548,7 +553,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
         </div>
         <div class="flex-1">
           <nuxt-img
-            class="w-full"
+            class="w-full rounded-lg"
             fit="cover"
             src="/images/aanbod/bbb.jpg"
             alt="BBB afbeelding"
@@ -566,7 +571,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
       <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <div class="flex-1">
           <nuxt-img
-            class="w-full"
+            class="w-full rounded-lg"
             fit="cover"
             src="/images/aanbod/callanetics.jpg"
             alt="Callanetics afbeelding"
@@ -598,7 +603,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
               :ui="{ content: 'md:max-w-max' }"
             >
               <u-button
-                label="Meer informatie"
+                label="Meer info & lidgeld"
                 class="flex-1"
                 icon="i-lucide-info"
                 color="secondary"
@@ -682,7 +687,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
               :ui="{ content: 'md:max-w-max' }"
             >
               <u-button
-                label="Meer informatie"
+                label="Meer info & lidgeld"
                 class="flex-1"
                 icon="i-lucide-info"
                 color="secondary"
@@ -741,7 +746,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
         </div>
         <div class="flex-1">
           <nuxt-img
-            class="w-full"
+            class="w-full rounded-lg"
             fit="cover"
             src="/images/aanbod/net-voetbal.jpg"
             alt="Net-voetbal afbeelding"
@@ -755,6 +760,59 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
         iedereen is welkom!
       </p>
     </section>
+    <section id="lidgelden" class="w-full bg-secondary py-16">
+      <div class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
+        <h2 class="text-left text-white">Lidgelden</h2>
+        <div class="w-full overflow-x-auto">
+          <table class="w-full lidgelden-table">
+            <tbody>
+              <tr class="group-header">
+                <td colspan="2">Jeugd</td>
+              </tr>
+              <tr>
+                <td>Turnen kleuters</td>
+                <td>&euro; 85 per jaar</td>
+              </tr>
+              <tr>
+                <td>Turnen 1ste, 2de en 3de leerjaar</td>
+                <td>&euro; 85 per jaar</td>
+              </tr>
+              <tr>
+                <td>Turnen vanaf het 4de leerjaar</td>
+                <td>&euro; 95 per jaar</td>
+              </tr>
+              <tr>
+                <td>Trampoline</td>
+                <td>&euro; 95 per jaar</td>
+              </tr>
+              <tr class="group-header">
+                <td colspan="2">Volwassenen</td>
+              </tr>
+              <tr>
+                <td>BBB</td>
+                <td>&euro; 105 per jaar</td>
+              </tr>
+              <tr>
+                <td>Callanetics</td>
+                <td>&euro; 105 per jaar</td>
+              </tr>
+              <tr>
+                <td>Net-voetbal</td>
+                <td>&euro; 105 per jaar</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex flex-col gap-1 text-white">
+          <p class="font-semibold">Kortingen (cumuleerbaar)</p>
+          <ul class="list-disc list-inside">
+            <li>60-plussers: &euro; {{ is60PlusAtEndOfThisYearDiscount }} korting</li>
+            <li>2de sport binnen de club: &euro; {{ secondSportDiscount }} korting</li>
+            <li>2de gezinslid: &euro; {{ familyMemberDiscount }} korting</li>
+          </ul>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -764,6 +822,10 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
 section#banner {
   @apply bg-primary-300;
   background-image: url("/images/banner.jpg");
+}
+
+section#lidgelden h2 {
+  @apply text-white;
 }
 
 table {
@@ -794,5 +856,33 @@ table {
 
 p.text-center.text-xl {
   @apply text-secondary-500;
+}
+
+table.lidgelden-table {
+  @apply mb-0;
+
+  tbody {
+    @apply border-b-0;
+
+    tr {
+      @apply bg-transparent border-b-1 border-b-white/25 even:border-b-white/25;
+
+      td {
+        @apply text-left text-nowrap text-white p-2 sm:p-3;
+      }
+
+      &:last-child {
+        @apply border-b-0;
+      }
+
+      &.group-header td {
+        @apply text-white font-bold text-2xl pt-6 text-left;
+      }
+
+      &.group-header:first-child td {
+        @apply pt-0;
+      }
+    }
+  }
 }
 </style>
