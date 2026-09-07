@@ -1,5 +1,5 @@
 import type { GooglePhoto } from "#shared/utils/google-drive";
-import { isCacheStale } from "#shared/utils/google-drive";
+import { comparePhotosByDateDescThenSequenceAsc, isCacheStale } from "#shared/utils/google-drive";
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
 const GOOGLE_DRIVE_FILES_URL = "https://www.googleapis.com/drive/v3/files";
@@ -59,7 +59,7 @@ async function fetchAllPhotos(): Promise<GooglePhoto[]> {
     pageToken = response.nextPageToken;
   } while (pageToken);
 
-  return photos;
+  return photos.sort(comparePhotosByDateDescThenSequenceAsc);
 }
 
 export async function getPhotos(): Promise<{ photos: GooglePhoto[]; error: boolean }> {

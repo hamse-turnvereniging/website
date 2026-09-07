@@ -3,7 +3,7 @@ import LightGallery from "lightgallery/vue";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgZoom from "lightgallery/plugins/zoom";
 
-import { buildSizedThumbnailUrl } from "#shared/utils/google-drive";
+import { buildSizedThumbnailUrl, parsePhotoName } from "#shared/utils/google-drive";
 
 import "lightgallery/css/lightgallery.css";
 import "lightgallery/css/lg-thumbnail.css";
@@ -55,12 +55,13 @@ const lightGalleryLicenseKey = useRuntimeConfig().public.lightGalleryLicenseKey;
           :key="photo.id"
           class="block aspect-square overflow-hidden rounded-lg cursor-pointer"
           :href="buildSizedThumbnailUrl(photo.thumbnailLink, 1600)"
+          :data-sub-html="`<h4>${parsePhotoName(photo.name).displayName}</h4>`"
         >
           <img
             class="w-full h-full object-cover hover:scale-105 transition-transform"
             referrerPolicy="no-referrer"
             :src="buildSizedThumbnailUrl(photo.thumbnailLink, 400)"
-            :alt="photo.name"
+            :alt="parsePhotoName(photo.name).displayName"
             loading="lazy"
           />
         </a>
