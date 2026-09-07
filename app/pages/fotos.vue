@@ -77,3 +77,12 @@ section#banner {
   background-image: url("/images/banner.jpg");
 }
 </style>
+
+<style>
+/* lightGallery renders its thumbnail strip outside this component's DOM,
+   so this override can't be scoped. */
+.lg-outer .lg-thumb-item.active,
+.lg-outer .lg-thumb-item:hover {
+  border-color: var(--ui-primary);
+}
+</style>
