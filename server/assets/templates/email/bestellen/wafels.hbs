@@ -169,6 +169,52 @@
               </td>
             </tr>
 
+            {{#if hasMember}}
+            <!-- Wafels meegeven aan -->
+            <tr>
+              <td style="padding: 12px 24px 0">
+                <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0 0 12px" />
+                <h2
+                  style="
+                  margin: 0 0 8px;
+                  font-size: 16px;
+                  color: #059e95;
+                  font-weight: 700;
+                  font-family: 'Open Sans', sans-serif;
+                "
+                >
+                  Wafels meegeven aan
+                </h2>
+                <table
+                  role="presentation"
+                  width="100%"
+                  cellspacing="0"
+                  cellpadding="0"
+                  border="0"
+                  style="
+                  border-collapse: collapse;
+                  font-size: 14px;
+                  color: #0f172a;
+                  font-family: 'Open Sans', sans-serif;
+                "
+                >
+                  <tr>
+                    <td width="34%" style="padding: 6px 6px 6px 0px">Voornaam</td>
+                    <td style="padding: 6px 0"><strong>{{member.firstName}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Naam</td>
+                    <td style="padding: 6px 0"><strong>{{member.lastName}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Groep</td>
+                    <td style="padding: 6px 0"><strong>{{member.group}}</strong></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            {{/if}}
+
             <!-- Wafels -->
             <tr>
               <td style="padding: 12px 24px 0">
@@ -204,6 +250,10 @@
                   <tr>
                     <td style="padding: 6px 6px 6px 0px">Aantal pakken half-gechocolateerde</td>
                     <td style="padding: 6px 0"><strong>{{wafels.chocolate}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 6px 6px 6px 0px">Aantal pakken koffiewafeltjes</td>
+                    <td style="padding: 6px 0"><strong>{{wafels.coffee}}</strong></td>
                   </tr>
                 </table>
               </td>
@@ -244,10 +294,16 @@
                   </tr>
                   <tr>
                     <td style="padding: 6px 6px 6px 0px">Mededeling</td>
-                    <td style="padding: 6px 0"><strong>{{type}}
-                        {{firstName}}
-                        {{lastName}}</strong></td>
+                    <td style="padding: 6px 0"><strong>Wafels {{firstName}} {{lastName}}</strong></td>
                   </tr>
+                  {{#if qrCodeImageUrl}}
+                    <tr>
+                      <td style="padding: 6px 6px 6px 0px; vertical-align: top">Scan via bank app</td>
+                      <td style="padding: 6px 0">
+                        <img src="{{qrCodeImageUrl}}" width="150" height="150" alt="QR-code betaling" />
+                      </td>
+                    </tr>
+                  {{/if}}
                   <tr>
                     <td style="padding: 6px 6px 6px 0px">Ik heb reeds betaald of de betaalgegevens
                       zorgvuldig genoteerd.</td>

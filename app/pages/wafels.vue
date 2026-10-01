@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-import { schema, initialState, type Schema } from "#shared/schemas/bestellen/wafels";
-import type { FormErrorEvent, FormSubmitEvent } from "@nuxt/ui";
+import { schema, initialState, calculateAmount, groups, type Schema } from "#shared/schemas/bestellen/wafels";
+import { buildWafelsQrCode } from "#shared/utils/wafels-qr-code";
+import type { FormErrorEvent, FormSubmitEvent, SelectItem } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { startOfDay, startOfToday } from "date-fns";
-const showForm = computed(() => startOfToday() >= startOfDay(new Date("2026-10-18")) && startOfToday() <= startOfDay(new Date("2026-11-15")));
+const showForm = computed(() => startOfToday() >= startOfDay(new Date("2026-10-01")) && startOfToday() <= startOfDay(new Date("2026-10-31")));
 
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
@@ -24,28 +25,31 @@ watch(state.value, (value) => {
     if ((value.wafels.chocolate as any) === "") {
       state.value.wafels.chocolate = undefined;
     }
+
+    if ((value.wafels.coffee as any) === "") {
+      state.value.wafels.coffee = undefined;
+    }
   }
 });
 
-const amount = computed(() => {
-  const quantity = (state.value.wafels.vanilla ?? 0) + (state.value.wafels.chocolate ?? 0);
+const groupsList = computed(() => groups.map((value) => ({ label: value, value }) as SelectItem));
 
-  return quantity * (quantity >= 3 ? 4 : 5);
+const amount = computed(() => calculateAmount(state.value.wafels));
+
+// Clear the minimum order error as soon as a waffle is added
+watch(amount, () => {
+  if (form.value?.getErrors("wafels").length) {
+    form.value.validate({ name: "wafels", silent: true });
+  }
 });
 
 const qrCode = computed(() =>
   amount.value > 0 && state.value.firstName && state.value.lastName
-    ? `BCD
-001
-1
-SCT
-GKCCBEBB
-HAMSE TURNVERENIGING
-BE69068209399078
-EUR${amount.value}
-
-Wafels ${state.value.firstName} ${state.value.lastName}
-`
+    ? buildWafelsQrCode({
+        firstName: state.value.firstName,
+        lastName: state.value.lastName,
+        amount: amount.value,
+      })
     : null
 );
 
@@ -81,6 +85,9 @@ const resetModalOpen = ref(false);
 function resetForm() {
   state.value = {
     ...initialState,
+    member: {
+      ...initialState.member,
+    },
     wafels: {
       ...initialState.wafels,
     },
@@ -117,20 +124,23 @@ async function onError(event: FormErrorEvent) {
         Met deze actie willen we de werking van de Hamse Turnvereniging extra ondersteunen en daar
         kunnen we jullie hulp goed bij gebruiken!
       </p>
-      <p>
-        We verkopen heerlijke Mina-wafels, verpakt in pakken van 5 wafels per pak.<br />
-        Je hebt de keuze tussen vanillewafels of half-gechocolateerde wafels.
-      </p>
+      <p>We verkopen heerlijke Mina-wafels in 3 varianten:</p>
+      <ul class="list-disc pl-6">
+        <li>Vanillewafels: 5 wafels per pak</li>
+        <li>Half-gechocolateerde wafels: 5 wafels per pak</li>
+        <li>Koffiewafeltjes: 20 wafels per pak</li>
+      </ul>
       <div class="flex flex-wrap gap-4">
-        <nuxt-img class="rounded-lg" src="/images/wafels/vanille.jpg" width="180" height="135" />
-        <nuxt-img class="rounded-lg" src="/images/wafels/chocolade.jpg" width="180" height="135" />
+        <nuxt-img class="shadow-none!" src="/images/wafels/vanille.png" width="180" height="137" />
+        <nuxt-img class="shadow-none!" src="/images/wafels/chocolade.png" width="180" height="137" />
+        <nuxt-img class="shadow-none!" src="/images/wafels/koffie.png" width="180" height="137" />
       </div>
-      <p>De prijs bedraagt &euro; 5 per pak, vanaf 3 pakken &euro; 4 per pak.</p>
-      <p>Bestellen kan <strong>tot en met 15 november</strong> via het bestelformulier hieronder.</p>
       <p>
-        De bestelde wafels zullen verdeeld worden tijdens de lessen vanaf de laatste week van
-        november.
+        Voor 1 pak wafels vragen we &euro; 5. Vanaf 3 pakken vragen we slechts &euro; 4 per pak.<br />
+        Je mag gerust verschillende soorten combineren.
       </p>
+      <p>Bestellen kan <strong>tot en met 31 oktober</strong> via het bestelformulier hieronder.</p>
+      <p>De bestelde wafels zullen verdeeld worden tijdens de lessen vanaf half november.</p>
       <p>Alvast bedankt voor jullie steun! Samen maken we er een geslaagde actie van.</p>
     </div>
     <u-form v-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
@@ -173,6 +183,42 @@ async function onError(event: FormErrorEvent) {
         </div>
         <hr />
         <div class="flex flex-col gap-4">
+          <h4>Wafels meegeven aan</h4>
+          <p>Optioneel: geef op aan wie we de wafels tijdens de les mogen meegeven.</p>
+          <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+            <u-form-field
+              class="flex-1"
+              label="Voornaam"
+              name="member.firstName"
+            >
+              <u-input
+                v-model="state.member.firstName"
+                class="w-full"
+                size="xl"
+                placeholder="Voornaam"
+              />
+            </u-form-field>
+            <u-form-field class="flex-1" label="Naam" name="member.lastName">
+              <u-input
+                v-model="state.member.lastName"
+                class="w-full"
+                size="xl"
+                placeholder="Naam"
+              />
+            </u-form-field>
+          </div>
+          <u-form-field label="Groep" name="member.group">
+            <u-select
+              v-model="state.member.group"
+              :items="groupsList"
+              class="w-full"
+              size="xl"
+              placeholder="Maak je keuze"
+            />
+          </u-form-field>
+        </div>
+        <hr />
+        <div class="flex flex-col gap-4">
           <h4>Wafels</h4>
           <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
             <u-form-field class="flex-1" label="Aantal pakken vanillewafels" name="wafels.vanilla">
@@ -202,6 +248,21 @@ async function onError(event: FormErrorEvent) {
               />
             </u-form-field>
           </div>
+          <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+            <u-form-field class="flex-1" label="Aantal pakken koffiewafeltjes" name="wafels.coffee">
+              <u-input
+                v-model="state.wafels.coffee"
+                type="number"
+                min="0"
+                step="1"
+                class="w-full"
+                size="xl"
+                placeholder="Aantal pakken koffiewafeltjes"
+              />
+            </u-form-field>
+            <div class="hidden sm:block flex-1" />
+          </div>
+          <u-form-field name="wafels" />
         </div>
         <hr />
         <div class="flex flex-col gap-4">

@@ -9,6 +9,7 @@ export const inschrijvingen = sqliteTable("inschrijvingen", {
 
 export const bestellingen = sqliteTable("bestellingen", {
   id: integer("id").primaryKey({ autoIncrement: true }),
+  publicId: text("public_id").unique(),
   data: text("data").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
 });
