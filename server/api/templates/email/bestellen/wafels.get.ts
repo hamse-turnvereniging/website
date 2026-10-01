@@ -1,4 +1,4 @@
-import { Schema } from "#shared/schemas/bestellen/wafels";
+import { calculateAmount, type Schema } from "#shared/schemas/bestellen/wafels";
 import emailTemplate from "~~/server/assets/templates/email/bestellen/wafels";
 
 export default defineEventHandler(async (event) => {
@@ -15,10 +15,16 @@ export default defineEventHandler(async (event) => {
       lastName: "Beckers",
       phoneNumber: "+32 499 765 192",
       email: "steff@steffbeckers.com",
+      member: {
+        firstName: "Steff",
+        lastName: "Beckers",
+        group: "Trampoline (Kristoffelheem)",
+      },
       paymentCheck: true,
       wafels: {
         chocolate: 3,
         vanilla: 3,
+        coffee: 2,
       },
     },
   ];
@@ -31,12 +37,12 @@ export default defineEventHandler(async (event) => {
 
   const subject = `Bevestiging bestelling - Wafels - ${input.firstName} ${input.lastName}`;
 
-  const quantity = (input.wafels.vanilla ?? 0) + (input.wafels.chocolate ?? 0);
-  const amount = quantity * (quantity >= 3 ? 4 : 5);
+  const amount = calculateAmount(input.wafels);
 
   return emailTemplate({
     ...input,
     subject,
     amount,
+    hasMember: !!(input.member.firstName || input.member.lastName || input.member.group),
   });
 });

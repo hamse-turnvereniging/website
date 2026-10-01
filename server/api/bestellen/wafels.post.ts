@@ -2,7 +2,7 @@ import { bestellingen } from "hub:db:schema";
 import * as v from "valibot";
 
 import emailTemplate from "~~/server/assets/templates/email/bestellen/wafels";
-import { schema } from "~~/shared/schemas/bestellen/wafels";
+import { calculateAmount, schema } from "~~/shared/schemas/bestellen/wafels";
 
 export default defineEventHandler(async (event) => {
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
@@ -16,10 +16,12 @@ export default defineEventHandler(async (event) => {
   }
 
   const input = validationResult.output;
+  const publicId = crypto.randomUUID();
 
   try {
     // Save to database
     await db.insert(bestellingen).values({
+      publicId,
       data: JSON.stringify({ ...input, type: "Wafels" }),
       createdAt: new Date(),
     });
@@ -38,13 +40,17 @@ export default defineEventHandler(async (event) => {
 
     const subject = `Bevestiging bestelling - Wafels - ${input.firstName} ${input.lastName}`;
 
-    const quantity = (input.wafels.vanilla ?? 0) + (input.wafels.chocolate ?? 0);
-    const amount = quantity * (quantity >= 3 ? 4 : 5);
+    const amount = calculateAmount(input.wafels);
+    const qrCodeImageUrl = amount
+      ? `https://www.hamseturnvereniging.be/api/bestellen/wafels/${publicId}/qr-code.png`
+      : null;
 
     const htmlContent = emailTemplate({
       ...input,
       subject,
       amount,
+      hasMember: !!(input.member.firstName || input.member.lastName || input.member.group),
+      qrCodeImageUrl,
     });
 
     await $fetch("https://api.brevo.com/v3/smtp/email", {

@@ -43,6 +43,13 @@
       "when": 1786477908136,
       "tag": "0005_workable_turbo",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1790877296911,
+      "tag": "0006_parallel_karnak",
+      "breakpoints": true
     }
   ]
 }
