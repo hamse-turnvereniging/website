@@ -163,6 +163,14 @@
         </p>
       </div>
       <div class="flex flex-col gap-4 pb-4">
+        <nuxt-img
+          class="w-full rounded-lg"
+          fit="cover"
+          src="/images/welkom/t-shirt.jpg"
+          alt="T-shirt verkoop afbeelding"
+          width="400"
+          height="267"
+        />
         <h3>T-shirt verkoop</h3>
         <p>
           We verkopen met de <span class="font-semibold">turnclub T-shirts</span> voor de leden.
