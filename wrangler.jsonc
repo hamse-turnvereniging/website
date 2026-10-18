@@ -23,6 +23,7 @@
     }
   ],
   "vars": {
+    "GOOGLE_DRIVE_FOLDER_ID": "10jxhrTszXShsGqlvMDpbbMQmrWof7LTN",
     "NUXT_IMAGE_CLOUDFLARE_BASE_URL": "https://www.hamseturnvereniging.be",
     "NUXT_IMAGE_PROVIDER": "cloudflare"
   },
