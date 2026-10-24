@@ -12,17 +12,19 @@ import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { startOfDay, startOfToday } from "date-fns";
 const showForm = computed(() => startOfToday() <= startOfDay(new Date("2026-02-25")));
 
+const { submitted, isSubmitting, submit, startAgain } = useFormSubmission();
+
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
 
 const state = useLocalStorage(
   "reservatieformulier-eetdag",
-  { ...initialState },
+  structuredClone(initialState),
   { mergeDefaults: true }
 );
 
 // Number input state fixes
-watch(state.value, (value) => {
+watch(state, (value) => {
   for (let i = 0; i < value.childMeals.length; i++) {
     const childMeal = value.childMeals[i];
 
@@ -50,7 +52,7 @@ watch(state.value, (value) => {
   if ((value.supportCardQuantity as any) === "") {
     state.value.supportCardQuantity = undefined;
   }
-});
+}, { deep: true });
 
 const quantity = computed(() =>
   [
@@ -92,10 +94,10 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   body.childMeals = body.childMeals.filter((x) => x.quantity && x.quantity > 0);
   body.adultMeals = body.adultMeals.filter((x) => x.quantity && x.quantity > 0);
 
-  const response = await $fetch("/api/reserveren/eetdag", {
+  const success = await submit(() => $fetch("/api/reserveren/eetdag", {
     method: "POST",
     body,
-  });
+  }));
 
   const errorToast: Partial<Toast> = {
     title: "Mislukt!",
@@ -104,32 +106,28 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     color: "error",
   };
 
-  if (!response.success) {
-    console.error(response);
+  if (success === undefined) return;
+
+  if (!success) {
     toast.add(errorToast);
 
     return;
   }
 
-  toast.add({ title: "Gelukt!", description: "Je reservatie is verzonden.", color: "primary" });
-
-  resetForm();
+  resetForm(false);
 }
 
-const resetModalOpen = ref(false);
+const { resetModalOpen, finishReset, onResetModalClose } = useFormResetFocus(formTitle);
 
-function resetForm() {
-  state.value = {
-    ...initialState,
-    childMeals: [...initialState.childMeals.map((x) => ({ ...x }))],
-    adultMeals: [...initialState.adultMeals.map((x) => ({ ...x }))],
-  };
+function resetForm(scrollToForm = true) {
+  state.value = structuredClone(initialState);
   form.value?.clear();
-  resetModalOpen.value = false;
+  finishReset(scrollToForm);
+}
 
-  setTimeout(() => {
-    formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 100);
+function restartForm() {
+  startAgain();
+  resetForm();
 }
 
 async function onError(event: FormErrorEvent) {
@@ -170,10 +168,18 @@ async function onError(event: FormErrorEvent) {
         bewijs van je bestelling.
       </p>
     </div>
-    <u-form v-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
+    <form-success
+      v-if="submitted"
+      title="Je reservatie is succesvol verzonden!"
+      description="We hebben je reservatie voor de eetdag goed ontvangen. Bedankt en tot dan!"
+      restart-label="Nog een reservatie maken"
+      :can-restart="showForm"
+      @restart="restartForm"
+    />
+    <u-form v-else-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
-          <h3 ref="formTitle">Reserveren</h3>
+          <h3 ref="formTitle" tabindex="-1" class="focus:outline-none">Reserveren</h3>
           <div class="flex flex-col gap-4">
             <u-form-field class="flex-1" label="Tijdslot" name="timeSlot">
               <u-radio-group
@@ -386,11 +392,13 @@ async function onError(event: FormErrorEvent) {
           <u-button
             label="Reservatie verzenden"
             type="submit"
+            :loading="isSubmitting"
+            :disabled="isSubmitting"
             icon="i-lucide-send"
             size="xl"
             color="secondary"
           />
-          <u-modal v-model:open="resetModalOpen">
+          <u-modal v-model:open="resetModalOpen" :content="{ onCloseAutoFocus: onResetModalClose }">
             <u-button label="Gegevens wissen" icon="i-lucide-trash" variant="ghost" color="error" />
             <template #content>
               <div class="flex flex-col gap-4 p-6">

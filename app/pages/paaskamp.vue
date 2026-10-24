@@ -16,12 +16,14 @@ const schoolYearsList = computed(() =>
   schoolYears.map((value) => ({ label: value, value } as SelectItem))
 );
 
+const { submitted, isSubmitting, submit, startAgain } = useFormSubmission();
+
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
 
 const state = useLocalStorage(
   "inschrijvingsformulier-paaskamp",
-  { ...initialState, contact: { ...initialState.contact } },
+  structuredClone(initialState),
   { mergeDefaults: true }
 );
 
@@ -44,10 +46,10 @@ Paaskamp ${state.value.firstName} ${state.value.lastName}
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  const response = await $fetch("/api/inschrijven/paaskamp", {
+  const success = await submit(() => $fetch("/api/inschrijven/paaskamp", {
     method: "POST",
     body: event.data,
-  });
+  }));
 
   const errorToast: Partial<Toast> = {
     title: "Mislukt!",
@@ -56,33 +58,28 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     color: "error",
   };
 
-  if (!response.success) {
-    console.error(response);
+  if (success === undefined) return;
+
+  if (!success) {
     toast.add(errorToast);
 
     return;
   }
 
-  toast.add({ title: "Gelukt!", description: "Je inschrijving is verzonden.", color: "primary" });
-
-  resetForm();
+  resetForm(false);
 }
 
-const resetModalOpen = ref(false);
+const { resetModalOpen, finishReset, onResetModalClose } = useFormResetFocus(formTitle);
 
-function resetForm() {
-  state.value = {
-    ...initialState,
-    contact: {
-      ...initialState.contact,
-    },
-  };
+function resetForm(scrollToForm = true) {
+  state.value = structuredClone(initialState);
   form.value?.clear();
-  resetModalOpen.value = false;
+  finishReset(scrollToForm);
+}
 
-  setTimeout(() => {
-    formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 100);
+function restartForm() {
+  startAgain();
+  resetForm();
 }
 
 async function onError(event: FormErrorEvent) {
@@ -131,10 +128,18 @@ async function onError(event: FormErrorEvent) {
       </p>
       <p>Inschrijven kan via het formulier hieronder.</p>
     </div>
-    <u-form v-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
+    <form-success
+      v-if="submitted"
+      title="Je inschrijving is succesvol verzonden!"
+      description="We hebben je inschrijving voor het paaskamp goed ontvangen. Tot op het kamp!"
+      restart-label="Nog iemand inschrijven"
+      :can-restart="showForm"
+      @restart="restartForm"
+    />
+    <u-form v-else-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
-          <h3 ref="formTitle">Inschrijvingsformulier</h3>
+          <h3 ref="formTitle" tabindex="-1" class="focus:outline-none">Inschrijvingsformulier</h3>
           <div class="flex flex-col gap-4">
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
               <u-form-field class="flex-1" label="Voornaam" name="firstName" :required="true">
@@ -272,11 +277,13 @@ async function onError(event: FormErrorEvent) {
           <u-button
             label="Inschrijving verzenden"
             type="submit"
+            :loading="isSubmitting"
+            :disabled="isSubmitting"
             icon="i-lucide-send"
             size="xl"
             color="secondary"
           />
-          <u-modal v-model:open="resetModalOpen">
+          <u-modal v-model:open="resetModalOpen" :content="{ onCloseAutoFocus: onResetModalClose }">
             <u-button label="Gegevens wissen" icon="i-lucide-trash" variant="ghost" color="error" />
             <template #content>
               <div class="flex flex-col gap-4 p-6">
