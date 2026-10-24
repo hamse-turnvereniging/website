@@ -9,16 +9,18 @@ import { vMaska } from "maska/vue";
 
 const showForm = computed(() => isRegistrationFormVisible(new Date()));
 
+const { submitted, isSubmitting, submit, startAgain } = useFormSubmission();
+
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
 
 const state = useLocalStorage(
   "inschrijvingsformulier",
-  { ...initialState },
+  structuredClone(initialState),
   { mergeDefaults: true }
 );
 
-watch(state.value, (value) => {
+watch(state, (value) => {
   if (value.group && value.location) {
     if (!locationGroups[value.location]?.includes(value.group!)) {
       const newLocation = availableLocations.value[0]?.value as typeof state.value.location;
@@ -36,7 +38,7 @@ watch(state.value, (value) => {
       state.value.location = availableLocations.value[0]?.value as typeof state.value.location;
     }
   }
-});
+}, { deep: true });
 
 const groups: SelectItem[] = [
   {
@@ -179,10 +181,10 @@ function markAsPaid(id: string) {
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  const response = await $fetch("/api/inschrijven", {
+  const success = await submit(() => $fetch("/api/inschrijven", {
     method: "POST",
     body: event.data,
-  });
+  }));
 
   const errorToast: Partial<Toast> = {
     title: "Mislukt!",
@@ -191,14 +193,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     color: "error",
   };
 
-  if (!response.success) {
-    console.error(response);
+  if (success === undefined) return;
+
+  if (!success) {
     toast.add(errorToast);
 
     return;
   }
-
-  toast.add({ title: "Gelukt!", description: "Je inschrijving is verzonden.", color: "primary" });
 
   if (amount.value) {
     pendingPayments.value.push({
@@ -217,44 +218,20 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     });
   }
 
-  resetForm();
+  resetForm(false);
 }
 
-const resetModalOpen = ref(false);
+const { resetModalOpen, finishReset, onResetModalClose } = useFormResetFocus(formTitle);
 
-function resetForm() {
-  state.value = {
-    ...initialState,
-    address: {
-      ...initialState.address,
-    },
-    emergencyContact: {
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
-    },
-    familyMember: {
-      ...initialState.familyMember,
-    },
-    parent1: {
-      email: "",
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
-    },
-    parent2: {
-      email: "",
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
-    },
-  };
+function resetForm(scrollToForm = true) {
+  state.value = structuredClone(initialState);
   form.value?.clear();
-  resetModalOpen.value = false;
+  finishReset(scrollToForm);
+}
 
-  setTimeout(() => {
-    formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 100);
+function restartForm() {
+  startAgain();
+  resetForm();
 }
 
 async function onError(event: FormErrorEvent) {
@@ -282,10 +259,18 @@ async function onError(event: FormErrorEvent) {
           Schrijf je hier in en sluit je aan bij onze sportieve en gezellige groep.
         </p>
       </div>
-      <u-form ref="form" :schema :state @submit="onSubmit" @error="onError">
+      <form-success
+        v-if="submitted"
+        title="Je bent succesvol ingeschreven!"
+        description="We hebben je inschrijving goed ontvangen. Welkom bij de Hamse Turnvereniging!"
+        restart-label="Nog iemand inschrijven"
+        :can-restart="showForm"
+        @restart="restartForm"
+      />
+      <u-form v-else ref="form" :schema :state @submit="onSubmit" @error="onError">
         <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
-          <h3 ref="formTitle">Voor welke groep wil je inschrijven?</h3>
+          <h3 ref="formTitle" tabindex="-1" class="focus:outline-none">Voor welke groep wil je inschrijven?</h3>
           <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
             <u-form-field class="flex-1" label="Groep" name="group" :required="true">
               <u-select
@@ -781,11 +766,13 @@ async function onError(event: FormErrorEvent) {
           <u-button
             label="Inschrijving verzenden"
             type="submit"
+            :loading="isSubmitting"
+            :disabled="isSubmitting"
             icon="i-lucide-send"
             size="xl"
             color="secondary"
           />
-          <u-modal v-model:open="resetModalOpen">
+          <u-modal v-model:open="resetModalOpen" :content="{ onCloseAutoFocus: onResetModalClose }">
             <u-button label="Gegevens wissen" icon="i-lucide-trash" variant="ghost" color="error" />
             <template #content>
               <div class="flex flex-col gap-4 p-6">
@@ -824,63 +811,61 @@ async function onError(event: FormErrorEvent) {
         binnenkort.
       </p>
     </div>
-  </section>
-  <section v-if="pendingPayments.length" class="max-w-2xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-col gap-4">
+    <div v-if="pendingPayments.length" class="flex flex-col gap-4">
       <h2>Openstaande betalingen</h2>
       <p>
         Overzicht van lidgeld dat nog betaald moet worden. Dit overzicht is enkel op dit toestel
         zichtbaar en verdwijnt zodra je een betaling als betaald markeert.
       </p>
-    </div>
-    <div
-      v-for="payment in pendingPayments"
-      :key="payment.id"
-      class="flex flex-col gap-4 border border-default rounded-lg p-4"
-    >
-      <h3>{{ payment.firstName }} {{ payment.lastName }} - {{ payment.group }}</h3>
-      <table>
-        <tbody>
-          <tr>
-            <td class="text-sm" width="160px">Rekeningnummer</td>
-            <td class="font-semibold py-1">BE69 0682 0939 9078</td>
-          </tr>
-          <tr>
-            <td class="text-sm">Bedrag</td>
-            <td class="font-semibold py-1">
-              <span v-if="payment.discount">
-                <span class="font-normal line-through mr-1">&euro; {{ payment.amount }}</span>
-                &euro; {{ payment.discountedAmount }}
-                <span v-if="payment.is60PlusAtEndOfThisYear">
-                  &nbsp;({{ is60PlusAtEndOfThisYearDiscount }} euro korting voor 60-plussers)
+      <div
+        v-for="payment in pendingPayments"
+        :key="payment.id"
+        class="flex flex-col gap-4 border border-default rounded-lg p-4"
+      >
+        <h3>{{ payment.firstName }} {{ payment.lastName }} - {{ payment.group }}</h3>
+        <table>
+          <tbody>
+            <tr>
+              <td class="text-sm" width="160px">Rekeningnummer</td>
+              <td class="font-semibold py-1">BE69 0682 0939 9078</td>
+            </tr>
+            <tr>
+              <td class="text-sm">Bedrag</td>
+              <td class="font-semibold py-1">
+                <span v-if="payment.discount">
+                  <span class="font-normal line-through mr-1">&euro; {{ payment.amount }}</span>
+                  &euro; {{ payment.discountedAmount }}
+                  <span v-if="payment.is60PlusAtEndOfThisYear">
+                    &nbsp;({{ is60PlusAtEndOfThisYearDiscount }} euro korting voor 60-plussers)
+                  </span>
+                  <span v-if="payment.familyMemberCheck">
+                    &nbsp;({{ familyMemberDiscount }} euro korting via gezinslid)
+                  </span>
+                  <span v-if="payment.secondSportCheck">
+                    &nbsp;({{ secondSportDiscount }} euro korting via 2de sport)
+                  </span>
                 </span>
-                <span v-if="payment.familyMemberCheck">
-                  &nbsp;({{ familyMemberDiscount }} euro korting via gezinslid)
-                </span>
-                <span v-if="payment.secondSportCheck">
-                  &nbsp;({{ secondSportDiscount }} euro korting via 2de sport)
-                </span>
-              </span>
-              <span v-else>&euro; {{ payment.amount }}</span>
-            </td>
-          </tr>
-          <tr>
-            <td class="text-sm">Mededeling</td>
-            <td class="font-semibold py-1">{{ payment.firstName }} {{ payment.lastName }}</td>
-          </tr>
-          <tr>
-            <td class="text-sm align-top py-1">Scan via bank app</td>
-            <td class="py-1"><qrcode width="150" :value="payment.qrCode" /></td>
-          </tr>
-        </tbody>
-      </table>
-      <u-button
-        label="Markeer als betaald"
-        icon="i-lucide-check"
-        color="primary"
-        class="self-start"
-        @click="markAsPaid(payment.id)"
-      />
+                <span v-else>&euro; {{ payment.amount }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-sm">Mededeling</td>
+              <td class="font-semibold py-1">{{ payment.firstName }} {{ payment.lastName }}</td>
+            </tr>
+            <tr>
+              <td class="text-sm align-top py-1">Scan via bank app</td>
+              <td class="py-1"><qrcode width="150" :value="payment.qrCode" /></td>
+            </tr>
+          </tbody>
+        </table>
+        <u-button
+          label="Markeer als betaald"
+          icon="i-lucide-check"
+          color="primary"
+          class="self-start"
+          @click="markAsPaid(payment.id)"
+        />
+      </div>
     </div>
   </section>
 </template>

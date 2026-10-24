@@ -6,17 +6,19 @@ import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
 import { startOfDay, startOfToday } from "date-fns";
 const showForm = computed(() => startOfToday() >= startOfDay(new Date("2026-10-01")) && startOfToday() <= startOfDay(new Date("2026-10-31")));
 
+const { submitted, isSubmitting, submit, startAgain } = useFormSubmission();
+
 const form = useTemplateRef("form");
 const formTitle = useTemplateRef("formTitle");
 
 const state = useLocalStorage(
   "bestelformulier-wafels",
-  { ...initialState },
+  structuredClone(initialState),
   { mergeDefaults: true }
 );
 
 // Number input state fixes
-watch(state.value, (value) => {
+watch(state, (value) => {
   if (value.wafels) {
     if ((value.wafels.vanilla as any) === "") {
       state.value.wafels.vanilla = undefined;
@@ -30,7 +32,7 @@ watch(state.value, (value) => {
       state.value.wafels.coffee = undefined;
     }
   }
-});
+}, { deep: true });
 
 const groupsList = computed(() => groups.map((value) => ({ label: value, value }) as SelectItem));
 
@@ -56,10 +58,10 @@ const qrCode = computed(() =>
 const toast = useToast();
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
-  const response = await $fetch("/api/bestellen/wafels", {
+  const success = await submit(() => $fetch("/api/bestellen/wafels", {
     method: "POST",
     body: event.data,
-  });
+  }));
 
   const errorToast: Partial<Toast> = {
     title: "Mislukt!",
@@ -68,36 +70,28 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     color: "error",
   };
 
-  if (!response.success) {
-    console.error(response);
+  if (success === undefined) return;
+
+  if (!success) {
     toast.add(errorToast);
 
     return;
   }
 
-  toast.add({ title: "Gelukt!", description: "Je bestelling is verzonden.", color: "primary" });
-
-  resetForm();
+  resetForm(false);
 }
 
-const resetModalOpen = ref(false);
+const { resetModalOpen, finishReset, onResetModalClose } = useFormResetFocus(formTitle);
 
-function resetForm() {
-  state.value = {
-    ...initialState,
-    member: {
-      ...initialState.member,
-    },
-    wafels: {
-      ...initialState.wafels,
-    },
-  };
+function resetForm(scrollToForm = true) {
+  state.value = structuredClone(initialState);
   form.value?.clear();
-  resetModalOpen.value = false;
+  finishReset(scrollToForm);
+}
 
-  setTimeout(() => {
-    formTitle.value?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 100);
+function restartForm() {
+  startAgain();
+  resetForm();
 }
 
 async function onError(event: FormErrorEvent) {
@@ -143,10 +137,18 @@ async function onError(event: FormErrorEvent) {
       <p>De bestelde wafels zullen verdeeld worden tijdens de lessen vanaf half november.</p>
       <p>Alvast bedankt voor jullie steun! Samen maken we er een geslaagde actie van.</p>
     </div>
-    <u-form v-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
+    <form-success
+      v-if="submitted"
+      title="Je wafels zijn succesvol besteld!"
+      description="We hebben je bestelling goed ontvangen. Bedankt voor je steun!"
+      restart-label="Nog een bestelling plaatsen"
+      :can-restart="showForm"
+      @restart="restartForm"
+    />
+    <u-form v-else-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
       <div class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
-          <h3 ref="formTitle">Bestelformulier</h3>
+          <h3 ref="formTitle" tabindex="-1" class="focus:outline-none">Bestelformulier</h3>
           <div class="flex flex-col gap-4">
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
               <u-form-field class="flex-1" label="Voornaam" name="firstName" :required="true">
@@ -331,11 +333,13 @@ async function onError(event: FormErrorEvent) {
           <u-button
             label="Bestelling verzenden"
             type="submit"
+            :loading="isSubmitting"
+            :disabled="isSubmitting"
             icon="i-lucide-send"
             size="xl"
             color="secondary"
           />
-          <u-modal v-model:open="resetModalOpen">
+          <u-modal v-model:open="resetModalOpen" :content="{ onCloseAutoFocus: onResetModalClose }">
             <u-button label="Gegevens wissen" icon="i-lucide-trash" variant="ghost" color="error" />
             <template #content>
               <div class="flex flex-col gap-4 p-6">
