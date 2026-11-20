@@ -31,30 +31,32 @@ if (calendar.value) {
     </div>
   </section>
   <section class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16 w-full">
-    <div class="flex flex-col gap-4">
+    <motion-reveal class="flex flex-col gap-4">
       <h2>Seizoen 2026-2027</h2>
       <p>
         Hier kan je al onze activiteiten van dit turnseizoen terugvinden.<br />We vullen deze
         kalender regelmatig aan, dus kom hier zeker nog eens terug!
       </p>
-    </div>
-    <u-accordion
-      :items
-      :ui="{
-        trailingIcon: 'size-8! text-neutral-400 group-data-[state=open]:text-primary-500',
-      }"
-      :unmount-on-hide="false"
-    >
-      <template #default="{ item }">
-        <div class="flex flex-col gap-1">
-          <h3>{{ item.label }}</h3>
-          <p class="text-neutral-400">{{ item.content }}</p>
-        </div>
-      </template>
-      <template #content="{ item }">
-        <content-renderer class="detail pb-3.5" :value="item.body" :prose="false" />
-      </template>
-    </u-accordion>
+    </motion-reveal>
+    <motion-reveal :delay="0.1">
+      <u-accordion
+        :items
+        :ui="{
+          trailingIcon: 'size-8! text-neutral-400 group-data-[state=open]:text-primary-500',
+        }"
+        :unmount-on-hide="false"
+      >
+        <template #default="{ item }">
+          <div class="flex flex-col gap-1">
+            <h3>{{ item.label }}</h3>
+            <p class="text-neutral-400">{{ item.content }}</p>
+          </div>
+        </template>
+        <template #content="{ item }">
+          <content-renderer class="detail pb-3.5" :value="item.body" :prose="false" />
+        </template>
+      </u-accordion>
+    </motion-reveal>
   </section>
 </template>
 

@@ -10,7 +10,7 @@
   </section>
   <div class="flex flex-col gap-16 py-16">
     <section class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8 px-8">
-      <div class="flex-1">
+      <motion-reveal class="flex-1">
         <nuxt-img
           class="w-full rounded-lg"
           fit="cover"
@@ -19,8 +19,8 @@
           width="600"
           height="400"
         />
-      </div>
-      <div class="flex flex-1 flex-col gap-4">
+      </motion-reveal>
+      <motion-reveal class="flex flex-1 flex-col gap-4" :delay="0.1">
         <h2>Welkom!</h2>
         <p>
           Bij ons draait het om meer dan alleen turnen. Wij helpen
@@ -44,13 +44,14 @@
           color="secondary"
           size="xl"
         />
-      </div>
+      </motion-reveal>
     </section>
-    <section
+    <motion-reveal-group
+      as="section"
       id="in-de-schijnwerper"
       class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-8 px-8"
     >
-      <div class="flex flex-col gap-4 pb-4">
+      <motion-reveal class="flex flex-col gap-4 pb-4">
         <nuxt-img
           class="w-full rounded-lg"
           fit="cover"
@@ -70,8 +71,8 @@
           color="secondary"
           size="xl"
         />
-      </div>
-      <div class="flex flex-col gap-4 pb-4">
+      </motion-reveal>
+      <motion-reveal class="flex flex-col gap-4 pb-4">
         <nuxt-img
           class="w-full rounded-lg"
           fit="cover"
@@ -105,8 +106,8 @@
           color="secondary"
           size="xl"
         />
-      </div>
-      <div class="flex flex-col gap-4 pb-4">
+      </motion-reveal>
+      <motion-reveal class="flex flex-col gap-4 pb-4">
         <nuxt-img
           class="w-full rounded-lg"
           fit="cover"
@@ -135,8 +136,8 @@
           color="secondary"
           size="xl"
         />
-      </div>
-      <div class="flex flex-col gap-4 pb-4">
+      </motion-reveal>
+      <motion-reveal class="flex flex-col gap-4 pb-4">
         <nuxt-img
           class="w-full rounded-lg"
           fit="cover"
@@ -161,8 +162,8 @@
           <span class="font-semibold">Stuur ons een berichtje of kom eens langs</span>, en wie weet
           sta jij binnenkort voor een groep gemotiveerde turners!
         </p>
-      </div>
-      <div class="flex flex-col gap-4 pb-4">
+      </motion-reveal>
+      <motion-reveal class="flex flex-col gap-4 pb-4">
         <nuxt-img
           class="w-full rounded-lg"
           fit="cover"
@@ -182,8 +183,8 @@
           <span class="font-semibold">12 euro</span>. Deze kunnen aangekocht worden na de les, bij
           de lesgevers.
         </p>
-      </div>
-    </section>
+      </motion-reveal>
+    </motion-reveal-group>
   </div>
 </template>
 

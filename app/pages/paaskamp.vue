@@ -99,7 +99,7 @@ async function onError(event: FormErrorEvent) {
     </div>
   </section>
   <section class="max-w-2xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-col gap-4">
+    <motion-reveal class="flex flex-col gap-4">
       <h2>Turnkamp Hamse Turnvereniging</h2>
       <p>
         Tijdens de paasvakantie organiseert de Hamse Turnvereniging een leuk en sportief turnkamp
@@ -127,7 +127,7 @@ async function onError(event: FormErrorEvent) {
         >.
       </p>
       <p>Inschrijven kan via het formulier hieronder.</p>
-    </div>
+    </motion-reveal>
     <form-success
       v-if="submitted"
       title="Je inschrijving is succesvol verzonden!"
@@ -136,188 +136,190 @@ async function onError(event: FormErrorEvent) {
       :can-restart="showForm"
       @restart="restartForm"
     />
-    <u-form v-else-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
-      <div class="flex flex-col gap-8">
-        <div class="flex flex-col gap-4">
-          <h3 ref="formTitle" tabindex="-1" class="focus:outline-none">Inschrijvingsformulier</h3>
+    <motion-reveal v-else-if="showForm" :delay="0.1">
+      <u-form ref="form" :schema :state @submit="onSubmit" @error="onError">
+        <div class="flex flex-col gap-8">
           <div class="flex flex-col gap-4">
+            <h3 ref="formTitle" tabindex="-1" class="focus:outline-none">Inschrijvingsformulier</h3>
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+                <u-form-field class="flex-1" label="Voornaam" name="firstName" :required="true">
+                  <u-input
+                    v-model="state.firstName"
+                    class="w-full"
+                    size="xl"
+                    placeholder="Voornaam"
+                  />
+                </u-form-field>
+                <u-form-field class="flex-1" label="Naam" name="lastName" :required="true">
+                  <u-input v-model="state.lastName" class="w-full" size="xl" placeholder="Naam" />
+                </u-form-field>
+              </div>
+              <u-form-field class="flex-1" label="Leerjaar" name="schoolYear" :required="true">
+                <u-select
+                  v-model="state.schoolYear"
+                  :items="schoolYearsList"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Leerjaar"
+                />
+              </u-form-field>
+            </div>
+          </div>
+          <hr />
+          <div class="flex flex-col gap-4">
+            <h4>Contactpersoon</h4>
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-              <u-form-field class="flex-1" label="Voornaam" name="firstName" :required="true">
+              <u-form-field class="flex-1" label="Voornaam" name="contact.firstName" :required="true">
                 <u-input
-                  v-model="state.firstName"
+                  v-model="state.contact.firstName"
                   class="w-full"
                   size="xl"
                   placeholder="Voornaam"
                 />
               </u-form-field>
-              <u-form-field class="flex-1" label="Naam" name="lastName" :required="true">
-                <u-input v-model="state.lastName" class="w-full" size="xl" placeholder="Naam" />
+              <u-form-field class="flex-1" label="Naam" name="contact.lastName" :required="true">
+                <u-input
+                  v-model="state.contact.lastName"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Naam"
+                />
               </u-form-field>
             </div>
-            <u-form-field class="flex-1" label="Leerjaar" name="schoolYear" :required="true">
-              <u-select
-                v-model="state.schoolYear"
-                :items="schoolYearsList"
-                class="w-full"
-                size="xl"
-                placeholder="Leerjaar"
-              />
-            </u-form-field>
-          </div>
-        </div>
-        <hr />
-        <div class="flex flex-col gap-4">
-          <h4>Contactpersoon</h4>
-          <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-            <u-form-field class="flex-1" label="Voornaam" name="contact.firstName" :required="true">
-              <u-input
-                v-model="state.contact.firstName"
-                class="w-full"
-                size="xl"
-                placeholder="Voornaam"
-              />
-            </u-form-field>
-            <u-form-field class="flex-1" label="Naam" name="contact.lastName" :required="true">
-              <u-input
-                v-model="state.contact.lastName"
-                class="w-full"
-                size="xl"
-                placeholder="Naam"
-              />
-            </u-form-field>
-          </div>
-          <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-            <u-form-field
-              class="flex-1"
-              label="Telefoonnummer"
-              name="contact.phoneNumber"
-              :required="true"
-            >
-              <u-input
-                v-model="state.contact.phoneNumber"
-                class="w-full"
-                size="xl"
-                placeholder="Telefoonnummer"
-              />
-            </u-form-field>
-            <u-form-field class="flex-1" label="E-mailadres" name="contact.email" :required="true">
-              <u-input
-                v-model="state.contact.email"
-                class="w-full"
-                size="xl"
-                placeholder="E-mailadres"
-              />
-            </u-form-field>
-          </div>
-        </div>
-        <hr />
-        <div class="flex flex-col gap-4">
-          <h4>Betaalgegevens</h4>
-          <div class="sm:hidden flex flex-col gap-2">
-            <div class="flex flex-col">
-              <div class="text-sm">Rekeningnummer</div>
-              <div class="font-semibold py-1">BE69 0682 0939 9078</div>
+            <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+              <u-form-field
+                class="flex-1"
+                label="Telefoonnummer"
+                name="contact.phoneNumber"
+                :required="true"
+              >
+                <u-input
+                  v-model="state.contact.phoneNumber"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Telefoonnummer"
+                />
+              </u-form-field>
+              <u-form-field class="flex-1" label="E-mailadres" name="contact.email" :required="true">
+                <u-input
+                  v-model="state.contact.email"
+                  class="w-full"
+                  size="xl"
+                  placeholder="E-mailadres"
+                />
+              </u-form-field>
             </div>
-            <div class="flex flex-col">
-              <div class="text-sm">Bedrag</div>
-              <div class="font-semibold py-1">&euro; {{ campPrice }}</div>
-            </div>
-            <div class="flex flex-col">
-              <div class="text-sm">Mededeling</div>
-              <div class="font-semibold py-1">
-                Paaskamp
-                {{ state.firstName != "" ? state.firstName : "Voornaam" }}
-                {{ state.lastName != "" ? state.lastName : "Naam" }}
+          </div>
+          <hr />
+          <div class="flex flex-col gap-4">
+            <h4>Betaalgegevens</h4>
+            <div class="sm:hidden flex flex-col gap-2">
+              <div class="flex flex-col">
+                <div class="text-sm">Rekeningnummer</div>
+                <div class="font-semibold py-1">BE69 0682 0939 9078</div>
               </div>
-            </div>
-            <div v-if="qrCode" class="flex flex-col">
-              <div class="text-sm py-1">Scan via bank app</div>
-              <qrcode class="py-1" width="150" :value="qrCode" :border="0" />
-            </div>
-          </div>
-          <table class="hidden sm:block">
-            <tbody>
-              <tr>
-                <td class="text-sm" width="160px">Rekeningnummer</td>
-                <td class="font-semibold py-1">BE69 0682 0939 9078</td>
-              </tr>
-              <tr>
-                <td class="text-sm">Bedrag</td>
-                <td class="font-semibold py-1">&euro; {{ campPrice }}</td>
-              </tr>
-              <tr>
-                <td class="text-sm">Mededeling</td>
-                <td class="font-semibold py-1">
+              <div class="flex flex-col">
+                <div class="text-sm">Bedrag</div>
+                <div class="font-semibold py-1">&euro; {{ campPrice }}</div>
+              </div>
+              <div class="flex flex-col">
+                <div class="text-sm">Mededeling</div>
+                <div class="font-semibold py-1">
                   Paaskamp
                   {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                   {{ state.lastName != "" ? state.lastName : "Naam" }}
-                </td>
-              </tr>
-              <tr v-if="qrCode">
-                <td class="text-sm align-top py-1">Scan via bank app</td>
-                <qrcode class="py-1" width="150" :value="qrCode" />
-              </tr>
-            </tbody>
-          </table>
-          <u-form-field name="paymentCheck">
-            <u-checkbox
-              v-model="state.paymentCheck"
-              label="Ik heb reeds betaald of de betaalgegevens zorgvuldig genoteerd."
-              description="(te betalen binnen 14 dagen na inschrijving)"
-              size="xl"
-            />
-          </u-form-field>
-        </div>
-        <hr />
-        <div class="flex flex-col gap-4">
-          <p>
-            Je ontvangt een bevestiging van je inschrijving via e-mail.
-            <span class="font-semibold">Controleer ook je spam/ongewenste e-mail</span>.
-          </p>
-          <u-button
-            label="Inschrijving verzenden"
-            type="submit"
-            :loading="isSubmitting"
-            :disabled="isSubmitting"
-            icon="i-lucide-send"
-            size="xl"
-            color="secondary"
-          />
-          <u-modal v-model:open="resetModalOpen" :content="{ onCloseAutoFocus: onResetModalClose }">
-            <u-button label="Gegevens wissen" icon="i-lucide-trash" variant="ghost" color="error" />
-            <template #content>
-              <div class="flex flex-col gap-4 p-6">
-                <div class="flex justify-between">
-                  <h3>Gegevens wissen</h3>
-                  <u-button
-                    icon="i-lucide-x"
-                    variant="ghost"
-                    color="neutral"
-                    size="xl"
-                    @click="resetModalOpen = false"
-                  />
-                </div>
-                <p>Ben je zeker dat je de gegevens van het inschrijvingsformulier wilt wissen?</p>
-                <div class="flex gap-4 justify-end">
-                  <u-button
-                    label="Annuleren"
-                    variant="ghost"
-                    size="lg"
-                    color="neutral"
-                    @click="resetModalOpen = false"
-                  />
-                  <u-button label="Wissen" size="lg" color="error" @click="resetForm()" />
                 </div>
               </div>
-            </template>
-          </u-modal>
+              <div v-if="qrCode" class="flex flex-col">
+                <div class="text-sm py-1">Scan via bank app</div>
+                <qrcode class="py-1" width="150" :value="qrCode" :border="0" />
+              </div>
+            </div>
+            <table class="hidden sm:block">
+              <tbody>
+                <tr>
+                  <td class="text-sm" width="160px">Rekeningnummer</td>
+                  <td class="font-semibold py-1">BE69 0682 0939 9078</td>
+                </tr>
+                <tr>
+                  <td class="text-sm">Bedrag</td>
+                  <td class="font-semibold py-1">&euro; {{ campPrice }}</td>
+                </tr>
+                <tr>
+                  <td class="text-sm">Mededeling</td>
+                  <td class="font-semibold py-1">
+                    Paaskamp
+                    {{ state.firstName != "" ? state.firstName : "Voornaam" }}
+                    {{ state.lastName != "" ? state.lastName : "Naam" }}
+                  </td>
+                </tr>
+                <tr v-if="qrCode">
+                  <td class="text-sm align-top py-1">Scan via bank app</td>
+                  <qrcode class="py-1" width="150" :value="qrCode" />
+                </tr>
+              </tbody>
+            </table>
+            <u-form-field name="paymentCheck">
+              <u-checkbox
+                v-model="state.paymentCheck"
+                label="Ik heb reeds betaald of de betaalgegevens zorgvuldig genoteerd."
+                description="(te betalen binnen 14 dagen na inschrijving)"
+                size="xl"
+              />
+            </u-form-field>
+          </div>
+          <hr />
+          <div class="flex flex-col gap-4">
+            <p>
+              Je ontvangt een bevestiging van je inschrijving via e-mail.
+              <span class="font-semibold">Controleer ook je spam/ongewenste e-mail</span>.
+            </p>
+            <u-button
+              label="Inschrijving verzenden"
+              type="submit"
+              :loading="isSubmitting"
+              :disabled="isSubmitting"
+              icon="i-lucide-send"
+              size="xl"
+              color="secondary"
+            />
+            <u-modal v-model:open="resetModalOpen" :content="{ onCloseAutoFocus: onResetModalClose }">
+              <u-button label="Gegevens wissen" icon="i-lucide-trash" variant="ghost" color="error" />
+              <template #content>
+                <div class="flex flex-col gap-4 p-6">
+                  <div class="flex justify-between">
+                    <h3>Gegevens wissen</h3>
+                    <u-button
+                      icon="i-lucide-x"
+                      variant="ghost"
+                      color="neutral"
+                      size="xl"
+                      @click="resetModalOpen = false"
+                    />
+                  </div>
+                  <p>Ben je zeker dat je de gegevens van het inschrijvingsformulier wilt wissen?</p>
+                  <div class="flex gap-4 justify-end">
+                    <u-button
+                      label="Annuleren"
+                      variant="ghost"
+                      size="lg"
+                      color="neutral"
+                      @click="resetModalOpen = false"
+                    />
+                    <u-button label="Wissen" size="lg" color="error" @click="resetForm()" />
+                  </div>
+                </div>
+              </template>
+            </u-modal>
+          </div>
         </div>
-      </div>
-    </u-form>
-    <div v-else class="flex flex-col gap-4">
+      </u-form>
+    </motion-reveal>
+    <motion-reveal v-else class="flex flex-col gap-4">
       <h3>Inschrijfformulier</h3>
       <p>Je kan momenteel niet meer inschrijven voor het paaskamp.</p>
-    </div>
+    </motion-reveal>
   </section>
 </template>
 

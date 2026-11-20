@@ -18,7 +18,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
   </section>
   <div class="flex flex-col gap-16 pt-16">
     <section id="turnen" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
-      <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
+      <motion-reveal class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
         <div class="flex flex-1 flex-col gap-4">
           <h2>Turnen</h2>
           <p>
@@ -41,11 +41,11 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             height="400"
           />
         </div>
-      </div>
-      <p class="text-center text-xl">
+      </motion-reveal>
+      <motion-reveal as="p" class="text-center text-xl">
         Onze turnclub biedt toestelturnen aan voor verschillende leeftijden en niveaus:
-      </p>
-      <div id="turnen-kleuters" class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+      </motion-reveal>
+      <motion-reveal id="turnen-kleuters" class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <div class="flex-1">
           <nuxt-img
             class="flex-none md:ml-auto rounded-lg"
@@ -162,8 +162,8 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             </u-modal>
           </div>
         </div>
-      </div>
-      <div
+      </motion-reveal>
+      <motion-reveal
         id="turnen-lagere-school"
         class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8"
       >
@@ -282,7 +282,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             height="267"
           />
         </div>
-      </div>
+      </motion-reveal>
       <!-- <div
         id="turnen-1ste-middelbaar"
         class="flex flex-col md:flex-row items-center gap-4 md:gap-8"
@@ -368,13 +368,13 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
           </div>
         </div>
       </div> -->
-      <p class="text-center text-xl">
+      <motion-reveal as="p" class="text-center text-xl">
         Toestelturnen is een sport voor iedereen: jongens en meisjes, beginners en gevorderden.
         Onder begeleiding van onze lesgevers turnen we in een veilige en stimulerende omgeving.
-      </p>
+      </motion-reveal>
     </section>
     <section id="trampoline" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
-      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+      <motion-reveal class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <div class="flex-1">
           <nuxt-img
             class="w-full rounded-lg"
@@ -467,14 +467,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             </u-modal>
           </div>
         </div>
-      </div>
-      <p class="text-center text-xl">
+      </motion-reveal>
+      <motion-reveal as="p" class="text-center text-xl">
         Trampolinespringen is niet alleen leuk, het verbetert ook je kracht, coördinatie en
         zelfvertrouwen.<br />Ideaal voor wie houdt van beweging met een vleugje adrenaline!
-      </p>
+      </motion-reveal>
     </section>
     <section id="bbb" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
-      <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
+      <motion-reveal class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
         <div class="flex flex-1 flex-col gap-4">
           <h2>BBB</h2>
           <p>
@@ -561,14 +561,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             height="400"
           />
         </div>
-      </div>
-      <p class="text-center text-xl">
+      </motion-reveal>
+      <motion-reveal as="p" class="text-center text-xl">
         Elke les is anders, maar steeds met hetzelfde doel:<br />sterker worden, je goed voelen en
         vooral plezier hebben in bewegen!
-      </p>
+      </motion-reveal>
     </section>
     <section id="callanetics" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
-      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+      <motion-reveal class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
         <div class="flex-1">
           <nuxt-img
             class="w-full rounded-lg"
@@ -660,14 +660,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             </u-modal>
           </div>
         </div>
-      </div>
-      <p class="text-center text-xl">
+      </motion-reveal>
+      <motion-reveal as="p" class="text-center text-xl">
         Wil je werken aan je lichaam op een rustige maar doelgerichte manier? Dan is Callanetics
         iets voor jou!
-      </p>
+      </motion-reveal>
     </section>
     <section id="net-voetbal" class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
-      <div class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
+      <motion-reveal class="flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8">
         <div class="flex flex-1 flex-col gap-4">
           <h2>Net-voetbal</h2>
           <p>
@@ -754,14 +754,14 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             height="400"
           />
         </div>
-      </div>
-      <p class="text-center text-xl">
+      </motion-reveal>
+      <motion-reveal as="p" class="text-center text-xl">
         Of je nu al ervaring hebt met voetbal of gewoon op zoek bent naar een nieuwe uitdaging:
         iedereen is welkom!
-      </p>
+      </motion-reveal>
     </section>
     <section id="lidgelden" class="w-full bg-secondary py-16">
-      <div class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
+      <motion-reveal class="max-w-6xl mx-auto flex flex-col gap-8 px-8">
         <h2 class="text-left text-white">Lidgelden</h2>
         <div class="w-full overflow-x-auto">
           <table class="w-full lidgelden-table">
@@ -811,7 +811,7 @@ const breakpoints = useBreakpoints(breakpointsTailwind);
             <li>2de gezinslid: &euro; {{ familyMemberDiscount }} korting</li>
           </ul>
         </div>
-      </div>
+      </motion-reveal>
     </section>
   </div>
 </template>

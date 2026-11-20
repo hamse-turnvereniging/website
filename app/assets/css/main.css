@@ -80,7 +80,51 @@ h5 {
 }
 
 a:not(.button) {
-  @apply font-medium text-secondary-500 hover:text-primary-500;
+  @apply font-medium text-secondary-500 hover:text-primary-500 transition-colors duration-200;
+}
+
+/* Motion: values mirror app/utils/motion.ts */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
+}
+
+@keyframes banner-title {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  section#banner h1 {
+    animation: banner-title 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  /* Images with their own hover effect (photo gallery) are left alone. */
+  main img:not(.transition-transform) {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
 
 section#banner {
