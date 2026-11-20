@@ -59,6 +59,56 @@ body {
   flex-direction: column;
 }
 
+/*
+ * Decorative background circles behind the page content. They alternate right/left, run partly
+ * off screen and repeat every --circles-tile. Sizes and positions are randomised per render by
+ * app/utils/backgroundCircles.ts (set as inline custom properties on <main>), which also keeps
+ * them from overlapping; the values below are only the fallback. All numbers are design pixels,
+ * scaled down on small screens by --s.
+ */
+main {
+  --s: clamp(0.55px, 0.07vw, 1px);
+  --circle: color-mix(in oklab, var(--color-light-green-200) 40%, white);
+
+  --c1-r: 520;
+  --c1-x: 60;
+  --c1-y: 580;
+  --c2-r: 400;
+  --c2-x: -40;
+  --c2-y: 1600;
+  --c3-r: 450;
+  --c3-x: 20;
+  --c3-y: 2550;
+  --c4-r: 480;
+  --c4-x: 80;
+  --c4-y: 3580;
+  --circles-tile: 4100;
+
+  background-image:
+    radial-gradient(
+      circle calc(var(--s) * var(--c1-r)) at calc(100% + var(--s) * var(--c1-x)) calc(var(--s) * var(--c1-y)),
+      var(--circle) calc(100% - 1px),
+      transparent
+    ),
+    radial-gradient(
+      circle calc(var(--s) * var(--c2-r)) at calc(var(--s) * var(--c2-x) * -1) calc(var(--s) * var(--c2-y)),
+      var(--circle) calc(100% - 1px),
+      transparent
+    ),
+    radial-gradient(
+      circle calc(var(--s) * var(--c3-r)) at calc(100% + var(--s) * var(--c3-x)) calc(var(--s) * var(--c3-y)),
+      var(--circle) calc(100% - 1px),
+      transparent
+    ),
+    radial-gradient(
+      circle calc(var(--s) * var(--c4-r)) at calc(var(--s) * var(--c4-x) * -1) calc(var(--s) * var(--c4-y)),
+      var(--circle) calc(100% - 1px),
+      transparent
+    );
+  background-size: 100% calc(var(--s) * var(--circles-tile));
+  background-repeat: repeat-y;
+}
+
 h1 {
   @apply text-4xl font-bold text-white text-shadow-lg;
 }
