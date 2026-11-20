@@ -111,7 +111,7 @@ async function onError(event: FormErrorEvent) {
     </div>
   </section>
   <section class="max-w-2xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-col gap-4">
+    <motion-reveal class="flex flex-col gap-4">
       <h2>Wafelverkoop</h2>
       <p>Dit jaar organiseren we opnieuw een wafelverkoop ten voordele van onze club.</p>
       <p>
@@ -136,7 +136,7 @@ async function onError(event: FormErrorEvent) {
       <p>Bestellen kan <strong>tot en met 31 oktober</strong> via het bestelformulier hieronder.</p>
       <p>De bestelde wafels zullen verdeeld worden tijdens de lessen vanaf half november.</p>
       <p>Alvast bedankt voor jullie steun! Samen maken we er een geslaagde actie van.</p>
-    </div>
+    </motion-reveal>
     <form-success
       v-if="submitted"
       title="Je wafels zijn succesvol besteld!"
@@ -145,235 +145,237 @@ async function onError(event: FormErrorEvent) {
       :can-restart="showForm"
       @restart="restartForm"
     />
-    <u-form v-else-if="showForm" ref="form" :schema :state @submit="onSubmit" @error="onError">
-      <div class="flex flex-col gap-8">
-        <div class="flex flex-col gap-4">
-          <h3 ref="formTitle" tabindex="-1" class="focus:outline-none">Bestelformulier</h3>
+    <motion-reveal v-else-if="showForm" :delay="0.1">
+      <u-form ref="form" :schema :state @submit="onSubmit" @error="onError">
+        <div class="flex flex-col gap-8">
           <div class="flex flex-col gap-4">
+            <h3 ref="formTitle" tabindex="-1" class="focus:outline-none">Bestelformulier</h3>
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+                <u-form-field class="flex-1" label="Voornaam" name="firstName" :required="true">
+                  <u-input
+                    v-model="state.firstName"
+                    class="w-full"
+                    size="xl"
+                    placeholder="Voornaam"
+                  />
+                </u-form-field>
+                <u-form-field class="flex-1" label="Naam" name="lastName" :required="true">
+                  <u-input v-model="state.lastName" class="w-full" size="xl" placeholder="Naam" />
+                </u-form-field>
+              </div>
+              <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+                <u-form-field
+                  class="flex-1"
+                  label="Telefoonnummer"
+                  name="phoneNumber"
+                  :required="true"
+                >
+                  <u-input
+                    v-model="state.phoneNumber"
+                    class="w-full"
+                    size="xl"
+                    placeholder="Telefoonnummer"
+                  />
+                </u-form-field>
+                <u-form-field class="flex-1" label="E-mailadres" name="email" :required="true">
+                  <u-input v-model="state.email" class="w-full" size="xl" placeholder="E-mailadres" />
+                </u-form-field>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="flex flex-col gap-4">
+            <h4>Wafels meegeven aan</h4>
+            <p>Optioneel: geef op aan wie we de wafels tijdens de les mogen meegeven.</p>
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-              <u-form-field class="flex-1" label="Voornaam" name="firstName" :required="true">
+              <u-form-field
+                class="flex-1"
+                label="Voornaam"
+                name="member.firstName"
+              >
                 <u-input
-                  v-model="state.firstName"
+                  v-model="state.member.firstName"
                   class="w-full"
                   size="xl"
                   placeholder="Voornaam"
                 />
               </u-form-field>
-              <u-form-field class="flex-1" label="Naam" name="lastName" :required="true">
-                <u-input v-model="state.lastName" class="w-full" size="xl" placeholder="Naam" />
+              <u-form-field class="flex-1" label="Naam" name="member.lastName">
+                <u-input
+                  v-model="state.member.lastName"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Naam"
+                />
+              </u-form-field>
+            </div>
+            <u-form-field label="Groep" name="member.group">
+              <u-select
+                v-model="state.member.group"
+                :items="groupsList"
+                class="w-full"
+                size="xl"
+                placeholder="Maak je keuze"
+              />
+            </u-form-field>
+          </div>
+          <hr />
+          <div class="flex flex-col gap-4">
+            <h4>Wafels</h4>
+            <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
+              <u-form-field class="flex-1" label="Aantal pakken vanillewafels" name="wafels.vanilla">
+                <u-input
+                  v-model="state.wafels.vanilla"
+                  type="number"
+                  min="0"
+                  step="1"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Aantal pakken vanille"
+                />
+              </u-form-field>
+              <u-form-field
+                class="flex-1"
+                label="Aantal pakken half-gechocolateerde"
+                name="wafels.chocolate"
+              >
+                <u-input
+                  v-model="state.wafels.chocolate"
+                  type="number"
+                  min="0"
+                  step="1"
+                  class="w-full"
+                  size="xl"
+                  placeholder="Aantal pakken half-gechocolateerde"
+                />
               </u-form-field>
             </div>
             <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-              <u-form-field
-                class="flex-1"
-                label="Telefoonnummer"
-                name="phoneNumber"
-                :required="true"
-              >
+              <u-form-field class="flex-1" label="Aantal pakken koffiewafeltjes" name="wafels.coffee">
                 <u-input
-                  v-model="state.phoneNumber"
+                  v-model="state.wafels.coffee"
+                  type="number"
+                  min="0"
+                  step="1"
                   class="w-full"
                   size="xl"
-                  placeholder="Telefoonnummer"
+                  placeholder="Aantal pakken koffiewafeltjes"
                 />
               </u-form-field>
-              <u-form-field class="flex-1" label="E-mailadres" name="email" :required="true">
-                <u-input v-model="state.email" class="w-full" size="xl" placeholder="E-mailadres" />
-              </u-form-field>
+              <div class="hidden sm:block flex-1" />
             </div>
+            <u-form-field name="wafels" />
           </div>
-        </div>
-        <hr />
-        <div class="flex flex-col gap-4">
-          <h4>Wafels meegeven aan</h4>
-          <p>Optioneel: geef op aan wie we de wafels tijdens de les mogen meegeven.</p>
-          <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-            <u-form-field
-              class="flex-1"
-              label="Voornaam"
-              name="member.firstName"
-            >
-              <u-input
-                v-model="state.member.firstName"
-                class="w-full"
-                size="xl"
-                placeholder="Voornaam"
-              />
-            </u-form-field>
-            <u-form-field class="flex-1" label="Naam" name="member.lastName">
-              <u-input
-                v-model="state.member.lastName"
-                class="w-full"
-                size="xl"
-                placeholder="Naam"
-              />
-            </u-form-field>
-          </div>
-          <u-form-field label="Groep" name="member.group">
-            <u-select
-              v-model="state.member.group"
-              :items="groupsList"
-              class="w-full"
-              size="xl"
-              placeholder="Maak je keuze"
-            />
-          </u-form-field>
-        </div>
-        <hr />
-        <div class="flex flex-col gap-4">
-          <h4>Wafels</h4>
-          <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-            <u-form-field class="flex-1" label="Aantal pakken vanillewafels" name="wafels.vanilla">
-              <u-input
-                v-model="state.wafels.vanilla"
-                type="number"
-                min="0"
-                step="1"
-                class="w-full"
-                size="xl"
-                placeholder="Aantal pakken vanille"
-              />
-            </u-form-field>
-            <u-form-field
-              class="flex-1"
-              label="Aantal pakken half-gechocolateerde"
-              name="wafels.chocolate"
-            >
-              <u-input
-                v-model="state.wafels.chocolate"
-                type="number"
-                min="0"
-                step="1"
-                class="w-full"
-                size="xl"
-                placeholder="Aantal pakken half-gechocolateerde"
-              />
-            </u-form-field>
-          </div>
-          <div class="flex flex-col gap-4 sm:flex-row sm:gap-6">
-            <u-form-field class="flex-1" label="Aantal pakken koffiewafeltjes" name="wafels.coffee">
-              <u-input
-                v-model="state.wafels.coffee"
-                type="number"
-                min="0"
-                step="1"
-                class="w-full"
-                size="xl"
-                placeholder="Aantal pakken koffiewafeltjes"
-              />
-            </u-form-field>
-            <div class="hidden sm:block flex-1" />
-          </div>
-          <u-form-field name="wafels" />
-        </div>
-        <hr />
-        <div class="flex flex-col gap-4">
-          <h4>Betaalgegevens</h4>
-          <div class="sm:hidden flex flex-col gap-2">
-            <div class="flex flex-col">
-              <div class="text-sm">Rekeningnummer</div>
-              <div class="font-semibold py-1">BE69 0682 0939 9078</div>
-            </div>
-            <div class="flex flex-col">
-              <div class="text-sm">Bedrag</div>
-              <div class="font-semibold py-1">&euro; {{ amount }}</div>
-            </div>
-            <div class="flex flex-col">
-              <div class="text-sm">Mededeling</div>
-              <div class="font-semibold py-1">
-                Wafels
-                {{ state.firstName != "" ? state.firstName : "Voornaam" }}
-                {{ state.lastName != "" ? state.lastName : "Naam" }}
+          <hr />
+          <div class="flex flex-col gap-4">
+            <h4>Betaalgegevens</h4>
+            <div class="sm:hidden flex flex-col gap-2">
+              <div class="flex flex-col">
+                <div class="text-sm">Rekeningnummer</div>
+                <div class="font-semibold py-1">BE69 0682 0939 9078</div>
               </div>
-            </div>
-            <div v-if="qrCode" class="flex flex-col">
-              <div class="text-sm py-1">Scan via bank app</div>
-              <qrcode class="py-1" width="150" :value="qrCode" :border="0" />
-            </div>
-          </div>
-          <table class="hidden sm:block">
-            <tbody>
-              <tr>
-                <td class="text-sm" width="160px">Rekeningnummer</td>
-                <td class="font-semibold py-1">BE69 0682 0939 9078</td>
-              </tr>
-              <tr>
-                <td class="text-sm">Bedrag</td>
-                <td class="font-semibold py-1">&euro; {{ amount }}</td>
-              </tr>
-              <tr>
-                <td class="text-sm">Mededeling</td>
-                <td class="font-semibold py-1">
+              <div class="flex flex-col">
+                <div class="text-sm">Bedrag</div>
+                <div class="font-semibold py-1">&euro; {{ amount }}</div>
+              </div>
+              <div class="flex flex-col">
+                <div class="text-sm">Mededeling</div>
+                <div class="font-semibold py-1">
                   Wafels
                   {{ state.firstName != "" ? state.firstName : "Voornaam" }}
                   {{ state.lastName != "" ? state.lastName : "Naam" }}
-                </td>
-              </tr>
-              <tr v-if="qrCode">
-                <td class="text-sm align-top py-1">Scan via bank app</td>
-                <qrcode class="py-1" width="150" :value="qrCode" />
-              </tr>
-            </tbody>
-          </table>
-          <u-form-field name="paymentCheck">
-            <u-checkbox
-              v-model="state.paymentCheck"
-              label="Ik heb reeds betaald of de betaalgegevens zorgvuldig genoteerd."
-              description="(te betalen binnen 14 dagen na bestelling)"
-              size="xl"
-            />
-          </u-form-field>
-        </div>
-        <hr />
-        <div class="flex flex-col gap-4">
-          <p>
-            Je ontvangt een bevestiging van je bestelling via e-mail.
-            <span class="font-semibold">Controleer ook je spam/ongewenste e-mail</span>.
-          </p>
-          <u-button
-            label="Bestelling verzenden"
-            type="submit"
-            :loading="isSubmitting"
-            :disabled="isSubmitting"
-            icon="i-lucide-send"
-            size="xl"
-            color="secondary"
-          />
-          <u-modal v-model:open="resetModalOpen" :content="{ onCloseAutoFocus: onResetModalClose }">
-            <u-button label="Gegevens wissen" icon="i-lucide-trash" variant="ghost" color="error" />
-            <template #content>
-              <div class="flex flex-col gap-4 p-6">
-                <div class="flex justify-between">
-                  <h3>Gegevens wissen</h3>
-                  <u-button
-                    icon="i-lucide-x"
-                    variant="ghost"
-                    color="neutral"
-                    size="xl"
-                    @click="resetModalOpen = false"
-                  />
-                </div>
-                <p>Ben je zeker dat je de gegevens van het bestelformulier wilt wissen?</p>
-                <div class="flex gap-4 justify-end">
-                  <u-button
-                    label="Annuleren"
-                    variant="ghost"
-                    size="lg"
-                    color="neutral"
-                    @click="resetModalOpen = false"
-                  />
-                  <u-button label="Wissen" size="lg" color="error" @click="resetForm()" />
                 </div>
               </div>
-            </template>
-          </u-modal>
+              <div v-if="qrCode" class="flex flex-col">
+                <div class="text-sm py-1">Scan via bank app</div>
+                <qrcode class="py-1" width="150" :value="qrCode" :border="0" />
+              </div>
+            </div>
+            <table class="hidden sm:block">
+              <tbody>
+                <tr>
+                  <td class="text-sm" width="160px">Rekeningnummer</td>
+                  <td class="font-semibold py-1">BE69 0682 0939 9078</td>
+                </tr>
+                <tr>
+                  <td class="text-sm">Bedrag</td>
+                  <td class="font-semibold py-1">&euro; {{ amount }}</td>
+                </tr>
+                <tr>
+                  <td class="text-sm">Mededeling</td>
+                  <td class="font-semibold py-1">
+                    Wafels
+                    {{ state.firstName != "" ? state.firstName : "Voornaam" }}
+                    {{ state.lastName != "" ? state.lastName : "Naam" }}
+                  </td>
+                </tr>
+                <tr v-if="qrCode">
+                  <td class="text-sm align-top py-1">Scan via bank app</td>
+                  <qrcode class="py-1" width="150" :value="qrCode" />
+                </tr>
+              </tbody>
+            </table>
+            <u-form-field name="paymentCheck">
+              <u-checkbox
+                v-model="state.paymentCheck"
+                label="Ik heb reeds betaald of de betaalgegevens zorgvuldig genoteerd."
+                description="(te betalen binnen 14 dagen na bestelling)"
+                size="xl"
+              />
+            </u-form-field>
+          </div>
+          <hr />
+          <div class="flex flex-col gap-4">
+            <p>
+              Je ontvangt een bevestiging van je bestelling via e-mail.
+              <span class="font-semibold">Controleer ook je spam/ongewenste e-mail</span>.
+            </p>
+            <u-button
+              label="Bestelling verzenden"
+              type="submit"
+              :loading="isSubmitting"
+              :disabled="isSubmitting"
+              icon="i-lucide-send"
+              size="xl"
+              color="secondary"
+            />
+            <u-modal v-model:open="resetModalOpen" :content="{ onCloseAutoFocus: onResetModalClose }">
+              <u-button label="Gegevens wissen" icon="i-lucide-trash" variant="ghost" color="error" />
+              <template #content>
+                <div class="flex flex-col gap-4 p-6">
+                  <div class="flex justify-between">
+                    <h3>Gegevens wissen</h3>
+                    <u-button
+                      icon="i-lucide-x"
+                      variant="ghost"
+                      color="neutral"
+                      size="xl"
+                      @click="resetModalOpen = false"
+                    />
+                  </div>
+                  <p>Ben je zeker dat je de gegevens van het bestelformulier wilt wissen?</p>
+                  <div class="flex gap-4 justify-end">
+                    <u-button
+                      label="Annuleren"
+                      variant="ghost"
+                      size="lg"
+                      color="neutral"
+                      @click="resetModalOpen = false"
+                    />
+                    <u-button label="Wissen" size="lg" color="error" @click="resetForm()" />
+                  </div>
+                </div>
+              </template>
+            </u-modal>
+          </div>
         </div>
-      </div>
-    </u-form>
-    <div v-else class="flex flex-col gap-4">
+      </u-form>
+    </motion-reveal>
+    <motion-reveal v-else class="flex flex-col gap-4">
       <h3>Bestelformulier</h3>
       <p>Je kan momenteel geen wafels meer bestellen.</p>
-    </div>
+    </motion-reveal>
   </section>
 </template>
 

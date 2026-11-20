@@ -35,38 +35,40 @@ const lightGalleryLicenseKey = useRuntimeConfig().public.lightGalleryLicenseKey;
     </div>
   </section>
   <section class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16 w-full">
-    <div class="flex flex-col gap-4">
+    <motion-reveal class="flex flex-col gap-4">
       <h2>Fotoalbum</h2>
       <p>Een greep uit onze activiteiten. Klik op een foto om ze groter te bekijken.</p>
-    </div>
+    </motion-reveal>
     <p v-if="hasError" class="text-center text-xl">
       De foto's konden niet geladen worden. Probeer het later opnieuw.
     </p>
     <p v-else-if="photos.length === 0" class="text-center text-xl">
       Er staan nog geen foto's in het album.
     </p>
-    <client-only v-else>
-      <light-gallery
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
-        :settings="{ plugins: lightGalleryPlugins, licenseKey: lightGalleryLicenseKey, speed: 300 }"
-      >
-        <a
-          v-for="photo in photos"
-          :key="photo.id"
-          class="block aspect-square overflow-hidden rounded-lg cursor-pointer"
-          :href="buildSizedThumbnailUrl(photo.thumbnailLink, 1600)"
-          :data-sub-html="`<h4>${parsePhotoName(photo.name).displayName}</h4>`"
+    <motion-reveal v-else :delay="0.1">
+      <client-only>
+        <light-gallery
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
+          :settings="{ plugins: lightGalleryPlugins, licenseKey: lightGalleryLicenseKey, speed: 300 }"
         >
-          <img
-            class="w-full h-full object-cover hover:scale-105 transition-transform"
-            referrerPolicy="no-referrer"
-            :src="buildSizedThumbnailUrl(photo.thumbnailLink, 400)"
-            :alt="parsePhotoName(photo.name).displayName"
-            loading="lazy"
-          />
-        </a>
-      </light-gallery>
-    </client-only>
+          <a
+            v-for="photo in photos"
+            :key="photo.id"
+            class="block aspect-square overflow-hidden rounded-lg cursor-pointer"
+            :href="buildSizedThumbnailUrl(photo.thumbnailLink, 1600)"
+            :data-sub-html="`<h4>${parsePhotoName(photo.name).displayName}</h4>`"
+          >
+            <img
+              class="w-full h-full object-cover hover:scale-105 transition-transform"
+              referrerPolicy="no-referrer"
+              :src="buildSizedThumbnailUrl(photo.thumbnailLink, 400)"
+              :alt="parsePhotoName(photo.name).displayName"
+              loading="lazy"
+            />
+          </a>
+        </light-gallery>
+      </client-only>
+    </motion-reveal>
   </section>
 </template>
 

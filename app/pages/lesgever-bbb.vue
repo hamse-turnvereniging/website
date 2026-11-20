@@ -6,7 +6,7 @@
     </div>
   </section>
   <section class="max-w-2xl mx-auto flex flex-col gap-8 px-8 py-16">
-    <div class="flex flex-col gap-4">
+    <motion-reveal class="flex flex-col gap-4">
       <h2>Lesgever BBB gezocht in Oostham</h2>
       <p>De Hamse Turnvereniging is op zoek naar een enthousiaste lesgever voor onze lessen BBB.</p>
       <div class="flex flex-col gap-2">
@@ -44,7 +44,7 @@
         </p>
       </div>
       <p>We kijken ernaar uit om je te ontmoeten!</p>
-    </div>
+    </motion-reveal>
   </section>
 </template>
 

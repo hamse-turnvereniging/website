@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   compatibilityDate: "2026-02-01",
   css: ["~/assets/css/main.css"],
+  experimental: {
+    viewTransition: true,
+  },
   fonts: {
     defaults: {
       weights: [400, 500, 600, 700],
@@ -61,5 +64,11 @@ export default defineNuxtConfig({
   },
   ui: {
     colorMode: false,
+  },
+  vite: {
+    server: {
+      // Allow ngrok tunnels to reach the dev server (dev only).
+      allowedHosts: [".ngrok-free.app"],
+    },
   },
 });

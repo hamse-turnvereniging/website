@@ -31,26 +31,28 @@ if (faq.value) {
     </div>
   </section>
   <section class="max-w-6xl mx-auto flex flex-col gap-8 px-8 py-16 w-full">
-    <div class="flex flex-col gap-4">
+    <motion-reveal class="flex flex-col gap-4">
       <h2>Meest gestelde vragen</h2>
       <p>Ontdek hier de antwoorden op de meest gestelde vragen.</p>
-    </div>
-    <u-accordion
-      :items
-      :ui="{
-        label: 'text-2xl font-medium text-secondary',
-        trailingIcon: 'size-8! text-neutral-400 group-data-[state=open]:text-primary-500',
-      }"
-      :unmount-on-hide="false"
-    >
-      <template #content="{ item }">
-        <content-renderer class="answer pb-3.5" :value="item.body" :prose="false" />
-      </template>
-    </u-accordion>
-    <p>
+    </motion-reveal>
+    <motion-reveal :delay="0.1">
+      <u-accordion
+        :items
+        :ui="{
+          label: 'text-2xl font-medium text-secondary',
+          trailingIcon: 'size-8! text-neutral-400 group-data-[state=open]:text-primary-500',
+        }"
+        :unmount-on-hide="false"
+      >
+        <template #content="{ item }">
+          <content-renderer class="answer pb-3.5" :value="item.body" :prose="false" />
+        </template>
+      </u-accordion>
+    </motion-reveal>
+    <motion-reveal as="p">
       Indien je nog andere vragen hebt kan je altijd terecht bij ons via het e-mailadres
       <a href="mailto:info@hamseturnvereniging.be">info@hamseturnvereniging.be</a>.
-    </p>
+    </motion-reveal>
   </section>
 </template>
 
