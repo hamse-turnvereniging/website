@@ -6,6 +6,10 @@ const showWafels = computed(() => startOfToday() >= startOfDay(new Date("2026-10
 const showEetdag = computed(() => startOfToday() <= startOfDay(new Date("2026-03-01")));
 const showPaaskamp = computed(() => startOfToday() <= startOfDay(new Date("2026-04-15")));
 const showUitstap = computed(() => startOfToday() <= startOfDay(new Date("2026-06-27")));
+// De knop van de eetdag krijgt voorrang: zolang die getoond wordt, wijkt de knop van het turnfeest.
+const showTurnfeest = computed(
+  () => startOfToday() <= startOfDay(new Date("2027-03-20")) && !showEetdag.value
+);
 </script>
 
 <template>
@@ -75,6 +79,14 @@ const showUitstap = computed(() => startOfToday() <= startOfDay(new Date("2026-0
             :color="route.path === '/uitstap' ? 'primary' : 'secondary'"
             size="xl"
             >Uitstap</u-button
+          >
+        </div>
+        <div v-if="showTurnfeest" class="flex items-center">
+          <u-button
+            to="/turnfeest"
+            :color="route.path === '/turnfeest' ? 'primary' : 'secondary'"
+            size="xl"
+            >Turnfeest</u-button
           >
         </div>
       </nav>
@@ -157,6 +169,15 @@ const showUitstap = computed(() => startOfToday() <= startOfDay(new Date("2026-0
                 size="xl"
                 @click="close()"
                 ><h3 class="text-white!">Uitstap</h3></u-button
+              >
+            </div>
+            <div v-if="showTurnfeest" class="p-4 flex justify-center">
+              <u-button
+                to="/turnfeest"
+                :color="route.path === '/turnfeest' ? 'primary' : 'secondary'"
+                size="xl"
+                @click="close()"
+                ><h3 class="text-white!">Turnfeest</h3></u-button
               >
             </div>
           </nav>
