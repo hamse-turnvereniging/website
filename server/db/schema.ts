@@ -31,3 +31,9 @@ export const inschrijvingenUitstap = sqliteTable("inschrijvingen_uitstap", {
   data: text("data").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
 });
+
+export const inschrijvingenTurnfeest = sqliteTable("inschrijvingen_turnfeest", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  data: text("data").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
