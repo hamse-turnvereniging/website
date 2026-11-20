@@ -10,4 +10,6 @@ Leden worden verwacht **om 10u** in de sporthal **Kristoffelheem**.
 
 Einde: de generale repetitie loopt **tot 12u**.
 
+Meer info en inschrijven voor het turnfeest kan via de [Turnfeest pagina](/turnfeest).
+
 **De turnlessen op zaterdag 13 en 20 maart gaan niet door!**
