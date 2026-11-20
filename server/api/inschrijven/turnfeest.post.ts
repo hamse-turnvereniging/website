@@ -3,8 +3,13 @@ import * as v from "valibot";
 
 import emailTemplate from "~~/server/assets/templates/email/inschrijven/turnfeest";
 import { schema, theatreOptions } from "~~/shared/schemas/inschrijven/turnfeest";
+import { isTurnfeestPublic } from "~~/shared/utils/turnfeest-visibility";
 
 export default defineEventHandler(async (event) => {
+  if (!isTurnfeestPublic) {
+    throw createError({ statusCode: 404, statusMessage: "Not found" });
+  }
+
   const validationResult = await readValidatedBody(event, (body) => v.safeParse(schema, body));
 
   if (!validationResult.success) {

@@ -1,3 +1,5 @@
+import { isTurnfeestPublic } from "./shared/utils/turnfeest-visibility";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2026-02-01",
@@ -61,6 +63,9 @@ export default defineNuxtConfig({
     defaultLocale: "nl",
     name: "Hamse Turnvereniging",
     url: "https://www.hamseturnvereniging.be",
+  },
+  sitemap: {
+    exclude: isTurnfeestPublic ? [] : ["/turnfeest"],
   },
   ui: {
     colorMode: false,

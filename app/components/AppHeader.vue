@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { isTurnfeestPublic } from "#shared/utils/turnfeest-visibility";
 import { startOfDay, startOfToday } from "date-fns";
 
 const route = useRoute();
@@ -8,7 +9,10 @@ const showPaaskamp = computed(() => startOfToday() <= startOfDay(new Date("2026-
 const showUitstap = computed(() => startOfToday() <= startOfDay(new Date("2026-06-27")));
 // De knop van de eetdag krijgt voorrang: zolang die getoond wordt, wijkt de knop van het turnfeest.
 const showTurnfeest = computed(
-  () => startOfToday() <= startOfDay(new Date("2027-03-20")) && !showEetdag.value
+  () =>
+    isTurnfeestPublic &&
+    startOfToday() <= startOfDay(new Date("2027-03-20")) &&
+    !showEetdag.value
 );
 </script>
 
