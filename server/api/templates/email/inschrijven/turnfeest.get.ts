@@ -1,13 +1,7 @@
 import { type Schema, theatreOptions } from "#shared/schemas/inschrijven/turnfeest";
 import emailTemplate from "~~/server/assets/templates/email/inschrijven/turnfeest";
-import { isTurnfeestPublic } from "~~/shared/utils/turnfeest-visibility";
 
 export default defineEventHandler(async (event) => {
-  // De voorbeeldmail blijft lokaal bereikbaar om eraan te kunnen verder werken.
-  if (!isTurnfeestPublic && !import.meta.dev) {
-    throw createError({ statusCode: 404, statusMessage: "Not found" });
-  }
-
   let inputIndex = 0;
 
   const query = getQuery(event);

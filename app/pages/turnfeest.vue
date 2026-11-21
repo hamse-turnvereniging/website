@@ -12,12 +12,7 @@ import {
 } from "#shared/schemas/inschrijven/turnfeest";
 import type { CheckboxGroupItem, FormErrorEvent, FormSubmitEvent } from "@nuxt/ui";
 import type { Toast } from "@nuxt/ui/runtime/composables/useToast.js";
-import { isTurnfeestPublic } from "#shared/utils/turnfeest-visibility";
 import { startOfDay, startOfToday } from "date-fns";
-
-if (!isTurnfeestPublic) {
-  throw createError({ statusCode: 404, statusMessage: "Page not found", fatal: true });
-}
 
 const showForm = computed(() => startOfToday() <= startOfDay(new Date("2026-12-20")));
 
